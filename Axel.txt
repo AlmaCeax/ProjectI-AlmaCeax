@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 axelbecario
+=======
+So
+Que os peten!!
+>>>>>>> origin/master
