@@ -25,3 +25,12 @@ El Checklist:
 -Test it works
 -Add README.md
 -Compress to zip and upload (en serio, en zip, no vale en rar o se suspende)
+
+
+La primera entrega es un enlace a una wiki.
+
+
+Descripcion corta del juego: homenaje.....
+Nombre nosotros y foto del equipo.
+enlace al video del juego original.
+Empezar la wiki para la primera entrega.
