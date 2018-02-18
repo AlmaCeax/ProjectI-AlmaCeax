@@ -18,7 +18,7 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 
 ## QA
 ### Cere Venteo
-![X-Multiply Screenshot](https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/10455762_10204400120716585_3854011848079828615_n.jpg?oh=adb70a65875b376b3cecce0258b5c562&oe=5B1C1FCE)
+![X-Multiply Screenshot](https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-1/p160x160/10455762_10204400120716585_3854011848079828615_n.jpg?oh=fbf1e5b1ea222e70d94736c3dbbbc483&oe=5B0E7591)
 
 [Github account](https://github.com/CereVenteo)
 
