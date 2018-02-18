@@ -23,7 +23,7 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 [Github account](https://github.com/CereVenteo)
 
 
-
+## Gameplay video of the original title
 [![X-Multiply gameplay](https://img.youtube.com/vi/GcoOZxjrLdk/0.jpg)](https://www.youtube.com/watch?v=GcoOZxjrLdk)
 
 
