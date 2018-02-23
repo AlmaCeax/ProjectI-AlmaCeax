@@ -3,6 +3,8 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 
 ![X-Multiply Screenshot](http://ghostarca.de/wp-content/uploads/2016/06/xm-5.jpg)
 
+***
+
 # Our Team
 ![AlmaCeax Screenshot](https://assets.entrepreneur.com/content/3x2/1300/20170821205622-trabajo-en-equipo.jpeg?width=750&crop=16:9)
 
@@ -23,6 +25,7 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 
 [Github account](https://github.com/CereVenteo)
 
+***
 
 ## Gameplay video of the original title
 <iframe width="640" height="360" src="https://www.youtube.com/embed/GcoOZxjrLdk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
