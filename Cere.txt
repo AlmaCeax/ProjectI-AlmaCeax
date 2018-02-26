@@ -12,11 +12,11 @@ final delivery is 1.0
 
 plantear las 0.1 0.2 0.3 ....
 
-versiones de estabilizacion de la beta: 0.5-beta.1 0.5-beta.2 ....asÌ hasta q nos cansemos de arreglar bugs.
+versiones de estabilizacion de la beta: 0.5-beta.1 0.5-beta.2 ....as√≠ hasta q nos cansemos de arreglar bugs.
 versiones de estabilizacion de la release: 0.5-rc.1 0.5-rc.2 ...
-Si para la version de estabilizaciÛn de la beta se han hecho X cambios, para la release ser· 3X.
+Si para la version de estabilizaci√≥n de la beta se han hecho X cambios, para la release ser√° 3X.
 
-Hacer documentaciÛn de los cambios realizados.
+Hacer documentaci√≥n de los cambios realizados.
 
 
 El Checklist:
@@ -30,7 +30,4 @@ El Checklist:
 La primera entrega es un enlace a una wiki.
 
 
-Descripcion corta del juego: homenaje.....
-Nombre nosotros y foto del equipo.
-enlace al video del juego original.
-Empezar la wiki para la primera entrega.
+
