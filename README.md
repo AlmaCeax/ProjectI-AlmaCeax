@@ -15,19 +15,19 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 
 
 ## Art/Design: Alejandro París 
-![Marc Guillén Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/alejandro.jpg)
+![Alejandro París Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/alejandro.jpg)
 
 [Github account](https://github.com/AlejandroParis)
 
 
 ## Code: Axel Alavedra Cabello
-![Marc Guillén Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/axel.jpg)
+![Axel Alavedra Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/axel.jpg)
 
 [Github account](https://github.com/AxelAlavedra)
 
 
 ## QA: Cere Venteo
-![CereVenteo Screenshot](https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-1/p160x160/10455762_10204400120716585_3854011848079828615_n.jpg?oh=fbf1e5b1ea222e70d94736c3dbbbc483&oe=5B0E7591)
+![Cere Venteo Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/cere.jpg)
 
 [Github account](https://github.com/CereVenteo)
 
