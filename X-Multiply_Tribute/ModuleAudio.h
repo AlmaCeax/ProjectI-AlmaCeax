@@ -7,7 +7,7 @@
 #define MAX_MUSICS 50
 #define MAX_FXS 100
 
-struct Mix_Music;
+struct _Mix_Music;
 struct Mix_Chunk;
 
 class ModuleAudio : public Module
@@ -22,12 +22,12 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	Mix_Music* const LoadMusic(const char* path);
+	_Mix_Music* const LoadMusic(const char* path);
 	Mix_Chunk* const LoadFx(const char* path);
 
 public:
-	Mix_Music* musics[MAX_MUSICS];
-	Mix_Music* music;
+	_Mix_Music* musics[MAX_MUSICS];
+	_Mix_Music* music;
 	Mix_Chunk* fxs[MAX_FXS];
 	Mix_Chunk* fx;
 };
