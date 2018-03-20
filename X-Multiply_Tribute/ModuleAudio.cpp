@@ -44,7 +44,7 @@ bool ModuleAudio::Init()
 	}
 
 	music = LoadMusic("../../Assets/Audio/Music/02_Into_the_Human_Body_Stage_1_.ogg");
-	fx = LoadFx("../../Assets/Audio/SFX/xmultipl-017.wav");
+	fx = LoadFx("../../Assets/Audio/SFX/xmultipl-026.wav");
 	Mix_PlayMusic(music, -1);
 	Mix_PlayChannel(-1, fx, 0);
 

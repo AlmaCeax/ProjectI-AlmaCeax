@@ -1,11 +1,2 @@
-﻿  ModuleRender.cpp
-  Generando código...
-  Compilando...
-  ModuleWindow.cpp
-  ModuleTextures.cpp
-  ModuleInput.cpp
-  ModuleAudio.cpp
-  Main.cpp
-  Application.cpp
-  Generando código...
+﻿  ModuleAudio.cpp
   SDL Game.vcxproj -> E:\GitHub\AlmlaCeax\Project1\X-Multiply_Tribute\Debug\X-Multiply_Tribute.exe
