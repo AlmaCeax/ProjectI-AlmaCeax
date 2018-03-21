@@ -33,7 +33,7 @@ bool ModuleRender::Init()
 	}
 
 	// TODO 9: load a texture "test.png" to test is everything works well
-	tex = App->textures->Load("../../Assets/Sprites/Stages/Stage1/Background/FirstLvlMap1.png");
+	tex = App->texture->Load("../../Assets/Sprites/Stages/Stage1/Background/FirstLvlMap1.png");
 
 	return ret;
 }

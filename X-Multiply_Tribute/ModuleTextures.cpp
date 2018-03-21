@@ -13,7 +13,6 @@ ModuleTextures::ModuleTextures() : Module()
 	for (int i = 0; i < MAX_TEXTURES; i++) {
 		textures[i] = nullptr;
 	}
-	texture = nullptr;
 }
 
 // Destructor
@@ -66,7 +65,7 @@ SDL_Texture* const ModuleTextures::Load(const char* path)
 	// TODO 3: Once your have the SDL_surface*, you need to create
 	// a texture from it to return it (check for errors again)
 
-	texture = SDL_CreateTextureFromSurface(App->render->renderer, surface);
+	SDL_Texture *texture = SDL_CreateTextureFromSurface(App->render->renderer, surface);
 	if (!texture) {
 		LOG("CreateTextureFromSurface failed: %s\n", SDL_GetError());
 	}

@@ -22,7 +22,6 @@ public:
 
 public:
 	SDL_Texture* textures[MAX_TEXTURES];
-	SDL_Texture* texture;
 	SDL_Surface* surface;
 };
 
