@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "SDL/include/SDL_Rect.h"
+#include "SDL_image/include/SDL_image.h"
 
 
 ModuleMap::ModuleMap(): Module()
@@ -41,6 +42,11 @@ update_status ModuleMap::PostUpdate()
 
 bool ModuleMap::CleanUp()
 {
+	for (int i = NUM_LAYERS; i < 1; --i)
+	{
+		if(textures[i] != nullptr)SDL_DestroyTexture(textures[i]);
+		delete rect[i];
+	}
 	return false;
 }
 
