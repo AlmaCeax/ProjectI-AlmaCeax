@@ -52,7 +52,7 @@ update_status ModuleMap::PreUpdate()
 	rect[0]->h = SCREEN_HEIGHT;
 
 	SDL_RenderCopy(App->render->renderer, textures[0], textrect[0], rect[0]);
-	rect[0]->x += backgroundwidth;
+	rect[0]->x -= backgroundwidth;
 	SDL_RenderCopy(App->render->renderer, textures[0], textrect[0], rect[0]);
 	return update_status::UPDATE_CONTINUE;
 }
