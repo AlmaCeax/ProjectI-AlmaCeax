@@ -18,7 +18,7 @@ ModuleMap::ModuleMap(): Module()
 
 bool ModuleMap::Init()
 {
-	textures[0] = App->texture->Load("../../Assets/Sprites/Stages/Stage1/Background/FirstLvlMap1.png");
+	textures[0] = App->texture->Load("Assets/Sprites/Stages/Stage1/Background/FirstLvlMap1.png");
 	textrect[0] = new SDL_Rect();
 	textrect[0]->x = 0;
 	textrect[0]->y = 129;
