@@ -96,7 +96,7 @@ Mix_Music * const ModuleAudio::LoadMusic(const char* path)
 	}
 	else {
 
-		if (musics[MAX_MUSICS] != nullptr) {
+		if (musics[MAX_MUSICS-1] != nullptr) {
 			LOG("Musics aren't empty");
 		}
 		else {

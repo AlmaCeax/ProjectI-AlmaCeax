@@ -24,7 +24,7 @@ public:
 	ModuleInput* input = nullptr;
 	ModuleTextures* texture = nullptr;
 	ModuleAudio* audio = nullptr;
-	ModuleMap* background = nullptr;
+	ModuleMap* map = nullptr;
 
 public:
 

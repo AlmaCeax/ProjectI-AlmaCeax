@@ -10,10 +10,10 @@ Application::Application()
 {
 	modules[0] = window = new ModuleWindow();
 	modules[1] = input = new ModuleInput();
-	modules[2] = texture = new ModuleTextures();
-	modules[3] = audio = new ModuleAudio();
-	modules[4] = background = new ModuleMap();
-	modules[NUM_MODULES-1] = render = new ModuleRender();
+	modules[2] = render = new ModuleRender();
+	modules[3] = texture = new ModuleTextures();
+	modules[4] = audio = new ModuleAudio();
+	modules[5] = map = new ModuleMap();
 
 }	
 

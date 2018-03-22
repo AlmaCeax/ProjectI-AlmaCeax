@@ -33,7 +33,6 @@ bool ModuleRender::Init()
 	}
 
 	// TODO 9: load a texture "test.png" to test is everything works well
-	tex = App->texture->Load("../../Assets/Sprites/Stages/Stage1/Background/FirstLvlMap1.png");
 
 	return ret;
 }
@@ -46,7 +45,7 @@ update_status ModuleRender::PreUpdate()
 	SDL_RenderClear(renderer);
 
 	// TODO 10: Blit our test texture to check functionality
-	Blit(tex, 0, 0, nullptr);
+	//Blit(tex, 0, 0, nullptr);
 
 	return update_status::UPDATE_CONTINUE;
 }

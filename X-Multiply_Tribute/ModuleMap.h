@@ -15,14 +15,17 @@ class ModuleMap :
 private:
 	int x = 0;
 	int y = 0;
-	int velocity = 5;
+	int velocity = 1;
 	bool isMoving = false;
+	int backgroundwidth = 512;
 	SDL_Rect* rect[NUM_LAYERS];
+	SDL_Rect* textrect[NUM_LAYERS];
 	SDL_Texture* textures[NUM_LAYERS];
 public:
 	bool Init();
 	update_status Update();
 	update_status PostUpdate();
+	update_status PreUpdate();
 	bool CleanUp();
 	ModuleMap();
 	~ModuleMap();

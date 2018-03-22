@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "SDL/include/SDL_Rect.h"
+#include "SDL/include/SDL_Render.h"
 #include "SDL_image/include/SDL_image.h"
 
 
@@ -17,26 +18,42 @@ ModuleMap::ModuleMap(): Module()
 
 bool ModuleMap::Init()
 {
-	//rect[0]->x = 0;
-	//rect[0]->y = 0;
-	//rect[0]->h = 512;
-	//rect[0]->w = 512;
-	textures[0] = App->texture->Load("../Assets/Sprites/Stages/Stage1/Background/FirstLvlMap1.png");
-
-	if (textures[0] != nullptr) {
+	textures[0] = App->texture->Load("../../Assets/Sprites/Stages/Stage1/Background/FirstLvlMap1.png");
+	textrect[0] = new SDL_Rect();
+	textrect[0]->x = 0;
+	textrect[0]->y = 129;
+	textrect[0]->h = 240;
+	textrect[0]->w = 512;
+	if (textures[0] == nullptr) {
 		return false;
 	}else return true;
 }
 
 update_status ModuleMap::Update()
 {
-	x += velocity;
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModuleMap::PostUpdate()
 {
-	App->render->Blit(textures[0], x, y, nullptr);
+	return update_status::UPDATE_CONTINUE;
+}
+
+update_status ModuleMap::PreUpdate()
+{
+	rect[0] = new SDL_Rect();
+
+	x -= velocity;
+	if (x <= -backgroundwidth) x = 0;
+
+	rect[0]->x = -x;
+	rect[0]->y = 0;
+	rect[0]->w = backgroundwidth;
+	rect[0]->h = SCREEN_HEIGHT;
+
+	SDL_RenderCopy(App->render->renderer, textures[0], textrect[0], rect[0]);
+	rect[0]->x += backgroundwidth;
+	SDL_RenderCopy(App->render->renderer, textures[0], textrect[0], rect[0]);
 	return update_status::UPDATE_CONTINUE;
 }
 
