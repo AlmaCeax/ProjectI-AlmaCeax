@@ -24,6 +24,7 @@ bool ModuleMap::Init()
 	textrect[0]->y = 129;
 	textrect[0]->h = 240;
 	textrect[0]->w = 512;
+
 	if (textures[0] == nullptr) {
 		return false;
 	}else return true;
@@ -41,19 +42,14 @@ update_status ModuleMap::PostUpdate()
 
 update_status ModuleMap::PreUpdate()
 {
-	rect[0] = new SDL_Rect();
-
+	int nextX;
 	x -= velocity;
 	if (x <= -backgroundwidth) x = 0;
 
-	rect[0]->x = -x;
-	rect[0]->y = 0;
-	rect[0]->w = backgroundwidth;
-	rect[0]->h = SCREEN_HEIGHT;
+	App->render->Blit(textures[0], x, y, textrect[0]);
+	nextX = x + backgroundwidth;
+	App->render->Blit(textures[0], nextX, y, textrect[0]);
 
-	SDL_RenderCopy(App->render->renderer, textures[0], textrect[0], rect[0]);
-	rect[0]->x -= backgroundwidth;
-	SDL_RenderCopy(App->render->renderer, textures[0], textrect[0], rect[0]);
 	return update_status::UPDATE_CONTINUE;
 }
 
