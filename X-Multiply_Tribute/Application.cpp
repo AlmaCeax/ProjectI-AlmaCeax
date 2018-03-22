@@ -4,16 +4,16 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
-#include "ModuleBackground.h"
+#include "ModuleMap.h"
 
 Application::Application()
 {
 	modules[0] = window = new ModuleWindow();
-	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
 	modules[3] = texture = new ModuleTextures();
 	modules[4] = audio = new ModuleAudio();
-	modules[5] = background = new ModuleBackground();
+	modules[5] = background = new ModuleMap();
+	modules[1] = render = new ModuleRender();
 
 }	
 

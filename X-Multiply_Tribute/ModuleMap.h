@@ -1,5 +1,5 @@
-#ifndef __ModuleBackground_H__
-#define __ModuleBackground_H__
+#ifndef __ModuleMap_H__
+#define __ModuleMap_H__
 
 #include "Module.h"
 #include "Globals.h"
@@ -9,13 +9,13 @@
 struct SDL_Rect;
 struct SDL_Texture;
 
-class ModuleBackground :
+class ModuleMap :
 	public Module
 {
 private:
 	int x = 0;
 	int y = 0;
-	int velocity = 2;
+	int velocity = 5;
 	bool isMoving = false;
 	SDL_Rect* rect[NUM_LAYERS];
 	SDL_Texture* textures[NUM_LAYERS];
@@ -24,8 +24,8 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
-	ModuleBackground();
-	~ModuleBackground();
+	ModuleMap();
+	~ModuleMap();
 };
 
 #endif

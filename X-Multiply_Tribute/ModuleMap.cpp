@@ -1,11 +1,11 @@
 #include "Application.h"
-#include "ModuleBackground.h"
+#include "ModuleMap.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "SDL/include/SDL_Rect.h"
 
 
-ModuleBackground::ModuleBackground(): Module()
+ModuleMap::ModuleMap(): Module()
 {
 	for (int i = 0; i < NUM_LAYERS; ++i)
 	{
@@ -14,7 +14,7 @@ ModuleBackground::ModuleBackground(): Module()
 	}
 }
 
-bool ModuleBackground::Init()
+bool ModuleMap::Init()
 {
 	//rect[0]->x = 0;
 	//rect[0]->y = 0;
@@ -27,24 +27,24 @@ bool ModuleBackground::Init()
 	}else return true;
 }
 
-update_status ModuleBackground::Update()
+update_status ModuleMap::Update()
 {
 	x += velocity;
 	return update_status::UPDATE_CONTINUE;
 }
 
-update_status ModuleBackground::PostUpdate()
+update_status ModuleMap::PostUpdate()
 {
 	App->render->Blit(textures[0], x, y, nullptr);
 	return update_status::UPDATE_CONTINUE;
 }
 
-bool ModuleBackground::CleanUp()
+bool ModuleMap::CleanUp()
 {
 	return false;
 }
 
 
-ModuleBackground::~ModuleBackground()
+ModuleMap::~ModuleMap()
 {
 }
