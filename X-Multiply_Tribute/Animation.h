@@ -7,6 +7,7 @@
 class Animation
 {
 public:
+	bool repeat = true;
 	float speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES];
 
@@ -24,10 +25,19 @@ public:
 	SDL_Rect& GetCurrentFrame()
 	{
 		current_frame += speed;
-		if (current_frame >= last_frame)
+		if (current_frame >= last_frame && repeat == false)
+		{
+			current_frame = (int)current_frame - 1;
+		}
+		else if(current_frame >= last_frame && repeat == true)
+		{
 			current_frame = 0;
+		}
 
 		return frames[(int)current_frame];
+	}
+	void ResetAnimation() {
+		current_frame = 0;
 	}
 };
 

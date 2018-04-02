@@ -51,11 +51,11 @@ update_status ModuleRender::Update()
 {
 	int speed = 3;
 
-	if (App->input->keyboard[SDL_SCANCODE_UP] == 1)
+	/*if (App->input->keyboard[SDL_SCANCODE_UP] == 1)
 		camera.y += speed;
 
 	if (App->input->keyboard[SDL_SCANCODE_DOWN] == 1)
-		camera.y -= speed;
+		camera.y -= speed;*/
 
 	return update_status::UPDATE_CONTINUE;
 }
