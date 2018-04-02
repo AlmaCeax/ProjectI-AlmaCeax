@@ -46,16 +46,6 @@ update_status ModulePlayer::Update()
 	Animation* current_animation = &idle;
 	int speed = 1;
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == 1)
-	{
-		current_animation = &up;
-		position.y -= speed;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == 1)
-	{
-		current_animation = &down;
-		position.y += speed;
-	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == 1)
 	{
 		current_animation = &idle;
@@ -66,6 +56,17 @@ update_status ModulePlayer::Update()
 		current_animation = &idle;
 		position.x -= speed;
 	}
+	if (App->input->keyboard[SDL_SCANCODE_W] == 1)
+	{
+		current_animation = &up;
+		position.y -= speed;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_S] == 1)
+	{
+		current_animation = &down;
+		position.y += speed;
+	}
+
 	if (last_animation != current_animation) {
 		current_animation->ResetAnimation();
 	}
