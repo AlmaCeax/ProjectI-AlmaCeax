@@ -25,6 +25,12 @@ bool ModuleMap::Init()
 	textrect[0]->y = 129;
 	textrect[0]->h = 240;
 	textrect[0]->w = 512;
+	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/BG01.png");
+	textrect[1] = new SDL_Rect();
+	textrect[1]->x = 0;
+	textrect[1]->y = 14;
+	textrect[1]->h = 240;
+	textrect[1]->w = 5000;
 
 	if (textures[0] == nullptr) {
 		return false;
@@ -45,11 +51,33 @@ update_status ModuleMap::PreUpdate()
 {
 	int nextX;
 	x -= velocity;
+	xLayer -= velocityLayer;
 	if (x <= -backgroundwidth) x = 0;
 
 	App->render->Blit(textures[0], x, y, textrect[0]);
 	nextX = x + backgroundwidth;
 	App->render->Blit(textures[0], nextX, y, textrect[0]);
+	App->render->Blit(textures[1], xLayer, y, textrect[1]);
+	
+	/*if (xLayer <= -512) {
+		switch (indexLayer)
+		{
+			case 1:
+				textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map2.png");
+				textrect[1]->y = 126;
+				textrect[1]->h = 225; break;
+			case 2: 
+				textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map3.png"); break;
+			case 3: 
+				textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map4.png"); break;
+			case 4: 
+				textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map5.png"); break;
+			case 5: 
+				textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map6.png"); break;
+		}
+
+		xLayer = 0;
+	}*/
 
 	return update_status::UPDATE_CONTINUE;
 }

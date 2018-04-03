@@ -15,7 +15,10 @@ class ModuleMap :
 private:
 	int x = 0;
 	int y = 0;
+	int xLayer = 0;
+	int velocityLayer = 2;
 	int velocity = 1;
+	int indexLayer = 1;
 	bool isMoving = false;
 	int backgroundwidth = 512;
 	SDL_Rect* rect[NUM_LAYERS];
