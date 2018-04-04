@@ -16,16 +16,20 @@ private:
 	int x = 0;
 	int y = 0;
 	int xLayer = 0;
+	int yLayer = 0;
 	int velocityLayer = 2;
-	int velocity = 1;
+	int xVelocity = 1;
+	int yVelocityLayer = 0;
 	int indexLayer = 1;
+	int indexRect = 1;
 	bool isMoving = false;
 	int backgroundwidth = 512;
 	SDL_Rect* rect[NUM_LAYERS];
-	SDL_Rect* textrect[NUM_LAYERS];
-	SDL_Texture* textures[NUM_LAYERS];
+	SDL_Rect* textrect[3];
+	SDL_Texture* textures[11];
 public:
 	bool Init();
+	bool loadMapTextures();
 	update_status Update();
 	update_status PostUpdate();
 	update_status PreUpdate();
