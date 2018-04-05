@@ -35,57 +35,16 @@ update_status ModuleMap::PostUpdate()
 
 update_status ModuleMap::PreUpdate()
 {
-	int nextX, nextXLayer, nextYLayer = 0;
-	if (isMovingX) {
-		x -= velocityBackground;
-		xLayer -= xVelocityLayer;
-	}
 
-	if (isMovingY)
-	{
-		yLayer -= yVelocityLayer;
-	}
-
-	if (x <= -backgroundwidth) x = 0;
-
-	App->render->Blit(textures[0], x, y, textrect[0]);
-	nextX = x + backgroundwidth;
-	App->render->Blit(textures[0], nextX, y, textrect[0]);
-
-	App->render->Blit(textures[indexLayer], xLayer, yLayer, textrect[1]);
-	nextXLayer = xLayer + backgroundwidth;
-	if(indexLayer < 10)App->render->Blit(textures[indexLayer+1], nextXLayer, yLayer, textrect[1]);
-	
-	if (xLayer <= -backgroundwidth) {
-		xLayer = 0;
-		indexLayer++;
-	}
-
-	switch (indexLayer)
-	{
-	case 6: if(x <= -375)isMovingY = true; break;
-	//case 8: yVelocityLayer = 1; break;
-	//case 9: yVelocityLayer = 0; break;
-	case 10: isMovingX = false;
-	default:
-		break;
-	}
-
-	//if (indexLayer == 7 || indexLayer == 8)
-	//{
-	//	nextYLayer = xLayer + 240;
-	//	if (yLayer <= -240)
-	//	{
-	//		yLayer = 0;
-	//	}
-	//}
+	App->render->Blit(textures[0], x, y, textrect[0], 0.5f);
+	App->render->Blit(textures[1], xLayer, yLayer, textrect[1]);
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 bool ModuleMap::CleanUp()
 {
-	for (int i = 11; i < 1; --i)
+	for (int i = NUM_LAYERS; i < 1; --i)
 	{
 		if(textures[i] != nullptr)SDL_DestroyTexture(textures[i]);
 		delete rect[i];
@@ -102,27 +61,19 @@ bool ModuleMap::loadMapTextures()
 {
 	LOG("Loading background textures");
 	//Load all background textures
-	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/FirstLvlMap1.png");
-	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map1.png");
-	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map2.png");
-	textures[3] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map3.png");
-	textures[4] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map4.png");
-	textures[5] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map5.png");
-	textures[6] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map6.png");
-	textures[7] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map7.png");
-	textures[8] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map8.png");
-	textures[9] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/Tilemap/Map9.png");
+	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/FirstLvlMap.png");
+	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/BG01.png");
 	//Set origin rectangles in the right coordinates
 	textrect[0] = new SDL_Rect();
 	textrect[0]->x = 0;
-	textrect[0]->y = 129;
-	textrect[0]->h = 240;
-	textrect[0]->w = 512;
+	textrect[0]->y = 0;
+	textrect[0]->h = 512;
+	textrect[0]->w = 4960;
 	textrect[1] = new SDL_Rect();
 	textrect[1]->x = 0;
 	textrect[1]->y = 0;
-	textrect[1]->h = 240;
-	textrect[1]->w = 512;
+	textrect[1]->h = 512;
+	textrect[1]->w = 4960;
 
 	if (textures[0] == nullptr) {
 		return false;

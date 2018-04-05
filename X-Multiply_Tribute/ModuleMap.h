@@ -17,6 +17,7 @@ private:
 	int x = 0;
 	int y = 0;
 	int velocityBackground = 1;
+	int nextX = 512;
 	//Layers
 	int xLayer = 0;
 	int yLayer = 0;
@@ -28,8 +29,8 @@ private:
 	bool isMovingX = true;
 	int backgroundwidth = 512;
 	SDL_Rect* rect[NUM_LAYERS];
-	SDL_Rect* textrect[2];
-	SDL_Texture* textures[11];
+	SDL_Rect* textrect[NUM_LAYERS];
+	SDL_Texture* textures[NUM_LAYERS];
 public:
 	bool Init();
 	bool loadMapTextures();

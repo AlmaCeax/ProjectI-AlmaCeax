@@ -49,8 +49,16 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	int speed = 3;
+	int speed = 1;
+	camera.x -= speed;
 
+	if (camera.x < -2670 && camera.x > -3452) {
+		timer++;
+		if (timer >= 3) {
+			camera.y -= speed;
+			timer = 0;
+		}
+	}
 	/*if (App->input->keyboard[SDL_SCANCODE_UP] == 1)
 		camera.y += speed;
 

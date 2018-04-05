@@ -12,7 +12,7 @@ class ModuleRender : public Module
 public:
 	ModuleRender();
 	~ModuleRender();
-
+	int timer = 0;
 	bool Init();
 	update_status PostUpdate();
 	update_status Update();
