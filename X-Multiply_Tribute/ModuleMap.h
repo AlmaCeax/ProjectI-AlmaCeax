@@ -13,19 +13,22 @@ class ModuleMap :
 	public Module
 {
 private:
+	//Background variables
 	int x = 0;
 	int y = 0;
+	int velocityBackground = 1;
+	//Layers
 	int xLayer = 0;
 	int yLayer = 0;
-	int velocityLayer = 2;
-	int xVelocity = 1;
-	int yVelocityLayer = 0;
+	int xVelocityLayer = 2;
+	int yVelocityLayer = 1;
 	int indexLayer = 1;
 	int indexRect = 1;
-	bool isMoving = false;
+	bool isMovingY = false;
+	bool isMovingX = true;
 	int backgroundwidth = 512;
 	SDL_Rect* rect[NUM_LAYERS];
-	SDL_Rect* textrect[3];
+	SDL_Rect* textrect[2];
 	SDL_Texture* textures[11];
 public:
 	bool Init();

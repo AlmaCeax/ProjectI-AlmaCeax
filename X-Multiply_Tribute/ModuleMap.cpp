@@ -36,9 +36,16 @@ update_status ModuleMap::PostUpdate()
 update_status ModuleMap::PreUpdate()
 {
 	int nextX, nextXLayer, nextYLayer = 0;
-	x -= xVelocity;
-	xLayer -= velocityLayer;
-	yLayer -= yVelocityLayer;
+	if (isMovingX) {
+		x -= velocityBackground;
+		xLayer -= xVelocityLayer;
+	}
+
+	if (isMovingY)
+	{
+		yLayer -= yVelocityLayer;
+	}
+
 	if (x <= -backgroundwidth) x = 0;
 
 	App->render->Blit(textures[0], x, y, textrect[0]);
@@ -47,18 +54,21 @@ update_status ModuleMap::PreUpdate()
 
 	App->render->Blit(textures[indexLayer], xLayer, yLayer, textrect[1]);
 	nextXLayer = xLayer + backgroundwidth;
-	App->render->Blit(textures[indexLayer+1], nextXLayer, nextYLayer, textrect[1]);
+	if(indexLayer < 10)App->render->Blit(textures[indexLayer+1], nextXLayer, yLayer, textrect[1]);
 	
 	if (xLayer <= -backgroundwidth) {
 		xLayer = 0;
 		indexLayer++;
-		switch (indexLayer)
-		{
-			case 7: yVelocityLayer = 1; break;
-			case 8: yVelocityLayer = 0; break;
-			default: 
-				break;
-		}
+	}
+
+	switch (indexLayer)
+	{
+	case 6: if(x <= -375)isMovingY = true; break;
+	//case 8: yVelocityLayer = 1; break;
+	//case 9: yVelocityLayer = 0; break;
+	case 10: isMovingX = false;
+	default:
+		break;
 	}
 
 	//if (indexLayer == 7 || indexLayer == 8)
@@ -75,7 +85,7 @@ update_status ModuleMap::PreUpdate()
 
 bool ModuleMap::CleanUp()
 {
-	for (int i = NUM_LAYERS; i < 1; --i)
+	for (int i = 11; i < 1; --i)
 	{
 		if(textures[i] != nullptr)SDL_DestroyTexture(textures[i]);
 		delete rect[i];
