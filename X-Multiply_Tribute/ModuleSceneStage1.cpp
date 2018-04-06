@@ -27,7 +27,10 @@ bool ModuleSceneStage1::Init()
 
 bool ModuleSceneStage1::Start() {
 	App->player->Enable();
-
+	right = true;
+	up = false;
+	down = false;
+	left = false;
 	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1_.ogg");
 	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
 	Mix_PlayMusic(music, -1);
@@ -39,6 +42,12 @@ update_status ModuleSceneStage1::Update()
 {
 	App->render->Blit(textures[0], x, y, textrect[0], 0.5f);
 	App->render->Blit(textures[1], xLayer, yLayer, textrect[1]);
+	if (App->render->camera.x < -8000 && App->render->camera.x > -10400)
+	{
+		down = true;
+	}
+	else if(down) down = false;
+
 	return update_status::UPDATE_CONTINUE;
 }
 

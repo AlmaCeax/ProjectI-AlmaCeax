@@ -18,19 +18,14 @@ private:
 	//Background variables
 	int x = 0;
 	int y = 0;
-	int velocityBackground = 1;
-	int nextX = 512;
 
 	//Layers
 	int xLayer = 0;
 	int yLayer = 0;
-	int xVelocityLayer = 2;
-	int yVelocityLayer = 1;
-	int indexLayer = 1;
-	int indexRect = 1;
-	bool isMovingY = false;
-	bool isMovingX = true;
-	int backgroundwidth = 512;
+
+	//timers
+	//Uint32 start_time;
+	//Uint32 total_time;
 
 	SDL_Rect* rect[NUM_LAYERS];
 	SDL_Rect* textrect[NUM_LAYERS];
@@ -40,6 +35,7 @@ private:
 	Mix_Chunk* shipSpawn = nullptr;
 
 public:
+	bool right, left, up, down;
 	bool Init();
 	bool loadMapTextures();
 	update_status Update();
