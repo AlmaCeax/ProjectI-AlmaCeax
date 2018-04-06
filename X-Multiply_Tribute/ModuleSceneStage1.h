@@ -43,7 +43,6 @@ public:
 	bool Init();
 	bool loadMapTextures();
 	update_status Update();
-	update_status PreUpdate();
 	bool CleanUp();
 	bool Start();
 	ModuleSceneStage1();

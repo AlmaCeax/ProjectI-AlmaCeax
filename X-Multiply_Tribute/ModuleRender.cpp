@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
+#include "ModuleSceneStage1.h"
 #include "SDL/include/SDL.h"
 
 ModuleRender::ModuleRender() : Module()
@@ -49,16 +50,19 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	int speed = 1;
-	camera.x -= speed;
+	//this needs to change.
+	if (App->stage1->IsEnabled()) {
+		int speed = 1;
+		camera.x -= speed;
 
-	if (camera.x < -2670 && camera.x > -3452) {
-		timer++;
-		if (timer >= 3) {
-			camera.y -= speed;
-			timer = 0;
+		if (camera.x < -2670 && camera.x > -3452) {
+			timer++;
+			if (timer >= 3) {
+				camera.y -= speed;
+				timer = 0;
+			}
 		}
-	}
+	}	
 
 	return update_status::UPDATE_CONTINUE;
 }

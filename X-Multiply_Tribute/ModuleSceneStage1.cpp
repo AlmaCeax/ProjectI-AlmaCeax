@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
+#include "ModulePlayer.h"
 #include "SDL/include/SDL_Rect.h"
 #include "SDL_image/include/SDL_image.h"
 #include "SDL_mixer/include/SDL_mixer.h"
@@ -25,6 +26,8 @@ bool ModuleSceneStage1::Init()
 }
 
 bool ModuleSceneStage1::Start() {
+	App->player->Enable();
+
 	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1_.ogg");
 	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
 	Mix_PlayMusic(music, -1);
@@ -34,14 +37,8 @@ bool ModuleSceneStage1::Start() {
 
 update_status ModuleSceneStage1::Update()
 {
-	return update_status::UPDATE_CONTINUE;
-}
-
-update_status ModuleSceneStage1::PreUpdate()
-{
 	App->render->Blit(textures[0], x, y, textrect[0], 0.5f);
 	App->render->Blit(textures[1], xLayer, yLayer, textrect[1]);
-
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -57,7 +54,7 @@ bool ModuleSceneStage1::CleanUp()
 	App->audio->UnloadSFX(shipSpawn);
 
 
-	return false;
+	return true;
 }
 
 

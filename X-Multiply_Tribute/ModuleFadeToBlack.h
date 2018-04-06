@@ -26,6 +26,8 @@ private:
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
 	SDL_Rect screen;
+	Module* module_enable = nullptr;
+	Module* module_disable = nullptr;
 };
 
 #endif //__MODULEFADETOBLACK_H__

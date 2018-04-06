@@ -15,6 +15,7 @@ public:
 	~ModulePlayer();
 
 	bool Start();
+	bool CleanUp();
 	update_status Update();
 
 public:
