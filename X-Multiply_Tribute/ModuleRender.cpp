@@ -59,18 +59,12 @@ update_status ModuleRender::Update()
 			timer = 0;
 		}
 	}
-	/*if (App->input->keyboard[SDL_SCANCODE_UP] == 1)
-		camera.y += speed;
-
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == 1)
-		camera.y -= speed;*/
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModuleRender::PostUpdate()
 {
-	// TODO 8: Switch buffers so we actually render
 	SDL_RenderPresent(renderer);
 	return update_status::UPDATE_CONTINUE;
 }

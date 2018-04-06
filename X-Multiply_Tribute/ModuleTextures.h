@@ -19,10 +19,10 @@ public:
 	bool CleanUp();
 
 	SDL_Texture* const Load(const char* path);
+	bool Unload(SDL_Texture * texture);
 
 public:
 	SDL_Texture* textures[MAX_TEXTURES];
-	SDL_Surface* surface;
 };
 
 #endif // __ModuleTextures_H__

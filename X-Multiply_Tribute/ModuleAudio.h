@@ -5,7 +5,7 @@
 #include "Globals.h"
 
 #define MAX_MUSICS 50
-#define MAX_FXS 100
+#define MAX_SFX 100
 
 struct _Mix_Music;
 struct Mix_Chunk;
@@ -17,9 +17,6 @@ public:
 	~ModuleAudio();
 
 	bool Init();
-	update_status PreUpdate();
-	update_status Update();
-	update_status PostUpdate();
 	bool CleanUp();
 
 	_Mix_Music* const LoadMusic(const char* path);
@@ -27,9 +24,7 @@ public:
 
 public:
 	_Mix_Music* musics[MAX_MUSICS];
-	_Mix_Music* music;
-	Mix_Chunk* fxs[MAX_FXS];
-	Mix_Chunk* fx;
+	Mix_Chunk* sfx[MAX_SFX];
 };
 
 #endif // __ModuleAudio_H__

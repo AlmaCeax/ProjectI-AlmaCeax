@@ -2,9 +2,10 @@
 #include "ModuleMap.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
+#include "ModuleAudio.h"
 #include "SDL/include/SDL_Rect.h"
-#include "SDL/include/SDL_Render.h"
 #include "SDL_image/include/SDL_image.h"
+#include "SDL_mixer/include/SDL_mixer.h"
 
 
 ModuleMap::ModuleMap(): Module()
@@ -23,19 +24,21 @@ bool ModuleMap::Init()
 	}else return true;
 }
 
-update_status ModuleMap::Update()
-{
-	return update_status::UPDATE_CONTINUE;
+bool ModuleMap::Start() {
+	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1_.ogg");
+	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
+	Mix_PlayMusic(music, -1);
+	Mix_PlayChannel(-1, shipSpawn, 0);
+	return true;
 }
 
-update_status ModuleMap::PostUpdate()
+update_status ModuleMap::Update()
 {
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModuleMap::PreUpdate()
 {
-
 	App->render->Blit(textures[0], x, y, textrect[0], 0.5f);
 	App->render->Blit(textures[1], xLayer, yLayer, textrect[1]);
 

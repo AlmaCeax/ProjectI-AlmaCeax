@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleMap.h"
 #include "ModulePlayer.h"
+#include "ModuleFadeToBlack.h"
 
 Application::Application()
 {
@@ -15,7 +16,8 @@ Application::Application()
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = audio = new ModuleAudio();
 	modules[5] = map = new ModuleMap();
-	modules[6] = player = new ModulePlayer();
+	modules[6] = fade = new ModuleFadeToBlack();
+	modules[7] = player = new ModulePlayer();
 
 }	
 
@@ -28,6 +30,8 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
+
+	player->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

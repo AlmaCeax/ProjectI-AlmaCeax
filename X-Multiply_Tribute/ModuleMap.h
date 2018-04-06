@@ -8,6 +8,8 @@
 
 struct SDL_Rect;
 struct SDL_Texture;
+struct _Mix_Music;
+struct Mix_Chunk;
 
 class ModuleMap :
 	public Module
@@ -18,6 +20,7 @@ private:
 	int y = 0;
 	int velocityBackground = 1;
 	int nextX = 512;
+
 	//Layers
 	int xLayer = 0;
 	int yLayer = 0;
@@ -28,16 +31,21 @@ private:
 	bool isMovingY = false;
 	bool isMovingX = true;
 	int backgroundwidth = 512;
+
 	SDL_Rect* rect[NUM_LAYERS];
 	SDL_Rect* textrect[NUM_LAYERS];
 	SDL_Texture* textures[NUM_LAYERS];
+
+	_Mix_Music* music = nullptr;
+	Mix_Chunk* shipSpawn = nullptr;
+
 public:
 	bool Init();
 	bool loadMapTextures();
 	update_status Update();
-	update_status PostUpdate();
 	update_status PreUpdate();
 	bool CleanUp();
+	bool Start();
 	ModuleMap();
 	~ModuleMap();
 };

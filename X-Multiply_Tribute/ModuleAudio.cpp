@@ -12,12 +12,10 @@ ModuleAudio::ModuleAudio() : Module()
 	for (int i = 0; i < MAX_MUSICS; i++) {
 		musics[i] = nullptr;
 	}
-	music = nullptr;
 	// Initialize all fx pointers to nullptr
-	for (int i = 0; i < MAX_FXS; i++) {
-		fxs[i] = nullptr;
+	for (int i = 0; i < MAX_SFX; i++) {
+		sfx[i] = nullptr;
 	}
-	fx = nullptr;
 }
 
 // Destructor
@@ -42,29 +40,8 @@ bool ModuleAudio::Init()
 		LOG("Could not initialize mixer lib. Mix_Init: %s", Mix_GetError());
 		ret = false;
 	}
-	
-	music = LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1_.ogg");
-	fx = LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
-	Mix_PlayMusic(music, -1);
-	Mix_PlayChannel(-1, fx, 0);
 
 	return ret;
-}
-
-update_status ModuleAudio::PreUpdate()
-{
-	
-	return update_status::UPDATE_CONTINUE;
-}
-
-update_status ModuleAudio::Update()
-{
-	return update_status::UPDATE_CONTINUE;
-}
-
-update_status ModuleAudio::PostUpdate()
-{
-	return update_status::UPDATE_CONTINUE;
 }
 
 // Called before quitting
@@ -76,8 +53,8 @@ bool ModuleAudio::CleanUp()
 	for (int i = 0; i < MAX_MUSICS; i++) {
 		Mix_FreeMusic(musics[i]);
 	}
-	for (int i = 0; i < MAX_FXS; i++) {
-		Mix_FreeChunk(fxs[i]);
+	for (int i = 0; i < MAX_SFX; i++) {
+		Mix_FreeChunk(sfx[i]);
 	}
 
 	Mix_CloseAudio();
@@ -89,23 +66,25 @@ Mix_Music * const ModuleAudio::LoadMusic(const char* path)
 {
 	// Load a music from a path (must be a ogg)
 	// and check for errors
-	music = Mix_LoadMUS(path);
+	Mix_Music* music = Mix_LoadMUS(path);
 	if (!music) {
 		LOG("Mix_LoadMUS: %s\n", Mix_GetError());
 		// handle error
 	}
 	else {
 
-		if (musics[MAX_MUSICS-1] != nullptr) {
-			LOG("Musics aren't empty");
-		}
-		else {
-			for (int i = 0; i < MAX_MUSICS; i++) {
-				if (musics[i] == nullptr) {
-					musics[i] = music;
-				}
+		bool room = false;
+		for (int i = 0; i < MAX_MUSICS; ++i)
+		{
+			if (musics[i] == nullptr)
+			{
+				musics[i] = music;
+				room = true;
+				break;
 			}
 		}
+		if (room == false)
+			LOG("Music buffer overflow");
 	}
 	return music;
 }
@@ -116,23 +95,26 @@ Mix_Chunk * const ModuleAudio::LoadFx(const char* path)
 
 	// Load a music from a path (must be a ogg)
 	// and check for errors
-	fx = Mix_LoadWAV(path);
+	Mix_Chunk* fx = Mix_LoadWAV(path);
+
 	if (!fx) {
-		LOG("Mix_LoadWAV: %s\n", Mix_GetError());
+		LOG("Mix_LoadWAV error: %s\n", Mix_GetError());
 		// handle error
 	}
 	else {
 
-		if (fxs[MAX_FXS] != nullptr) {
-			LOG("fxs aren't empty");
-		}
-		else {
-			for (int i = 0; i < MAX_FXS; i++) {
-				if (fxs[i] == nullptr) {
-					fxs[i] = fx;
-				}
+		bool room = false;
+		for (int i = 0; i < MAX_SFX; ++i)
+		{
+			if (sfx[i] == nullptr)
+			{
+				sfx[i] = fx;
+				room = true;
+				break;
 			}
 		}
+		if (room == false)
+			LOG("SFX buffer overflow");
 	}
 
 	return fx;
