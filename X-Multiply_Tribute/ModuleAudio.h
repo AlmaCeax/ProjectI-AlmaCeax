@@ -22,6 +22,9 @@ public:
 	_Mix_Music* const LoadMusic(const char* path);
 	Mix_Chunk* const LoadFx(const char* path);
 
+	bool UnloadMusic(_Mix_Music * music);
+	bool UnloadSFX(Mix_Chunk * sfx);
+
 public:
 	_Mix_Music* musics[MAX_MUSICS];
 	Mix_Chunk* sfx[MAX_SFX];

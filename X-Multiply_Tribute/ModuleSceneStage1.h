@@ -1,5 +1,5 @@
-#ifndef __ModuleMap_H__
-#define __ModuleMap_H__
+#ifndef __ModuleSceneStage1_H__
+#define __ModuleSceneStage1_H__
 
 #include "Module.h"
 #include "Globals.h"
@@ -11,7 +11,7 @@ struct SDL_Texture;
 struct _Mix_Music;
 struct Mix_Chunk;
 
-class ModuleMap :
+class ModuleSceneStage1 :
 	public Module
 {
 private:
@@ -46,8 +46,8 @@ public:
 	update_status PreUpdate();
 	bool CleanUp();
 	bool Start();
-	ModuleMap();
-	~ModuleMap();
+	ModuleSceneStage1();
+	~ModuleSceneStage1();
 };
 
 #endif

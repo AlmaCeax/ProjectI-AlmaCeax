@@ -4,7 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
-#include "ModuleMap.h"
+#include "ModuleSceneStage1.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 
@@ -15,7 +15,7 @@ Application::Application()
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = audio = new ModuleAudio();
-	modules[5] = map = new ModuleMap();
+	modules[5] = stage1 = new ModuleSceneStage1();
 	modules[6] = fade = new ModuleFadeToBlack();
 	modules[7] = player = new ModulePlayer();
 

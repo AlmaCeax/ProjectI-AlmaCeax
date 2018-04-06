@@ -119,3 +119,44 @@ Mix_Chunk * const ModuleAudio::LoadFx(const char* path)
 
 	return fx;
 }
+
+bool ModuleAudio::UnloadMusic(_Mix_Music* music){
+
+	bool ret = false;
+
+	if (music != nullptr)
+	{
+		for (int i = 0; i < MAX_MUSICS; ++i)
+		{
+			if (musics[i] == music)
+			{
+				musics[i] = nullptr;
+				ret = true;
+				break;
+			}
+		}
+		Mix_FreeMusic(music);
+	}
+
+	return ret;
+}
+
+bool ModuleAudio::UnloadSFX(Mix_Chunk* _sfx) {
+	bool ret = false;
+
+	if (_sfx != nullptr)
+	{
+		for (int i = 0; i < MAX_SFX; ++i)
+		{
+			if (sfx[i] == _sfx)
+			{
+				sfx[i] = nullptr;
+				ret = true;
+				break;
+			}
+		}
+		Mix_FreeChunk(_sfx);
+	}
+
+	return ret;
+}
