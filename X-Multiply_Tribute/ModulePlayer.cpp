@@ -7,9 +7,6 @@
 
 ModulePlayer::ModulePlayer()
 {
-	position.x = 10;
-	position.y = 50;
-
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({ 100, 1, 36, 14 });
 	idle.PushBack({ 100, 1, 36, 14 });
@@ -34,6 +31,9 @@ ModulePlayer::~ModulePlayer()
 // Load assets
 bool ModulePlayer::Start()
 {
+	position.x = 75;
+	position.y = 125;
+
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png"); // arcade version
@@ -42,6 +42,7 @@ bool ModulePlayer::Start()
 
 bool ModulePlayer::CleanUp() {
 	App->textures->Unload(graphics);
+	graphics = nullptr;
 	return true;
 }
 
@@ -60,7 +61,7 @@ update_status ModulePlayer::Update()
 	{
 		current_animation = &idle;
 		position.x -= speed;
-	}else position.x += 1;
+	}//else position.x += 1;
 	if (App->input->keyboard[SDL_SCANCODE_W] == 1)
 	{
 		current_animation = &up;

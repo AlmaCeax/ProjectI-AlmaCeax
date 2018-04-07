@@ -4,6 +4,7 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleSceneStage1.h"
+#include "ModuleSceneStage2.h"
 #include "SDL/include/SDL.h"
 
 ModuleRender::ModuleRender() : Module()
@@ -62,7 +63,10 @@ update_status ModuleRender::Update()
 				timer = 0;
 			}
 		}
-	}	
+	}
+	else if (App->stage2->IsEnabled()) {
+		camera.x = 0;
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
