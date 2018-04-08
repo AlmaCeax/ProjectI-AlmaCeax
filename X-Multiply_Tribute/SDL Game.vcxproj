@@ -78,6 +78,8 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
+    <ClInclude Include="ModuleSceneStage2.h" />
+    <ClInclude Include="ModuleSceneStageClear.h" />
     <ClInclude Include="ModuleSceneStart.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="MemLeaks.h" />
@@ -100,6 +102,8 @@
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
+    <ClCompile Include="ModuleSceneStage2.cpp" />
+    <ClCompile Include="ModuleSceneStageClear.cpp" />
     <ClCompile Include="ModuleSceneStart.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />

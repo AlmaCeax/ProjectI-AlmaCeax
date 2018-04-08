@@ -26,20 +26,21 @@ ModuleAudio::~ModuleAudio()
 bool ModuleAudio::Init()
 {
 	LOG("Init Audios library");
-	Mix_Init(MIX_INIT_OGG);
-	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
-	
+
 	bool ret = true;
 
 	// load support for the PNG image format
 	int flags = MIX_INIT_OGG;
 	int init = Mix_Init(flags);
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
 	if ((init & flags) != flags)
 	{
 		LOG("Could not initialize mixer lib. Mix_Init: %s", Mix_GetError());
 		ret = false;
 	}
+
+	Mix_VolumeMusic(MIX_MAX_VOLUME / 6);
 
 	return ret;
 }

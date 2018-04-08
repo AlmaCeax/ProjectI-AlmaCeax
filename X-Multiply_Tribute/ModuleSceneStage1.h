@@ -15,6 +15,7 @@ class ModuleSceneStage1 :
 	public Module
 {
 private:
+
 	//Background variables
 	int x = 0;
 	int y = 0;
@@ -27,7 +28,6 @@ private:
 	//Uint32 start_time;
 	//Uint32 total_time;
 
-	SDL_Rect* rect[NUM_LAYERS];
 	SDL_Rect* textrect[NUM_LAYERS];
 	SDL_Texture* textures[NUM_LAYERS];
 
