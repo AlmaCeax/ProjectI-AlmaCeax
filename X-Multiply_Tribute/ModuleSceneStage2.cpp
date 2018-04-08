@@ -28,6 +28,8 @@ ModuleSceneStage2::~ModuleSceneStage2()
 
 bool ModuleSceneStage2::Start() {
 	App->player->Enable();
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 
 	music = App->audio->LoadMusic("Assets/Audio/Music/05_Babe_Good-Lookin_Stage_2.ogg");
 	bossTextures[0] = App->textures->Load("Assets/Sprites/Stages/Stage2/Background/BG02-1.png");
