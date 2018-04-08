@@ -15,18 +15,8 @@ class ModuleSceneStage1 :
 	public Module
 {
 private:
-
-	//Background variables
-	int x = 0;
-	int y = 0;
-
-	//Layers
-	int xLayer = 0;
-	int yLayer = 0;
-
-	//timers
-	//Uint32 start_time;
-	//Uint32 total_time;
+	int timer;
+	bool right, left, up, down;
 
 	SDL_Rect* textrect[NUM_LAYERS];
 	SDL_Texture* textures[NUM_LAYERS];
@@ -35,12 +25,14 @@ private:
 	Mix_Chunk* shipSpawn = nullptr;
 
 public:
-	bool right, left, up, down;
 	bool Init();
 	bool loadMapTextures();
 	update_status Update();
 	bool CleanUp();
 	bool Start();
+
+	void checkCameraEvents();
+	void updateCamera();
 	ModuleSceneStage1();
 	~ModuleSceneStage1();
 };

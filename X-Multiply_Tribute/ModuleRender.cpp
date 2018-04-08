@@ -51,30 +51,6 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	//this needs to change.
-	if (App->stage1->IsEnabled()) {
-		int speed = 3;
-
-		if (App->stage1->right)camera.x -= speed;
-		if (App->stage1->left)camera.x += speed;
-		if (App->stage1->up) {
-			timer++;
-			if (timer >= 3) {
-				camera.y += speed;
-				timer = 0;
-			}
-		}
-		if (App->stage1->down) {
-			timer++;
-			if (timer >= 3) {
-				camera.y -= speed;
-				timer = 0;
-			}
-		}
-	}
-	else if (App->stage2->IsEnabled()) {
-		camera.x = 0;
-	}
 
 	return update_status::UPDATE_CONTINUE;
 }

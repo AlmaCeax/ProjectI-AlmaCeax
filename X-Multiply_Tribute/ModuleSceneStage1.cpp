@@ -42,16 +42,51 @@ bool ModuleSceneStage1::Start() {
 	return true;
 }
 
-update_status ModuleSceneStage1::Update()
+void ModuleSceneStage1::checkCameraEvents()
 {
-
-	App->render->Blit(textures[0], x, y, textrect[0], 0.5f);
-	App->render->Blit(textures[1], xLayer, yLayer, textrect[1]);
-	if (App->render->camera.x < -8000 && App->render->camera.x > -10400)
+	if (App->render->camera.x < -8000 && App->render->camera.x > -10300)
 	{
 		down = true;
 	}
-	else if(down) down = false;
+	else if (down) down = false;
+}
+
+void ModuleSceneStage1::updateCamera()
+{
+	if (App->stage1->IsEnabled()) {
+		int speed = 3;
+
+		if (right) {
+			App->render->camera.x -= speed;
+			App->player->position.x += 1;
+		}
+		if (left)App->render->camera.x += speed;
+		if (up) {
+			timer++;
+			if (timer >= 3) {
+				App->render->camera.y += speed;
+				timer = 0;
+			}
+		}
+		if (down) {
+			timer++;
+			if (timer >= 3) {
+				App->render->camera.y -= speed;
+				App->player->position.y += 1;
+				timer = 0;
+			}
+		}
+	}
+}
+
+update_status ModuleSceneStage1::Update()
+{
+
+	App->render->Blit(textures[0], 0, 0, textrect[0], 0.5f);
+	App->render->Blit(textures[1], 0, 0, textrect[1]);
+
+	checkCameraEvents();
+	updateCamera();
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) App->fade->FadeToBlack(this, App->stage2, 2);
 
@@ -62,7 +97,7 @@ bool ModuleSceneStage1::CleanUp()
 {
 	App->player->Disable();
 
-	for (int i = NUM_LAYERS; i < 1; --i)
+	for (int i = 0; i < NUM_LAYERS; ++i)
 	{
 		App->textures->Unload(textures[i]);
 		textures[i] = nullptr;
@@ -72,6 +107,7 @@ bool ModuleSceneStage1::CleanUp()
 	music = nullptr;
 	App->audio->UnloadSFX(shipSpawn);
 	shipSpawn = nullptr;
+	right = false;
 
 	return true;
 }

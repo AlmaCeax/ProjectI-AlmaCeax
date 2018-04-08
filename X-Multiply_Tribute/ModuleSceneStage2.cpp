@@ -48,6 +48,11 @@ bool ModuleSceneStage2::Init()
 
 update_status ModuleSceneStage2::Update()
 {
+
+	if (App->stage2->IsEnabled()) {
+		App->render->camera.x = 0;
+	}
+
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) App->fade->FadeToBlack(this, App->stage_clear, 2);
 
 	App->render->Blit(bossTextures[0], 85, 160, &boss[0], 0.5f);
