@@ -33,7 +33,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	position.x = 75;
-	position.y = 125;
+	position.y = 118;
 
 	LOG("Loading player textures");
 	bool ret = true;

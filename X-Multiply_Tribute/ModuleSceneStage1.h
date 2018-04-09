@@ -5,7 +5,7 @@
 #include "Globals.h"
 #include "Animation.h"
 
-#define NUM_LAYERS 3
+#define NUM_LAYERS 4
 
 struct SDL_Rect;
 struct SDL_Texture;
