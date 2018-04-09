@@ -34,7 +34,9 @@ bool ModuleSceneStage1::Init()
 	startAnimation1.repeat = false;
 	startAnimation1.speed = 0.09f;
 
-	
+	startAnimation2.PushBack({ 414, 24, 48, 120 });
+	startAnimation2.PushBack({ 335, 24, 48, 120 });
+	startAnimation2.PushBack({ 266, 24, 48, 112 });
 	startAnimation1.PushBack({ 188, 24, 48, 103 });
 	startAnimation2.PushBack({ 107, 24, 48, 105 });
 	startAnimation2.PushBack({ 28, 24, 48, 102 });
