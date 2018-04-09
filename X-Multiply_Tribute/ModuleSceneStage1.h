@@ -3,8 +3,9 @@
 
 #include "Module.h"
 #include "Globals.h"
+#include "Animation.h"
 
-#define NUM_LAYERS 2
+#define NUM_LAYERS 3
 
 struct SDL_Rect;
 struct SDL_Texture;
@@ -15,8 +16,13 @@ class ModuleSceneStage1 :
 	public Module
 {
 private:
-	int timer;
-	bool right, left, up, down;
+	int timer, startTime;
+	bool right, left, up, down, injecting;
+
+	int xInjection = 75;
+	int yInjection = -100;
+
+	Animation startAnimation1, startAnimation2;
 
 	SDL_Rect* textrect[NUM_LAYERS];
 	SDL_Texture* textures[NUM_LAYERS];
