@@ -41,7 +41,7 @@ bool ModuleSceneStage1::Init()
 	startAnimation2.PushBack({ 107, 24, 48, 105 });
 	startAnimation2.PushBack({ 28, 24, 48, 102 });
 	startAnimation2.repeat = false;
-	startAnimation2.speed = 0.1f;
+	startAnimation2.speed = 0.09f;
 
 	injecting = true;
 
@@ -70,7 +70,7 @@ bool ModuleSceneStage1::Start() {
 
 void ModuleSceneStage1::checkCameraEvents()
 {
-	if (App->render->camera.x < -8000 && App->render->camera.x > -10300)
+	if (App->render->camera.x > 8000 && App->render->camera.x < 10300)
 	{
 		down = true;
 	}
@@ -83,21 +83,21 @@ void ModuleSceneStage1::updateCamera()
 		int speed = 3;
 
 		if (right) {
-			App->render->camera.x -= speed;
+			App->render->camera.x += speed;
 			App->player->position.x += 1;
 		}
-		if (left)App->render->camera.x += speed;
+		if (left)App->render->camera.x -= speed;
 		if (up) {
 			timer++;
 			if (timer >= 3) {
-				App->render->camera.y += speed;
+				App->render->camera.y -= speed;
 				timer = 0;
 			}
 		}
 		if (down) {
 			timer++;
 			if (timer >= 3) {
-				App->render->camera.y -= speed;
+				App->render->camera.y += speed;
 				App->player->position.y += 1;
 				timer = 0;
 			}
@@ -110,6 +110,9 @@ update_status ModuleSceneStage1::Update()
 
 	App->render->Blit(textures[0], 0, 0, textrect[0], 0.5f);
 	App->render->Blit(textures[1], 0, 0, textrect[1]);
+
+	checkCameraEvents();
+	updateCamera();
 
 	if (yInjection == 0 && injecting)
 	{
@@ -131,8 +134,6 @@ update_status ModuleSceneStage1::Update()
 
 	App->render->Blit(textures[2], xInjection, yInjection, textrect[2]);
 
-	checkCameraEvents();
-	updateCamera();
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) App->fade->FadeToBlack(this, App->stage2, 2);
 
