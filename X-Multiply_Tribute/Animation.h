@@ -28,6 +28,11 @@ public:
 		else return false;
 	}
 
+	int GetCurrentFrameIndex()
+	{
+		return current_frame;
+	}
+
 	SDL_Rect& GetCurrentFrame()
 	{
 		current_frame += speed;

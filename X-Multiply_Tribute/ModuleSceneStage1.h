@@ -22,7 +22,7 @@ private:
 	int xInjection = 75;
 	int yInjection = -100;
 
-	Animation startAnimation1, startAnimation2;
+	Animation startAnimation;
 
 	SDL_Rect* textrect[NUM_LAYERS];
 	SDL_Texture* textures[NUM_LAYERS];
@@ -39,6 +39,7 @@ public:
 
 	void checkCameraEvents();
 	void updateCamera();
+	void injection();
 	ModuleSceneStage1();
 	~ModuleSceneStage1();
 };

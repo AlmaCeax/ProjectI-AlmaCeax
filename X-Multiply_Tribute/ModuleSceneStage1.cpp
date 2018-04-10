@@ -25,22 +25,21 @@ bool ModuleSceneStage1::Init()
 		return false;
 	}
 
-	startAnimation1.PushBack({28, 24, 48, 102});
-	startAnimation1.PushBack({107, 24, 48, 105});
-	startAnimation1.PushBack({188, 24, 48, 103});
-	startAnimation1.PushBack({266, 24, 48, 113});
-	startAnimation1.PushBack({335, 24, 48, 121});
-	startAnimation1.PushBack({414, 24, 48, 123});
-	startAnimation1.repeat = false;
-	startAnimation1.speed = 0.09f;
+	startAnimation.PushBack({28, 24, 48, 102});
+	startAnimation.PushBack({107, 24, 48, 105});
+	startAnimation.PushBack({188, 24, 48, 103});
+	startAnimation.PushBack({266, 24, 48, 113});
+	startAnimation.PushBack({335, 24, 48, 121});
+	startAnimation.PushBack({414, 24, 48, 123});
+	startAnimation.PushBack({414, 157, 48, 122});
+	startAnimation.PushBack({335, 157, 48, 120});
+	startAnimation.PushBack({266, 157, 48, 112});
+	startAnimation.PushBack({188, 157, 48, 103});
+	startAnimation.PushBack({107, 157, 48, 105});
+	startAnimation.PushBack({28, 157, 48, 102});
 
-	startAnimation2.PushBack({ 335, 24, 48, 120 });
-	startAnimation2.PushBack({ 266, 24, 48, 112 });
-	startAnimation2.PushBack({ 188, 24, 48, 103 });
-	startAnimation2.PushBack({ 107, 24, 48, 105 });
-	startAnimation2.PushBack({ 28, 24, 48, 102 });
-	startAnimation2.repeat = false;
-	startAnimation2.speed = 0.09f;
+	startAnimation.repeat = false;
+	startAnimation.speed = 0.09f;
 
 
 	textrect[2] = new SDL_Rect();
@@ -67,6 +66,43 @@ bool ModuleSceneStage1::Start() {
 	Mix_PlayChannel(-1, shipSpawn, 0);
 	return true;
 }
+
+update_status ModuleSceneStage1::Update()
+{
+
+	checkCameraEvents();
+	updateCamera();
+	injection();
+
+	App->render->Blit(textures[0], 0, 0, textrect[0], 0.5f);
+	App->render->Blit(textures[1], 0, 0, textrect[1]);
+	App->render->Blit(textures[2], xInjection, yInjection, textrect[2], 0.9f);
+
+
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) App->fade->FadeToBlack(this, App->stage2, 2);
+
+	return update_status::UPDATE_CONTINUE;
+}
+
+bool ModuleSceneStage1::CleanUp()
+{
+	App->player->Disable();
+
+	for (int i = 0; i < NUM_LAYERS; ++i)
+	{
+		App->textures->Unload(textures[i]);
+		textures[i] = nullptr;
+	}
+
+	App->audio->UnloadMusic(music);
+	music = nullptr;
+	App->audio->UnloadSFX(shipSpawn);
+	shipSpawn = nullptr;
+	right = false;
+
+	return true;
+}
+
 
 void ModuleSceneStage1::checkCameraEvents()
 {
@@ -105,59 +141,6 @@ void ModuleSceneStage1::updateCamera()
 	}
 }
 
-update_status ModuleSceneStage1::Update()
-{
-
-	checkCameraEvents();
-	updateCamera();
-	if (yInjection >= -4 && injecting)
-	{
-		if (startAnimation1.isDone()) {
-			App->player->Enable();
-			right = true;
-			injecting = false;
-		}
-		textrect[2] = &startAnimation1.GetCurrentFrame();
-	}
-	else {
-		if (!injecting)
-		{
-			if (startAnimation2.isDone()) {
-				yInjection--;
-			}else textrect[2] = &startAnimation2.GetCurrentFrame();
-		}else yInjection++;
-	}
-
-	App->render->Blit(textures[0], 0, 0, textrect[0], 0.5f);
-	App->render->Blit(textures[1], 0, 0, textrect[1]);
-	App->render->Blit(textures[2], xInjection, yInjection, textrect[2], 0.9f);
-
-
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) App->fade->FadeToBlack(this, App->stage2, 2);
-
-	return update_status::UPDATE_CONTINUE;
-}
-
-bool ModuleSceneStage1::CleanUp()
-{
-	App->player->Disable();
-
-	for (int i = 0; i < NUM_LAYERS; ++i)
-	{
-		App->textures->Unload(textures[i]);
-		textures[i] = nullptr;
-	}
-
-	App->audio->UnloadMusic(music);
-	music = nullptr;
-	App->audio->UnloadSFX(shipSpawn);
-	shipSpawn = nullptr;
-	right = false;
-
-	return true;
-}
-
-
 ModuleSceneStage1::~ModuleSceneStage1()
 {
 }
@@ -174,4 +157,31 @@ bool ModuleSceneStage1::loadMapTextures()
 		return false;
 	}
 	else return true;
+}
+
+void ModuleSceneStage1::injection()
+{
+	if (yInjection >= -4 && injecting)
+	{
+		if (startAnimation.GetCurrentFrameIndex() == 6)
+		{
+			App->player->Enable();
+			right = true;
+			injecting = false;
+		}
+		textrect[2] = &startAnimation.GetCurrentFrame();
+	}
+	else {
+		if (!injecting)
+		{
+			if (startAnimation.isDone())
+			{
+				yInjection--;
+			}
+			else {
+				textrect[2] = &startAnimation.GetCurrentFrame();
+			}
+		}
+		else yInjection++;
+	}
 }
