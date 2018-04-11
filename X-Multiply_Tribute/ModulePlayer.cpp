@@ -78,6 +78,11 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 	{
+		//int offset;
+		//if (current_animation == &idle)	offset = 1;
+		//else if (current_animation == &down) offset = -1;
+		//else if (current_animation == &up) offset = 2;
+		
 		App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y+1);
 		App->particles->AddParticle(App->particles->baseShot, position.x+25, position.y+5);
 	}
