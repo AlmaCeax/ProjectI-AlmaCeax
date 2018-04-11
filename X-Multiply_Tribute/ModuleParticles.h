@@ -18,7 +18,10 @@ struct Particle
 	iPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
+	int offsetx = 0;
+	int offsety = 0;
 	bool fx_played = false;
+	bool isPlayerAttached = false;
 
 	Particle();
 	Particle(const Particle& p);
@@ -46,6 +49,7 @@ private:
 public:
 
 	Particle baseShot;
+	Particle baseShotExp;
 };
 
 #endif // __MODULEPARTICLES_H__

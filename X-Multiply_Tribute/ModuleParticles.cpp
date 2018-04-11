@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
 
 #include "SDL/include/SDL_timer.h"
 
@@ -22,15 +23,22 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png");
 
-	// Explosion particle
+	// BaseShot particle
 	baseShot.anim.PushBack({ 63, 38, 17, 4 });
-	baseShot.anim.PushBack({ 63, 38, 17, 4 });
-	baseShot.anim.loop = true;
+	baseShot.anim.loop = false;
 	baseShot.anim.speed = 0.3f;
 	baseShot.life = 700;
 	baseShot.speed = { 10,0 };
 
-	// TODO 2: Create the template for a new particle "laser"
+	baseShotExp.anim.PushBack({ 33, 36, 7, 6 });
+	baseShotExp.anim.PushBack({ 49, 34, 12, 12 });
+	baseShotExp.anim.loop = false;
+	baseShotExp.anim.speed = 0.5f;
+	baseShotExp.life = 100;
+	baseShotExp.speed = { 1,0 };
+	baseShotExp.isPlayerAttached = true;
+	baseShotExp.offsetx = 30;
+	baseShotExp.offsety = 1;
 
 	return true;
 }
@@ -78,7 +86,6 @@ update_status ModuleParticles::Update()
 			}
 		}
 	}
-
 	return UPDATE_CONTINUE;
 }
 
@@ -103,7 +110,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life)
+	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety)
 {}
 
 bool Particle::Update()
@@ -121,6 +128,11 @@ bool Particle::Update()
 
 	position.x += speed.x;
 	position.y += speed.y;
+
+	if (isPlayerAttached) {
+		position.y = App->player->position.y+offsety;
+		position.x = App->player->position.x+offsetx;
+	}
 
 	return ret;
 }

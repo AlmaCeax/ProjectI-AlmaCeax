@@ -34,7 +34,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	position.x = 75;
-	position.y = 118;
+	position.y = 105;
 
 	LOG("Loading player textures");
 	bool ret = true;
@@ -78,7 +78,8 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 	{
-		App->particles->AddParticle(App->particles->baseShot, position.x+25, position.y-10);
+		App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y+1);
+		App->particles->AddParticle(App->particles->baseShot, position.x+25, position.y+5);
 	}
 
 	if (last_animation != current_animation) {
@@ -88,7 +89,7 @@ update_status ModulePlayer::Update()
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	App->render->Blit(graphics, position.x, position.y - r.h, &r);
+	App->render->Blit(graphics, position.x, position.y, &r);
 
 	return UPDATE_CONTINUE;
 }
