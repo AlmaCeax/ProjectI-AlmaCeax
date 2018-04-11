@@ -38,7 +38,7 @@ bool ModuleSceneStage1::Init()
 	startAnimation.PushBack({107, 157, 48, 105});
 	startAnimation.PushBack({28, 157, 48, 102});
 
-	startAnimation.repeat = false;
+	startAnimation.loop = false;
 	startAnimation.speed = 0.09f;
 
 

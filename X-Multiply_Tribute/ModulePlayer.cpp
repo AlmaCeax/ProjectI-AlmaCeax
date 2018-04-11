@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleSceneStage1.h"
+#include "ModuleParticles.h"
 
 ModulePlayer::ModulePlayer()
 {
@@ -18,12 +19,12 @@ ModulePlayer::ModulePlayer()
 	up.PushBack({ 53, 2, 36, 14 });
 	up.PushBack({ 5, 2, 36, 14 });
 	up.speed = 0.1f;
-	up.repeat = false;
+	up.loop = false;
 
 	down.PushBack({ 149, 1, 36, 14 });
 	down.PushBack({ 198, 1, 36, 14 });
 	down.speed = 0.1f;
-	down.repeat = false;
+	down.loop = false;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -53,29 +54,35 @@ update_status ModulePlayer::Update()
 	Animation* current_animation = &idle;
 	int speed = 2;
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &idle;
 		position.x += speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &idle;
 		position.x -= speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &up;
 		position.y -= speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == 1)
+
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &down;
 		position.y += speed;
 	}
 
+	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+	{
+		App->particles->AddParticle(App->particles->baseShot, position.x+25, position.y-10);
+	}
+
 	if (last_animation != current_animation) {
-		current_animation->ResetAnimation();
+		current_animation->Reset();
 	}
 	last_animation = current_animation;
 	// Draw everything --------------------------------------

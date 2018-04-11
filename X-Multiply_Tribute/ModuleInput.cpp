@@ -5,6 +5,8 @@
 
 ModuleInput::ModuleInput() : Module()
 {
+	for (uint i = 0; i < MAX_KEYS; ++i)
+		keyboard[i] = KEY_IDLE;
 }
 
 // Destructor
@@ -30,18 +32,36 @@ bool ModuleInput::Init()
 // Called every draw update
 update_status ModuleInput::PreUpdate()
 {
-	//SDL_PumpEvents();
-	SDL_Event e;
-	SDL_PollEvent(&e);
+	SDL_PumpEvents();
 
-	if(e.type == SDL_QUIT)
+	const Uint8* keys = SDL_GetKeyboardState(NULL);
+
+	SDL_Event close;
+	SDL_PollEvent(&close);
+
+	if (close.type == SDL_QUIT)
 		return update_status::UPDATE_STOP;
 
-	keyboard = SDL_GetKeyboardState(NULL);
+	for (int i = 0; i < MAX_KEYS; ++i)
+	{
+		if (keys[i] == 1)
+		{
+			if (keyboard[i] == KEY_IDLE)
+				keyboard[i] = KEY_DOWN;
+			else
+				keyboard[i] = KEY_REPEAT;
+		}
+		else
+		{
+			if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
+				keyboard[i] = KEY_UP;
+			else
+				keyboard[i] = KEY_IDLE;
+		}
+	}
 
 	if (keyboard[SDL_SCANCODE_ESCAPE])
 		return update_status::UPDATE_STOP;
-
 
 	return update_status::UPDATE_CONTINUE;
 }

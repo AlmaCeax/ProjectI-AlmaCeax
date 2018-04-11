@@ -10,6 +10,7 @@
 #include "ModuleSceneStageClear.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleParticles.h"
 
 Application::Application()
 {
@@ -24,6 +25,7 @@ Application::Application()
 	modules[8] = stage_clear = new ModuleSceneStageClear();
 	modules[9] = player = new ModulePlayer();
 	modules[10] = fade = new ModuleFadeToBlack();
+	modules[11] = particles = new ModuleParticles();
 }	
 
 Application::~Application()
