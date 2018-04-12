@@ -96,6 +96,9 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Uint32
 	p->position.x = x;
 	p->position.y = y;
 
+	if (last_particle >= 50) {
+		last_particle = 0;
+	}
 	active[last_particle++] = p;
 }
 
