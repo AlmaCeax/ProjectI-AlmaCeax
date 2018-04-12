@@ -21,28 +21,21 @@ ModuleSceneStage1::ModuleSceneStage1()
 bool ModuleSceneStage1::Init()
 {
 
-	startAnimation.PushBack({28, 24, 48, 102});
-	startAnimation.PushBack({107, 24, 48, 105});
-	startAnimation.PushBack({188, 24, 48, 103});
-	startAnimation.PushBack({266, 24, 48, 113});
-	startAnimation.PushBack({335, 24, 48, 121});
-	startAnimation.PushBack({414, 24, 48, 123});
-	startAnimation.PushBack({414, 157, 48, 122});
+	startAnimation.PushBack({28, 28, 48, 102});
+	startAnimation.PushBack({107, 28, 48, 105});
+	startAnimation.PushBack({188, 28, 48, 103});
+	startAnimation.PushBack({266, 28, 48, 113});
+	startAnimation.PushBack({335, 28, 48, 121});
+	startAnimation.PushBack({414, 28, 48, 123});
+	startAnimation.PushBack({414, 28, 48, 122});
 	startAnimation.PushBack({335, 157, 48, 120});
 	startAnimation.PushBack({266, 157, 48, 112});
-	startAnimation.PushBack({188, 157, 48, 103});
+	startAnimation.PushBack({188, 157, 48, 102});
 	startAnimation.PushBack({107, 157, 48, 105});
 	startAnimation.PushBack({28, 157, 48, 102});
 
 	startAnimation.loop = false;
-	startAnimation.speed = 0.09f;
-
-
-	textrect[2] = new SDL_Rect();
-	textrect[2]->x = 28;
-	textrect[2]->y = 24;
-	textrect[2]->w = 48;
-	textrect[2]->h = 102;
+	startAnimation.speed = 0.1f;
 
 
 	return true;
@@ -54,12 +47,20 @@ bool ModuleSceneStage1::Start() {
 	up = false;
 	down = false;
 	left = false;
+	shake = false;
+	aux = 10;
 
-	xInjection = 75;
+	textrect[2] = new SDL_Rect();
+	textrect[2]->x = 28;
+	textrect[2]->y = 28;
+	textrect[2]->w = 48;
+	textrect[2]->h = 102;
+
+	xInjection = 80;
 	yInjection = -100;
 	injecting = true;
 
-	startAnimation.setCurrentFrameIndex(1);
+	//startAnimation.setCurrentFrameIndex(0);
 
 	if (!loadMapTextures()) {
 		return false;
@@ -84,9 +85,20 @@ update_status ModuleSceneStage1::Update()
 	updateCamera();
 	injection();
 
+	if (shake)
+	{
+		if (aux == xInjection)
+		{
+			xInjection--;
+		}
+		else xInjection++;
+
+		aux = xInjection;
+	}
+
 	App->render->Blit(textures[0], 0, 0, textrect[0], 0.5f);
 	App->render->Blit(textures[1], 0, 0, textrect[1]);
-	App->render->Blit(textures[2], xInjection, yInjection, textrect[2], 0.9f);
+	App->render->Blit(textures[2], xInjection, yInjection, textrect[2], 0.0001f);
 
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) App->fade->FadeToBlack(this, App->stage2, 2);
@@ -171,13 +183,15 @@ bool ModuleSceneStage1::loadMapTextures()
 
 void ModuleSceneStage1::injection()
 {
-	if (yInjection >= -4 && injecting)
+	if (yInjection == -4 && injecting)
 	{
 		if (startAnimation.GetCurrentFrameIndex() == 6)
 		{
 			App->player->Enable();
 			right = true;
 			injecting = false;
+			shake = true;
+			aux = xInjection;
 		}
 		textrect[2] = &startAnimation.GetCurrentFrame();
 	}

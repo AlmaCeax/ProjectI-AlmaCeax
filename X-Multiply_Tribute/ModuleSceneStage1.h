@@ -16,8 +16,8 @@ class ModuleSceneStage1 :
 	public Module
 {
 private:
-	int timer, startTime;
-	bool right, left, up, down, injecting;
+	int timer, startTime, aux;
+	bool right, left, up, down, injecting, shake;
 
 	int xInjection = 75;
 	int yInjection = -100;
