@@ -6,9 +6,18 @@
 #include "ModulePlayer.h"
 #include "ModuleSceneStage1.h"
 #include "ModuleParticles.h"
+#include "ModuleAudio.h"
+#include "SDL_mixer/include/SDL_mixer.h"
 
 ModulePlayer::ModulePlayer()
 {
+
+}
+
+ModulePlayer::~ModulePlayer()
+{}
+
+bool ModulePlayer::Init() {
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({ 100, 1, 36, 14 });
 	idle.PushBack({ 100, 1, 36, 14 });
@@ -25,10 +34,9 @@ ModulePlayer::ModulePlayer()
 	down.PushBack({ 198, 1, 36, 14 });
 	down.speed = 0.1f;
 	down.loop = false;
-}
 
-ModulePlayer::~ModulePlayer()
-{}
+	return true;
+}
 
 // Load assets
 bool ModulePlayer::Start()
@@ -37,9 +45,11 @@ bool ModulePlayer::Start()
 	position.y = 105;
 
 	LOG("Loading player textures");
-	bool ret = true;
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png"); // arcade version
-	return ret;
+	LOG("Loading player audio");
+	baseshotsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-083.wav");
+
+	return true;
 }
 
 bool ModulePlayer::CleanUp() {
@@ -52,38 +62,39 @@ bool ModulePlayer::CleanUp() {
 update_status ModulePlayer::Update()
 {
 	Animation* current_animation = &idle;
+	state = idl;
 	int speed = 2;
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &idle;
 		position.x += speed;
+		state = idl;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &idle;
 		position.x -= speed;
+		state = idl;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &up;
 		position.y -= speed;
+		state = top;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &down;
 		position.y += speed;
+		state = bot;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
-	{
-		//int offset;
-		//if (current_animation == &idle)	offset = 1;
-		//else if (current_animation == &down) offset = -1;
-		//else if (current_animation == &up) offset = 2;
-		
+	{	
 		App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y+1);
+		Mix_PlayChannel(-1, baseshotsfx, 0);
 		App->particles->AddParticle(App->particles->baseShot, position.x+25, position.y+5);
 	}
 

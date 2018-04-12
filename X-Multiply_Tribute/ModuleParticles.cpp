@@ -130,6 +130,10 @@ bool Particle::Update()
 	position.y += speed.y;
 
 	if (isPlayerAttached) {
+
+		if (App->player->state == App->player->idl)	offsety = 1;
+		else if (App->player->state == App->player->top) offsety = -1;
+		else if (App->player->state == App->player->bot) offsety = 2;
 		position.y = App->player->position.y + offsety;
 		position.x = App->player->position.x + offsetx;
 	}

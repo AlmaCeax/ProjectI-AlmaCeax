@@ -7,6 +7,7 @@
 #include "p2Point.h"
 
 struct SDL_Texture;
+struct Mix_Chunk;
 
 class ModulePlayer : public Module
 {
@@ -14,12 +15,16 @@ public:
 	ModulePlayer();
 	~ModulePlayer();
 
+	bool Init();
 	bool Start();
 	bool CleanUp();
 	update_status Update();
 
-public:
+	Mix_Chunk* baseshotsfx = nullptr;
 
+public:
+	enum state {top, bot, idl};
+	state state;
 	SDL_Texture * graphics = nullptr;
 	Animation* last_animation = nullptr;
 	Animation idle;

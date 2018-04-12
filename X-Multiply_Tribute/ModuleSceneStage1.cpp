@@ -21,10 +21,6 @@ ModuleSceneStage1::ModuleSceneStage1()
 bool ModuleSceneStage1::Init()
 {
 
-	if (!loadMapTextures()) {
-		return false;
-	}
-
 	startAnimation.PushBack({28, 24, 48, 102});
 	startAnimation.PushBack({107, 24, 48, 105});
 	startAnimation.PushBack({188, 24, 48, 103});
@@ -48,7 +44,6 @@ bool ModuleSceneStage1::Init()
 	textrect[2]->w = 48;
 	textrect[2]->h = 102;
 
-	injecting = true;
 
 	return true;
 }
@@ -60,10 +55,25 @@ bool ModuleSceneStage1::Start() {
 	down = false;
 	left = false;
 
+	xInjection = 75;
+	yInjection = -100;
+	injecting = true;
+
+	startAnimation.setCurrentFrameIndex(1);
+
+	if (!loadMapTextures()) {
+		return false;
+	}
+
 	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1.ogg");
 	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
+
 	Mix_PlayMusic(music, -1);
 	Mix_PlayChannel(-1, shipSpawn, 0);
+
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
 	return true;
 }
 

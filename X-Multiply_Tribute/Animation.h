@@ -33,6 +33,11 @@ public:
 		return current_frame;
 	}
 
+	void setCurrentFrameIndex(int i)
+	{
+		current_frame = i;
+	}
+
 	SDL_Rect& GetCurrentFrame()
 	{
 		current_frame += speed;
