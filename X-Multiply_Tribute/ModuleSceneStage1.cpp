@@ -60,7 +60,7 @@ bool ModuleSceneStage1::Start() {
 	yInjection = -100;
 	injecting = true;
 
-	//startAnimation.setCurrentFrameIndex(0);
+	startAnimation.setCurrentFrameIndex(0);
 
 	if (!loadMapTextures()) {
 		return false;
