@@ -19,6 +19,8 @@ ModuleSceneStageClear::~ModuleSceneStageClear()
 }
 
 bool ModuleSceneStageClear::Start() {
+
+	App->current_scene = this;
 	textures = App->textures->Load("Assets/Sprites/UI/UI_1.png");
 
 	return true;

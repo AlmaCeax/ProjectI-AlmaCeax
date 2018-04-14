@@ -6,11 +6,13 @@
 #include "Animation.h"
 
 #define NUM_LAYERS 4
+#define NUM_COLLIDERS 2
 
 struct SDL_Rect;
 struct SDL_Texture;
 struct _Mix_Music;
 struct Mix_Chunk;
+struct Collider;
 
 class ModuleSceneStage1 :
 	public Module
@@ -30,9 +32,11 @@ private:
 	_Mix_Music* music = nullptr;
 	Mix_Chunk* shipSpawn = nullptr;
 
+	Collider* colliders[NUM_COLLIDERS];
+
 public:
 	bool Init();
-	bool loadMapTextures();
+	bool loadMap();
 	update_status Update();
 	bool CleanUp();
 	bool Start();

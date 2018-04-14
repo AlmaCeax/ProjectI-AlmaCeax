@@ -40,6 +40,9 @@ public:
 	ModuleParticles* particles = nullptr;
 	ModuleCollision* collision = nullptr;
 
+
+	Module* current_scene = nullptr;
+
 public:
 
 	Application();

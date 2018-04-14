@@ -42,6 +42,8 @@ bool ModuleSceneStage1::Init()
 }
 
 bool ModuleSceneStage1::Start() {
+	App->current_scene = this;
+
 	App->player->Disable();
 	App->collision->Enable();
 
@@ -64,7 +66,7 @@ bool ModuleSceneStage1::Start() {
 
 	startAnimation.setCurrentFrameIndex(0);
 
-	if (!loadMapTextures()) {
+	if (!loadMap()) {
 		return false;
 	}
 
@@ -117,6 +119,12 @@ bool ModuleSceneStage1::CleanUp()
 		textures[i] = nullptr;
 	}
 
+	for (int i = 0; i < NUM_COLLIDERS; ++i) 
+	{
+		App->collision->RemoveCollider(colliders[i]);
+		colliders[i] = nullptr;
+	}
+
 	App->audio->UnloadMusic(music);
 	music = nullptr;
 	App->audio->UnloadSFX(shipSpawn);
@@ -166,13 +174,19 @@ ModuleSceneStage1::~ModuleSceneStage1()
 {
 }
 
-bool ModuleSceneStage1::loadMapTextures()
+bool ModuleSceneStage1::loadMap()
 {
 	LOG("Loading background textures");
 	//Load all background textures
 	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/FirstLvlMap.png");
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/BG01.png");
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/injection1.png");
+
+	SDL_Rect coll = { 0,212,2862,12 };
+	colliders[0] = App->collision->AddCollider(coll, COLLIDER_WALL, this);
+	coll = { 496,0,2033,10 };
+	colliders[1] = App->collision->AddCollider(coll, COLLIDER_WALL, this);
+
 
 	if (textures[0] == nullptr) {
 		return false;

@@ -6,6 +6,8 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleSceneStart.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "ModulePlayer.h"
 
@@ -59,9 +61,21 @@ bool ModulePlayer::CleanUp() {
 	App->textures->Unload(graphics);
 	graphics = nullptr;
 
+	App->collision->RemoveCollider(collider);
 	collider = nullptr;
 
+	App->audio->UnloadSFX(baseshotsfx);
+	baseshotsfx = nullptr;
+
 	return true;
+}
+
+void ModulePlayer::OnCollision(Collider * rect_a, Collider * rect_b)
+{
+	switch (rect_b->type) {
+	case COLLIDER_WALL: App->fade->FadeToBlack(App->current_scene, App->start); break;
+
+	}
 }
 
 // Update: draw background

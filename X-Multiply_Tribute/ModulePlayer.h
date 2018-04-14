@@ -19,6 +19,7 @@ public:
 	bool Init();
 	bool Start();
 	bool CleanUp();
+	void OnCollision(Collider*, Collider*);
 	update_status Update();
 
 	Mix_Chunk* baseshotsfx = nullptr;

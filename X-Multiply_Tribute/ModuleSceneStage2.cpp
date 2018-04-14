@@ -27,6 +27,8 @@ ModuleSceneStage2::~ModuleSceneStage2()
 
 
 bool ModuleSceneStage2::Start() {
+	App->current_scene = this;
+
 	App->player->Enable();
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
