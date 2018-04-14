@@ -58,6 +58,9 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp() {
 	App->textures->Unload(graphics);
 	graphics = nullptr;
+
+	collider = nullptr;
+
 	return true;
 }
 
@@ -101,13 +104,15 @@ update_status ModulePlayer::Update()
 		App->particles->AddParticle(App->particles->baseShot, position.x+25, position.y+5);
 	}
 
+	collider->SetPos(position.x, position.y);
+
 	if (last_animation != current_animation) {
 		current_animation->Reset();
 	}
 	last_animation = current_animation;
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
-	collider->SetPos(position.x, position.y);
 
 	App->render->Blit(graphics, position.x, position.y, &r);
 
