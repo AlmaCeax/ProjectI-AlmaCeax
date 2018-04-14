@@ -3,11 +3,11 @@
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
-#include "ModulePlayer.h"
-#include "ModuleSceneStage1.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
+#include "ModuleCollision.h"
 #include "SDL_mixer/include/SDL_mixer.h"
+#include "ModulePlayer.h"
 
 ModulePlayer::ModulePlayer()
 {
@@ -48,6 +48,9 @@ bool ModulePlayer::Start()
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png"); // arcade version
 	LOG("Loading player audio");
 	baseshotsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-083.wav");
+
+	SDL_Rect rect_collider = { position.x,position.y,36,14 };
+	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
 
 	return true;
 }
@@ -104,6 +107,7 @@ update_status ModulePlayer::Update()
 	last_animation = current_animation;
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
+	collider->SetPos(position.x, position.y);
 
 	App->render->Blit(graphics, position.x, position.y, &r);
 

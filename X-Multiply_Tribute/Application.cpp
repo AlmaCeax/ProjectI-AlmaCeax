@@ -11,6 +11,7 @@
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
+#include "ModuleCollision.h"
 
 Application::Application()
 {
@@ -26,6 +27,7 @@ Application::Application()
 	modules[9] = player = new ModulePlayer();
 	modules[10] = fade = new ModuleFadeToBlack();
 	modules[11] = particles = new ModuleParticles();
+	modules[12] = collision = new ModuleCollision();
 }	
 
 Application::~Application()
@@ -42,6 +44,7 @@ bool Application::Init()
 	stage1->Disable();
 	stage2->Disable();
 	stage_clear->Disable();
+	collision->Disable();
 
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)

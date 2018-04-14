@@ -6,6 +6,7 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneStage2.h"
+#include "ModuleCollision.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "ModuleSceneStage1.h"
 
@@ -43,6 +44,8 @@ bool ModuleSceneStage1::Init()
 
 bool ModuleSceneStage1::Start() {
 	App->player->Disable();
+	App->collision->Enable();
+
 	right = false;
 	up = false;
 	down = false;

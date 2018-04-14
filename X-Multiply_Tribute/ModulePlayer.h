@@ -8,6 +8,7 @@
 
 struct SDL_Texture;
 struct Mix_Chunk;
+struct Collider;
 
 class ModulePlayer : public Module
 {
@@ -31,7 +32,7 @@ public:
 	Animation up;
 	Animation down;
 	iPoint position;
-
+	Collider* collider;
 };
 
 #endif
