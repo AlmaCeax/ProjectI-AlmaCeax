@@ -21,7 +21,6 @@ ModuleSceneStage1::ModuleSceneStage1()
 
 bool ModuleSceneStage1::Init()
 {
-
 	startAnimation.PushBack({28, 28, 48, 102});
 	startAnimation.PushBack({107, 28, 48, 105});
 	startAnimation.PushBack({188, 28, 48, 103});
@@ -83,7 +82,6 @@ bool ModuleSceneStage1::Start() {
 
 update_status ModuleSceneStage1::Update()
 {
-
 	checkCameraEvents();
 	updateCamera();
 	injection();
@@ -140,28 +138,26 @@ void ModuleSceneStage1::checkCameraEvents()
 
 void ModuleSceneStage1::updateCamera()
 {
-	if (App->stage1->IsEnabled()) {
-		int speed = 3;
+	int speed = 3;
 
-		if (right) {
-			App->render->camera.x += speed;
-			App->player->position.x += 1;
+	if (right) {
+		App->render->camera.x += speed;
+		App->player->position.x += 1;
+	}
+	if (left)App->render->camera.x -= speed;
+	if (up) {
+		timer++;
+		if (timer >= 3) {
+			App->render->camera.y -= speed;
+			timer = 0;
 		}
-		if (left)App->render->camera.x -= speed;
-		if (up) {
-			timer++;
-			if (timer >= 3) {
-				App->render->camera.y -= speed;
-				timer = 0;
-			}
-		}
-		if (down) {
-			timer++;
-			if (timer >= 3) {
-				App->render->camera.y += speed;
-				App->player->position.y += 1;
-				timer = 0;
-			}
+	}
+	if (down) {
+		timer++;
+		if (timer >= 3) {
+			App->render->camera.y += speed;
+			App->player->position.y += 1;
+			timer = 0;
 		}
 	}
 }

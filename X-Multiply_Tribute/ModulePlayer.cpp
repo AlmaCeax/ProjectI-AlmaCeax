@@ -75,18 +75,21 @@ update_status ModulePlayer::Update()
 	{
 		current_animation = &idle;
 		position.x += speed;
+		if (((position.x+36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH)) position.x -= speed; //36 is player width
 		state = idl;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &idle;
 		position.x -= speed;
+		if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed;
 		state = idl;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &up;
 		position.y -= speed;
+		if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed;
 		state = top;
 	}
 
@@ -94,6 +97,7 @@ update_status ModulePlayer::Update()
 	{
 		current_animation = &down;
 		position.y += speed;
+		if (((position.y + 14) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT)) position.y -= speed;
 		state = bot;
 	}
 
