@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleCollision.h"
 #include "ModuleSceneStageClear.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "ModuleSceneStage2.h"
@@ -29,6 +30,7 @@ ModuleSceneStage2::~ModuleSceneStage2()
 bool ModuleSceneStage2::Start() {
 	App->current_scene = this;
 
+	App->collision->Enable();
 	App->player->Enable();
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
@@ -68,6 +70,7 @@ update_status ModuleSceneStage2::Update()
 bool ModuleSceneStage2::CleanUp()
 {
 	App->player->Disable();
+	App->collision->Disable();
 
 	for (int i = 0; i < 3; ++i)
 	{

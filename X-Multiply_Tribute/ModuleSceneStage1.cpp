@@ -112,6 +112,7 @@ update_status ModuleSceneStage1::Update()
 bool ModuleSceneStage1::CleanUp()
 {
 	App->player->Disable();
+	App->collision->Disable();
 
 	for (int i = 0; i < NUM_LAYERS; ++i)
 	{
