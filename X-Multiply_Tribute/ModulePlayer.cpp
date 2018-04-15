@@ -115,7 +115,7 @@ update_status ModulePlayer::Update()
 		state = bot;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{	
 		App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y+1);
 		Mix_PlayChannel(-1, baseshotsfx, 0);

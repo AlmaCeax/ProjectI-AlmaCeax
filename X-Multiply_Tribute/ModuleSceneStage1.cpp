@@ -104,7 +104,7 @@ update_status ModuleSceneStage1::Update()
 	App->render->Blit(textures[2], xInjection, yInjection, textrect[2], 0.0001f);
 
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) App->fade->FadeToBlack(this, App->stage2, 2);
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == 1) App->fade->FadeToBlack(this, App->stage2, 2);
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -120,11 +120,7 @@ bool ModuleSceneStage1::CleanUp()
 		textures[i] = nullptr;
 	}
 
-	for (int i = 0; i < NUM_COLLIDERS; ++i) 
-	{
-		if(colliders[i]!=nullptr) colliders[i]->to_delete = true;
-		colliders[i] = nullptr;
-	}
+	
 
 	App->audio->UnloadMusic(music);
 	music = nullptr;
@@ -184,9 +180,16 @@ bool ModuleSceneStage1::loadMap()
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/injection1.png");
 
 	SDL_Rect coll = { 0,212,2862,12 };
-	colliders[0] = App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 496,0,2033,10 };
-	colliders[1] = App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//coll = { x position, y position, width, height };
+	coll = { 405,195,60,17 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 415,183,25,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 500,188,90,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 
 	if (textures[0] == nullptr) {

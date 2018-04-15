@@ -43,7 +43,7 @@ bool ModuleSceneStageClear::Init()
 
 update_status ModuleSceneStageClear::Update()
 {
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) App->fade->FadeToBlack(this, App->start, 2);
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == 1) App->fade->FadeToBlack(this, App->start, 2);
 
 	App->render->Blit(textures, 80, 125, &letters[0], 0.5f);//S
 	App->render->Blit(textures, 96, 125, &letters[1], 0.5f);//T

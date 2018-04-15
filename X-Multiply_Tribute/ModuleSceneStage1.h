@@ -6,7 +6,6 @@
 #include "Animation.h"
 
 #define NUM_LAYERS 4
-#define NUM_COLLIDERS 2
 
 struct SDL_Rect;
 struct SDL_Texture;
@@ -32,7 +31,6 @@ private:
 	_Mix_Music* music = nullptr;
 	Mix_Chunk* shipSpawn = nullptr;
 
-	Collider* colliders[NUM_COLLIDERS];
 
 public:
 	bool Init();
