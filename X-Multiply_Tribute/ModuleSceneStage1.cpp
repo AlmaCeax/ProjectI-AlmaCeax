@@ -121,7 +121,7 @@ bool ModuleSceneStage1::CleanUp()
 
 	for (int i = 0; i < NUM_COLLIDERS; ++i) 
 	{
-		App->collision->RemoveCollider(colliders[i]);
+		if(colliders[i]!=nullptr) colliders[i]->to_delete = true;
 		colliders[i] = nullptr;
 	}
 
@@ -183,9 +183,9 @@ bool ModuleSceneStage1::loadMap()
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/injection1.png");
 
 	SDL_Rect coll = { 0,212,2862,12 };
-	colliders[0] = App->collision->AddCollider(coll, COLLIDER_WALL, this);
+	colliders[0] = App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 496,0,2033,10 };
-	colliders[1] = App->collision->AddCollider(coll, COLLIDER_WALL, this);
+	colliders[1] = App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 
 	if (textures[0] == nullptr) {

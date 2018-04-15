@@ -61,7 +61,7 @@ bool ModulePlayer::CleanUp() {
 	App->textures->Unload(graphics);
 	graphics = nullptr;
 
-	App->collision->RemoveCollider(collider);
+	if(collider!=nullptr) collider->to_delete = true;
 	collider = nullptr;
 
 	App->audio->UnloadSFX(baseshotsfx);
@@ -120,6 +120,11 @@ update_status ModulePlayer::Update()
 		App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y+1);
 		Mix_PlayChannel(-1, baseshotsfx, 0);
 		App->particles->AddParticle(App->particles->baseShot, position.x+25, position.y+5);
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
+	{
+		App->collision->GodMode();
 	}
 
 	collider->SetPos(position.x, position.y);

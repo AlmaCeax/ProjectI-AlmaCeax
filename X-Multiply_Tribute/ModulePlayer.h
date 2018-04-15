@@ -24,15 +24,18 @@ public:
 
 	Mix_Chunk* baseshotsfx = nullptr;
 
-public:
-	enum state {top, bot, idl};
+	iPoint position;
+	enum state { top, bot, idl };
 	state state;
+
+private:
+	
 	SDL_Texture * graphics = nullptr;
 	Animation* last_animation = nullptr;
 	Animation idle;
 	Animation up;
 	Animation down;
-	iPoint position;
+
 	Collider* collider;
 };
 

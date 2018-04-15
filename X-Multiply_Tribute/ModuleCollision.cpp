@@ -170,18 +170,12 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 	return ret;
 }
 
-bool ModuleCollision::RemoveCollider(Collider* coll) {
-
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-	{
-		if (colliders[i] == coll)
-		{
-			delete colliders[i];
-			colliders[i] = nullptr;
-			break;
-		}
-	}
-	return true;
+void ModuleCollision::GodMode()
+{
+	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = god;
+	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = god;
+	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT] = god;
+	god = !god;
 }
 
 // -----------------------------------------------------

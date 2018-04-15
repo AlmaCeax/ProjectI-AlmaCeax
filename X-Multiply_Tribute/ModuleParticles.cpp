@@ -59,7 +59,7 @@ bool ModuleParticles::CleanUp()
 		if (active[i] != nullptr)
 		{
 			if (active[i]->collider != nullptr) {
-				App->collision->RemoveCollider(active[i]->collider);
+				active[i]->collider->to_delete = true;
 				active[i]->collider = nullptr;
 			}
 			delete active[i];
@@ -83,7 +83,7 @@ update_status ModuleParticles::Update()
 		if (p->Update() == false)
 		{
 			if (active[i]->collider != nullptr) {
-				App->collision->RemoveCollider(active[i]->collider);
+				active[i]->collider->to_delete = true;
 				active[i]->collider = nullptr;
 			}
 			delete p;
@@ -122,7 +122,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
-			App->collision->RemoveCollider(active[i]->collider);
+			active[i]->collider->to_delete = true;
 			active[i]->collider = nullptr;
 			delete active[i];
 			active[i] = nullptr;
