@@ -85,21 +85,21 @@ update_status ModulePlayer::Update()
 	state = idl;
 	int speed = 2;
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &idle;
 		position.x += speed;
 		if (((position.x+36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH)) position.x -= speed; //36 is player width
 		state = idl;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &idle;
 		position.x -= speed;
 		if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed;
 		state = idl;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &up;
 		position.y -= speed;
@@ -107,7 +107,7 @@ update_status ModulePlayer::Update()
 		state = top;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 	{
 		current_animation = &down;
 		position.y += speed;
@@ -120,6 +120,19 @@ update_status ModulePlayer::Update()
 		App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y+1);
 		Mix_PlayChannel(-1, baseshotsfx, 0);
 		App->particles->AddParticle(App->particles->baseShot, position.x+25, position.y+5);
+	}
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
+	{
+		if (cooldown < 25) {
+			cooldown++;
+		}
+		else {
+			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
+			Mix_PlayChannel(-1, baseshotsfx, 0);
+			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5);
+			cooldown = 0;
+		}
+		
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)

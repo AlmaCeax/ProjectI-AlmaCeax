@@ -120,7 +120,6 @@ bool ModuleSceneStage1::CleanUp()
 		textures[i] = nullptr;
 	}
 
-	
 
 	App->audio->UnloadMusic(music);
 	music = nullptr;
@@ -183,7 +182,6 @@ bool ModuleSceneStage1::loadMap()
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 496,0,2033,10 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//coll = { x position, y position, width, height };
 	coll = { 405,195,60,17 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 415,183,25,12 };

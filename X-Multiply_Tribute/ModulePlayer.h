@@ -35,6 +35,7 @@ private:
 	Animation idle;
 	Animation up;
 	Animation down;
+	int cooldown = 0;
 
 	Collider* collider;
 };
