@@ -13,6 +13,7 @@
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "ModuleEnemies.h"
+#include "ModulePowerUPS.h"
 
 Application::Application()
 {
@@ -27,6 +28,7 @@ Application::Application()
 	modules[i++] = stage2 = new ModuleSceneStage2();
 	modules[i++] = stage_clear = new ModuleSceneStageClear();
 	modules[i++] = enemies = new ModuleEnemies();
+	modules[i++] = powerups = new ModulePowerUPS();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = collision = new ModuleCollision();
@@ -49,7 +51,6 @@ bool Application::Init()
 	stage2->Disable();
 	stage_clear->Disable();
 	collision->Disable();
-
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

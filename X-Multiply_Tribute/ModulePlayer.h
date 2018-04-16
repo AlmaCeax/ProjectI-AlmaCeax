@@ -26,7 +26,9 @@ public:
 
 	iPoint position;
 	enum state { top, bot, idl };
+	bool activePU[6];
 	state state;
+	int speed = 2;
 
 private:
 	

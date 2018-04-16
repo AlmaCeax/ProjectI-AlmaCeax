@@ -9,6 +9,7 @@
 #include "ModuleCollision.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "ModuleSceneStage1.h"
+#include "ModulePowerUPS.h"
 
 
 ModuleSceneStage1::ModuleSceneStage1()
@@ -79,6 +80,8 @@ bool ModuleSceneStage1::Start() {
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
+
+	App->powerups->AddPowerUp(App->powerups->speedBoost, 300, 100, COLLIDER_POWER_UP);
 
 	return true;
 }
