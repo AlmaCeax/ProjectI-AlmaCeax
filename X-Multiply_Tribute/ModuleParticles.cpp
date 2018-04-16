@@ -156,8 +156,8 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
 			switch (active[i]->id) {
-			case 1: AddParticle( baseShotColExp, active[i]->position.x + active[i]->w, active[i]->position.y); break;
-			case 2: AddParticle(bombExplosion, active[i]->position.x + active[i]->w, active[i]->position.y); break;
+			case 1: AddParticle( baseShotColExp, active[i]->position.x, active[i]->position.y); break;
+			case 2: AddParticle(bombExplosion, active[i]->position.x, active[i]->position.y); break;
 
 			}
 			delete active[i];
@@ -209,7 +209,7 @@ bool Particle::Update()
 	case 2: 
 		position.x += speed.x;
 		position.y += speed.y;		
-		if (speed.x > 1)speed.x -= 0.01f;
+		if (speed.x > 2.0f)speed.x -= 0.05f;
 
 		break;
 	}
