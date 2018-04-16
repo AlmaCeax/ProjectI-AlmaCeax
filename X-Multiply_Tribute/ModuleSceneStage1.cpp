@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemies.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneStage2.h"
@@ -28,6 +29,7 @@ bool ModuleSceneStage1::Init()
 	startAnimation.PushBack({335, 28, 48, 121});
 	startAnimation.PushBack({414, 28, 48, 123});
 	startAnimation.PushBack({414, 28, 48, 122});
+
 	startAnimation.PushBack({335, 157, 48, 120});
 	startAnimation.PushBack({266, 157, 48, 112});
 	startAnimation.PushBack({188, 157, 48, 102});
@@ -69,6 +71,18 @@ bool ModuleSceneStage1::Start() {
 	if (!loadMap()) {
 		return false;
 	}
+	//top
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 600, 100, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 615, 100, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 630, 100, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 645, 100, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 660, 100, false);
+	//bottom
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 600, 100, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 615, 100, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 630, 100, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 645, 100, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 660, 100, true);
 
 	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1.ogg");
 	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");

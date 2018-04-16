@@ -4,6 +4,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
+#include "Enemy_HellBall.h"
 #include "Enemy.h"
 
 #define SPAWN_MARGIN 50
@@ -22,7 +23,7 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
-	sprites = App->textures->Load("rtype/enemies.png");
+	sprites = App->textures->Load("Assets/Sprites/Enemies/enemies.png");
 
 	return true;
 }
@@ -34,7 +35,7 @@ update_status ModuleEnemies::PreUpdate()
 	{
 		if(queue[i].type != ENEMY_TYPES::NO_TYPE)
 		{
-			if(queue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN)
+			if (queue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN)
 			{
 				SpawnEnemy(queue[i]);
 				queue[i].type = ENEMY_TYPES::NO_TYPE;
@@ -96,7 +97,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool up)
 {
 	bool ret = false;
 
@@ -107,6 +108,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y)
 			queue[i].type = type;
 			queue[i].x = x;
 			queue[i].y = y;
+			queue[i].going_up = up;
 			ret = true;
 			break;
 		}
@@ -125,8 +127,8 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 	{
 		switch(info.type)
 		{
-			/*case ENEMY_TYPES::REDBIRD:
-			enemies[i] = new Enemy_RedBird(info.x,info.y);*/
+			case ENEMY_TYPES::HELLBALL:
+			enemies[i] = new Enemy_HellBall(info.x,info.y,info.going_up);
 			break;
 		}
 	}

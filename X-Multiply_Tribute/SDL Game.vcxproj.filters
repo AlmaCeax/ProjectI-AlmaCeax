@@ -58,6 +58,9 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy_HellBall.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -127,6 +130,9 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_HellBall.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
