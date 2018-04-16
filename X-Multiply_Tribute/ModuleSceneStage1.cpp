@@ -193,38 +193,122 @@ bool ModuleSceneStage1::loadMap()
 	coll = { 496,0,2033,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	
-	//puño
-	coll = { 410,197,50,15 };
+	//hand
+	coll = { 411,197,50,15 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 420,183,20,14 };
+	coll = { 421,183,20,14 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//corazon
+	//heart
 	coll = { 500,188,90,24 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	
-	//cortado
+	//cut
 	coll = { 640,12,74,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
-	//puño
-	coll = { 762,12,50,15 };
+	//hand
+	coll = { 763,12,50,15 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 772,27,20,14 };
+	coll = { 773,27,20,14 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
-	//corazon
-	coll = { 1010,12,90,24 };
+	//heart
+	coll = { 1012,12,90,24 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//cortado
+	//cut
 	coll = { 1024,200,74,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//cortado
-	coll = { 1150,12,74,12 };
+	//cut
+	coll = { 1152,12,74,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//corazon
-	coll = { 1265,188,90,24 };
+	//heart
+	coll = { 1268,188,90,24 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
+	//door
+	coll = { 1425,12,120,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1425,188,120,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1445,36,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1445,164,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1450,60,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1450,140,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1480,84,60,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1480,128,60,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//cut
+	coll = { 1664,12,74,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//hand
+	coll = { 1787,197,50,15 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1797,183,20,14 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//door
+	coll = { 2010,12,200,34 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2010,178,200,34 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2040,46,140,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2040,154,140,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2010,70,130,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2010,130,130,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//hand
+	coll = { 2427,12,50,15 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2437,27,20,14 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//heart
+	coll = { 2548,188,90,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//volcano
+	coll = { 2638,200,224,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2694,182,154,18 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2721,168,40,14 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//volcano
+	coll = { 3730,268,224,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 3736,280,154,18 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 3758,298,40,14 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//heart
+	coll = { 3956,450,90,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//cut
+	coll = { 3970,268,74,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//cut
+	coll = { 4224,456,74,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//hand
+	coll = { 4347,452,50,15 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4357,438,20,14 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//heart
+	coll = { 4340,275,90,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	if (textures[0] == nullptr) {
 		return false;
