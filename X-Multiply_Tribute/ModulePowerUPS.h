@@ -24,12 +24,11 @@ struct PowerUP
 	int h, w = 0;
 	Collider* collider = nullptr;
 
-	PowerUP() {}
-	PowerUP(iPoint _position):
-		position(_position) 
-	{}
-	~PowerUP() {}
-	bool Update() {}
+	PowerUP();
+	PowerUP(const PowerUP& pu);
+	~PowerUP();
+	void Effect();
+	bool Update();
 	bool isEnabled() { return enabled; }
 	void setEnabled(bool _enable) { enabled = _enable; }
 };
@@ -46,10 +45,11 @@ public:
 	bool CleanUp();
 
 	void OnCollision(Collider* c1, Collider* c2);
+	void AddPowerUp(const PowerUP& powerup, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE);
 
 private:
 	SDL_Texture * graphics = nullptr;
-	PowerUP* poweUps[MAX_POWERUPS];
+	PowerUP* powerUps[MAX_POWERUPS];
 
 public:
 	PowerUP life;

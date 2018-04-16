@@ -48,8 +48,6 @@ bool ModulePlayer::Start()
 
 	LOG("Loading player textures");
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png"); // arcade version
-	LOG("Loading player audio");
-	baseshotsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-083.wav");
 
 	SDL_Rect rect_collider = { position.x,position.y,36,14 };
 	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
@@ -64,17 +62,13 @@ bool ModulePlayer::CleanUp() {
 	if(collider!=nullptr) collider->to_delete = true;
 	collider = nullptr;
 
-	App->audio->UnloadSFX(baseshotsfx);
-	baseshotsfx = nullptr;
-
 	return true;
 }
 
 void ModulePlayer::OnCollision(Collider * rect_a, Collider * rect_b)
 {
 	switch (rect_b->type) {
-	case COLLIDER_WALL: App->fade->FadeToBlack(App->current_scene, App->start); break;
-
+		case COLLIDER_WALL: App->fade->FadeToBlack(App->current_scene, App->start); break;
 	}
 }
 
@@ -83,7 +77,6 @@ update_status ModulePlayer::Update()
 {
 	Animation* current_animation = &idle;
 	state = idl;
-	int speed = 2;
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 	{
@@ -118,7 +111,6 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{	
 		App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y+1);
-		Mix_PlayChannel(-1, baseshotsfx, 0);
 		App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 	}
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
@@ -128,7 +120,6 @@ update_status ModulePlayer::Update()
 		}
 		else {
 			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
-			Mix_PlayChannel(-1, baseshotsfx, 0);
 			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 			cooldown = 0;
 		}
