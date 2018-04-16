@@ -136,6 +136,8 @@ PowerUP::PowerUP(const PowerUP& pu) :
 
 PowerUP::~PowerUP()
 {
+	if (collider != nullptr)
+		collider->to_delete = true;
 }
 
 void PowerUP::Effect()
