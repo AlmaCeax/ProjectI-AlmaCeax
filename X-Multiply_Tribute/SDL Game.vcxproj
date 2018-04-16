@@ -82,7 +82,7 @@
     <ClInclude Include="ModuleEnemies.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleParticles.h" />
-    <ClInclude Include="ModulePowerUP.h" />
+    <ClInclude Include="ModulePowerUPS.h" />
     <ClInclude Include="ModuleSceneStage2.h" />
     <ClInclude Include="ModuleSceneStageClear.h" />
     <ClInclude Include="ModuleSceneStart.h" />
@@ -96,6 +96,7 @@
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleWindow.h" />
+    <ClInclude Include="Path.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -107,7 +108,7 @@
     <ClCompile Include="ModuleEnemies.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
-    <ClCompile Include="ModulePowerUP.cpp" />
+    <ClCompile Include="ModulePowerUPS.cpp" />
     <ClCompile Include="ModuleSceneStage1.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
