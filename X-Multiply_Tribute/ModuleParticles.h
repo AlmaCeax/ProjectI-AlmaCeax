@@ -11,6 +11,7 @@
 
 struct SDL_Texture;
 struct Collider;
+struct Mix_Chunk;
 enum COLLIDER_TYPE;
 
 struct Particle
@@ -27,6 +28,7 @@ struct Particle
 	int offsety = 0;
 	bool fx_played = false;
 	bool isPlayerAttached = false;
+	Mix_Chunk* sfx = nullptr;
 
 	Particle();
 	Particle(const Particle& p);
@@ -56,6 +58,7 @@ private:
 public:
 	Particle baseShot;
 	Particle baseShotExp;
+	Particle baseShotColExp;
 };
 
 #endif // __MODULEPARTICLES_H__

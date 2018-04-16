@@ -4,10 +4,13 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleAudio.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 
 #include "SDL/include/SDL_timer.h"
+#include "SDL_mixer/include/SDL_mixer.h"
+
 
 ModuleParticles::ModuleParticles()
 {
@@ -22,6 +25,7 @@ ModuleParticles::ModuleParticles()
 	baseShot.anim.speed = 0.3f;
 	baseShot.life = 700;
 	baseShot.speed = { 10,0 };
+	baseShot.w = 17;
 
 	baseShotExp.anim.PushBack({ 33, 36, 7, 6 });
 	baseShotExp.anim.PushBack({ 49, 34, 12, 12 });
@@ -32,6 +36,13 @@ ModuleParticles::ModuleParticles()
 	baseShotExp.isPlayerAttached = true;
 	baseShotExp.offsetx = 30;
 	baseShotExp.offsety = 1;
+
+	baseShotColExp.anim.PushBack({ 81, 34, 12, 12 });
+	baseShotColExp.anim.PushBack({ 101, 36, 8, 9 });
+	baseShotColExp.anim.loop = false;
+	baseShotColExp.anim.speed = 0.3f;
+	baseShotColExp.life = 100;
+	baseShotColExp.speed = { 0,0 };
 }
 
 ModuleParticles::~ModuleParticles()
@@ -43,6 +54,8 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png");
 
+	baseShotExp.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-083.wav");
+
 	return true;
 }
 
@@ -51,6 +64,8 @@ bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
 	App->textures->Unload(graphics);
+
+	App->audio->UnloadSFX(baseShotExp.sfx);
 
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -85,7 +100,7 @@ update_status ModuleParticles::Update()
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
-				// Play particle fx here
+				Mix_PlayChannel(-1, p->sfx, 0);
 			}
 		}
 	}
@@ -117,6 +132,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
+			AddParticle(baseShotColExp, active[i]->position.x + active[i]->w, active[i]->position.y);
 			delete active[i];
 			active[i] = nullptr;
 			break;
@@ -135,7 +151,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety)
+	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx)
 {}
 
 Particle::~Particle()
