@@ -190,13 +190,39 @@ bool ModuleSceneStage1::loadMap()
 
 	SDL_Rect coll = { 0,212,2862,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 496,0,2033,10 };
+	coll = { 496,0,2033,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 405,195,60,17 };
+	
+	//puño
+	coll = { 410,197,50,15 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 415,183,25,12 };
+	coll = { 420,183,20,14 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//corazon
 	coll = { 500,188,90,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	
+	//cortado
+	coll = { 640,12,74,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//puño
+	coll = { 762,12,50,15 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 772,27,20,14 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//corazon
+	coll = { 1010,12,90,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//cortado
+	coll = { 1024,200,74,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//cortado
+	coll = { 1150,12,74,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//corazon
+	coll = { 1265,188,90,24 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 
