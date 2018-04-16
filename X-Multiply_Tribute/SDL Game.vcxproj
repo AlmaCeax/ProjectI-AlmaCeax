@@ -80,6 +80,7 @@
     <ClInclude Include="ModuleCollision.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleParticles.h" />
+    <ClInclude Include="ModulePowerUP.h" />
     <ClInclude Include="ModuleSceneStage2.h" />
     <ClInclude Include="ModuleSceneStageClear.h" />
     <ClInclude Include="ModuleSceneStart.h" />
@@ -102,6 +103,7 @@
     <ClCompile Include="ModuleCollision.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
+    <ClCompile Include="ModulePowerUP.cpp" />
     <ClCompile Include="ModuleSceneStage1.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
