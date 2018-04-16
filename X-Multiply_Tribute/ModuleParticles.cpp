@@ -18,14 +18,6 @@ ModuleParticles::ModuleParticles()
 		active[i] = nullptr;
 
 	// BaseShot particle
-	baseShot.w = 17;
-	baseShot.h = 4;
-	baseShot.anim.PushBack({ 63, 38, 17, 4 });
-	baseShot.anim.loop = false;
-	baseShot.anim.speed = 0.3f;
-	baseShot.life = 700;
-	baseShot.speed = { 10,0 };
-	baseShot.w = 17;
 
 	baseShotExp.anim.PushBack({ 33, 36, 7, 6 });
 	baseShotExp.anim.PushBack({ 49, 34, 12, 12 });
@@ -43,6 +35,37 @@ ModuleParticles::ModuleParticles()
 	baseShotColExp.anim.speed = 0.3f;
 	baseShotColExp.life = 100;
 	baseShotColExp.speed = { 0,0 };
+
+	baseShot.w = 17;
+	baseShot.h = 4;
+	baseShot.anim.PushBack({ 63, 38, 17, 4 });
+	baseShot.anim.loop = false;
+	baseShot.anim.speed = 0.3f;
+	baseShot.life = 700;
+	baseShot.speed = { 10,0 };
+	baseShot.w = 17;
+	baseShot.id = 1;
+
+	bombExplosion.anim.PushBack({ 97, 171, 16, 16 });
+	bombExplosion.anim.PushBack({ 122, 166, 26, 26 });
+	bombExplosion.anim.PushBack({ 156, 166, 26, 26 });
+	bombExplosion.anim.PushBack({ 188, 166, 26, 26 });
+	bombExplosion.anim.PushBack({ 220, 166, 26, 26 });
+	bombExplosion.anim.loop = false;
+	bombExplosion.anim.speed = 0.7f;
+	bombExplosion.life = 200;
+	bombExplosion.speed = { 0, 0 };
+
+	bombshot.anim.PushBack({ 4, 170, 15, 4 });
+	bombshot.anim.PushBack({ 22, 170, 14, 8 });
+	bombshot.anim.PushBack({ 38, 166, 12, 12 });
+	bombshot.anim.PushBack({ 58, 165, 9, 14 });
+	bombshot.anim.PushBack({ 78, 164, 4, 15 });
+	bombshot.anim.loop = false;
+	bombshot.anim.speed = 0.03f;
+	bombshot.life = 1000;
+	bombshot.speed = { 5, 2 };
+	bombshot.id = 2;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -132,7 +155,11 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
-			AddParticle(baseShotColExp, active[i]->position.x + active[i]->w, active[i]->position.y);
+			switch (active[i]->id) {
+			case 1: AddParticle( baseShotColExp, active[i]->position.x + active[i]->w, active[i]->position.y); break;
+			case 2: AddParticle(bombExplosion, active[i]->position.x + active[i]->w, active[i]->position.y); break;
+
+			}
 			delete active[i];
 			active[i] = nullptr;
 			break;
@@ -151,7 +178,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx)
+	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id)
 {}
 
 Particle::~Particle()
@@ -173,8 +200,20 @@ bool Particle::Update()
 		if (anim.Finished())
 			ret = false;
 
-	position.x += speed.x;
-	position.y += speed.y;
+
+	switch (id)
+	{
+	case 1:
+		position.x += speed.x;
+		position.y += speed.y; break;
+	case 2: 
+		position.x += speed.x;
+		position.y += speed.y;		
+		if (speed.x > 1)speed.x -= 0.01f;
+
+		break;
+	}
+
 
 	if (isPlayerAttached) {
 
@@ -185,8 +224,11 @@ bool Particle::Update()
 		position.x = App->player->position.x + offsetx;
 	}
 
-	if (collider != nullptr)
+	if (collider != nullptr) {
 		collider->SetPos(position.x, position.y);
+		collider->SetShape(anim.GetCurrentFrame().w, anim.GetCurrentFrame().h);
+	}
+		
 
 	return ret;
 }

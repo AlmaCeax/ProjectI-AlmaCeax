@@ -29,6 +29,7 @@ struct Particle
 	bool fx_played = false;
 	bool isPlayerAttached = false;
 	Mix_Chunk* sfx = nullptr;
+	int id = 0;
 
 	Particle();
 	Particle(const Particle& p);
@@ -59,6 +60,8 @@ public:
 	Particle baseShot;
 	Particle baseShotExp;
 	Particle baseShotColExp;
+	Particle bombshot;
+	Particle bombExplosion;
 };
 
 #endif // __MODULEPARTICLES_H__

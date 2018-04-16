@@ -5,14 +5,16 @@
 
 #define MAX_POWERUPS 20
 
-enum pu_type 
-{	LASER,
-	MISSILE, 
-	SHADOW, 
-	BOMB, 
-	SPEED_BOOST, 
-	SPEED_DOWN, 
-	LIFE 
+
+enum pu_type
+{
+	LASER,
+	MISSILE,
+	SHADOW,
+	BOMB,
+	SPEED_BOOST,
+	SPEED_DOWN,
+	LIFE
 };
 
 struct PowerUP 

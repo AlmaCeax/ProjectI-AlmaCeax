@@ -32,8 +32,8 @@ ModulePowerUPS::ModulePowerUPS()
 	life.type = LIFE;
 	life.enabled = false;
 
-	bomb.anim.PushBack({ 229, 6, 21, 16 });
-	bomb.anim.PushBack({ 100, 56, 21, 16 });
+	bomb.anim.PushBack({ 229, 56, 21, 16 });
+	bomb.anim.PushBack({ 101, 56, 21, 16 });
 	bomb.anim.loop = true;
 	bomb.anim.speed = 0.1f;
 	bomb.type = BOMB;
@@ -154,6 +154,7 @@ void PowerUP::Effect()
 	case SPEED_DOWN: App->player->speed -= 1;
 		break;		
 	case BOMB: 
+		App->player->activePU[BOMB] = true;
 		break;
 	case SHADOW:
 		break;

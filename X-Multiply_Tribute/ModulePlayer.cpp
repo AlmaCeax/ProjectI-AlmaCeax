@@ -8,6 +8,7 @@
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneStart.h"
+#include "ModulePowerUPS.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "ModulePlayer.h"
 
@@ -121,6 +122,7 @@ update_status ModulePlayer::Update()
 		else {
 			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+			if(activePU[3] == true)App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 			cooldown = 0;
 		}
 		
