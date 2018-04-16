@@ -12,7 +12,7 @@
 
 update_status ModuleSceneStart::Update()
 {
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == 1) App->fade->FadeToBlack(this, App->stage1, 2);
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) App->fade->FadeToBlack(this, App->stage1, 2);
 
 	App->render->Blit(graphics, 0, 0, &background);
 	App->render->Blit(graphics, 0, 0, &title);
