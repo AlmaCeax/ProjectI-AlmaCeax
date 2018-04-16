@@ -12,22 +12,26 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
+#include "ModuleEnemies.h"
 
 Application::Application()
 {
-	modules[0] = window = new ModuleWindow();
-	modules[1] = render = new ModuleRender(); 
-	modules[2] = input = new ModuleInput();
-	modules[3] = textures = new ModuleTextures();
-	modules[4] = audio = new ModuleAudio();
-	modules[5] = start = new ModuleSceneStart();
-	modules[6] = stage1 = new ModuleSceneStage1();
-	modules[7] = stage2 = new ModuleSceneStage2();
-	modules[8] = stage_clear = new ModuleSceneStageClear();
-	modules[9] = player = new ModulePlayer();
-	modules[10] = fade = new ModuleFadeToBlack();
-	modules[11] = particles = new ModuleParticles();
-	modules[12] = collision = new ModuleCollision();
+	int i = 0;
+	modules[i++] = window = new ModuleWindow();
+	modules[i++] = render = new ModuleRender();
+	modules[i++] = input = new ModuleInput();
+	modules[i++] = textures = new ModuleTextures();
+	modules[i++] = audio = new ModuleAudio();
+	modules[i++] = start = new ModuleSceneStart();
+	modules[i++] = stage1 = new ModuleSceneStage1();
+	modules[i++] = stage2 = new ModuleSceneStage2();
+	modules[i++] = stage_clear = new ModuleSceneStageClear();
+	modules[i++] = enemies = new ModuleEnemies();
+	modules[i++] = player = new ModulePlayer();
+	modules[i++] = particles = new ModuleParticles();
+	modules[i++] = collision = new ModuleCollision();
+	modules[i++] = fade = new ModuleFadeToBlack();
+
 }	
 
 Application::~Application()

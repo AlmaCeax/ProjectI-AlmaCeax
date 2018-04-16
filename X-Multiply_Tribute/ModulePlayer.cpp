@@ -119,7 +119,7 @@ update_status ModulePlayer::Update()
 	{	
 		App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y+1);
 		Mix_PlayChannel(-1, baseshotsfx, 0);
-		App->particles->AddParticle(App->particles->baseShot, position.x+25, position.y+5);
+		App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 	}
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
 	{
@@ -129,7 +129,7 @@ update_status ModulePlayer::Update()
 		else {
 			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 			Mix_PlayChannel(-1, baseshotsfx, 0);
-			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5);
+			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 			cooldown = 0;
 		}
 		

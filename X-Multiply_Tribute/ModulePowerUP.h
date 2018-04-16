@@ -2,9 +2,10 @@
 #define __MODULEPOWERUP_H__
 
 #include "Module.h"
-#include "p2Point.h"
 #include "Animation.h"
 #include "Globals.h"
+#include "p2Point.h"
+#include "ModuleCollision.h"
 
 #define MAX_POWERUP 20
 
