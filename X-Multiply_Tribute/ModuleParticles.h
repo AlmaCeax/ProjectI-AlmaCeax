@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "ModuleCollision.h"
 
 #define MAX_ACTIVE_PARTICLES 50
 
@@ -15,7 +16,6 @@ enum COLLIDER_TYPE;
 struct Particle
 {
 	Collider* collider = nullptr;
-	COLLIDER_TYPE coll_type;
 	Animation anim;
 	uint fx = 0;
 	iPoint position;
@@ -30,6 +30,7 @@ struct Particle
 
 	Particle();
 	Particle(const Particle& p);
+	~Particle();
 	bool Update();
 };
 
@@ -43,7 +44,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddParticle(const Particle& particle, int x, int y, Uint32 delay = 0);
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0);
 	void OnCollision(Collider* c1, Collider* c2);
 
 private:

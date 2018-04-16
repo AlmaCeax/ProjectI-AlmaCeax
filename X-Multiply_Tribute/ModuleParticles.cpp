@@ -13,16 +13,6 @@ ModuleParticles::ModuleParticles()
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
-}
-
-ModuleParticles::~ModuleParticles()
-{}
-
-// Load assets
-bool ModuleParticles::Start()
-{
-	LOG("Loading particles");
-	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png");
 
 	// BaseShot particle
 	baseShot.w = 17;
@@ -32,7 +22,6 @@ bool ModuleParticles::Start()
 	baseShot.anim.speed = 0.3f;
 	baseShot.life = 700;
 	baseShot.speed = { 10,0 };
-	baseShot.coll_type = COLLIDER_PLAYER_SHOT;
 
 	baseShotExp.anim.PushBack({ 33, 36, 7, 6 });
 	baseShotExp.anim.PushBack({ 49, 34, 12, 12 });
@@ -43,7 +32,16 @@ bool ModuleParticles::Start()
 	baseShotExp.isPlayerAttached = true;
 	baseShotExp.offsetx = 30;
 	baseShotExp.offsety = 1;
-	baseShotExp.coll_type = COLLIDER_NONE;
+}
+
+ModuleParticles::~ModuleParticles()
+{}
+
+// Load assets
+bool ModuleParticles::Start()
+{
+	LOG("Loading particles");
+	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png");
 
 	return true;
 }
@@ -58,10 +56,6 @@ bool ModuleParticles::CleanUp()
 	{
 		if (active[i] != nullptr)
 		{
-			if (active[i]->collider != nullptr) {
-				active[i]->collider->to_delete = true;
-				active[i]->collider = nullptr;
-			}
 			delete active[i];
 			active[i] = nullptr;
 		}
@@ -82,10 +76,6 @@ update_status ModuleParticles::Update()
 
 		if (p->Update() == false)
 		{
-			if (active[i]->collider != nullptr) {
-				active[i]->collider->to_delete = true;
-				active[i]->collider = nullptr;
-			}
 			delete p;
 			active[i] = nullptr;			
 		}
@@ -102,17 +92,22 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay)
 {
-	Particle* p = new Particle(particle);
-	p->born = SDL_GetTicks() + delay;
-	p->position.x = x;
-	p->position.y = y;
-
-	if (last_particle >= 50) {
-		last_particle = 0;
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		if (active[i] == nullptr)
+		{
+			Particle* p = new Particle(particle);
+			p->born = SDL_GetTicks() + delay;
+			p->position.x = x;
+			p->position.y = y;
+			if (collider_type != COLLIDER_NONE)
+				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+			active[i] = p;
+			break;
+		}
 	}
-	active[last_particle++] = p;
 }
 
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
@@ -122,8 +117,6 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
-			active[i]->collider->to_delete = true;
-			active[i]->collider = nullptr;
 			delete active[i];
 			active[i] = nullptr;
 			break;
@@ -142,12 +135,13 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), coll_type(p.coll_type), h(p.h),w(p.w)
+	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety)
+{}
+
+Particle::~Particle()
 {
-	if (coll_type != COLLIDER_NONE) {
-		SDL_Rect rect_collider = { position.x,position.y,w,h };
-		collider = App->collision->AddCollider(rect_collider, coll_type, App->particles);
-	}
+	if (collider != nullptr)
+		collider->to_delete = true;
 }
 
 bool Particle::Update()
