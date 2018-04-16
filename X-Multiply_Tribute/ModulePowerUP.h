@@ -29,13 +29,13 @@ private:
 
 };
 
-class ModulePowerUP :  public Module
+class ModulePowerUP : public Module
 {
 public:
 	ModulePowerUP();
 	~ModulePowerUP();
 
-	enum pu_type {LASER, MISSILE, SHADOW, BOMB,  SPEED_BOOST, SPEED_DOWN, LIFE};
+	enum pu_type { LASER, MISSILE, SHADOW, BOMB, SPEED_BOOST, SPEED_DOWN, LIFE };
 
 	bool Init();
 	bool Start();

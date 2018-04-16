@@ -73,6 +73,7 @@ bool ModuleSceneStage1::Start() {
 	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1.ogg");
 	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
 
+
 	Mix_PlayMusic(music, -1);
 	Mix_PlayChannel(-1, shipSpawn, 0);
 
@@ -102,6 +103,7 @@ update_status ModuleSceneStage1::Update()
 	App->render->Blit(textures[0], 0, 0, textrect[0], 0.5f);
 	App->render->Blit(textures[1], 0, 0, textrect[1]);
 	App->render->Blit(textures[2], xInjection, yInjection, textrect[2], 0.0001f);
+	App->render->Blit(textures[3], 0, 224, textrect[3], 0.0f);
 
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == 1) App->fade->FadeToBlack(this, App->stage2, 2);
@@ -133,7 +135,7 @@ bool ModuleSceneStage1::CleanUp()
 
 void ModuleSceneStage1::checkCameraEvents()
 {
-	if (App->render->camera.x > 8000 && App->render->camera.x < 10300)
+	if (App->render->camera.x > 8000 && App->render->camera.x < 10304)
 	{
 		down = true;
 	}
@@ -177,6 +179,14 @@ bool ModuleSceneStage1::loadMap()
 	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/FirstLvlMap.png");
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/BG01.png");
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/injection1.png");
+	textures[3] = App->textures->Load("Assets/Sprites/UI/UI_1.png");
+
+	textrect[3] = new SDL_Rect();
+	textrect[3]->x = 0;
+	textrect[3]->y = 0;
+	textrect[3]->w = 384;
+	textrect[3]->h = 32;
+
 
 	SDL_Rect coll = { 0,212,2862,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);

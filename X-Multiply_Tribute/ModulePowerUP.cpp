@@ -1,17 +1,9 @@
-#include <math.h>
-#include "Application.h"
-#include "ModuleTextures.h"
-#include "ModuleRender.h"
-#include "ModulePlayer.h"
-#include "ModuleCollision.h"
 #include "ModulePowerUP.h"
 
-#include "SDL/include/SDL_timer.h"
 
 //ModulePowerUP::ModulePowerUP()
 //{
-//	for (uint i = 0; i < MAX_POWERUP; ++i)
-//		poweUps[i] = nullptr;
+//
 //}
 
 ModulePowerUP::~ModulePowerUP()
@@ -41,7 +33,3 @@ bool ModulePowerUP::CleanUp()
 void ModulePowerUP::OnCollision(Collider * c1, Collider * c2)
 {
 }
-
-//PowerUp::PowerUp(iPoint _position)
-//{
-//}
