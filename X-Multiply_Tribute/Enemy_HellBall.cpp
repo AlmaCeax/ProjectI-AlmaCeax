@@ -27,9 +27,7 @@ void Enemy_HellBall::Move()
 	if (going_up) position.y = origin.y + sinf(angle) * radius;	
 	else position.y = origin.y + sinf(-angle) * radius;
 
-	//position.x = origin.x + cosf(angle) * radius;
-	//origin.x--;
-
-	position.x--; 
+	/*position.x = origin.x + cosf(angle) * radius;
+	position.x -= 5;*/
 
 }
