@@ -66,6 +66,15 @@ ModuleParticles::ModuleParticles()
 	bombshot.life = 1500;
 	bombshot.speed = { 5, 2 };
 	bombshot.id = 2;
+
+	blueBall.anim.PushBack({ 10,217,8,8 });
+	blueBall.anim.PushBack({ 26,217,8,8 });
+	blueBall.anim.PushBack({ 42,217,8,8 });
+	blueBall.anim.PushBack({ 58,217,8,8 });
+	blueBall.anim.speed = 0.1f;
+	blueBall.life = 1500;
+	blueBall.speed = { 0,0 };
+	blueBall.id = 1;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -130,7 +139,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, iPoint speed, Uint32 delay)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -140,6 +149,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			p->born = SDL_GetTicks() + delay;
 			p->position.x = x;
 			p->position.y = y;
+			if (!speed.IsZero()) p->speed = speed;
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			active[i] = p;
@@ -158,7 +168,6 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			switch (active[i]->id) {
 			case 1: AddParticle( baseShotColExp, active[i]->position.x, active[i]->position.y); break;
 			case 2: AddParticle(bombExplosion, active[i]->position.x, active[i]->position.y); break;
-
 			}
 			delete active[i];
 			active[i] = nullptr;
@@ -208,9 +217,8 @@ bool Particle::Update()
 		position.y += speed.y; break;
 	case 2: 
 		position.x += speed.x;
-		position.y += speed.y;		
+		position.y += speed.y;
 		if (speed.x > 2.0f)speed.x -= 0.05f;
-
 		break;
 	}
 

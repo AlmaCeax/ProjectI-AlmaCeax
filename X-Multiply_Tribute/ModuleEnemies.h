@@ -8,7 +8,9 @@
 enum ENEMY_TYPES
 {
 	NO_TYPE,
-	HELLBALL
+	HELLBALL,
+	FLYINGWORM,
+	TENTACLESHOOTER,
 };
 
 class Enemy;
