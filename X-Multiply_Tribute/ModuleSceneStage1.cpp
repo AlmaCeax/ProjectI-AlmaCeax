@@ -7,6 +7,7 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneStage2.h"
+#include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "ModuleSceneStage1.h"
@@ -51,8 +52,10 @@ bool ModuleSceneStage1::Init()
 
 bool ModuleSceneStage1::Start() {
 	App->current_scene = this;
-
 	App->player->Disable();
+	App->particles->Enable();
+	App->enemies->Enable();
+	App->powerups->Enable();
 	App->collision->Enable();
 
 	right = false;
@@ -93,7 +96,7 @@ bool ModuleSceneStage1::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 630, 100);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 550, 150);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 530, 150);
 
 
 
@@ -133,7 +136,11 @@ update_status ModuleSceneStage1::Update()
 bool ModuleSceneStage1::CleanUp()
 {
 	App->player->Disable();
+	App->enemies->Disable();
+	App->particles->Disable();
+	App->powerups->Disable();
 	App->collision->Disable();
+
 
 	for (int i = 0; i < NUM_LAYERS; ++i)
 	{

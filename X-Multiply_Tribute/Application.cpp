@@ -50,6 +50,8 @@ bool Application::Init()
 	stage1->Disable();
 	stage2->Disable();
 	stage_clear->Disable();
+	enemies->Disable();
+	powerups->Disable();
 	collision->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
