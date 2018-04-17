@@ -19,7 +19,7 @@ class ModuleSceneStage1 :
 {
 private:
 	int timer, startTime, aux;
-	bool right, left, up, down, injecting, shake;
+	bool right, left, up, down, injecting, shake, stopped;
 	bool injectionleft = true;
 
 	fPoint injectionposition = { 75.0f, -100.0f };

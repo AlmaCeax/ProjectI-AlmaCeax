@@ -7,6 +7,7 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneStage2.h"
+#include "ModuleSceneStageClear.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "SDL_mixer/include/SDL_mixer.h"
@@ -63,6 +64,7 @@ bool ModuleSceneStage1::Start() {
 	down = false;
 	left = false;
 	shake = false;
+	stopped = false;
 	aux = 10;
 
 	textrect[2] = new SDL_Rect();
@@ -111,8 +113,7 @@ bool ModuleSceneStage1::Start() {
 	Mix_PlayMusic(music, -1);
 	Mix_PlayChannel(-1, shipSpawn, 0);
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
+	App->render->ResetCamera();
 
 	App->powerups->AddPowerUp(App->powerups->bomb, 300, 100, COLLIDER_POWER_UP);
 
@@ -132,7 +133,8 @@ update_status ModuleSceneStage1::Update()
 	App->render->Blit(textures[3], 0, 224, textrect[3], 0.0f);
 
 
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == 1) App->fade->FadeToBlack(this, App->stage2, 2);
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage2);
+	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage_clear);
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -157,6 +159,7 @@ bool ModuleSceneStage1::CleanUp()
 	music = nullptr;
 	App->audio->UnloadSFX(shipSpawn);
 	shipSpawn = nullptr;
+
 	right = false;
 
 	return true;
@@ -165,36 +168,41 @@ bool ModuleSceneStage1::CleanUp()
 
 void ModuleSceneStage1::checkCameraEvents()
 {
-	if (App->render->camera.x > 8000 && App->render->camera.x < 10304)
+	if (App->render->camera.x > 2666 * SCREEN_SIZE && App->render->camera.x < 3434 * SCREEN_SIZE)
 	{
 		down = true;
 	}
 	else if (down) down = false;
+
+	if (App->render->camera.x >= (4960 - SCREEN_WIDTH) * SCREEN_SIZE) {
+		stopped = true;
+		App->fade->FadeToBlack(this, App->stage_clear);
+	}
 }
 
 void ModuleSceneStage1::updateCamera()
 {
 	int speed = 1;
-	if (!App->player->dead) {
-		if (right) {
-			App->render->camera.x += speed * SCREEN_SIZE;
-			App->player->position.x += speed;
+	if (stopped || App->player->dead) return;
+
+	if (right) {
+		App->render->camera.x += speed * SCREEN_SIZE;
+		App->player->position.x += speed;
+	}
+	if (left)App->render->camera.x -= speed * SCREEN_SIZE;
+	if (up) {
+		timer++;
+		if (timer >= 3) {
+			App->render->camera.y -= speed * SCREEN_SIZE;
+			timer = 0;
 		}
-		if (left)App->render->camera.x -= speed * SCREEN_SIZE;
-		if (up) {
-			timer++;
-			if (timer >= 3) {
-				App->render->camera.y -= speed * SCREEN_SIZE;
-				timer = 0;
-			}
-		}
-		if (down) {
-			timer++;
-			if (timer >= 3) {
-				App->render->camera.y += speed * SCREEN_SIZE;
-				App->player->position.y += 1;
-				timer = 0;
-			}
+	}
+	if (down) {
+		timer++;
+		if (timer >= 3) {
+			App->render->camera.y += speed * SCREEN_SIZE;
+			App->player->position.y += 1;
+			timer = 0;
 		}
 	}
 	

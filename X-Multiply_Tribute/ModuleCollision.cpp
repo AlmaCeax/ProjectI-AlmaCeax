@@ -106,7 +106,7 @@ update_status ModuleCollision::PreUpdate()
 // Called before render is available
 update_status ModuleCollision::Update()
 {
-
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) App->collision->GodMode();
 	DebugDraw();
 
 	return UPDATE_CONTINUE;
@@ -191,6 +191,8 @@ void ModuleCollision::GodMode()
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = god;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = god;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT] = god;
+	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = god;
+	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_PLAYER] = god;
 	god = !god;
 }
 

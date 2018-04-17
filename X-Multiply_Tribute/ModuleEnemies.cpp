@@ -9,7 +9,7 @@
 #include "Enemy_TentacleShooter.h"
 #include "Enemy.h"
 
-#define SPAWN_MARGIN 50
+#define SPAWN_MARGIN 80
 
 ModuleEnemies::ModuleEnemies()
 {
