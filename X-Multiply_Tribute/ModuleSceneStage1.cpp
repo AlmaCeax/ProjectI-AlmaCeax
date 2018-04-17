@@ -232,7 +232,7 @@ bool ModuleSceneStage1::loadMap()
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 496,0,2033,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	
+
 	//hand
 	coll = { 411,197,50,15 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -241,7 +241,7 @@ bool ModuleSceneStage1::loadMap()
 	//heart
 	coll = { 500,188,90,24 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	
+
 	//cut
 	coll = { 640,12,74,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -324,12 +324,37 @@ bool ModuleSceneStage1::loadMap()
 	coll = { 2721,168,40,14 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
+
+	//diagonal
+	coll = { 2920,0,80,50 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	int y = 236;
+	for (int x = 2850; x < 3552; x += 50)
+	{
+		coll = { x,y,50,50 };
+		App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+		y += 17;
+	}
+	y = 0;
+	for (int x = 3000; x < 3700; x += 50)
+	{
+		coll = { x,y,50,50 };
+		App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+		y += 17;
+	}
+
+	// line down stage
+	coll = { 3808,256,1152,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 3552,468,1408,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
 	//volcano
-	coll = { 3730,268,224,12 };
+	coll = { 3730,298,224,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 3736,280,154,18 };
+	coll = { 3744,310,154,18 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 3758,298,40,14 };
+	coll = { 3840,328,40,14 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//heart
@@ -342,12 +367,30 @@ bool ModuleSceneStage1::loadMap()
 	coll = { 4224,456,74,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//hand
-	coll = { 4347,452,50,15 };
+	coll = { 4347,453,50,15 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 4357,438,20,14 };
+	coll = { 4357,439,20,14 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//heart
-	coll = { 4340,277,90,24 };
+	coll = { 4340,268,90,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//door
+	coll = { 4496,268,120,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4496,444,120,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4516,292,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4516,420,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4521,316,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4521,396,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4551,340,60,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4551,384,60,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	if (textures[0] == nullptr) {
@@ -355,6 +398,7 @@ bool ModuleSceneStage1::loadMap()
 	}
 	else return true;
 }
+	
 
 void ModuleSceneStage1::injection()
 {
