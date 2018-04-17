@@ -126,9 +126,9 @@ update_status ModuleSceneStage1::Update()
 	injection();
 
 
-	App->render->Blit(textures[0], 0, 0, textrect[0], 0.3f);
-	App->render->Blit(textures[1], 0, 0, textrect[1], .67f);
-	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, textrect[2],0.3f);
+	App->render->Blit(textures[0], 0, 0, textrect[0], 0.5f);
+	App->render->Blit(textures[1], 0, 0, textrect[1]);
+	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, textrect[2],0.5f);
 	App->render->Blit(textures[3], 0, 224, textrect[3], 0.0f);
 
 
@@ -174,24 +174,24 @@ void ModuleSceneStage1::checkCameraEvents()
 
 void ModuleSceneStage1::updateCamera()
 {
-	int speed = 3;
+	int speed = 1;
 
 	if (right) {
-		App->render->camera.x += speed;
-		App->player->position.x += 1;
+		App->render->camera.x += speed * SCREEN_SIZE;
+		App->player->position.x += speed;
 	}
-	if (left)App->render->camera.x -= speed;
+	if (left)App->render->camera.x -= speed * SCREEN_SIZE;
 	if (up) {
 		timer++;
 		if (timer >= 3) {
-			App->render->camera.y -= speed;
+			App->render->camera.y -= speed * SCREEN_SIZE;
 			timer = 0;
 		}
 	}
 	if (down) {
 		timer++;
 		if (timer >= 3) {
-			App->render->camera.y += speed;
+			App->render->camera.y += speed * SCREEN_SIZE;
 			App->player->position.y += 1;
 			timer = 0;
 		}
