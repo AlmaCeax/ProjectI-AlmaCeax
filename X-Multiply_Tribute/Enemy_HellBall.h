@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __HELLBALL_H__
+#define __HELLBALL_H__
+
 #include "Enemy.h"
 #include "Path.h"
 
@@ -10,12 +12,15 @@ private:
 	iPoint origin;
 
 	bool going_up = true;
-	int going_left = true;
 	float angle = 0;
+	int radius = 30;
+
 
 public:
 	Enemy_HellBall(int x, int y, bool going_up);
 
 	void Move();
 };
+
+#endif
 

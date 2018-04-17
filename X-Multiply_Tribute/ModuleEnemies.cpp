@@ -5,6 +5,8 @@
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "Enemy_HellBall.h"
+#include "Enemy_FlyingWorm.h"
+#include "Enemy_TentacleShooter.h"
 #include "Enemy.h"
 
 #define SPAWN_MARGIN 50
@@ -129,6 +131,12 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		{
 			case ENEMY_TYPES::HELLBALL:
 			enemies[i] = new Enemy_HellBall(info.x,info.y,info.going_up);
+			break;
+			case ENEMY_TYPES::FLYINGWORM:
+			enemies[i] = new Enemy_FlyingWorm(info.x, info.y);
+			break;
+			case ENEMY_TYPES::TENTACLESHOOTER:
+			enemies[i] = new Enemy_TentacleShooter(info.x, info.y);
 			break;
 		}
 	}

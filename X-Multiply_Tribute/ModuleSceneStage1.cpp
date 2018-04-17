@@ -73,17 +73,24 @@ bool ModuleSceneStage1::Start() {
 		return false;
 	}
 	//top
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 600, 100, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 615, 100, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 630, 100, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 645, 100, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 660, 100, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 450, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 465, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 480, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 495, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 510, 60, false);
 	//bottom
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 600, 100, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 615, 100, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 630, 100, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 645, 100, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 660, 100, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 450, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 465, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 480, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 495, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 510, 60, true);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 630, 100);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 550, 150);
+
+
 
 	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1.ogg");
 	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
