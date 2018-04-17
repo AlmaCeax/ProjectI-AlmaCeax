@@ -22,12 +22,11 @@ Enemy_HellBall::Enemy_HellBall(int x, int y, bool _going_up):Enemy(x,y)
 
 void Enemy_HellBall::Move()
 {
-	angle += 0.08f;
+	angle += 0.06f;
 
-	if (going_up) position.y = origin.y + sinf(angle) * radius;	
-	else position.y = origin.y + sinf(-angle) * radius;
+	if (going_up) position.y = origin.y + 1.5*sinf(angle) * radius;	
+	else position.y = origin.y + 1.5*sinf(-angle) * radius;
 
-	/*position.x = origin.x + cosf(angle) * radius;
-	position.x -= 5;*/
-
+	//position.x = origin.x + cosf(angle) * radius;
+	position.x -= 0.2;
 }

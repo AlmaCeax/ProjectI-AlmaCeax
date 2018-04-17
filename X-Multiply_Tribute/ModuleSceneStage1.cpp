@@ -86,12 +86,16 @@ bool ModuleSceneStage1::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 480, 60, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 495, 60, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 510, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 525, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 540, 60, false);
 	//bottom
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 450, 60, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 465, 60, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 480, 60, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 495, 60, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 510, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 525, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 540, 60, true);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 630, 100);
