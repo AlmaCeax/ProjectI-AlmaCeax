@@ -319,7 +319,7 @@ bool ModuleSceneStage1::loadMap()
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//heart
-	coll = { 3956,450,90,24 };
+	coll = { 3956,444,90,24 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//cut
 	coll = { 3970,268,74,12 };
@@ -333,7 +333,7 @@ bool ModuleSceneStage1::loadMap()
 	coll = { 4357,438,20,14 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//heart
-	coll = { 4340,275,90,24 };
+	coll = { 4340,277,90,24 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	if (textures[0] == nullptr) {
