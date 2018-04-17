@@ -23,19 +23,24 @@ ModuleSceneStage1::ModuleSceneStage1()
 
 bool ModuleSceneStage1::Init()
 {
-	startAnimation.PushBack({28, 28, 48, 102});
-	startAnimation.PushBack({107, 28, 48, 105});
-	startAnimation.PushBack({188, 28, 48, 103});
-	startAnimation.PushBack({266, 28, 48, 113});
-	startAnimation.PushBack({335, 28, 48, 121});
-	startAnimation.PushBack({414, 28, 48, 123});
-	startAnimation.PushBack({414, 28, 48, 122});
+	startAnimation.PushBack({28, 24, 48, 106});
+	startAnimation.PushBack({107, 24, 48, 105});
+	startAnimation.PushBack({188, 24, 48, 103});
+	startAnimation.PushBack({26, 149, 48, 104});
+	startAnimation.PushBack({107, 149, 48, 106});
+	startAnimation.PushBack({188, 149, 48, 110});
+	startAnimation.PushBack({26, 263, 48, 117});
+	startAnimation.PushBack({ 107, 263, 48, 123 });
 
-	startAnimation.PushBack({335, 157, 48, 120});
-	startAnimation.PushBack({266, 157, 48, 112});
-	startAnimation.PushBack({188, 157, 48, 102});
-	startAnimation.PushBack({107, 157, 48, 105});
-	startAnimation.PushBack({28, 157, 48, 102});
+	startAnimation.PushBack({ 264, 24, 48, 120 });
+	startAnimation.PushBack({342, 24, 48, 120});
+	startAnimation.PushBack({422, 24, 48, 117});
+	startAnimation.PushBack({264, 149, 48, 112});
+	startAnimation.PushBack({342, 149, 48, 109});
+	startAnimation.PushBack({422, 149, 48, 105});
+	startAnimation.PushBack({ 188, 24, 48, 103 });
+	startAnimation.PushBack({ 107, 24, 48, 105 });
+	startAnimation.PushBack({ 28, 24, 48, 106 });
 
 	startAnimation.loop = false;
 	startAnimation.speed = 0.1f;
@@ -95,7 +100,7 @@ bool ModuleSceneStage1::Start() {
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
-	App->powerups->AddPowerUp(App->powerups->bomb, 300, 100, COLLIDER_POWER_UP);
+	App->powerups->AddPowerUp(App->powerups->tentacles, 300, 100, COLLIDER_POWER_UP);
 
 	return true;
 }
@@ -335,9 +340,9 @@ bool ModuleSceneStage1::loadMap()
 
 void ModuleSceneStage1::injection()
 {
-	if (yInjection == -4 && injecting)
+	if (yInjection >= 0 && injecting)
 	{
-		if (startAnimation.GetCurrentFrameIndex() == 6)
+		if (startAnimation.GetCurrentFrameIndex() == 8)
 		{
 			App->player->Enable();
 			right = true;

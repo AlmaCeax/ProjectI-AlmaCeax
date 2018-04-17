@@ -14,7 +14,8 @@ enum pu_type
 	BOMB,
 	SPEED_BOOST,
 	SPEED_DOWN,
-	LIFE
+	LIFE,
+	TENTACLES
 };
 
 struct PowerUP 

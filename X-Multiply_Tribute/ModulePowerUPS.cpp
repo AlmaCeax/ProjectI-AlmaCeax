@@ -39,6 +39,12 @@ ModulePowerUPS::ModulePowerUPS()
 	bomb.type = BOMB;
 	bomb.enabled = false;
 
+	tentacles.anim.PushBack({ 5, 57, 18, 15 });
+	tentacles.anim.loop = true;
+	tentacles.anim.speed = 0.1f;
+	tentacles.type = TENTACLES;
+	tentacles.enabled = false;
+
 }
 
 ModulePowerUPS::~ModulePowerUPS()
@@ -144,12 +150,15 @@ void PowerUP::Effect()
 {
 	switch (type)
 	{
-	case LASER: 
+	case TENTACLES:
+		App->player->activePU[TENTACLES] = true;
+		break;
+	case LASER:
+		App->player->activePU[LASER] = true;
 		break;		
 	case LIFE: 
 		break;		
 	case SPEED_BOOST: App->player->speed += 1;
-		LOG("SPEEEEEEEEED BOOOOOOOOOOOOOOST");
 		break;		
 	case SPEED_DOWN: App->player->speed -= 1;
 		break;		
