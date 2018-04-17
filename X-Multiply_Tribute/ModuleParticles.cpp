@@ -64,7 +64,7 @@ ModuleParticles::ModuleParticles()
 	bombshot.anim.loop = false;
 	bombshot.anim.speed = 0.03f;
 	bombshot.life = 1500;
-	bombshot.speed = { 5, 2 };
+	bombshot.speed = { 4.5f, 1 };
 	bombshot.id = 2;
 
 	blueBall.anim.PushBack({ 10,217,8,8 });
@@ -139,7 +139,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, iPoint speed, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -218,7 +218,8 @@ bool Particle::Update()
 	case 2: 
 		position.x += speed.x;
 		position.y += speed.y;
-		if (speed.x > 2.0f)speed.x -= 0.05f;
+		if (speed.x > 1.55f)speed.x -= 0.1f;
+		if (speed.y < 2.0f)speed.y += 0.1f;
 		break;
 	}
 

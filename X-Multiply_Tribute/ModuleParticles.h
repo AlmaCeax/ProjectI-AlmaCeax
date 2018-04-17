@@ -20,7 +20,7 @@ struct Particle
 	Animation anim;
 	uint fx = 0;
 	iPoint position;
-	iPoint speed;
+	fPoint speed;
 	int w, h = 0;
 	Uint32 born = 0;
 	Uint32 life = 0;
@@ -47,7 +47,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, iPoint speed = {0,0}, Uint32 delay = 0);
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = {0,0}, Uint32 delay = 0);
 	void OnCollision(Collider* c1, Collider* c2);
 
 private:

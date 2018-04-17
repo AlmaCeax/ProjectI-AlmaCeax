@@ -107,7 +107,7 @@ bool ModuleSceneStage1::Start() {
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
-	App->powerups->AddPowerUp(App->powerups->tentacles, 300, 100, COLLIDER_POWER_UP);
+	App->powerups->AddPowerUp(App->powerups->bomb, 300, 100, COLLIDER_POWER_UP);
 
 	return true;
 }
