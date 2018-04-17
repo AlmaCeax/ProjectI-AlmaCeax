@@ -29,14 +29,18 @@ public:
 	bool activePU[6];
 	state state;
 	fPoint speed = {2, 0};
+	bool dead = false;
 
 private:
 	
+
 	SDL_Texture * graphics = nullptr;
+	Animation* current_animation = nullptr;
 	Animation* last_animation = nullptr;
 	Animation idle;
 	Animation up;
 	Animation down;
+	Animation death;
 	int cooldown = 0;
 
 	Collider* collider;

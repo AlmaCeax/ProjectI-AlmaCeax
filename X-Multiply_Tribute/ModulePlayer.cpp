@@ -40,6 +40,17 @@ bool ModulePlayer::Init() {
 	down.speed = 0.1f;
 	down.loop = false;
 
+	death.PushBack({ 5, 149, 6, 6 });
+	death.PushBack({ 19, 147, 10, 10 });
+	death.PushBack({ 34, 146, 12, 12 });
+	death.PushBack({ 49, 145, 14, 14 });
+	death.PushBack({ 64, 144, 16, 16 });
+	death.PushBack({ 80, 144, 16, 16 });
+	death.PushBack({ 96, 144, 16, 16 });
+	death.PushBack({ 112, 144, 16, 16 });
+	death.loop = false;
+	death.speed = 0.2f;
+
 	return true;
 }
 
@@ -70,77 +81,85 @@ bool ModulePlayer::CleanUp() {
 
 void ModulePlayer::OnCollision(Collider * rect_a, Collider * rect_b)
 {
-	switch (rect_b->type) {
+	dead = true;
+	current_animation = &death;
+	/*switch (rect_b->type) {
 		case COLLIDER_WALL: App->fade->FadeToBlack(App->current_scene, App->start); break;
-	}
+	}*/
 }
 
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	Animation* current_animation = &idle;
-	state = idl;
-
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
-	{
+	if (!dead) {
 		current_animation = &idle;
-		position.x += speed.x;
-		if (((position.x+36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
 		state = idl;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
-	{
-		current_animation = &idle;
-		position.x -= speed.x;
-		if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
-		state = idl;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
-	{
-		current_animation = &up;
-		position.y -= speed.x;
-		if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
-		state = top;
-	}
 
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
-	{
-		current_animation = &down;
-		position.y += speed.x;
-		if (((position.y + 14) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
-		state = bot;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
-	{	
-		App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y+1);
-		App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
-	}
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
-	{
-		if (cooldown < 25) {
-			cooldown++;
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
+		{
+			current_animation = &idle;
+			position.x += speed.x;
+			if (((position.x + 36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
+			state = idl;
 		}
-		else {
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
+		{
+			current_animation = &idle;
+			position.x -= speed.x;
+			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
+			state = idl;
+		}
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
+		{
+			current_animation = &up;
+			position.y -= speed.x;
+			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
+			state = top;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
+		{
+			current_animation = &down;
+			position.y += speed.x;
+			if (((position.y + 14) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
+			state = bot;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+		{
 			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
-			if(activePU[BOMB] == true)App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
-			cooldown = 0;
 		}
-		
-	}
+		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
+		{
+			if (cooldown < 25) {
+				cooldown++;
+			}
+			else {
+				App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
+				App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+				if (activePU[BOMB] == true)App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+				cooldown = 0;
+			}
 
-	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
-	{
-		App->collision->GodMode();
-	}
+		}
 
-	collider->SetPos(position.x, position.y);
+		if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
+		{
+			App->collision->GodMode();
+		}
 
-	if (last_animation != current_animation) {
-		current_animation->Reset();
+		collider->SetPos(position.x, position.y);
+
+		if (last_animation != current_animation) {
+			current_animation->Reset();
+		}
+		last_animation = current_animation;
 	}
-	last_animation = current_animation;
+	else {
+		if(current_animation->isDone()) App->fade->FadeToBlack(App->current_scene, App->start);
+	}
+	
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();

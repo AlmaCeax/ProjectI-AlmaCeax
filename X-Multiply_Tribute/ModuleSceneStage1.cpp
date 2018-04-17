@@ -175,27 +175,29 @@ void ModuleSceneStage1::checkCameraEvents()
 void ModuleSceneStage1::updateCamera()
 {
 	int speed = 1;
-
-	if (right) {
-		App->render->camera.x += speed * SCREEN_SIZE;
-		App->player->position.x += speed;
-	}
-	if (left)App->render->camera.x -= speed * SCREEN_SIZE;
-	if (up) {
-		timer++;
-		if (timer >= 3) {
-			App->render->camera.y -= speed * SCREEN_SIZE;
-			timer = 0;
+	if (!App->player->dead) {
+		if (right) {
+			App->render->camera.x += speed * SCREEN_SIZE;
+			App->player->position.x += speed;
+		}
+		if (left)App->render->camera.x -= speed * SCREEN_SIZE;
+		if (up) {
+			timer++;
+			if (timer >= 3) {
+				App->render->camera.y -= speed * SCREEN_SIZE;
+				timer = 0;
+			}
+		}
+		if (down) {
+			timer++;
+			if (timer >= 3) {
+				App->render->camera.y += speed * SCREEN_SIZE;
+				App->player->position.y += 1;
+				timer = 0;
+			}
 		}
 	}
-	if (down) {
-		timer++;
-		if (timer >= 3) {
-			App->render->camera.y += speed * SCREEN_SIZE;
-			App->player->position.y += 1;
-			timer = 0;
-		}
-	}
+	
 }
 
 ModuleSceneStage1::~ModuleSceneStage1()
