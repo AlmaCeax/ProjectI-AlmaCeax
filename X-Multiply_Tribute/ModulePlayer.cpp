@@ -57,8 +57,10 @@ bool ModulePlayer::Init() {
 // Load assets
 bool ModulePlayer::Start()
 {
+	dead = false;
 	position.x = 75;
 	position.y = 105;
+	death.Reset();
 
 	LOG("Loading player textures");
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png"); // arcade version
@@ -81,11 +83,11 @@ bool ModulePlayer::CleanUp() {
 
 void ModulePlayer::OnCollision(Collider * rect_a, Collider * rect_b)
 {
-	dead = true;
-	current_animation = &death;
-	/*switch (rect_b->type) {
-		case COLLIDER_WALL: App->fade->FadeToBlack(App->current_scene, App->start); break;
-	}*/
+	if (rect_b->type != COLLIDER_POWER_UP)
+	{
+		dead = true;
+		current_animation = &death;
+	}
 }
 
 // Update: draw background
@@ -157,7 +159,7 @@ update_status ModulePlayer::Update()
 		last_animation = current_animation;
 	}
 	else {
-		if(current_animation->isDone()) App->fade->FadeToBlack(App->current_scene, App->start);
+		if (current_animation->isDone()) App->fade->FadeToBlack(App->current_scene, App->start); 
 	}
 	
 

@@ -32,7 +32,6 @@ public:
 	bool dead = false;
 
 private:
-	
 
 	SDL_Texture * graphics = nullptr;
 	Animation* current_animation = nullptr;
