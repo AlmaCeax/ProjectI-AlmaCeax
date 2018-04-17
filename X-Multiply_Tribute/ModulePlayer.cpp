@@ -162,6 +162,9 @@ update_status ModulePlayer::Update()
 }
 
 void ModulePlayer::Die() {
+	position.x += 6;
+	position.y +=1;
 	dead = true;
 	current_animation = &death;
+	collider->to_delete = true;
 }
