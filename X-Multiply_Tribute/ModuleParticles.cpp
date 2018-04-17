@@ -56,6 +56,7 @@ ModuleParticles::ModuleParticles()
 	bombExplosion.life = 200;
 	bombExplosion.speed = { 0, 0 };
 
+
 	bombshot.anim.PushBack({ 4, 170, 15, 4 });
 	bombshot.anim.PushBack({ 22, 170, 14, 8 });
 	bombshot.anim.PushBack({ 38, 166, 12, 12 });
@@ -75,6 +76,20 @@ ModuleParticles::ModuleParticles()
 	blueBall.life = 1500;
 	blueBall.speed = { 0,0 };
 	blueBall.id = 1;
+
+	enemyExplosion.anim.PushBack({ 254, 11, 46, 40 });
+	enemyExplosion.anim.PushBack({ 302, 11, 46, 40 });
+	enemyExplosion.anim.PushBack({ 352, 4, 60, 56 });
+	enemyExplosion.anim.PushBack({ 413, 5, 26, 26 });
+	enemyExplosion.anim.PushBack({ 254, 63, 63, 63 });
+	enemyExplosion.anim.PushBack({ 318, 68, 62, 54 });
+	enemyExplosion.anim.PushBack({ 382, 64, 61, 63 });
+	enemyExplosion.anim.PushBack({ 449, 70, 60, 50 });
+	enemyExplosion.anim.PushBack({ 258, 132, 58, 56 });
+	enemyExplosion.anim.loop = false;
+	enemyExplosion.anim.speed = 0.5f;
+	enemyExplosion.life = 200;
+	enemyExplosion.speed = { 0, 0 };
 }
 
 ModuleParticles::~ModuleParticles()

@@ -63,6 +63,7 @@ public:
 	Particle bombshot;
 	Particle bombExplosion;
 	Particle blueBall;
+	Particle enemyExplosion;
 };
 
 #endif // __MODULEPARTICLES_H__
