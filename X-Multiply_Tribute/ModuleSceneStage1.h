@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "Animation.h"
+#include "p2Point.h"
 
 #define NUM_LAYERS 4
 
@@ -21,8 +22,7 @@ private:
 	bool right, left, up, down, injecting, shake;
 	bool injectionleft = true;
 
-	int xInjection = 75;
-	int yInjection = -100;
+	fPoint injectionposition = { 75.0f, -100.0f };
 
 	Animation startAnimation;
 

@@ -68,8 +68,8 @@ bool ModuleSceneStage1::Start() {
 	textrect[2]->w = 48;
 	textrect[2]->h = 102;
 
-	xInjection = 80;
-	yInjection = -100;
+	injectionposition.x = 80;
+	injectionposition.y = -100;
 	injecting = true;
 
 	startAnimation.setCurrentFrameIndex(0);
@@ -118,20 +118,10 @@ update_status ModuleSceneStage1::Update()
 	updateCamera();
 	injection();
 
-	if (shake)
-	{
-		if (aux == xInjection)
-		{
-			xInjection--;
-		}
-		else xInjection++;
 
-		aux = xInjection;
-	}
-
-	App->render->Blit(textures[0], 0, 0, textrect[0], 0.5f);
-	App->render->Blit(textures[1], 0, 0, textrect[1]);
-	App->render->Blit(textures[2], xInjection, yInjection, textrect[2], 0.0001f);
+	App->render->Blit(textures[0], 0, 0, textrect[0], 0.3f);
+	App->render->Blit(textures[1], 0, 0, textrect[1], .67f);
+	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, textrect[2],0.3f);
 	App->render->Blit(textures[3], 0, 224, textrect[3], 0.0f);
 
 
@@ -347,7 +337,7 @@ bool ModuleSceneStage1::loadMap()
 
 void ModuleSceneStage1::injection()
 {
-	if (yInjection >= 0 && injecting)
+	if (injectionposition.y >= 0 && injecting)
 	{
 		if (startAnimation.GetCurrentFrameIndex() == 8)
 		{
@@ -355,7 +345,6 @@ void ModuleSceneStage1::injection()
 			right = true;
 			injecting = false;
 			shake = true;
-			aux = xInjection;
 		}
 		textrect[2] = &startAnimation.GetCurrentFrame();
 	}
@@ -364,12 +353,12 @@ void ModuleSceneStage1::injection()
 		{
 			if (startAnimation.isDone())
 			{
-				yInjection--;
+				injectionposition.y--;
 			}
 			else {
 				textrect[2] = &startAnimation.GetCurrentFrame();
 			}
 		}
-		else yInjection++;
+		else injectionposition.y++;
 	}
 }

@@ -158,9 +158,9 @@ void PowerUP::Effect()
 		break;		
 	case LIFE: 
 		break;		
-	case SPEED_BOOST: App->player->speed += 1;
+	case SPEED_BOOST: App->player->speed.x += 0.3f;
 		break;		
-	case SPEED_DOWN: App->player->speed -= 1;
+	case SPEED_DOWN: App->player->speed.x -= 0.3f;
 		break;		
 	case BOMB: 
 		App->player->activePU[BOMB] = true;

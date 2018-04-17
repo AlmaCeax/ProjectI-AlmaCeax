@@ -24,11 +24,11 @@ public:
 
 	Mix_Chunk* baseshotsfx = nullptr;
 
-	iPoint position;
+	fPoint position;
 	enum state { top, bot, idl };
 	bool activePU[6];
 	state state;
-	int speed = 2;
+	fPoint speed = {2, 0};
 
 private:
 	
