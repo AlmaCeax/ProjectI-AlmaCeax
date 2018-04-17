@@ -27,24 +27,18 @@ bool ModuleSceneStage1::Init()
 	startAnimation.PushBack({28, 24, 48, 106});
 	startAnimation.PushBack({107, 24, 48, 105});
 	startAnimation.PushBack({188, 24, 48, 103});
-	startAnimation.PushBack({26, 149, 48, 104});
-	startAnimation.PushBack({107, 149, 48, 106});
-	startAnimation.PushBack({188, 149, 48, 110});
-	startAnimation.PushBack({26, 263, 48, 117});
-	startAnimation.PushBack({ 107, 263, 48, 123 });
-
-	startAnimation.PushBack({ 264, 24, 48, 120 });
-	startAnimation.PushBack({342, 24, 48, 120});
-	startAnimation.PushBack({422, 24, 48, 117});
-	startAnimation.PushBack({264, 149, 48, 112});
-	startAnimation.PushBack({342, 149, 48, 109});
-	startAnimation.PushBack({422, 149, 48, 105});
-	startAnimation.PushBack({ 188, 24, 48, 103 });
-	startAnimation.PushBack({ 107, 24, 48, 105 });
-	startAnimation.PushBack({ 28, 24, 48, 106 });
+	startAnimation.PushBack({188, 24, 48, 103});
+	startAnimation.PushBack({107, 24, 48, 105});
+	startAnimation.PushBack({28, 24, 48, 106});
 
 	startAnimation.loop = false;
 	startAnimation.speed = 0.1f;
+
+	startAnimationHook.PushBack({28, 156, 32 ,29});
+	startAnimationHook.PushBack({71, 156, 32 ,24});
+	startAnimationHook.PushBack({28, 156, 32 ,29 });
+	startAnimationHook.loop = false;
+	startAnimationHook.speed = 0.08f;
 
 
 	return true;
@@ -64,15 +58,26 @@ bool ModuleSceneStage1::Start() {
 	left = false;
 	shake = false;
 	aux = 10;
+	unhooked = false;
+	startAnimationHook.setCurrentFrameIndex(0);
+
 
 	textrect[2] = new SDL_Rect();
 	textrect[2]->x = 28;
-	textrect[2]->y = 28;
+	textrect[2]->y = 24;
 	textrect[2]->w = 48;
-	textrect[2]->h = 102;
+	textrect[2]->h = 106;
+
+	textrect[4] = new SDL_Rect();
+	textrect[4]->x = 120;
+	textrect[4]->y = 159;
+	textrect[4]->w = 35;
+	textrect[4]->h = 14;
 
 	injectionposition.x = 80;
 	injectionposition.y = -100;
+	injectionhookposition.x = 90;
+	injectionhookposition.y = 76;
 	injecting = true;
 
 	startAnimation.setCurrentFrameIndex(0);
@@ -123,14 +128,12 @@ update_status ModuleSceneStage1::Update()
 {
 	checkCameraEvents();
 	updateCamera();
-	injection();
-
 
 	App->render->Blit(textures[0], 0, 0, textrect[0], 0.5f);
 	App->render->Blit(textures[1], 0, 0, textrect[1]);
+	injection();
 	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, textrect[2],0.5f);
 	App->render->Blit(textures[3], 0, 224, textrect[3], 0.0f);
-
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == 1) App->fade->FadeToBlack(this, App->stage2, 2);
 
@@ -210,7 +213,7 @@ bool ModuleSceneStage1::loadMap()
 	//Load all background textures
 	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/FirstLvlMap.png");
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/BG01.png");
-	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/injection1.png");
+	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/injection.png");
 	textures[3] = App->textures->Load("Assets/Sprites/UI/UI_1.png");
 
 	textrect[3] = new SDL_Rect();
@@ -352,12 +355,10 @@ void ModuleSceneStage1::injection()
 {
 	if (injectionposition.y >= 0 && injecting)
 	{
-		if (startAnimation.GetCurrentFrameIndex() == 8)
+		if (startAnimation.GetCurrentFrameIndex() == 3)
 		{
-			App->player->Enable();
-			right = true;
+			startAnimation.hold = true;
 			injecting = false;
-			shake = true;
 		}
 		textrect[2] = &startAnimation.GetCurrentFrame();
 	}
@@ -367,10 +368,34 @@ void ModuleSceneStage1::injection()
 			if (startAnimation.isDone())
 			{
 				injectionposition.y--;
-			}
-			else {
+			}else {
 				textrect[2] = &startAnimation.GetCurrentFrame();
+				if (injectionhookposition.y < 96 && !unhooked)
+				{
+					startAnimationHook.hold = true;
+					injectionhookposition.y++;
+					App->render->Blit(textures[2], injectionhookposition.x, injectionhookposition.y+16, textrect[4]);
+
+				}
+				else {
+					startAnimationHook.hold = false;
+					if (startAnimationHook.GetCurrentFrameIndex() == 1) {
+						App->player->Enable();
+						right = true;
+						unhooked = true;
+					}
+				}
+
+				if (startAnimationHook.isDone())
+				{
+					if (injectionhookposition.y < 76)
+					{
+						startAnimation.hold = false;
+					}
+				}
+				App->render->Blit(textures[2], injectionhookposition.x, injectionhookposition.y, &startAnimationHook.GetCurrentFrame(), 0.5f);
 			}
+			if (unhooked)injectionhookposition.y--;
 		}
 		else injectionposition.y++;
 	}

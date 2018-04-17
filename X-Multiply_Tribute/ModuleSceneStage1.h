@@ -6,7 +6,7 @@
 #include "Animation.h"
 #include "p2Point.h"
 
-#define NUM_LAYERS 4
+#define NUM_LAYERS 5
 
 struct SDL_Rect;
 struct SDL_Texture;
@@ -19,12 +19,14 @@ class ModuleSceneStage1 :
 {
 private:
 	int timer, startTime, aux;
-	bool right, left, up, down, injecting, shake;
+	bool right, left, up, down, injecting, shake, unhooked;
 	bool injectionleft = true;
 
 	fPoint injectionposition = { 75.0f, -100.0f };
+	fPoint injectionhookposition = { 90.0f, 76.0f };
 
 	Animation startAnimation;
+	Animation startAnimationHook;
 
 	SDL_Rect* textrect[NUM_LAYERS];
 	SDL_Texture* textures[NUM_LAYERS];

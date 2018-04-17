@@ -8,6 +8,7 @@ class Animation
 {
 public:
 	bool loop = true;
+	bool hold = false;
 	float speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES];
 
@@ -40,11 +41,14 @@ public:
 
 	SDL_Rect& GetCurrentFrame()
 	{
-		current_frame += speed;
-		if (current_frame >= last_frame)
+		if (!hold)
 		{
-			current_frame = (loop) ? 0.0f : last_frame - 1;
-			loops++;
+			current_frame += speed;
+			if (current_frame >= last_frame)
+			{
+				current_frame = (loop) ? 0.0f : last_frame - 1;
+				loops++;
+			}
 		}
 
 		return frames[(int)current_frame];

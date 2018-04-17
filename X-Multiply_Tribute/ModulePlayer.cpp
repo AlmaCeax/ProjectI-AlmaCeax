@@ -58,8 +58,8 @@ bool ModulePlayer::Init() {
 bool ModulePlayer::Start()
 {
 	dead = false;
-	position.x = 75;
-	position.y = 105;
+	position.x = 84;
+	position.y = 108;
 	death.Reset();
 
 	LOG("Loading player textures");
