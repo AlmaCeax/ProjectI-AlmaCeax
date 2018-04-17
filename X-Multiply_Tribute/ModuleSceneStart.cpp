@@ -35,6 +35,7 @@ bool ModuleSceneStart::CleanUp()
 bool ModuleSceneStart::Start()
 {
 	App->current_scene = this;
+	App->render->ResetCamera();
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_2.png");
 	music = App->audio->LoadMusic("Assets/Audio/Music/01_X-Multiply_Title.ogg");
 	Mix_PlayMusic(music, -1);

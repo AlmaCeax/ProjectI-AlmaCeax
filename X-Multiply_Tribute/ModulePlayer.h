@@ -32,7 +32,7 @@ public:
 	bool dead = false;
 
 private:
-
+	void Die();
 	SDL_Texture * graphics = nullptr;
 	Animation* current_animation = nullptr;
 	Animation* last_animation = nullptr;

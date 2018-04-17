@@ -83,11 +83,7 @@ bool ModulePlayer::CleanUp() {
 
 void ModulePlayer::OnCollision(Collider * rect_a, Collider * rect_b)
 {
-	if (rect_b->type != COLLIDER_POWER_UP)
-	{
-		dead = true;
-		current_animation = &death;
-	}
+	if (rect_b->type != COLLIDER_POWER_UP) Die();
 }
 
 // Update: draw background
@@ -123,7 +119,7 @@ update_status ModulePlayer::Update()
 		{
 			current_animation = &down;
 			position.y += speed.x;
-			if (((position.y + 14) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
+			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
 			state = bot;
 		}
 
@@ -143,13 +139,8 @@ update_status ModulePlayer::Update()
 				if (activePU[BOMB] == true)App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 				cooldown = 0;
 			}
-
 		}
-
-		if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
-		{
-			App->collision->GodMode();
-		}
+		if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN) Die();
 
 		collider->SetPos(position.x, position.y);
 
@@ -160,8 +151,7 @@ update_status ModulePlayer::Update()
 	}
 	else {
 		if (current_animation->isDone()) App->fade->FadeToBlack(App->current_scene, App->start); 
-	}
-	
+	}	
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
@@ -169,4 +159,9 @@ update_status ModulePlayer::Update()
 	App->render->Blit(graphics, position.x, position.y, &r);
 
 	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::Die() {
+	dead = true;
+	current_animation = &death;
 }

@@ -7,6 +7,7 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneStage2.h"
+#include "ModuleSceneStageClear.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "SDL_mixer/include/SDL_mixer.h"
@@ -57,6 +58,7 @@ bool ModuleSceneStage1::Start() {
 	down = false;
 	left = false;
 	shake = false;
+	stopped = false;
 	aux = 10;
 	unhooked = false;
 	startAnimationHook.setCurrentFrameIndex(0);
@@ -116,8 +118,7 @@ bool ModuleSceneStage1::Start() {
 	Mix_PlayMusic(music, -1);
 	Mix_PlayChannel(-1, shipSpawn, 0);
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
+	App->render->ResetCamera();
 
 	App->powerups->AddPowerUp(App->powerups->bomb, 300, 100, COLLIDER_POWER_UP);
 
@@ -135,7 +136,9 @@ update_status ModuleSceneStage1::Update()
 	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, textrect[2],0.5f);
 	App->render->Blit(textures[3], 0, 224, textrect[3], 0.0f);
 
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == 1) App->fade->FadeToBlack(this, App->stage2, 2);
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage2);
+	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage_clear);
+
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -160,6 +163,7 @@ bool ModuleSceneStage1::CleanUp()
 	music = nullptr;
 	App->audio->UnloadSFX(shipSpawn);
 	shipSpawn = nullptr;
+
 	right = false;
 
 	return true;
@@ -168,36 +172,41 @@ bool ModuleSceneStage1::CleanUp()
 
 void ModuleSceneStage1::checkCameraEvents()
 {
-	if (App->render->camera.x > 8000 && App->render->camera.x < 10304)
+	if (App->render->camera.x > 2666 * SCREEN_SIZE && App->render->camera.x < 3434 * SCREEN_SIZE)
 	{
 		down = true;
 	}
 	else if (down) down = false;
+
+	if (App->render->camera.x >= (4960 - SCREEN_WIDTH) * SCREEN_SIZE) {
+		stopped = true;
+		App->fade->FadeToBlack(this, App->stage_clear);
+	}
 }
 
 void ModuleSceneStage1::updateCamera()
 {
 	int speed = 1;
-	if (!App->player->dead) {
-		if (right) {
-			App->render->camera.x += speed * SCREEN_SIZE;
-			App->player->position.x += speed;
+	if (stopped || App->player->dead) return;
+
+	if (right) {
+		App->render->camera.x += speed * SCREEN_SIZE;
+		App->player->position.x += speed;
+	}
+	if (left)App->render->camera.x -= speed * SCREEN_SIZE;
+	if (up) {
+		timer++;
+		if (timer >= 3) {
+			App->render->camera.y -= speed * SCREEN_SIZE;
+			timer = 0;
 		}
-		if (left)App->render->camera.x -= speed * SCREEN_SIZE;
-		if (up) {
-			timer++;
-			if (timer >= 3) {
-				App->render->camera.y -= speed * SCREEN_SIZE;
-				timer = 0;
-			}
-		}
-		if (down) {
-			timer++;
-			if (timer >= 3) {
-				App->render->camera.y += speed * SCREEN_SIZE;
-				App->player->position.y += 1;
-				timer = 0;
-			}
+	}
+	if (down) {
+		timer++;
+		if (timer >= 3) {
+			App->render->camera.y += speed * SCREEN_SIZE;
+			App->player->position.y += 1;
+			timer = 0;
 		}
 	}
 	
@@ -227,7 +236,7 @@ bool ModuleSceneStage1::loadMap()
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 496,0,2033,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	
+
 	//hand
 	coll = { 411,197,50,15 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -236,7 +245,7 @@ bool ModuleSceneStage1::loadMap()
 	//heart
 	coll = { 500,188,90,24 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	
+
 	//cut
 	coll = { 640,12,74,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -319,12 +328,37 @@ bool ModuleSceneStage1::loadMap()
 	coll = { 2721,168,40,14 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
+
+	//diagonal
+	coll = { 2920,0,80,50 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	int y = 236;
+	for (int x = 2850; x < 3552; x += 50)
+	{
+		coll = { x,y,50,50 };
+		App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+		y += 17;
+	}
+	y = 0;
+	for (int x = 3000; x < 3700; x += 50)
+	{
+		coll = { x,y,50,50 };
+		App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+		y += 17;
+	}
+
+	// line down stage
+	coll = { 3808,256,1152,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 3552,468,1408,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
 	//volcano
-	coll = { 3730,268,224,12 };
+	coll = { 3730,298,224,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 3736,280,154,18 };
+	coll = { 3744,310,154,18 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 3758,298,40,14 };
+	coll = { 3840,328,40,14 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//heart
@@ -337,12 +371,30 @@ bool ModuleSceneStage1::loadMap()
 	coll = { 4224,456,74,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//hand
-	coll = { 4347,452,50,15 };
+	coll = { 4347,453,50,15 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 4357,438,20,14 };
+	coll = { 4357,439,20,14 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//heart
-	coll = { 4340,277,90,24 };
+	coll = { 4340,268,90,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//door
+	coll = { 4496,268,120,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4496,444,120,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4516,292,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4516,420,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4521,316,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4521,396,100,24 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4551,340,60,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4551,384,60,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	if (textures[0] == nullptr) {
@@ -350,6 +402,7 @@ bool ModuleSceneStage1::loadMap()
 	}
 	else return true;
 }
+	
 
 void ModuleSceneStage1::injection()
 {

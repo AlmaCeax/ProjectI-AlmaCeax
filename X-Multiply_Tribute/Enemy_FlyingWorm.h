@@ -11,6 +11,8 @@ private:
 	bool going_up = true;
 	float wave = -1.0f;
 	int original_y;
+	int original_x;
+	int shootTimer = 0;
 
 public:
 	Enemy_FlyingWorm(int x, int y);
