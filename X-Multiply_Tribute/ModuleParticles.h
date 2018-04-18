@@ -64,6 +64,8 @@ public:
 	Particle bombExplosion;
 	Particle blueBall;
 	Particle enemyExplosion;
+	Particle enemyBossExplosion;
+	Particle playerBoost;
 };
 
 #endif // __MODULEPARTICLES_H__

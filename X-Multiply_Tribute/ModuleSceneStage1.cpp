@@ -431,16 +431,20 @@ void ModuleSceneStage1::injection()
 				textrect[2] = &startAnimation.GetCurrentFrame();
 				if (injectionhookposition.y < 96 && !unhooked)
 				{
+					App->player->Enable();
+					App->player->position.y = injectionhookposition.y + 16;
 					startAnimationHook.hold = true;
 					injectionhookposition.y++;
-					App->render->Blit(textures[2], injectionhookposition.x, injectionhookposition.y+16, textrect[4]);
+					//App->render->Blit(textures[2], injectionhookposition.x, injectionhookposition.y+16, textrect[4]);
 
 				}
 				else {
 					startAnimationHook.hold = false;
 					if (startAnimationHook.GetCurrentFrameIndex() == 1) {
-						App->player->Enable();
-						right = true;					
+						right = true;
+						App->player->injecting = false;
+						App->player->startBoost = true;
+						App->particles->AddParticle(App->particles->playerBoost, App->player->position.x - 42, App->player->position.y, COLLIDER_NONE, { 3,0 });;
 					}
 					if(startAnimationHook.isDone())unhooked = true;
 				}

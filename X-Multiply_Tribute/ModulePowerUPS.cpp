@@ -4,6 +4,7 @@
 #include "ModulePlayer.h"
 #include "ModuleCollision.h"
 #include "ModulePowerUPS.h"
+#include "ModuleParticles.h"
 
 
 ModulePowerUPS::ModulePowerUPS()
@@ -159,8 +160,11 @@ void PowerUP::Effect()
 	case LIFE: 
 		break;		
 	case SPEED_BOOST: App->player->speed.x += 0.3f;
+		App->player->speed.y += 0.3f;
+		App->particles->AddParticle(App->particles->playerBoost, App->player->position.x -42, App->player->position.y, COLLIDER_NONE);
 		break;		
 	case SPEED_DOWN: App->player->speed.x -= 0.3f;
+		App->player->speed.y -= 0.3f;
 		break;		
 	case BOMB: 
 		App->player->activePU[BOMB] = true;
