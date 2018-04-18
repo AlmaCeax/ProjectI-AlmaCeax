@@ -20,6 +20,7 @@ public:
 	bool Start();
 	bool CleanUp();
 	void OnCollision(Collider*, Collider*);
+	update_status PreUpdate();
 	update_status Update();
 
 	Mix_Chunk* baseshotsfx = nullptr;
@@ -30,6 +31,9 @@ public:
 	state state;
 	fPoint speed = {2, 0};
 	bool dead = false;
+	bool canMove = false;
+	bool injecting = true;
+	bool startBoost = false;
 
 private:
 	void Die();
@@ -40,7 +44,9 @@ private:
 	Animation up;
 	Animation down;
 	Animation death;
+	Animation ejecting;
 	int cooldown = 0;
+	uint startime;
 
 	Collider* collider;
 };

@@ -4,6 +4,7 @@
 #include "ModulePlayer.h"
 #include "ModuleCollision.h"
 #include "ModulePowerUPS.h"
+#include "ModuleParticles.h"
 
 
 ModulePowerUPS::ModulePowerUPS()
@@ -44,6 +45,15 @@ ModulePowerUPS::ModulePowerUPS()
 	tentacles.anim.speed = 0.1f;
 	tentacles.type = TENTACLES;
 	tentacles.enabled = false;
+
+	tentacle.anim.PushBack({ 90, 18, 19, 9 });
+	tentacle.anim.PushBack({ 122, 19, 19, 7 });
+	tentacle.anim.PushBack({ 154, 20, 19, 6 });
+	tentacle.anim.PushBack({ 186, 20, 19, 7 });
+	tentacle.anim.PushBack({ 218, 19, 19, 9 });
+	tentacle.anim.PushBack({ 10, 34, 19, 10 });
+	tentacle.anim.loop = true;
+	tentacle.anim.speed = 0.2f;
 
 }
 
@@ -159,8 +169,11 @@ void PowerUP::Effect()
 	case LIFE: 
 		break;		
 	case SPEED_BOOST: App->player->speed.x += 0.3f;
+		App->player->speed.y += 0.3f;
+		App->particles->AddParticle(App->particles->playerBoost, App->player->position.x -42, App->player->position.y, COLLIDER_NONE);
 		break;		
 	case SPEED_DOWN: App->player->speed.x -= 0.3f;
+		App->player->speed.y -= 0.3f;
 		break;		
 	case BOMB: 
 		App->player->activePU[BOMB] = true;

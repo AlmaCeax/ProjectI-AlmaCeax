@@ -40,14 +40,14 @@ bool ModulePlayer::Init() {
 	down.speed = 0.1f;
 	down.loop = false;
 
-	death.PushBack({ 5, 149, 16, 16 });
-	death.PushBack({ 19, 147, 16, 16 });
+	death.PushBack({ 5, 149, 12, 16 });
+	death.PushBack({ 19, 147, 12, 16 });
 	death.PushBack({ 34, 146, 16, 16 });
-	death.PushBack({ 49, 145, 16, 16 });
-	death.PushBack({ 64, 144, 16, 16 });
-	death.PushBack({ 80, 144, 16, 16 });
-	death.PushBack({ 96, 144, 16, 16 });
-	death.PushBack({ 112, 144, 16, 16 });
+	death.PushBack({ 51, 145, 16, 16 });
+	death.PushBack({ 68, 144, 16, 16 });
+	death.PushBack({ 86, 144, 16, 16 });
+	death.PushBack({ 103, 144, 16, 16 });
+	death.PushBack({ 120, 144, 16, 16 });
 	death.loop = false;
 	death.speed = 0.2f;
 
@@ -60,14 +60,22 @@ bool ModulePlayer::Start()
 	dead = false;
 
 	position.x = 84;
-	position.y = 108;
+	position.y = 115;
+
+	injecting = true;
+	startime = 35;
 	death.Reset();
+	canMove = false;
+	startBoost = false;
 
 	LOG("Loading player textures");
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png"); // arcade version
 
 	SDL_Rect rect_collider = { position.x,position.y,36,14 };
 	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
+
+	current_animation = &idle;
+	state = idl;
 
 	return true;
 }
@@ -88,11 +96,36 @@ void ModulePlayer::OnCollision(Collider * rect_a, Collider * rect_b)
 }
 
 // Update: draw background
+update_status ModulePlayer::PreUpdate()
+{
+	if (injecting) {
+		App->render->Blit(graphics, position.x, position.y, new SDL_Rect({101, 1, 35, 14}));
+	}
+
+	return UPDATE_CONTINUE;
+}
 update_status ModulePlayer::Update()
 {
-	if (!dead) {
+	if (startBoost)
+	{
+		position.x += speed.x;
+		startime--;
 		current_animation = &idle;
 		state = idl;
+
+		if (startime == 0)
+		{
+			startBoost = false;
+			canMove = true;
+		}
+	}
+	if (canMove) {
+		current_animation = &idle;
+		state = idl;
+
+		if (activePU[TENTACLES] == true) {
+			
+		}
 
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 		{
@@ -110,7 +143,9 @@ update_status ModulePlayer::Update()
 		}
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
 		{
-			current_animation = &up;
+			if (activePU[TENTACLES] == false) {
+				current_animation = &up;
+			}
 			position.y -= speed.x;
 			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
 			state = top;
@@ -118,7 +153,9 @@ update_status ModulePlayer::Update()
 
 		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 		{
-			current_animation = &down;
+			if (activePU[TENTACLES] == false) {
+				current_animation = &down;
+			}
 			position.y += speed.x;
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
 			state = bot;
@@ -143,20 +180,18 @@ update_status ModulePlayer::Update()
 		}
 		if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN) Die();
 
-		collider->SetPos(position.x, position.y);
-
 		if (last_animation != current_animation) {
 			current_animation->Reset();
 		}
 		last_animation = current_animation;
 	}
 	else {
-		if (current_animation->isDone()) App->fade->FadeToBlack(App->current_scene, App->start); 
+		if (current_animation->isDone() && dead) App->fade->FadeToBlack(App->current_scene, App->start); 
 	}	
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
-
+	collider->SetPos(position.x, position.y);
 	App->render->Blit(graphics, position.x, position.y, &r);
 
 	return UPDATE_CONTINUE;
@@ -166,6 +201,7 @@ void ModulePlayer::Die() {
 	position.x += 6;
 	position.y +=1;
 	dead = true;
+	canMove = false;
 	current_animation = &death;
 	collider->to_delete = true;
 	

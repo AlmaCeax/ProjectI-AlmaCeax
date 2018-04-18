@@ -41,10 +41,19 @@ ModuleParticles::ModuleParticles()
 	baseShot.anim.PushBack({ 63, 38, 17, 4 });
 	baseShot.anim.loop = false;
 	baseShot.anim.speed = 0.3f;
-	baseShot.life = 700;
+	baseShot.life = 1000;
 	baseShot.speed = { 10,0 };
-	baseShot.w = 17;
 	baseShot.id = 1;
+
+	playerBoost.h = 4;
+	playerBoost.anim.PushBack({ 251, 208, 42, 14 });
+	playerBoost.anim.PushBack({ 295, 208, 42, 13 });
+	playerBoost.anim.PushBack({ 342, 208, 42, 11 });
+	playerBoost.anim.loop = true;
+	playerBoost.anim.speed = 0.2f;
+	playerBoost.life = 425;
+	playerBoost.speed = { 0,0 };
+	playerBoost.id = 1;
 
 	bombExplosion.anim.PushBack({ 97, 171, 16, 16 });
 	bombExplosion.anim.PushBack({ 122, 166, 26, 26 });
@@ -77,19 +86,33 @@ ModuleParticles::ModuleParticles()
 	blueBall.speed = { 0,0 };
 	blueBall.id = 1;
 
-	enemyExplosion.anim.PushBack({ 254, 11, 46, 40 });
-	enemyExplosion.anim.PushBack({ 302, 11, 46, 40 });
-	enemyExplosion.anim.PushBack({ 352, 4, 60, 56 });
-	enemyExplosion.anim.PushBack({ 413, 5, 26, 26 });
-	enemyExplosion.anim.PushBack({ 254, 63, 63, 63 });
-	enemyExplosion.anim.PushBack({ 318, 68, 62, 54 });
-	enemyExplosion.anim.PushBack({ 382, 64, 61, 63 });
-	enemyExplosion.anim.PushBack({ 449, 70, 60, 50 });
-	enemyExplosion.anim.PushBack({ 258, 132, 58, 56 });
+	enemyExplosion.anim.PushBack({ 103, 284, 26, 22 });
+	enemyExplosion.anim.PushBack({ 135, 284, 26, 22 });
+	enemyExplosion.anim.PushBack({ 166, 279, 44, 32 });
+	enemyExplosion.anim.PushBack({ 217, 280, 37, 28 });
+	enemyExplosion.anim.PushBack({ 262, 280, 42, 31 });
+	enemyExplosion.anim.PushBack({ 106, 325, 39, 36 });
+	enemyExplosion.anim.PushBack({ 155, 324, 36, 35 });
+	enemyExplosion.anim.PushBack({ 202, 326, 36, 32 });
+	enemyExplosion.anim.PushBack({ 250, 324, 37, 40 });
 	enemyExplosion.anim.loop = false;
 	enemyExplosion.anim.speed = 0.5f;
 	enemyExplosion.life = 200;
 	enemyExplosion.speed = { 0, 0 };
+
+	enemyBossExplosion.anim.PushBack({ 254, 11, 46, 40 });
+	enemyBossExplosion.anim.PushBack({ 302, 11, 46, 40 });
+	enemyBossExplosion.anim.PushBack({ 352, 4, 60, 56 });
+	enemyBossExplosion.anim.PushBack({ 413, 5, 26, 26 });
+	enemyBossExplosion.anim.PushBack({ 254, 63, 63, 63 });
+	enemyBossExplosion.anim.PushBack({ 318, 68, 62, 54 });
+	enemyBossExplosion.anim.PushBack({ 382, 64, 61, 63 });
+	enemyBossExplosion.anim.PushBack({ 449, 70, 60, 50 });
+	enemyBossExplosion.anim.PushBack({ 258, 132, 58, 56 });
+	enemyBossExplosion.anim.loop = false;
+	enemyBossExplosion.anim.speed = 0.5f;
+	enemyBossExplosion.life = 200;
+	enemyBossExplosion.speed = { 0, 0 };
 }
 
 ModuleParticles::~ModuleParticles()
