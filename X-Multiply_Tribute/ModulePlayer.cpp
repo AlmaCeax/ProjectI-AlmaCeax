@@ -123,6 +123,10 @@ update_status ModulePlayer::Update()
 		current_animation = &idle;
 		state = idl;
 
+		if (activePU[TENTACLES] == true) {
+			
+		}
+
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 		{
 			current_animation = &idle;
@@ -139,7 +143,9 @@ update_status ModulePlayer::Update()
 		}
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
 		{
-			current_animation = &up;
+			if (activePU[TENTACLES] == false) {
+				current_animation = &up;
+			}
 			position.y -= speed.x;
 			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
 			state = top;
@@ -147,7 +153,9 @@ update_status ModulePlayer::Update()
 
 		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 		{
-			current_animation = &down;
+			if (activePU[TENTACLES] == false) {
+				current_animation = &down;
+			}
 			position.y += speed.x;
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
 			state = bot;
