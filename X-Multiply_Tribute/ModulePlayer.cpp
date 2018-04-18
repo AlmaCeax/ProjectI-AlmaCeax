@@ -58,6 +58,7 @@ bool ModulePlayer::Init() {
 bool ModulePlayer::Start()
 {
 	dead = false;
+
 	position.x = 84;
 	position.y = 108;
 	death.Reset();
@@ -167,4 +168,9 @@ void ModulePlayer::Die() {
 	dead = true;
 	current_animation = &death;
 	collider->to_delete = true;
+	
+	for (int i = 0; i < sizeof(activePU); i++)
+	{
+		activePU[i] = false;
+	}
 }

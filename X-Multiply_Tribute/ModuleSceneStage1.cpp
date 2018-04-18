@@ -440,9 +440,9 @@ void ModuleSceneStage1::injection()
 					startAnimationHook.hold = false;
 					if (startAnimationHook.GetCurrentFrameIndex() == 1) {
 						App->player->Enable();
-						right = true;
-						unhooked = true;
+						right = true;					
 					}
+					if(startAnimationHook.isDone())unhooked = true;
 				}
 
 				if (startAnimationHook.isDone())
