@@ -60,6 +60,7 @@ public:
 	PowerUP speedDown;
 	PowerUP bomb;
 	PowerUP tentacles;
+	PowerUP tentacle;
 };
 
 #endif
