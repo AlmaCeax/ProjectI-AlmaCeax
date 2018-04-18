@@ -45,16 +45,17 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 		return id;
 	}
 
-	fonts[id].graphic = tex; // graphic: pointer to the texture
-	fonts[id].rows = rows; // rows: rows of characters in the texture
-	fonts[id].len = strlen(characters);
 
 	uint width, height;
 	App->textures->GetSize(tex, width, height);
 
-	fonts[id].row_chars = fonts[id].len;
-	fonts[id].char_w = width / fonts[id].len;
-	fonts[id].char_h = height;
+
+	fonts[id].graphic = tex; // graphic: pointer to the texture
+	fonts[id].rows = rows; // rows: rows of characters in the texture
+	fonts[id].len = strlen(characters);
+	fonts[id].row_chars = fonts[id].len / rows;
+	fonts[id].char_w = width / fonts[id].row_chars;
+	fonts[id].char_h = height / rows;
 	strcpy_s(fonts[id].table, characters);
 
 
@@ -91,9 +92,17 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 
 	for (uint i = 0; i < len; ++i)
 	{
-		for (int z = 0; z < font->row_chars; z++) {
+		for (int z = 0; z < font->len; z++) {
 			if (font->table[z] == text[i]) {
-				SDL_Rect rect = { font->char_w * z, 0,font->char_w,font->char_h };
+				int row = 0;
+				int new_x = 0;
+				new_x = font->char_w * z;
+				if (z >= font->row_chars) { 
+					new_x = font->char_w * (z - font->row_chars);
+					row = 1; 
+				}
+
+				SDL_Rect rect = { new_x, font->char_h * row, font->char_w,font->char_h };
 				App->render->Blit(font->graphic, x, y, &rect, 0.0f, false);
 				x += font->char_w + 1;
 			}

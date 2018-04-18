@@ -90,6 +90,7 @@
     <ClInclude Include="ModuleSceneStage2.h" />
     <ClInclude Include="ModuleSceneStageClear.h" />
     <ClInclude Include="ModuleSceneStart.h" />
+    <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Module.h" />
@@ -125,6 +126,7 @@
     <ClCompile Include="ModuleSceneStageClear.cpp" />
     <ClCompile Include="ModuleSceneStart.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
+    <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

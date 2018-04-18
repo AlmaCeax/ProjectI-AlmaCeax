@@ -131,12 +131,12 @@ bool ModuleAudio::UnloadMusic(_Mix_Music* music){
 		{
 			if (musics[i] == music)
 			{
+				Mix_FreeMusic(musics[i]);
 				musics[i] = nullptr;
 				ret = true;
 				break;
 			}
-		}
-		Mix_FreeMusic(music);
+		}	
 	}
 
 	return ret;
@@ -151,12 +151,12 @@ bool ModuleAudio::UnloadSFX(Mix_Chunk* _sfx) {
 		{
 			if (sfx[i] == _sfx)
 			{
+				Mix_FreeChunk(sfx[i]);
 				sfx[i] = nullptr;
 				ret = true;
 				break;
 			}
-		}
-		Mix_FreeChunk(_sfx);
+		}	
 	}
 
 	return ret;
