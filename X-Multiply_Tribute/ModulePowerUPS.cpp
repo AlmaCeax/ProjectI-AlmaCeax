@@ -5,6 +5,8 @@
 #include "ModuleCollision.h"
 #include "ModulePowerUPS.h"
 #include "ModuleParticles.h"
+#include "ModuleAudio.h"
+#include "SDL_mixer\include\SDL_mixer.h"
 
 
 ModulePowerUPS::ModulePowerUPS()
@@ -70,6 +72,11 @@ bool ModulePowerUPS::Start()
 {
 	LOG("Loading particles");
 	graphics = App->textures->Load("Assets/Sprites/PowerUP/spr_powerup.png");
+
+	bomb.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-021.wav");
+	tentacles.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");;
+	life.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
+
 
 	if (!graphics)return false;
 	
@@ -167,15 +174,18 @@ void PowerUP::Effect()
 		App->player->activePU[LASER] = true;
 		break;		
 	case LIFE: 
+		Mix_PlayChannel(-1, sfx, 0);
 		break;		
 	case SPEED_BOOST: App->player->speed.x += 0.3f;
 		App->player->speed.y += 0.3f;
 		App->particles->AddParticle(App->particles->playerBoost, App->player->position.x -42, App->player->position.y, COLLIDER_NONE);
+		Mix_PlayChannel(-1, App->particles->playerBoost.sfx, 0);
 		break;		
 	case SPEED_DOWN: App->player->speed.x -= 0.3f;
 		App->player->speed.y -= 0.3f;
 		break;		
 	case BOMB: 
+		Mix_PlayChannel(-1, sfx, 0);
 		App->player->activePU[BOMB] = true;
 		break;
 	case SHADOW:

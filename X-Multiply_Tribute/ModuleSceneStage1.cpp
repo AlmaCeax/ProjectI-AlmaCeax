@@ -115,7 +115,7 @@ bool ModuleSceneStage1::Start() {
 	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
 
 
-	Mix_PlayMusic(music, -1);
+
 	Mix_PlayChannel(-1, shipSpawn, 0);
 
 	App->render->ResetCamera();
@@ -441,6 +441,7 @@ void ModuleSceneStage1::injection()
 				else {
 					startAnimationHook.hold = false;
 					if (startAnimationHook.GetCurrentFrameIndex() == 1) {
+						Mix_PlayMusic(music, -1);
 						right = true;
 						App->player->injecting = false;
 						App->player->startBoost = true;
