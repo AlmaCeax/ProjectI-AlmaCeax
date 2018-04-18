@@ -113,6 +113,7 @@ bool ModuleParticles::CleanUp()
 	App->textures->Unload(graphics);
 
 	App->audio->UnloadSFX(baseShotExp.sfx);
+	baseShot.sfx = nullptr;
 
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{

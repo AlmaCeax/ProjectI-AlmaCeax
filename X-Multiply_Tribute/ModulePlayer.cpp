@@ -40,10 +40,10 @@ bool ModulePlayer::Init() {
 	down.speed = 0.1f;
 	down.loop = false;
 
-	death.PushBack({ 5, 149, 6, 6 });
-	death.PushBack({ 19, 147, 10, 10 });
-	death.PushBack({ 34, 146, 12, 12 });
-	death.PushBack({ 49, 145, 14, 14 });
+	death.PushBack({ 5, 149, 16, 16 });
+	death.PushBack({ 19, 147, 16, 16 });
+	death.PushBack({ 34, 146, 16, 16 });
+	death.PushBack({ 49, 145, 16, 16 });
 	death.PushBack({ 64, 144, 16, 16 });
 	death.PushBack({ 80, 144, 16, 16 });
 	death.PushBack({ 96, 144, 16, 16 });
