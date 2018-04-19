@@ -126,7 +126,7 @@ bool ModuleParticles::Start()
 
 	baseShotExp.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-083.wav");
 	playerBoost.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
-	enemyExplosion.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-063.wav");
+	enemyExplosion.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-066.wav");
 
 	return true;
 }

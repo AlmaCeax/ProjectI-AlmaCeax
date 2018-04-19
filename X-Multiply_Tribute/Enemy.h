@@ -6,6 +6,7 @@
 
 struct SDL_Texture;
 struct Collider;
+struct Mix_Chunk;
 
 class Enemy
 {
@@ -15,6 +16,7 @@ protected:
 
 public:
 	iPoint position;
+	Mix_Chunk* deadsfx;
 
 public:
 	Enemy(int x, int y);

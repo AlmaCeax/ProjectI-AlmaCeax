@@ -17,7 +17,6 @@ Enemy_PowerUPShip::Enemy_PowerUPShip(int x, int y, int powerUpid):Enemy(x,y)
 	anim.PushBack({ 431, 102, 31, 20 });
 	anim.speed = 0.2f;
 	anim.loop = true;
-
 	animation = &anim;
 
 	collider = App->collision->AddCollider({ 0, 0, 31, 20 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
@@ -37,6 +36,8 @@ Enemy_PowerUPShip::Enemy_PowerUPShip(int x, int y, int powerUpid):Enemy(x,y)
 void Enemy_PowerUPShip::OnCollision(Collider * collider)
 {
 	if(pu != nullptr)pu->enabled = true;
+
+	Mix_PlayChannel(-1, deadsfx, 0);
 }
 
 void Enemy_PowerUPShip::Move()

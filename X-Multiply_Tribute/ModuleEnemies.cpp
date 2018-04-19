@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
+#include  "ModuleAudio.h"
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
@@ -27,6 +28,8 @@ bool ModuleEnemies::Start()
 {
 	// Create a prototype for each enemy available so we can copy them around
 	sprites = App->textures->Load("Assets/Sprites/Enemies/enemies.png");
+
+	App->audio->LoadFx("Assets/Audio/SFX/xmultipl-027.wav");
 
 	return true;
 }

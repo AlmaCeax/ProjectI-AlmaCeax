@@ -3,6 +3,7 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
+#include "SDL_mixer\include\SDL_mixer.h"
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {}
@@ -30,4 +31,5 @@ void Enemy::Draw(SDL_Texture* sprites)
 void Enemy::OnCollision(Collider* collider)
 {
 	//App->particles->AddParticle(App->particles->explosion, position.x, position.y);
+	Mix_PlayChannel(-1, deadsfx, 0);
 }
