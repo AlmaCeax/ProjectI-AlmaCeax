@@ -82,7 +82,7 @@ ModuleParticles::ModuleParticles()
 	blueBall.anim.PushBack({ 42,217,8,8 });
 	blueBall.anim.PushBack({ 58,217,8,8 });
 	blueBall.anim.speed = 0.1f;
-	blueBall.life = 1500;
+	blueBall.life = 3000;
 	blueBall.speed = { 0,0 };
 
 	enemyExplosion.anim.PushBack({ 103, 284, 26, 22 });
