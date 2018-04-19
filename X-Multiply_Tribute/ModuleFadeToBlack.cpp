@@ -39,6 +39,7 @@ update_status ModuleFadeToBlack::Update()
 			{
 				module_disable->Disable();
 				module_enable->Enable();
+				module_enable->OnFade();
 
 				total_time += total_time;
 				start_time = SDL_GetTicks();

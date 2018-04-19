@@ -14,9 +14,20 @@ public:
 	bool Init();
 	update_status Update();
 	void StageCleared();
+
 	bool CleanUp();
 
 	void AddScore(uint points);
+
+	void PlayerDeath();
+
+	void Reset();
+
+	void DeathFade();
+
+	void PlayerReady();
+
+	void ReadyDone();
 
 	bool ui_visible = false;
 
@@ -24,7 +35,11 @@ private:
 	SDL_Texture* graphics;
 	SDL_Rect ui_rect;
 	SDL_Rect screen;
+	SDL_Rect life;
 
+	void ClearUpdate();
+	void ReadyUpdate();
+	int player_lives = 2;
 	uint score = 0;
 	char score_text[9] = "00000000";
 
@@ -41,6 +56,12 @@ private:
 	const char final_text1[16] = "stage 1 cleared";
 	const char final_text2[18] = "stage bonus 10000";
 	float letter = 0;
+
+	enum ready_step {
+		not,
+		show_text,
+		dontshow_text
+	} current_ready_step = ready_step::not;
 
 	enum clear_step
 	{

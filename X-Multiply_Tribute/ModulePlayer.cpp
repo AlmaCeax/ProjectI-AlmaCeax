@@ -8,6 +8,7 @@
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneStart.h"
+#include "ModuleUI.h"
 #include "ModulePowerUPS.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "ModulePlayer.h"
@@ -180,7 +181,7 @@ update_status ModulePlayer::Update()
 				cooldown = 0;
 			}
 		}
-		if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN) Die();
+		if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN && !dead) Die();
 
 		if (last_animation != current_animation) {
 			current_animation->Reset();
@@ -188,7 +189,7 @@ update_status ModulePlayer::Update()
 		last_animation = current_animation;
 	}
 	else {
-		if (current_animation->isDone() && dead) App->fade->FadeToBlack(App->current_scene, App->start); 
+		if (current_animation->isDone() && dead) App->ui->DeathFade();
 	}	
 
 	// Draw everything --------------------------------------

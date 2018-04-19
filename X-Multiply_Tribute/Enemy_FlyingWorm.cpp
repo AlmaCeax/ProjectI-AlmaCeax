@@ -31,14 +31,28 @@ void Enemy_FlyingWorm::Move()
 {
 	wave += 0.1f;
 	position.y = original_y + sinf(wave) * 20;
-	position.x -= 1;
+	position.x -= 2;
 
 	shootTimer++;
 
 	if (shootTimer == 80) {
-		float vx = App->player->position.x + 5 - position.x;
-		float vy = App->player->position.y - position.y;
-		App->particles->AddParticle(App->particles->blueBall, position.x, position.y, COLLIDER_ENEMY_SHOT, {vx/40,vy/40});
+		//float vx = App->player->position.x + 5 - position.x;
+		//float vy = App->player->position.y - position.y;
+		if (App->player->position.x < position.x && App->player->position.y < position.y)
+		{
+			App->particles->AddParticle(App->particles->blueBall, position.x, position.y , COLLIDER_ENEMY_SHOT, { -1, -1 });
+		}
+		else if (App->player->position.x < position.x && App->player->position.y > position.y) {
+			App->particles->AddParticle(App->particles->blueBall, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, 1 });
+		}
+		else if (App->player->position.x > position.x && App->player->position.y < position.y) {
+			App->particles->AddParticle(App->particles->blueBall, position.x, position.y, COLLIDER_ENEMY_SHOT, { 1, -1 });
+		}
+		else if (App->player->position.x > position.x && App->player->position.y > position.y) {
+			App->particles->AddParticle(App->particles->blueBall, position.x, position.y, COLLIDER_ENEMY_SHOT, { 1, 1 });
+		}
+		
+		//App->particles->AddParticle(App->particles->blueBall, position.x, position.y, COLLIDER_ENEMY_SHOT, { vx / 40.0f,vy / 40.0f });
 		shootTimer = 0;
 	}
 }

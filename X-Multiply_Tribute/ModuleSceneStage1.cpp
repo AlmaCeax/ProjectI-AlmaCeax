@@ -63,6 +63,7 @@ bool ModuleSceneStage1::Start() {
 	stopped = false;
 	aux = 10;
 	unhooked = false;
+	first_time = true;
 	startAnimationHook.setCurrentFrameIndex(0);
 
 
@@ -182,6 +183,7 @@ bool ModuleSceneStage1::Start() {
 	return true;
 }
 
+
 update_status ModuleSceneStage1::Update()
 {
 	checkCameraEvents();
@@ -243,7 +245,7 @@ void ModuleSceneStage1::checkCameraEvents()
 void ModuleSceneStage1::updateCamera()
 {
 	int speed = 1;
-	if (stopped || App->player->dead) return;
+	if (stopped || !App->player->canMove) return;
 
 	if (right) {
 		App->render->camera.x += speed * SCREEN_SIZE;
@@ -455,55 +457,62 @@ bool ModuleSceneStage1::loadMap()
 
 void ModuleSceneStage1::injection()
 {
-	if (injectionposition.y >= 0 && injecting)
-	{
-		if (startAnimation.GetCurrentFrameIndex() == 3)
+	if (first_time) {
+		if (injectionposition.y >= 0 && injecting)
 		{
-			startAnimation.hold = true;
-			injecting = false;
-		}
-		textrect[2] = &startAnimation.GetCurrentFrame();
-	}
-	else {
-		if (!injecting)
-		{
-			if (startAnimation.isDone())
+			if (startAnimation.GetCurrentFrameIndex() == 3)
 			{
-				injectionposition.y--;
-			}else {
-				textrect[2] = &startAnimation.GetCurrentFrame();
-				if (injectionhookposition.y < 96 && !unhooked)
+				startAnimation.hold = true;
+				injecting = false;
+			}
+			textrect[2] = &startAnimation.GetCurrentFrame();
+		}
+		else {
+			if (!injecting)
+			{
+				if (startAnimation.isDone())
 				{
-					App->player->Enable();
-					App->player->position.y = injectionhookposition.y + 16;
-					startAnimationHook.hold = true;
-					injectionhookposition.y++;
-					//App->render->Blit(textures[2], injectionhookposition.x, injectionhookposition.y+16, textrect[4]);
-
+					injectionposition.y--;
 				}
 				else {
-					startAnimationHook.hold = false;
-					if (startAnimationHook.GetCurrentFrameIndex() == 1) {
-						Mix_PlayMusic(music, -1);
-						right = true;
-						App->player->injecting = false;
-						App->player->startBoost = true;
-						App->particles->AddParticle(App->particles->playerBoost, App->player->position.x - 42, App->player->position.y, COLLIDER_NONE, { 3,0 });;
-					}
-					if(startAnimationHook.isDone())unhooked = true;
-				}
-
-				if (startAnimationHook.isDone())
-				{
-					if (injectionhookposition.y < 76)
+					textrect[2] = &startAnimation.GetCurrentFrame();
+					if (injectionhookposition.y < 96 && !unhooked)
 					{
-						startAnimation.hold = false;
+						App->player->Enable();
+						App->player->position.y = injectionhookposition.y + 16;
+						startAnimationHook.hold = true;
+						injectionhookposition.y++;
+						//App->render->Blit(textures[2], injectionhookposition.x, injectionhookposition.y+16, textrect[4]);
+
 					}
+					else {
+						startAnimationHook.hold = false;
+						if (startAnimationHook.GetCurrentFrameIndex() == 1) {
+							Mix_PlayMusic(music, -1);
+							right = true;
+							App->player->injecting = false;
+							App->player->startBoost = true;
+							App->particles->AddParticle(App->particles->playerBoost, App->player->position.x - 42, App->player->position.y, COLLIDER_NONE, { 3,0 });;
+						}
+						if (startAnimationHook.isDone())unhooked = true;
+					}
+
+					if (startAnimationHook.isDone())
+					{
+						if (injectionhookposition.y < 76)
+						{
+							startAnimation.hold = false;
+						}
+					}
+					App->render->Blit(textures[2], injectionhookposition.x, injectionhookposition.y, &startAnimationHook.GetCurrentFrame(), 0.5f);
 				}
-				App->render->Blit(textures[2], injectionhookposition.x, injectionhookposition.y, &startAnimationHook.GetCurrentFrame(), 0.5f);
+				if (unhooked)injectionhookposition.y--;
 			}
-			if (unhooked)injectionhookposition.y--;
+			else injectionposition.y++;
 		}
-		else injectionposition.y++;
 	}
+}
+
+void ModuleSceneStage1::OnFade() {
+	if (App->player->dead) App->ui->PlayerDeath();
 }

@@ -19,7 +19,7 @@ class ModuleSceneStage1 :
 {
 private:
 	int timer, startTime, aux;
-	bool right, left, up, down, injecting, shake, stopped, unhooked;
+	bool left, up, down, injecting, shake, stopped, unhooked;
 	bool injectionleft = true;
 
 	fPoint injectionposition = { 75.0f, -100.0f };
@@ -41,6 +41,9 @@ public:
 	update_status Update();
 	bool CleanUp();
 	bool Start();
+	void OnFade();
+
+	bool first_time,right;
 
 	void checkCameraEvents();
 	void updateCamera();
