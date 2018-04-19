@@ -43,7 +43,6 @@ update_status ModuleUI::Update()
  {
 	if (ui_visible) { 
 		if (App->collision->god) App->fonts->BlitText(0, 0, score_font, "godmode");
-		
 		App->render->Blit(graphics, 0, 224, &ui_rect, false); 
 		App->fonts->BlitText(30, 240, score_font, "1up");
 		App->fonts->BlitText(62, 240, score_font, score_text);
