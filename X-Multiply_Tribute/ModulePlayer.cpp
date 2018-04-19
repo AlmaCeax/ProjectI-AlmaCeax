@@ -210,3 +210,7 @@ void ModulePlayer::Die() {
 		activePU[i] = false;
 	}
 }
+
+void ModulePlayer::BlitPlayer() {
+	App->render->Blit(graphics, position.x, position.y, &idle.GetCurrentFrame());
+}
