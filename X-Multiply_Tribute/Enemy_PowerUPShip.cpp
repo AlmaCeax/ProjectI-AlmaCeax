@@ -5,7 +5,8 @@
 #include "ModulePlayer.h"
 #include "Enemy_PowerUPShip.h"
 #include "ModulePowerUPS.h"
-
+#include "ModuleAudio.h"
+#include "SDL_mixer\include\SDL_mixer.h"
 
 Enemy_PowerUPShip::Enemy_PowerUPShip(int x, int y, int powerUpid):Enemy(x,y)
 {

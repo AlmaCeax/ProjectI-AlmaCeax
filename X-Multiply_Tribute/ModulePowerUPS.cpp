@@ -78,7 +78,6 @@ bool ModulePowerUPS::Start()
 	tentacles.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");;
 	life.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
 
-
 	if (!graphics)return false;
 	
 	return true;
@@ -176,7 +175,7 @@ void PowerUP::Effect()
 		App->player->activePU[LASER] = true;
 		break;		
 	case LIFE: 
-		Mix_PlayChannel(-1, sfx, 0);
+		Mix_PlayChannel(-1, App->powerups->life.sfx, 0);
 		break;		
 	case SPEED_BOOST: App->player->speed.x += 0.3f;
 		App->player->speed.y += 0.3f;
@@ -187,7 +186,7 @@ void PowerUP::Effect()
 		App->player->speed.y -= 0.3f;
 		break;		
 	case BOMB: 
-		Mix_PlayChannel(-1, sfx, 0);
+		Mix_PlayChannel(-1, App->powerups->bomb.sfx, 0);
 		App->player->activePU[BOMB] = true;
 		break;
 	case SHADOW:

@@ -107,12 +107,38 @@ bool ModuleSceneStage1::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 525, 60, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 540, 60, true);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 530, 150);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 630, 100);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 530, 150);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 750, 120);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 750, 140, false, 3);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 855, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 870, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 885, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 900, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 915, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 930, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 945, 60, false);
+	//bottom
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 855, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 870, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 885, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 900, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 915, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 930, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 945, 60, true);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 900, 175);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false, 2);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1000, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1030, 100);
 
 	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1.ogg");
 	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
@@ -122,9 +148,6 @@ bool ModuleSceneStage1::Start() {
 	Mix_PlayChannel(-1, shipSpawn, 0);
 
 	App->render->ResetCamera();
-
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 470, 100, false, 3);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 450, 100, false, 2);
 
 
 	return true;
