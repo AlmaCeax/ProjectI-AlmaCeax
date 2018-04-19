@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "ModuleUI.h"
+#include "ModuleEnemies.h"
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {}

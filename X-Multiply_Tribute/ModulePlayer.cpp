@@ -71,6 +71,8 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png"); // arcade version
 
+	deadsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-018.wav");
+
 	SDL_Rect rect_collider = { position.x,position.y,36,14 };
 	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
 
@@ -204,7 +206,10 @@ void ModulePlayer::Die() {
 	canMove = false;
 	current_animation = &death;
 	collider->to_delete = true;
+	speed.x = 2;
+	speed.y = 2;
 	
+	Mix_PlayChannel(-1, deadsfx, 0);
 	for (int i = 0; i < sizeof(activePU); i++)
 	{
 		activePU[i] = false;

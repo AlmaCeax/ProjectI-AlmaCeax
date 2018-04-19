@@ -1,7 +1,7 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
-#include  "ModuleAudio.h"
+#include "ModuleAudio.h"
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
@@ -9,6 +9,7 @@
 #include "Enemy_FlyingWorm.h"
 #include "Enemy_TentacleShooter.h"
 #include "Enemy_PowerUPShip.h"
+#include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
 
 #define SPAWN_MARGIN 80
@@ -22,6 +23,7 @@ ModuleEnemies::ModuleEnemies()
 // Destructor
 ModuleEnemies::~ModuleEnemies()
 {
+	
 }
 
 bool ModuleEnemies::Start()
@@ -29,8 +31,10 @@ bool ModuleEnemies::Start()
 	// Create a prototype for each enemy available so we can copy them around
 	sprites = App->textures->Load("Assets/Sprites/Enemies/enemies.png");
 
-	App->audio->LoadFx("Assets/Audio/SFX/xmultipl-027.wav");
-
+	hellballDeadsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-066.wav");
+	flyerDeadsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-066.wav");
+	nemonaDeadsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-063.wav");
+	pushipDeadsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-027.wav");
 	return true;
 }
 
@@ -157,6 +161,21 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
 			App->particles->AddParticle(App->particles->enemyExplosion, enemies[i]->position.x, enemies[i]->position.y, COLLIDER_NONE, { 0,0 });
+			switch (enemies[i]->type)
+			{
+			case NO_TYPE:
+				break;
+			case HELLBALL:Mix_PlayChannel(-1, hellballDeadsfx, 0);
+				break;
+			case FLYINGWORM:Mix_PlayChannel(-1, flyerDeadsfx, 0);
+				break;
+			case TENTACLESHOOTER:Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+				break;
+			case POWERUPSHIP:Mix_PlayChannel(-1, pushipDeadsfx, 0);
+				break;
+			default:
+				break;
+			}
  			enemies[i]->OnCollision(c2);
 			delete enemies[i];
 			enemies[i] = nullptr;

@@ -23,7 +23,7 @@ public:
 	update_status PreUpdate();
 	update_status Update();
 
-	Mix_Chunk* baseshotsfx = nullptr;
+	Mix_Chunk* deadsfx = nullptr;
 
 	fPoint position;
 	enum state { top, bot, idl };

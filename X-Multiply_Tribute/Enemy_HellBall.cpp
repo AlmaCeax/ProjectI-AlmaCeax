@@ -1,10 +1,12 @@
 #include "Application.h"
 #include "ModuleCollision.h"
 #include "Enemy_HellBall.h"
+#include "ModuleEnemies.h"
 
 
 Enemy_HellBall::Enemy_HellBall(int x, int y, bool _going_up):Enemy(x,y)
 {
+	type = HELLBALL;
 	open_mouth.PushBack({ 241, 8, 24, 27 });
 	open_mouth.PushBack({ 271, 8, 24, 27 });
 	open_mouth.PushBack({ 302, 8, 24, 27 });

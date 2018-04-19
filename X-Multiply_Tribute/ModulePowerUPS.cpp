@@ -75,7 +75,7 @@ bool ModulePowerUPS::Start()
 	graphics = App->textures->Load("Assets/Sprites/PowerUP/spr_powerup.png");
 
 	bomb.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-021.wav");
-	tentacles.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");;
+	tentacles.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
 	life.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
 
 	if (!graphics)return false;
