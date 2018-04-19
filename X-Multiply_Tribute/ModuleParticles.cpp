@@ -53,7 +53,7 @@ ModuleParticles::ModuleParticles()
 	playerBoost.anim.speed = 0.2f;
 	playerBoost.life = 425;
 	playerBoost.speed = { 0,0 };
-	playerBoost.id = 1;
+	playerBoost.id = 3;
 
 	bombExplosion.anim.PushBack({ 97, 171, 16, 16 });
 	bombExplosion.anim.PushBack({ 122, 166, 26, 26 });
@@ -125,6 +125,8 @@ bool ModuleParticles::Start()
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png");
 
 	baseShotExp.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-083.wav");
+	playerBoost.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
+	enemyExplosion.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-063.wav");
 
 	return true;
 }
@@ -142,6 +144,8 @@ bool ModuleParticles::CleanUp()
 	{
 		if (active[i] != nullptr)
 		{
+			App->audio->UnloadSFX(active[i]->sfx);
+			active[i]->sfx = nullptr;
 			delete active[i];
 			active[i] = nullptr;
 		}
@@ -171,7 +175,7 @@ update_status ModuleParticles::Update()
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
-				Mix_PlayChannel(-1, p->sfx, 0);
+				if(p->id != 3)Mix_PlayChannel(-1, p->sfx, 0);
 			}
 		}
 	}
@@ -205,7 +209,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
 			switch (active[i]->id) {
-			case 1: AddParticle( baseShotColExp, active[i]->position.x, active[i]->position.y); break;
+			case 1: AddParticle(baseShotColExp, active[i]->position.x, active[i]->position.y); break;
 			case 2: AddParticle(bombExplosion, active[i]->position.x, active[i]->position.y); break;
 			}
 			delete active[i];
@@ -259,6 +263,10 @@ bool Particle::Update()
 		position.y += speed.y;
 		if (speed.x > 1.55f)speed.x -= 0.1f;
 		if (speed.y < 2.0f)speed.y += 0.1f;
+		break;
+	case 3: 
+		position.x = App->player->position.x-42;
+		position.y = App->player->position.y;
 		break;
 	}
 

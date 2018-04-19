@@ -2,9 +2,12 @@
 #define __MODULEPOWERUPS_H__
 
 #include "Module.h"
+#include "Globals.h"
+#include "Enemy_PowerUPShip.h"
 
 #define MAX_POWERUPS 20
 
+struct  Mix_Chunk;
 
 enum pu_type
 {
@@ -24,6 +27,7 @@ struct PowerUP
 	Animation anim;
 	iPoint position;
 	pu_type type;
+	Mix_Chunk* sfx = nullptr;
 	int h, w = 0;
 	Collider* collider = nullptr;
 

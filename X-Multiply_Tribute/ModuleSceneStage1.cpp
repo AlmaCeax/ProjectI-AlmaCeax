@@ -118,16 +118,13 @@ bool ModuleSceneStage1::Start() {
 	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
 
 
-	Mix_PlayMusic(music, -1);
+
 	Mix_PlayChannel(-1, shipSpawn, 0);
 
 	App->render->ResetCamera();
 
-	App->powerups->AddPowerUp(App->powerups->speedBoost, 300, 100, COLLIDER_POWER_UP);
-	App->powerups->AddPowerUp(App->powerups->bomb, 300, 75, COLLIDER_POWER_UP);
-	App->powerups->AddPowerUp(App->powerups->speedDown, 300, 125, COLLIDER_POWER_UP);
-	App->powerups->AddPowerUp(App->powerups->life, 300, 150, COLLIDER_POWER_UP);
-
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 470, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 470, 100);
 
 
 
@@ -436,6 +433,7 @@ void ModuleSceneStage1::injection()
 				else {
 					startAnimationHook.hold = false;
 					if (startAnimationHook.GetCurrentFrameIndex() == 1) {
+						Mix_PlayMusic(music, -1);
 						right = true;
 						App->player->injecting = false;
 						App->player->startBoost = true;
