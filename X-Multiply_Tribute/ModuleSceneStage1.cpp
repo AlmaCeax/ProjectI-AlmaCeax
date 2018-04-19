@@ -136,8 +136,38 @@ bool ModuleSceneStage1::Start() {
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false, 2);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1000, 60);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1030, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1230, 100);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1295, 150);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2270, 175);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2305, 175);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2400, 175);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2485, 175);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 150);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 190);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3280, 200);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3280, 240);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3320, 130);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3460, 190);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3560, 240);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3560, 340);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3580, 350);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3580, 250);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3610, 360);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3650, 390);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3670, 320);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3670, 370);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3710, 330);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3710, 380);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3750, 350);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3750, 410);
+
+
+
 
 	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1.ogg");
 	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");

@@ -43,7 +43,7 @@ ModuleParticles::ModuleParticles()
 	baseShot.anim.speed = 0.3f;
 	baseShot.life = 1000;
 	baseShot.speed = { 10,0 };
-	baseShot.id = -1;
+	baseShot.id = 1;
 
 	playerBoost.h = 4;
 	playerBoost.anim.PushBack({ 251, 208, 42, 14 });
