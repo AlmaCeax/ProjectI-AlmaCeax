@@ -117,21 +117,21 @@ bool ModuleSceneStage1::Start() {
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 750, 140, false, 3);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 855, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 870, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 885, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 900, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 915, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 930, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 945, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 855, 120, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 870, 120, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 885, 120, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 900, 120, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 915, 120, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 930, 120, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 945, 120, false);
 	//bottom
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 855, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 870, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 885, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 900, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 915, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 930, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 945, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 855, 120, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 870, 120, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 885, 120, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 900, 120, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 915, 120, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 930, 120, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 945, 120, true);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 900, 175);
 
