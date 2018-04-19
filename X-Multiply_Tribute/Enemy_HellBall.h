@@ -13,7 +13,8 @@ private:
 
 	bool going_up = true;
 	float angle = 0;
-	int radius = 30;
+	int radius = 20;
+	bool change = true;
 
 
 public:

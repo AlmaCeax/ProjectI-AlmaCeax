@@ -110,10 +110,10 @@ bool ModuleSceneStage1::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 530, 150);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 630, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 100);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 750, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 120);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 750, 140, false, 3);
 
@@ -138,7 +138,7 @@ bool ModuleSceneStage1::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false, 2);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 60);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1230, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 100);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1295, 150);
 
@@ -194,7 +194,7 @@ update_status ModuleSceneStage1::Update()
 	injection();
 	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, textrect[2],0.5f);
 
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage2);
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage2);
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) App->ui->StageCleared();
 
 
