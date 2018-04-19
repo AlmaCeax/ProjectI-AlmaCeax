@@ -16,7 +16,7 @@ public:
 	void StageCleared();
 	bool CleanUp();
 
-	void AddScore(int points);
+	void AddScore(uint points);
 
 	bool ui_visible = false;
 

@@ -3,13 +3,13 @@
 #include "ModuleTextures.h"
 #include "ModuleFonts.h"
 #include "ModuleRender.h"
-#include "ModuleUI.h"
 #include "ModuleSceneStart.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "ModuleCollision.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
+#include "ModuleUI.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -48,8 +48,6 @@ update_status ModuleUI::Update()
 		App->fonts->BlitText(258, 240, score_font, "2up");
 		App->fonts->BlitText(290, 240, score_font, "00000000");
 	}
-
-
 
 	if(current_step == clear_step::none) return update_status::UPDATE_CONTINUE;
 
@@ -111,17 +109,22 @@ bool ModuleUI::CleanUp()
 	return true;
 }
 
-void ModuleUI::AddScore(int points) {
+void ModuleUI::AddScore(uint points) {
 	score += points;
 
 	char str[8];
 	_itoa_s(score, str, 10);
-
 	int new_position = 7;
-	for (int i = 7; i >= 0; i--) {
-		if (str[i] != 'Ì' && str[i] != '\0') { 
-			score_text[new_position] = str[i];
-			new_position--;
-		}
+	int total = 0;
+
+	for (int i = 0; i < 7; i++) {
+
+		if (str[i] == NULL) break;
+		total++;
+	}
+
+	for (int i = total-1; i >= 0; i--) {
+		score_text[new_position] = str[i];
+		new_position--;
 	}
 }

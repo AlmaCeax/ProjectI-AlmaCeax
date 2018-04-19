@@ -1,10 +1,10 @@
 #include "Application.h"
-#include "Enemy.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
-#include "SDL_mixer\include\SDL_mixer.h"
 #include "ModuleUI.h"
+#include "SDL_mixer\include\SDL_mixer.h"
+#include "Enemy.h"
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {}

@@ -13,7 +13,7 @@ class Enemy
 protected:
 	Animation* animation = nullptr;
 	Collider* collider = nullptr;
-	int points;
+	uint points = 0;
 
 public:
 	iPoint position;

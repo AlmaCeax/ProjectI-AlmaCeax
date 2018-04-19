@@ -11,10 +11,11 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
+#include "ModuleUI.h"
 #include "ModuleEnemies.h"
 #include "ModulePowerUPS.h"
 #include "ModuleFonts.h"
-#include "ModuleUI.h"
+
 
 Application::Application()
 {
