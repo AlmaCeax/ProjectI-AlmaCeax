@@ -104,7 +104,7 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 
 				SDL_Rect rect = { new_x, font->char_h * row, font->char_w,font->char_h };
 				App->render->Blit(font->graphic, x, y, &rect, 0.0f, false);
-				x += font->char_w + 1;
+				x += font->char_w;
 			}
 		}
 	}

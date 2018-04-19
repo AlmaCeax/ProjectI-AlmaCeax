@@ -16,6 +16,8 @@ public:
 	void StageCleared();
 	bool CleanUp();
 
+	void AddScore(int points);
+
 	bool ui_visible = false;
 
 private:
@@ -24,7 +26,7 @@ private:
 	SDL_Rect screen;
 
 	uint score = 0;
-	char score_text[10];
+	char score_text[9] = "00000000";
 
 	int score_font = -1;
 	int blue_font = -1;

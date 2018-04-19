@@ -30,7 +30,7 @@ Enemy_PowerUPShip::Enemy_PowerUPShip(int x, int y, int powerUpid):Enemy(x,y)
 	case 5: pu = App->powerups->AddPowerUp(App->powerups->life, position.x+2, position.y + 16, COLLIDER_POWER_UP); break;
 	}
 
-	LOG("HI");
+	points = 1000;
 }
 
 void Enemy_PowerUPShip::OnCollision(Collider * collider)

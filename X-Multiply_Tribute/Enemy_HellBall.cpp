@@ -18,6 +18,7 @@ Enemy_HellBall::Enemy_HellBall(int x, int y, bool _going_up):Enemy(x,y)
 
 	collider = App->collision->AddCollider({ 0, 0, 24, 27 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
+	points = 100;
 }
 
 void Enemy_HellBall::Move()
