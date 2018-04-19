@@ -121,7 +121,7 @@ void ModulePowerUPS::OnCollision(Collider * c1, Collider * c2)
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
 	{
 		// Always destroy powerUps that collide
-		if (powerUps[i] != nullptr && powerUps[i]->collider == c1)
+		if (powerUps[i] != nullptr && powerUps[i]->collider == c1 && powerUps[i]->enabled)
 		{
 			powerUps[i]->Effect();
 			delete powerUps[i];
