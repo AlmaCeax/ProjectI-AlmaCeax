@@ -3,7 +3,6 @@
 
 #include "Module.h"
 #include "Globals.h"
-#include "Enemy_PowerUPShip.h"
 
 #define MAX_POWERUPS 20
 
@@ -52,7 +51,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(Collider* c1, Collider* c2);
-	void AddPowerUp(const PowerUP& powerup, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE);
+	PowerUP* AddPowerUp(const PowerUP& powerup, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE);
 
 private:
 	SDL_Texture * graphics = nullptr;

@@ -33,6 +33,7 @@ bool ModuleAudio::Init()
 	int flags = MIX_INIT_OGG;
 	int init = Mix_Init(flags);
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+	Mix_AllocateChannels(10);
 
 	if ((init & flags) != flags)
 	{

@@ -100,7 +100,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool up)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool up, int powerUPid)
 {
 	bool ret = false;
 
@@ -112,6 +112,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool up)
 			queue[i].x = x;
 			queue[i].y = y;
 			queue[i].going_up = up;
+			queue[i].powerUpid = powerUPid;
 			ret = true;
 			break;
 		}
@@ -140,7 +141,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_TentacleShooter(info.x, info.y);
 			break;
 			case ENEMY_TYPES::POWERUPSHIP:
-			enemies[i] = new Enemy_PowerUPShip(info.x, info.y);
+			enemies[i] = new Enemy_PowerUPShip(info.x, info.y, info.powerUpid);
 			break;
 		}
 	}

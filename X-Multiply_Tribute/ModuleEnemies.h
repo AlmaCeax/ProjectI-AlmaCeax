@@ -3,6 +3,7 @@
 
 #include "Module.h"
 
+
 #define MAX_ENEMIES 100
 
 enum ENEMY_TYPES
@@ -19,7 +20,7 @@ class Enemy;
 struct EnemyInfo
 {
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
-	int x, y;
+	int x, y, powerUpid;
 	bool going_up;
 };
 
@@ -37,7 +38,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	bool AddEnemy(ENEMY_TYPES type, int x, int y, bool up = false);
+	bool AddEnemy(ENEMY_TYPES type, int x, int y, bool up = false, int powerUPid = -1);
 
 private:
 

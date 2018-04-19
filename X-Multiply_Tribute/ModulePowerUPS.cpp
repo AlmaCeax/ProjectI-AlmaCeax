@@ -4,6 +4,7 @@
 #include "ModulePlayer.h"
 #include "ModuleCollision.h"
 #include "ModulePowerUPS.h"
+#include "Enemy_PowerUPShip.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "SDL_mixer\include\SDL_mixer.h"
@@ -77,7 +78,6 @@ bool ModulePowerUPS::Start()
 	tentacles.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");;
 	life.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
 
-
 	if (!graphics)return false;
 	
 	return true;
@@ -131,7 +131,7 @@ void ModulePowerUPS::OnCollision(Collider * c1, Collider * c2)
 	}
 }
 
-void ModulePowerUPS::AddPowerUp(const PowerUP & powerup, int x, int y, COLLIDER_TYPE collider_type)
+PowerUP* ModulePowerUPS::AddPowerUp(const PowerUP & powerup, int x, int y, COLLIDER_TYPE collider_type)
 {
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
 	{
@@ -143,6 +143,7 @@ void ModulePowerUPS::AddPowerUp(const PowerUP & powerup, int x, int y, COLLIDER_
 			if (collider_type != COLLIDER_NONE)
 				pu->collider = App->collision->AddCollider(pu->anim.GetCurrentFrame(), collider_type, this);
 			powerUps[i] = pu;
+			return pu;
 			break;
 		}
 	}
@@ -174,7 +175,7 @@ void PowerUP::Effect()
 		App->player->activePU[LASER] = true;
 		break;		
 	case LIFE: 
-		Mix_PlayChannel(-1, sfx, 0);
+		Mix_PlayChannel(-1, App->powerups->life.sfx, 0);
 		break;		
 	case SPEED_BOOST: App->player->speed.x += 0.3f;
 		App->player->speed.y += 0.3f;
@@ -185,7 +186,7 @@ void PowerUP::Effect()
 		App->player->speed.y -= 0.3f;
 		break;		
 	case BOMB: 
-		Mix_PlayChannel(-1, sfx, 0);
+		Mix_PlayChannel(-1, App->powerups->bomb.sfx, 0);
 		App->player->activePU[BOMB] = true;
 		break;
 	case SHADOW:
