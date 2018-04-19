@@ -120,9 +120,8 @@ bool ModuleSceneStage1::Start() {
 
 	App->render->ResetCamera();
 
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 470, 100);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 470, 100);
-
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 470, 100, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 450, 100, false, 2);
 
 
 	return true;

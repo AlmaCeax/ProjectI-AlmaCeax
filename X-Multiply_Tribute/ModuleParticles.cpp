@@ -84,7 +84,6 @@ ModuleParticles::ModuleParticles()
 	blueBall.anim.speed = 0.1f;
 	blueBall.life = 1500;
 	blueBall.speed = { 0,0 };
-	blueBall.id = 1;
 
 	enemyExplosion.anim.PushBack({ 103, 284, 26, 22 });
 	enemyExplosion.anim.PushBack({ 135, 284, 26, 22 });
@@ -99,6 +98,7 @@ ModuleParticles::ModuleParticles()
 	enemyExplosion.anim.speed = 0.5f;
 	enemyExplosion.life = 200;
 	enemyExplosion.speed = { 0, 0 };
+	enemyExplosion.id = 2;
 
 	enemyBossExplosion.anim.PushBack({ 254, 11, 46, 40 });
 	enemyBossExplosion.anim.PushBack({ 302, 11, 46, 40 });
@@ -268,6 +268,9 @@ bool Particle::Update()
 		position.x = App->player->position.x-42;
 		position.y = App->player->position.y;
 		break;
+	default:
+		position.x += speed.x;
+		position.y += speed.y;
 	}
 
 

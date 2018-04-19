@@ -71,7 +71,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleUI.cpp" />
-    <ClCompile Include="Enemy_PowerUPShip.cpp" />
+    <ClCompile Include="Enemy_PowerUPShip.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -156,7 +158,9 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleUI.h" />
-    <ClInclude Include="Enemy_PowerUPShip.h" />
+    <ClInclude Include="Enemy_PowerUPShip.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
