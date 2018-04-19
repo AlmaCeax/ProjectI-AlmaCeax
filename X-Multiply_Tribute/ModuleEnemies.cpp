@@ -7,6 +7,7 @@
 #include "Enemy_HellBall.h"
 #include "Enemy_FlyingWorm.h"
 #include "Enemy_TentacleShooter.h"
+#include "Enemy_PowerUPShip.h"
 #include "Enemy.h"
 
 #define SPAWN_MARGIN 80
@@ -137,6 +138,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 			case ENEMY_TYPES::TENTACLESHOOTER:
 			enemies[i] = new Enemy_TentacleShooter(info.x, info.y);
+			break;
+			case ENEMY_TYPES::POWERUPSHIP:
+			enemies[i] = new Enemy_PowerUPShip(info.x, info.y);
 			break;
 		}
 	}

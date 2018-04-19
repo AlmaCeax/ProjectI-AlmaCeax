@@ -198,5 +198,10 @@ bool PowerUP::Update()
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
 
+	if (!enabled)
+	{
+		position.x--;
+	}
+
 	return true;
 }

@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Globals.h"
+#include "Enemy_PowerUPShip.h"
 
 #define MAX_POWERUPS 20
 

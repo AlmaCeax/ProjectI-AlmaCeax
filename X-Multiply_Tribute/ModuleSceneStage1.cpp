@@ -120,11 +120,8 @@ bool ModuleSceneStage1::Start() {
 
 	App->render->ResetCamera();
 
-	App->powerups->AddPowerUp(App->powerups->speedBoost, 300, 100, COLLIDER_POWER_UP);
-	App->powerups->AddPowerUp(App->powerups->bomb, 300, 75, COLLIDER_POWER_UP);
-	App->powerups->AddPowerUp(App->powerups->speedDown, 300, 125, COLLIDER_POWER_UP);
-	App->powerups->AddPowerUp(App->powerups->life, 300, 150, COLLIDER_POWER_UP);
-
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 470, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 470, 100);
 
 
 
