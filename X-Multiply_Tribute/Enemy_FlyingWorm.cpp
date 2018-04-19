@@ -3,12 +3,14 @@
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
 #include "Enemy_FlyingWorm.h"
+#include "ModuleEnemies.h"
 
 
 
 
 Enemy_FlyingWorm::Enemy_FlyingWorm(int x, int y):Enemy(x,y)
 {
+	type = FLYINGWORM;
 	original_y = y;
 	original_x = x;
 

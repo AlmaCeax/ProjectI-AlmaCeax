@@ -3,6 +3,7 @@
 #include "ModuleParticles.h"
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemies.h"
 #include "Enemy_PowerUPShip.h"
 #include "ModulePowerUPS.h"
 #include "ModuleAudio.h"
@@ -10,6 +11,7 @@
 
 Enemy_PowerUPShip::Enemy_PowerUPShip(int x, int y, int powerUpid):Enemy(x,y)
 {
+	type = POWERUPSHIP;
 	original_y = y;
 	original_x = x;
 

@@ -31,7 +31,6 @@ void Enemy::Draw(SDL_Texture* sprites)
 
 void Enemy::OnCollision(Collider* collider)
 {
-	//App->particles->AddParticle(App->particles->explosion, position.x, position.y);
 	Mix_PlayChannel(-1, deadsfx, 0);
 	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
 	App->ui->AddScore(points);

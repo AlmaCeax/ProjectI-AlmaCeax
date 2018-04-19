@@ -2,10 +2,12 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "Enemy_TentacleShooter.h"
+#include "ModuleEnemies.h"
 
 
 Enemy_TentacleShooter::Enemy_TentacleShooter(int x, int y):Enemy(x,y)
 {
+	type = TENTACLESHOOTER;
 	anim.PushBack({ 35, 2, 48, 41 });
 	anim.PushBack({ 96, 3, 46, 39 });
 	anim.PushBack({ 156, 0, 47, 42 });

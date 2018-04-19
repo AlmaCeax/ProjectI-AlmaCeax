@@ -3,6 +3,7 @@
 
 #include "p2Point.h"
 #include "Animation.h"
+#include "Globals.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -18,7 +19,7 @@ protected:
 public:
 	iPoint position;
 	Mix_Chunk* deadsfx;
-
+	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 public:
 	Enemy(int x, int y);
 	virtual ~Enemy();
