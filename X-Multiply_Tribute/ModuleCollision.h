@@ -59,13 +59,14 @@ public:
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module* callback = nullptr);
 	void GodMode();
 	void DebugDraw();
+	bool god = false;
 
 private:
 
 	Collider* colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 	bool debug = true;
-	bool god = false;
+
 };
 
 #endif // __ModuleCollision_H__

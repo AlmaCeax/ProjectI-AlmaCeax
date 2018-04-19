@@ -34,9 +34,11 @@ public:
 	bool canMove = false;
 	bool injecting = true;
 	bool startBoost = false;
+	void BlitPlayer();
 
 private:
 	void Die();
+
 	SDL_Texture * graphics = nullptr;
 	Animation* current_animation = nullptr;
 	Animation* last_animation = nullptr;

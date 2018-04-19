@@ -14,7 +14,9 @@ class ModuleSceneStageClear :
 private:
 	SDL_Texture* textures;
 	SDL_Rect letters[9];
+	bool moving_player = true;
 
+	fPoint distance;
 public:
 	update_status Update();
 	bool CleanUp();
@@ -22,6 +24,8 @@ public:
 	bool Init();
 	ModuleSceneStageClear();
 	~ModuleSceneStageClear();
+
+	void MovePlayer();
 };
 #endif
 

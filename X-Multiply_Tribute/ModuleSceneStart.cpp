@@ -4,6 +4,7 @@
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
 #include "ModuleInput.h"
+#include "ModuleUI.h"
 #include "ModuleSceneStage1.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL_mixer/include/SDL_mixer.h"
@@ -36,6 +37,7 @@ bool ModuleSceneStart::Start()
 {
 	App->current_scene = this;
 	App->render->ResetCamera();
+	App->ui->ui_visible = false;
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_2.png");
 	music = App->audio->LoadMusic("Assets/Audio/Music/01_X-Multiply_Title.ogg");
 	Mix_PlayMusic(music, -1);

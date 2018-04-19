@@ -10,9 +10,11 @@
 #include "ModuleSceneStageClear.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
+#include "ModuleUI.h"
+#include "ModulePowerUPS.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "ModuleSceneStage1.h"
-#include "ModulePowerUPS.h"
+
 
 
 ModuleSceneStage1::ModuleSceneStage1()
@@ -52,6 +54,7 @@ bool ModuleSceneStage1::Start() {
 	App->enemies->Enable();
 	App->powerups->Enable();
 	App->collision->Enable();
+	App->ui->ui_visible = true;
 
 	right = false;
 	up = false;
@@ -140,10 +143,9 @@ update_status ModuleSceneStage1::Update()
 	App->render->Blit(textures[1], 0, 0, textrect[1]);
 	injection();
 	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, textrect[2],0.5f);
-	App->render->Blit(textures[3], 0, 224, textrect[3], 0.0f);
 
 	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage2);
-	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage_clear);
+	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) App->ui->StageCleared();
 
 
 	return update_status::UPDATE_CONTINUE;
@@ -186,7 +188,7 @@ void ModuleSceneStage1::checkCameraEvents()
 
 	if (App->render->camera.x >= (4960 - SCREEN_WIDTH) * SCREEN_SIZE) {
 		stopped = true;
-		App->fade->FadeToBlack(this, App->stage_clear);
+		App->ui->StageCleared();
 	}
 }
 
@@ -229,13 +231,6 @@ bool ModuleSceneStage1::loadMap()
 	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/FirstLvlMap.png");
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/BG01.png");
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/injection.png");
-	textures[3] = App->textures->Load("Assets/Sprites/UI/UI_1.png");
-
-	textrect[3] = new SDL_Rect();
-	textrect[3]->x = 0;
-	textrect[3]->y = 0;
-	textrect[3]->w = 384;
-	textrect[3]->h = 32;
 
 
 	SDL_Rect coll = { 0,212,2862,12 };
