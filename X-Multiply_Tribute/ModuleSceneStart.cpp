@@ -59,3 +59,6 @@ ModuleSceneStart::~ModuleSceneStart()
 {
 }
 
+void ModuleSceneStart::OnFade() {
+	App->ui->Reset();
+}

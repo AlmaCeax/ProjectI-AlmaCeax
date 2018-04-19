@@ -25,6 +25,7 @@ public:
 	bool Start();
 	ModuleSceneStart();
 	~ModuleSceneStart();
+	void OnFade();
 };
 #endif
 
