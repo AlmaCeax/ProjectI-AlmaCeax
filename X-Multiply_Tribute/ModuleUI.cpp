@@ -12,6 +12,7 @@
 #include "SDL/include/SDL_timer.h"
 
 #include <string.h>
+#include <stdlib.h>
 
 
 ModuleUI::ModuleUI()
@@ -38,8 +39,15 @@ bool ModuleUI::Init()
 
 update_status ModuleUI::Update()
  {
-	if (ui_visible) App->render->Blit(graphics, 0, 224, &ui_rect, false);
-
+	if (ui_visible) { 
+		App->render->Blit(graphics, 0, 224, &ui_rect, false); 
+		App->fonts->BlitText(30, 240, score_font, "1up");
+		App->fonts->BlitText(62, 240, score_font, score_text);
+		App->fonts->BlitText(144, 240, score_font, "top");
+		App->fonts->BlitText(176, 240, score_font, "00500000");
+		App->fonts->BlitText(258, 240, score_font, "2up");
+		App->fonts->BlitText(290, 240, score_font, "00000000");
+	}
 
 
 
@@ -101,4 +109,19 @@ void ModuleUI::StageCleared() {
 bool ModuleUI::CleanUp()
 {
 	return true;
+}
+
+void ModuleUI::AddScore(int points) {
+	score += points;
+
+	char str[8];
+	_itoa_s(score, str, 10);
+
+	int new_position = 7;
+	for (int i = 7; i >= 0; i--) {
+		if (str[i] != 'Ì' && str[i] != '\0') { 
+			score_text[new_position] = str[i];
+			new_position--;
+		}
+	}
 }

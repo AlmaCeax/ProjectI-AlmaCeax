@@ -23,6 +23,7 @@ Enemy_PowerUPShip::Enemy_PowerUPShip(int x, int y) : Enemy(x, y)
 
 	App->powerups->AddPowerUp(App->powerups->speedBoost, position.x, position.y+20, COLLIDER_POWER_UP);
 
+	points = 1000;
 }
 
 void Enemy_PowerUPShip::OnCollision(Collider * collider)

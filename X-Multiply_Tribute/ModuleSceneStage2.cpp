@@ -6,7 +6,7 @@
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleCollision.h"
-#include "ModuleSceneStageClear.h"
+#include "ModuleSceneStart.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "ModuleSceneStage2.h"
 
@@ -59,7 +59,7 @@ update_status ModuleSceneStage2::Update()
 		App->render->camera.x = 0;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == 1) App->fade->FadeToBlack(this, App->stage_clear, 2);
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == 1) App->fade->FadeToBlack(this, App->start, 2);
 
 	App->render->Blit(bossTextures[0], 85, 160, &boss[0], 0.5f);
 	App->render->Blit(bossTextures[1], 146, 130, &boss[1], 0.5f);

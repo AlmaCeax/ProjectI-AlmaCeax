@@ -43,9 +43,6 @@
     <ClCompile Include="ModuleSceneStage2.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleSceneStageClear.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleSceneStart.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -130,9 +127,6 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneStage2.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleSceneStageClear.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneStart.h">

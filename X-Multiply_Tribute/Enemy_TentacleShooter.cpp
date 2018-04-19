@@ -14,6 +14,8 @@ Enemy_TentacleShooter::Enemy_TentacleShooter(int x, int y):Enemy(x,y)
 	animation = &anim;
 
 	collider = App->collision->AddCollider({ 0, 0, 48, 41 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+
+	points = 600;
 }
 
 

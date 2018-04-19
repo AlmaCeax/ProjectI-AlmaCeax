@@ -89,7 +89,6 @@
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModulePowerUPS.h" />
     <ClInclude Include="ModuleSceneStage2.h" />
-    <ClInclude Include="ModuleSceneStageClear.h" />
     <ClInclude Include="ModuleSceneStart.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="p2Point.h" />
@@ -125,7 +124,6 @@
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleSceneStage2.cpp" />
-    <ClCompile Include="ModuleSceneStageClear.cpp" />
     <ClCompile Include="ModuleSceneStart.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleUI.cpp" />

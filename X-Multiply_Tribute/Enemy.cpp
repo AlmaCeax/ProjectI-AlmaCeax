@@ -3,6 +3,7 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
+#include "ModuleUI.h"
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {}
@@ -29,5 +30,6 @@ void Enemy::Draw(SDL_Texture* sprites)
 
 void Enemy::OnCollision(Collider* collider)
 {
-	//App->particles->AddParticle(App->particles->explosion, position.x, position.y);
+	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
+	App->ui->AddScore(points);
 }
