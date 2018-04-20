@@ -90,6 +90,9 @@ bool ModulePlayer::CleanUp() {
 	if(collider!=nullptr) collider->to_delete = true;
 	collider = nullptr;
 
+	App->audio->UnloadSFX(deadsfx);
+	deadsfx = nullptr;
+
 	return true;
 }
 

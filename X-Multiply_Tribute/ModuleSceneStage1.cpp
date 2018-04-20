@@ -42,6 +42,10 @@ bool ModuleSceneStage1::Init()
 	startAnimationHook.loop = false;
 	startAnimationHook.speed = 0.08f;
 
+	textrect[0] = { 0,0,4960,512 };
+	textrect[1] = { 0,0,4960,512 };
+	textrect[2] = { 28,24,48,106 };
+	textrect[4] = { 120,159,35,14 };
 
 	return true;
 }
@@ -67,17 +71,7 @@ bool ModuleSceneStage1::Start() {
 	startAnimationHook.setCurrentFrameIndex(0);
 
 
-	textrect[2] = new SDL_Rect();
-	textrect[2]->x = 28;
-	textrect[2]->y = 24;
-	textrect[2]->w = 48;
-	textrect[2]->h = 106;
 
-	textrect[4] = new SDL_Rect();
-	textrect[4]->x = 120;
-	textrect[4]->y = 159;
-	textrect[4]->w = 35;
-	textrect[4]->h = 14;
 
 	injectionposition.x = 80;
 	injectionposition.y = -100;
@@ -175,8 +169,6 @@ bool ModuleSceneStage1::Start() {
 
 
 
-	Mix_PlayChannel(-1, shipSpawn, 0);
-
 	App->render->ResetCamera();
 
 
@@ -189,10 +181,10 @@ update_status ModuleSceneStage1::Update()
 	checkCameraEvents();
 	updateCamera();
 
-	App->render->Blit(textures[0], 0, 0, textrect[0], 0.5f);
-	App->render->Blit(textures[1], 0, 0, textrect[1]);
+	App->render->Blit(textures[0], 0, 0, &textrect[0], 0.5f);
+	App->render->Blit(textures[1], 0, 0, &textrect[1]);
 	injection();
-	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, textrect[2],0.5f);
+	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, &textrect[2],0.5f);
 
 	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage2);
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) App->ui->StageCleared();
@@ -216,7 +208,6 @@ bool ModuleSceneStage1::CleanUp()
 		textures[i] = nullptr;
 	}
 
-
 	App->audio->UnloadMusic(music);
 	music = nullptr;
 	App->audio->UnloadSFX(shipSpawn);
@@ -236,7 +227,7 @@ void ModuleSceneStage1::checkCameraEvents()
 	}
 	else if (down) down = false;
 
-	if (App->render->camera.x >= (4960 - SCREEN_WIDTH) * SCREEN_SIZE) {
+	if (App->render->camera.x >= (4960 - SCREEN_WIDTH) * SCREEN_SIZE && !stopped) {
 		stopped = true;
 		App->ui->StageCleared();
 	}
@@ -465,7 +456,7 @@ void ModuleSceneStage1::injection()
 				startAnimation.hold = true;
 				injecting = false;
 			}
-			textrect[2] = &startAnimation.GetCurrentFrame();
+			textrect[2] = startAnimation.GetCurrentFrame();
 		}
 		else {
 			if (!injecting)
@@ -475,7 +466,7 @@ void ModuleSceneStage1::injection()
 					injectionposition.y--;
 				}
 				else {
-					textrect[2] = &startAnimation.GetCurrentFrame();
+					textrect[2] = startAnimation.GetCurrentFrame();
 					if (injectionhookposition.y < 96 && !unhooked)
 					{
 						App->player->Enable();
@@ -508,7 +499,7 @@ void ModuleSceneStage1::injection()
 				}
 				if (unhooked)injectionhookposition.y--;
 			}
-			else injectionposition.y++;
+			else { if (!Mix_Playing(0))Mix_PlayChannel(-1, shipSpawn, 0); injectionposition.y++; }
 		}
 	}
 }

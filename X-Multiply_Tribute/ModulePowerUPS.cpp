@@ -103,6 +103,7 @@ bool ModulePowerUPS::CleanUp()
 {
 	LOG("Unloading particles");
 	App->textures->Unload(graphics);
+	graphics = nullptr;
 
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
 	{
@@ -112,6 +113,13 @@ bool ModulePowerUPS::CleanUp()
 			powerUps[i] = nullptr;
 		}
 	}
+
+	App->audio->UnloadSFX(bomb.sfx);
+	bomb.sfx = nullptr;
+	App->audio->UnloadSFX(tentacles.sfx);
+	bomb.sfx = nullptr;
+	App->audio->UnloadSFX(life.sfx);
+	bomb.sfx = nullptr;
 
 	return true;
 }

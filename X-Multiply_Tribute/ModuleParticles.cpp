@@ -135,9 +135,13 @@ bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
 	App->textures->Unload(graphics);
+	graphics = nullptr;
 
 	App->audio->UnloadSFX(baseShotExp.sfx);
 	baseShot.sfx = nullptr;
+
+	App->audio->UnloadSFX(playerBoost.sfx);
+	playerBoost.sfx = nullptr;
 
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{

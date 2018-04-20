@@ -7,10 +7,12 @@
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
 #include "ModuleCollision.h"
+#include "ModuleAudio.h"
 #include "ModuleSceneStage1.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
 #include "ModuleUI.h"
+#include "SDL_mixer/include/SDL_mixer.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -31,6 +33,9 @@ bool ModuleUI::Init()
 	blue_font = App->fonts->Load("Assets/Sprites/UI/blue_font.png", "0123456789$.-= ºººººººººººabcdefghijklmnopqrstuvwxyz", 2);
 	pink_font = App->fonts->Load("Assets/Sprites/UI/pink_font.png", "0123456789$.-= ºººººººººººabcdefghijklmnopqrstuvwxyz", 2);
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_1.png");
+
+	clear_song = App->audio->LoadMusic("Assets/Audio/Music/04_Stage_Clear.ogg");
+	ready_song = App->audio->LoadMusic("Assets/Audio/Music/14_Player_Ready.ogg");
 
 	ui_rect = { 0,0,384,32 };
 	life = { 392,0,8,16 };
@@ -67,6 +72,7 @@ update_status ModuleUI::Update()
 }
 
 void ModuleUI::StageCleared() {
+	Mix_PlayMusic(clear_song, false);
 	if (!App->collision->god) App->collision->GodMode();
 	total_time = (Uint32)(4.0f * 0.5f * 1000.0f);
 	start_time = SDL_GetTicks();
@@ -77,7 +83,7 @@ void ModuleUI::StageCleared() {
 void ModuleUI::ReadyUpdate() {
 
 	Uint32 now = SDL_GetTicks() - start_time;
-	LOG("now is : %i", now);
+
 	if (now >= 500 && now < 1000) current_ready_step = ready_step::dontshow_text;
 	else current_ready_step = ready_step::show_text;
 	if (now >= 1500 && now < 2000) current_ready_step = ready_step::dontshow_text;
@@ -164,6 +170,7 @@ void ModuleUI::PlayerDeath() {
 void ModuleUI::Reset() {
 	player_lives = 2;
 	score = 0;
+	memset(score_text, '0', 8);
 }
 
 void ModuleUI::DeathFade() {
@@ -175,6 +182,7 @@ void ModuleUI::DeathFade() {
 }
 
 void ModuleUI::PlayerReady() {
+	Mix_PlayMusic(ready_song, false);
 	App->stage1->first_time = false;
 	total_time = (Uint32)(3.0f * 1000.0f);
 	start_time = SDL_GetTicks();

@@ -94,6 +94,7 @@ bool ModuleEnemies::CleanUp()
 	LOG("Freeing all enemies");
 
 	App->textures->Unload(sprites);
+	sprites = nullptr;
 
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -108,6 +109,15 @@ bool ModuleEnemies::CleanUp()
 	{
 		queue[i].type = ENEMY_TYPES::NO_TYPE;
 	}
+	
+	App->audio->UnloadSFX(hellballDeadsfx);
+	hellballDeadsfx = nullptr;
+	App->audio->UnloadSFX(flyerDeadsfx);
+	flyerDeadsfx = nullptr;
+	App->audio->UnloadSFX(nemonaDeadsfx);
+	nemonaDeadsfx = nullptr;
+	App->audio->UnloadSFX(pushipDeadsfx);
+	pushipDeadsfx = nullptr;
 
 	return true;
 }

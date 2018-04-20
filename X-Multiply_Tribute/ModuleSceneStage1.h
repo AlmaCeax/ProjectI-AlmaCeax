@@ -28,7 +28,7 @@ private:
 	Animation startAnimation;
 	Animation startAnimationHook;
 
-	SDL_Rect* textrect[NUM_LAYERS];
+	SDL_Rect textrect[NUM_LAYERS];
 	SDL_Texture* textures[NUM_LAYERS];
 
 	_Mix_Music* music = nullptr;

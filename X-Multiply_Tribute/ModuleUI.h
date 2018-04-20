@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "p2Point.h"
 
+struct _Mix_Music;
+
 class ModuleUI :
 	public Module
 {
@@ -20,13 +22,9 @@ public:
 	void AddScore(uint points);
 
 	void PlayerDeath();
-
 	void Reset();
-
 	void DeathFade();
-
 	void PlayerReady();
-
 	void ReadyDone();
 
 	bool ui_visible = false;
@@ -36,6 +34,8 @@ private:
 	SDL_Rect ui_rect;
 	SDL_Rect screen;
 	SDL_Rect life;
+	_Mix_Music* clear_song;
+	_Mix_Music* ready_song;
 
 	void ClearUpdate();
 	void ReadyUpdate();
