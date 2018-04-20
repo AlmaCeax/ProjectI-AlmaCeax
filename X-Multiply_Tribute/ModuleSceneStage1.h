@@ -31,7 +31,7 @@ private:
 	SDL_Rect textrect[NUM_LAYERS];
 	SDL_Texture* textures[NUM_LAYERS];
 
-	_Mix_Music* music = nullptr;
+
 	Mix_Chunk* shipSpawn = nullptr;
 
 
@@ -44,6 +44,7 @@ public:
 	void OnFade();
 
 	bool first_time,right;
+	_Mix_Music* music = nullptr;
 
 	void checkCameraEvents();
 	void updateCamera();

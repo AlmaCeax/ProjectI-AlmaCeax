@@ -51,7 +51,7 @@ ModuleParticles::ModuleParticles()
 	playerBoost.anim.PushBack({ 342, 208, 42, 11 });
 	playerBoost.anim.loop = true;
 	playerBoost.anim.speed = 0.2f;
-	playerBoost.life = 425;
+	playerBoost.life = 525;
 	playerBoost.speed = { 0,0 };
 	playerBoost.id = 3;
 
