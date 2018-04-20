@@ -9,6 +9,7 @@ class Enemy_TentacleShooter :
 private:
 	Animation anim;
 	int shootTimer = 0;
+	bool up = false;
 public:
 	Enemy_TentacleShooter(int x, int y, bool up);
 

@@ -135,33 +135,44 @@ bool ModuleSceneStage1::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 100);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1295, 12, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1295, 150);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1315, 12, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1290, 150);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2270, 175);
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2305, 175);
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2400, 175);
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2485, 175);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 150);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 190);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3280, 200);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3280, 240);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3320, 130);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3460, 190);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3560, 240);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3560, 340);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3580, 350);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3580, 250);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3610, 360);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3650, 390);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3110, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3500, 185, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3670, 245, true);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3670, 320);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3670, 370);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3710, 330);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3710, 380);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3750, 350);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3750, 410);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 170);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 210);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3260, 220);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3260, 250);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3300, 150);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3400, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3460, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3460, 330);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3480, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3500, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3500, 330);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3520, 330);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3540, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3540, 330);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3560, 230);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3560, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3580, 230);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3580, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3600, 230);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3600, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3600, 310);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 230);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 310);
+
+	
 
 
 
@@ -374,7 +385,7 @@ bool ModuleSceneStage1::loadMap()
 
 
 	//diagonal
-	coll = { 2920,0,80,50 };
+	coll = { 2920,0,80,30 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	int y = 236;
 	for (int x = 2850; x < 3552; x += 50)
