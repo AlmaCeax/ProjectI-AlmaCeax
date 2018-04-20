@@ -27,7 +27,7 @@ void Enemy_HellBall::Move()
 {
 	angle += 0.06f;
 	
-	if (origin.x - 150 == position.x) {
+	if (origin.x - 140 == position.x) {
 		change = false;
 	}
 	
