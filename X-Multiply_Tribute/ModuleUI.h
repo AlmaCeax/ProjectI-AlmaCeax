@@ -53,12 +53,17 @@ private:
 	float alpha = 0;
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
+	fPoint clear_position;
+	fPoint origin_position;
+	fPoint direction;
+	float distance;
 
 	char current_text2[18] = "";
 	char current_text1[16] = "";
-	const char final_text1[16] = "stage 1 cleared";
-	const char final_text2[18] = "stage bonus 10000";
-	float letter = 0;
+	char final_text1[16] = "stage 1 cleared";
+	char final_text2[18] = "stage bonus 10000";
+	int letter = 0;
+	float timer = 0;
 
 	enum ready_step {
 		not,
@@ -69,6 +74,7 @@ private:
 	enum clear_step
 	{
 		none,
+		fade,
 		player_moving,
 		player_stopped
 	} current_step = clear_step::none;

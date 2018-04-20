@@ -197,7 +197,7 @@ update_status ModulePlayer::Update()
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
-	collider->SetPos(position.x, position.y);
+	if(collider != nullptr) collider->SetPos(position.x, position.y);
 	App->render->Blit(graphics, position.x, position.y, &r);
 
 	return UPDATE_CONTINUE;
