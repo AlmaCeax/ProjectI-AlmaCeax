@@ -3,7 +3,7 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 
 ![X-Multiply Screenshot](http://ghostarca.de/wp-content/uploads/2016/06/xm-5.jpg)
 
-***
+
 
 # Our Team
 ![AlmaCeax Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/team.jpg)
@@ -31,7 +31,27 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 
 [Github account](https://github.com/CereVenteo)
 
-***
+
 
 ## Gameplay video of the original title
 <iframe width="640" height="360" src="https://www.youtube.com/embed/GcoOZxjrLdk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+***
+
+# How to play the game
+
+
+## Controls
+- W: Move to up
+- S: Move to down
+- A: Move to left
+- D: Move to right
+- SPACE: Shoot
+- F1: Show colliders
+- F3: Win
+- F4: Lose
+- F5: God Mode
+- F6: Previous Stage
+- F7: Next Stage
+- ESC: Quit game
+
