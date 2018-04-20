@@ -204,8 +204,8 @@ update_status ModulePlayer::Update()
 }
 
 void ModulePlayer::Die() {
-	position.x += 6;
-	position.y +=1;
+	position.x -= 5;
+	position.y -=10;
 	dead = true;
 	canMove = false;
 	current_animation = &death;
