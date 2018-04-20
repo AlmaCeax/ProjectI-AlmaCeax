@@ -41,16 +41,13 @@ bool ModulePlayer::Init() {
 	down.speed = 0.1f;
 	down.loop = false;
 
-	death.PushBack({ 5, 149, 12, 16 });
-	death.PushBack({ 19, 147, 12, 16 });
-	death.PushBack({ 34, 146, 16, 16 });
-	death.PushBack({ 51, 145, 16, 16 });
-	death.PushBack({ 68, 144, 16, 16 });
-	death.PushBack({ 86, 144, 16, 16 });
-	death.PushBack({ 103, 144, 16, 16 });
-	death.PushBack({ 120, 144, 16, 16 });
+	death.PushBack({ 11, 386, 40, 42 });
+	death.PushBack({ 67, 386, 40, 42 });
+	death.PushBack({ 120, 386, 40, 42 });
+	death.PushBack({ 174, 386, 40, 42 });
+	death.PushBack({ 219, 386, 40, 42 });
 	death.loop = false;
-	death.speed = 0.2f;
+	death.speed = 0.3f;
 
 	return true;
 }
