@@ -36,8 +36,6 @@ void Enemy_FlyingWorm::Move()
 	shootTimer++;
 
 	if (shootTimer == 80) {
-		//float vx = App->player->position.x + 5 - position.x;
-		//float vy = App->player->position.y - position.y;
 		if (App->player->position.x < position.x && App->player->position.y < position.y)
 		{
 			App->particles->AddParticle(App->particles->blueBall, position.x, position.y , COLLIDER_ENEMY_SHOT, { -1, -1 });
@@ -51,8 +49,6 @@ void Enemy_FlyingWorm::Move()
 		else if (App->player->position.x > position.x && App->player->position.y > position.y) {
 			App->particles->AddParticle(App->particles->blueBall, position.x, position.y, COLLIDER_ENEMY_SHOT, { 1, 1 });
 		}
-		
-		//App->particles->AddParticle(App->particles->blueBall, position.x, position.y, COLLIDER_ENEMY_SHOT, { vx / 40.0f,vy / 40.0f });
 		shootTimer = 0;
 	}
 }

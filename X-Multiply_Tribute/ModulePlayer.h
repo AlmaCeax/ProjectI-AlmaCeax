@@ -36,6 +36,8 @@ public:
 	bool startBoost = false;
 	void BlitPlayer();
 
+	Collider* collider;
+
 private:
 	void Die();
 
@@ -50,7 +52,6 @@ private:
 	int cooldown = 0;
 	uint startime;
 
-	Collider* collider;
 };
 
 #endif

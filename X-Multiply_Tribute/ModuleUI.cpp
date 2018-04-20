@@ -79,15 +79,6 @@ update_status ModuleUI::Update()
 	return update_status::UPDATE_CONTINUE;
 }
 
-void ModuleUI::StageCleared() {
-	Mix_PlayMusic(clear_song, false);
-	if (!App->collision->god) App->collision->GodMode();
-	total_time = (Uint32)(4.0f * 1000.0f);
-	start_time = SDL_GetTicks();
-	ui_visible = false;
-	current_step = clear_step::player_moving;
-}
-
 void ModuleUI::ReadyUpdate() {
 
 	Uint32 now = SDL_GetTicks() - start_time;
@@ -104,37 +95,64 @@ void ModuleUI::ClearUpdate() {
 	Uint32 now = SDL_GetTicks() - start_time;
 	float normalized = MIN(1.0f, (float)now / (float)total_time);
 
-	if (current_step == clear_step::player_moving) {
+	switch (current_step) {
+		case clear_step::fade: {
+			if (now >= total_time) {
+				App->player->canMove = false;
+				clear_position = { (float)((App->render->camera.x + (SCREEN_WIDTH*SCREEN_SIZE / 2))/SCREEN_SIZE)-18, (float)(App->render->camera.y/SCREEN_SIZE)+50};
+				origin_position = { App->player->position.x, App->player->position.y };
+				distance = origin_position.DistanceTo(clear_position);
+				direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
 
-		if (now >= total_time) {
-			current_step = clear_step::player_stopped;
-			start_time = SDL_GetTicks();
-			total_time = (Uint32)(8.0f * 1000.0f);
-		}
+				current_step = clear_step::player_moving;
+				start_time = SDL_GetTicks();
+				total_time = (Uint32)(9.0f * 1000.0f);
+			}
+		}break;
+
+		case clear_step::player_moving: {
+			normalized = 1.0;
+
+			App->player->position.x += direction.x;
+			App->player->position.y += direction.y;
+
+			if (origin_position.DistanceTo(App->player->position) >= distance)
+			{
+				App->player->position = clear_position;
+				current_step = clear_step::player_stopped;
+			}
+		
+		}break;
+
+		case clear_step::player_stopped: {
+			normalized = 1.0;
+			if (current_text1[14] != final_text1[14] && timer >= 1)
+			{
+				LOG("text 1 letter is = %f", letter);
+				current_text1[letter] = final_text1[letter];
+				letter++;
+				timer = 0;
+				if (letter > 14) letter = 0;
+			}
+			else if (current_text2[16] != final_text2[16] && timer>= 1) {
+				LOG("text 2 letter is = %f", letter);
+				current_text2[letter] = final_text2[letter];
+				letter++;
+				timer = 0;
+				if (letter > 16) letter = 0;
+			}
+			timer += 0.2f;
+
+			if (now >= total_time) {
+				timer = 0;
+				memset(current_text1, 0, sizeof(current_text1));
+				memset(current_text2, 0, sizeof(current_text2));
+				App->fade->FadeToBlack(App->current_scene, App->start, 0.0f);
+				current_step = clear_step::none;
+			}
+		}break;
 	}
-	else {
-		normalized = 1.0;
-		Uint32 now = SDL_GetTicks() - start_time;
 
-		if (current_text1[14] != final_text1[14])
-		{
-			current_text1[(int)letter] = final_text1[(int)letter];
-			if (letter >= 14) letter = 0;
-		}
-		else if (current_text2[16] != final_text2[16]) {
-			current_text2[(int)letter] = final_text2[(int)letter];
-			if (letter >= 16) letter = 0;
-		}
-		letter += 0.2f;
-
-		if (now >= total_time) {
-			App->collision->GodMode();
-			memset(current_text1, 0, sizeof(current_text1));
-			memset(current_text2, 0, sizeof(current_text2));
-			App->fade->FadeToBlack(App->current_scene, App->start, 0.0f);
-			current_step = clear_step::none;
-		}
-	}
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(normalized * 255));
 	SDL_RenderFillRect(App->render->renderer, &screen);
 
@@ -194,7 +212,7 @@ void ModuleUI::DeathFade() {
 void ModuleUI::PlayerReady() {
 	Mix_PlayMusic(ready_song, false);
 	App->stage1->first_time = false;
-	total_time = (Uint32)(2.0f * 1000.0f);
+	total_time = (Uint32)(3.5f * 1000.0f);
 	start_time = SDL_GetTicks();
 	current_ready_step = ready_step::show_text;
 }
@@ -207,4 +225,13 @@ void ModuleUI::ReadyDone() {
 	App->stage1->right = true;
 	Mix_PlayMusic(App->stage1->music, true);
 	current_ready_step = ready_step::not;
+}
+
+void ModuleUI::StageCleared() {
+	Mix_PlayMusic(clear_song, false);
+	App->player->collider->to_delete = true;
+	App->stage1->right = false;
+	total_time = (Uint32)(4.0f * 1000.0f);
+	start_time = SDL_GetTicks();
+	current_step = clear_step::fade;
 }
