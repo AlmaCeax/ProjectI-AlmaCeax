@@ -46,7 +46,7 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 - S: Move to down
 - A: Move to left
 - D: Move to right
-- SPACE: Shoot
+- SPACEBAR: Shoot
 - F1: Show colliders
 - F3: Win
 - F4: Lose
