@@ -69,8 +69,6 @@ update_status ModuleUI::Update()
 		Uint32 now = SDL_GetTicks() - start_time;
 		if (now >= total_time) {
 			App->fade->FadeToBlack(App->current_scene, App->start);
-			App->player->dead = false;
-			game_over = false;
 		}
 	}
 	
@@ -84,7 +82,7 @@ update_status ModuleUI::Update()
 void ModuleUI::StageCleared() {
 	Mix_PlayMusic(clear_song, false);
 	if (!App->collision->god) App->collision->GodMode();
-	total_time = (Uint32)(4.0f * 0.5f * 1000.0f);
+	total_time = (Uint32)(4.0f * 1000.0f);
 	start_time = SDL_GetTicks();
 	ui_visible = false;
 	current_step = clear_step::player_moving;
@@ -94,7 +92,7 @@ void ModuleUI::ReadyUpdate() {
 
 	Uint32 now = SDL_GetTicks() - start_time;
 
-	if (now >= 500 && now < 1000) current_ready_step = ready_step::dontshow_text;
+	if (now >= 200 && now < 1000) current_ready_step = ready_step::dontshow_text;
 	else current_ready_step = ready_step::show_text;
 	if (now >= 1500 && now < 2000) current_ready_step = ready_step::dontshow_text;
 	else current_ready_step = ready_step::show_text;
@@ -113,7 +111,7 @@ void ModuleUI::ClearUpdate() {
 		if (now >= total_time) {
 			current_step = clear_step::player_stopped;
 			start_time = SDL_GetTicks();
-			total_time = (Uint32)(10.0f * 0.5f * 1000.0f);
+			total_time = (Uint32)(8.0f * 1000.0f);
 		}
 	}
 	else {
@@ -178,6 +176,8 @@ void ModuleUI::PlayerDeath() {
 }
 
 void ModuleUI::Reset() {
+	App->player->dead = false;
+	game_over = false;
 	player_lives = 2;
 	score = 0;
 	memset(score_text, '0', 8);
