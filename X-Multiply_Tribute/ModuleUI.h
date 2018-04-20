@@ -36,6 +36,7 @@ private:
 	SDL_Rect life;
 	_Mix_Music* clear_song;
 	_Mix_Music* ready_song;
+	_Mix_Music* over_song;
 
 	void ClearUpdate();
 	void ReadyUpdate();
@@ -46,6 +47,8 @@ private:
 	int score_font = -1;
 	int blue_font = -1;
 	int pink_font = -1;
+
+	bool game_over = false;
 
 	float alpha = 0;
 	Uint32 start_time = 0;

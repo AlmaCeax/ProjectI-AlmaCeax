@@ -36,6 +36,7 @@ bool ModuleUI::Init()
 
 	clear_song = App->audio->LoadMusic("Assets/Audio/Music/04_Stage_Clear.ogg");
 	ready_song = App->audio->LoadMusic("Assets/Audio/Music/14_Player_Ready.ogg");
+	over_song = App->audio->LoadMusic("Assets/Audio/Music/15_Game_Over.ogg");
 
 	ui_rect = { 0,0,384,32 };
 	life = { 392,0,8,16 };
@@ -55,6 +56,7 @@ update_status ModuleUI::Update()
 		App->fonts->BlitText(176, 240, score_font, "00500000");
 		App->fonts->BlitText(258, 240, score_font, "2up");
 		App->fonts->BlitText(290, 240, score_font, "00000000");
+		if(game_over) App->fonts->BlitText(120, 100, pink_font, "game over");
 
 		for (int i = 0; i < player_lives; i++) {
 			App->render->Blit(graphics, 62 + (life.w*i), 224, &life, false);
@@ -63,6 +65,14 @@ update_status ModuleUI::Update()
 	
 	
 	if (current_ready_step != ready_step::not) ReadyUpdate();
+	if (game_over) {
+		Uint32 now = SDL_GetTicks() - start_time;
+		if (now >= total_time) {
+			App->fade->FadeToBlack(App->current_scene, App->start);
+			App->player->dead = false;
+			game_over = false;
+		}
+	}
 	
 	if(current_step == clear_step::none) return update_status::UPDATE_CONTINUE;
 	ClearUpdate();
@@ -175,9 +185,11 @@ void ModuleUI::Reset() {
 
 void ModuleUI::DeathFade() {
 	if (player_lives > 0) App->fade->FadeToBlack(App->current_scene, App->current_scene);
-	else { 
-		App->fade->FadeToBlack(App->current_scene, App->start);
-		App->player->dead = false;
+	else if(!game_over) { 
+		Mix_PlayMusic(over_song,false);
+		total_time = (Uint32)(4.0f * 1000.0f);
+		start_time = SDL_GetTicks();
+		game_over = true;
 	}
 }
 
@@ -195,5 +207,6 @@ void ModuleUI::ReadyDone() {
 	App->player->injecting = false;
 	App->player->startBoost = true;
 	App->stage1->right = true;
+	Mix_PlayMusic(App->stage1->music, true);
 	current_ready_step = ready_step::not;
 }

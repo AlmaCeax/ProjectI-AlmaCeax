@@ -499,7 +499,10 @@ void ModuleSceneStage1::injection()
 				}
 				if (unhooked)injectionhookposition.y--;
 			}
-			else { if (!Mix_Playing(0))Mix_PlayChannel(-1, shipSpawn, 0); injectionposition.y++; }
+			else { 
+				if (!Mix_Playing(0))Mix_PlayChannel(-1, shipSpawn, 0); 
+				injectionposition.y++; 
+			}
 		}
 	}
 }
