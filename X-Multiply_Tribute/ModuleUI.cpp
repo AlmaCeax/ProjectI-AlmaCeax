@@ -99,7 +99,7 @@ void ModuleUI::ClearUpdate() {
 		case clear_step::fade: {
 			if (now >= total_time) {
 				App->player->canMove = false;
-				clear_position = { (float)((App->render->camera.x + (SCREEN_WIDTH*SCREEN_SIZE / 2))/SCREEN_SIZE)-18, (float)(App->render->camera.y/SCREEN_SIZE)+50};
+				clear_position = { (float)((App->render->camera.x + (SCREEN_WIDTH*SCREEN_SIZE / 2))/SCREEN_SIZE)-36, (float)(App->render->camera.y/SCREEN_SIZE)+50 };
 				origin_position = { App->player->position.x, App->player->position.y };
 				distance = origin_position.DistanceTo(clear_position);
 				direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
@@ -229,7 +229,7 @@ void ModuleUI::ReadyDone() {
 
 void ModuleUI::StageCleared() {
 	Mix_PlayMusic(clear_song, false);
-	App->player->collider->to_delete = true;
+	if(App->player->collider != nullptr) App->player->collider->to_delete = true;
 	App->stage1->right = false;
 	total_time = (Uint32)(4.0f * 1000.0f);
 	start_time = SDL_GetTicks();
