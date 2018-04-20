@@ -92,9 +92,7 @@ void ModuleUI::ReadyUpdate() {
 
 	Uint32 now = SDL_GetTicks() - start_time;
 
-	if (now >= 200 && now < 1000) current_ready_step = ready_step::dontshow_text;
-	else current_ready_step = ready_step::show_text;
-	if (now >= 1500 && now < 2000) current_ready_step = ready_step::dontshow_text;
+	if (now >= 800 && now <= 1200) current_ready_step = ready_step::dontshow_text;
 	else current_ready_step = ready_step::show_text;
 
 	if (current_ready_step == ready_step::show_text) App->fonts->BlitText(80, 85, pink_font, "player 1 ready");
@@ -196,7 +194,7 @@ void ModuleUI::DeathFade() {
 void ModuleUI::PlayerReady() {
 	Mix_PlayMusic(ready_song, false);
 	App->stage1->first_time = false;
-	total_time = (Uint32)(3.0f * 1000.0f);
+	total_time = (Uint32)(2.0f * 1000.0f);
 	start_time = SDL_GetTicks();
 	current_ready_step = ready_step::show_text;
 }

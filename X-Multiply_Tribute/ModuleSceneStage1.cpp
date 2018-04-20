@@ -483,7 +483,6 @@ void ModuleSceneStage1::injection()
 							right = true;
 							App->player->injecting = false;
 							App->player->startBoost = true;
-							App->particles->AddParticle(App->particles->playerBoost, App->player->position.x - 42, App->player->position.y, COLLIDER_NONE, { 3,0 });;
 						}
 						if (startAnimationHook.isDone())unhooked = true;
 					}
@@ -500,7 +499,7 @@ void ModuleSceneStage1::injection()
 				if (unhooked)injectionhookposition.y--;
 			}
 			else { 
-				if (!Mix_Playing(0))Mix_PlayChannel(-1, shipSpawn, 0); 
+				if (!Mix_Playing(0)) Mix_PlayChannel(-1, shipSpawn, 0); 
 				injectionposition.y++; 
 			}
 		}

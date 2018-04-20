@@ -114,6 +114,9 @@ update_status ModulePlayer::Update()
 {
 	if (startBoost)
 	{
+		if (startime == 35) {
+			App->particles->AddParticle(App->particles->playerBoost, position.x - 42, position.y, COLLIDER_NONE, { 3,0 });
+		}
 		position.x += speed.x;
 		startime--;
 		current_animation = &idle;
