@@ -5,12 +5,20 @@
 #include "ModuleEnemies.h"
 
 
-Enemy_TentacleShooter::Enemy_TentacleShooter(int x, int y):Enemy(x,y)
+Enemy_TentacleShooter::Enemy_TentacleShooter(int x, int y, bool up):Enemy(x,y)
 {
 	type = TENTACLESHOOTER;
-	anim.PushBack({ 37, 10, 54, 42 });
-	anim.PushBack({ 94, 10, 54, 42 });
-	anim.PushBack({ 155, 10, 54, 42 });
+	if (up) {
+		anim.PushBack({ 37, 419, 54, 42 });
+		anim.PushBack({ 95, 419, 54, 42 });
+		anim.PushBack({ 157, 419, 54, 42 });
+	}
+	else {
+		anim.PushBack({ 37, 10, 54, 42 });
+		anim.PushBack({ 94, 10, 54, 42 });
+		anim.PushBack({ 155, 10, 54, 42 });
+	}
+	
 	anim.speed = 0.05f;
 
 	animation = &anim;

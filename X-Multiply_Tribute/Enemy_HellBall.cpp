@@ -30,9 +30,6 @@ void Enemy_HellBall::Move()
 	if (origin.x - 140 == position.x) {
 		change = false;
 	}
-	
-	
-
 
 	if ( change) {
 		if (going_up) position.y = origin.y + 2 * sinf(angle) * radius;
@@ -45,21 +42,5 @@ void Enemy_HellBall::Move()
 
 		position.x += 3;
 	}
-	/*else if (cont >= 3 && cont <= 4){
-	if (cont == 4) {
-	if (going_up) position.y = origin.y + 2 * sinf(angle) * radius;
-	else position.y = origin.y + 2 * sinf(-angle) * radius;
-	position.x -= 1;
-	}
-	else{
-	if (!going_up) position.y = origin.y + 2 * sinf(angle) * radius;
-	else position.y = origin.y + 2 * sinf(-angle) * radius;
-	position.x += 3;
-	}
-	}*/
 	
-
-
-
-
 }

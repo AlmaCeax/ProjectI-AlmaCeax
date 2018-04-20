@@ -29,7 +29,7 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
-	bool AddEnemy(ENEMY_TYPES type, int x, int y, bool up = false, int powerUPid = -1);
+	bool AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up = false, int powerUPid = -1);
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 
 private:

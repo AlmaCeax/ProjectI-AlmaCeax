@@ -122,7 +122,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool up, int powerUPid)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up, int powerUPid)
 {
 	bool ret = false;
 
@@ -133,7 +133,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool up, int powerU
 			queue[i].type = type;
 			queue[i].x = x;
 			queue[i].y = y;
-			queue[i].going_up = up;
+			queue[i].going_up = going_up;
 			queue[i].powerUpid = powerUPid;
 			ret = true;
 			break;
@@ -160,7 +160,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_FlyingWorm(info.x, info.y);
 			break;
 			case ENEMY_TYPES::TENTACLESHOOTER:
-			enemies[i] = new Enemy_TentacleShooter(info.x, info.y);
+			enemies[i] = new Enemy_TentacleShooter(info.x, info.y, info.going_up);
 			break;
 			case ENEMY_TYPES::POWERUPSHIP:
 			enemies[i] = new Enemy_PowerUPShip(info.x, info.y, info.powerUpid);

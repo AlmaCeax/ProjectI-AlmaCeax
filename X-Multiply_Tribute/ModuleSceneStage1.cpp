@@ -111,29 +111,31 @@ bool ModuleSceneStage1::Start() {
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 750, 140, false, 3);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 855, 120, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 870, 120, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 885, 120, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 900, 120, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 915, 120, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 930, 120, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 945, 120, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 770, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 785, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 800, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 815, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 830, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 845, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 860, 90, false);
 	//bottom
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 855, 120, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 870, 120, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 885, 120, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 900, 120, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 915, 120, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 930, 120, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 945, 120, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 770, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 785, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 800, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 815, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 830, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 845, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 860, 90, true);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 900, 175);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false, 2);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1160, 50);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 100);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1295, 12, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1295, 150);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2270, 175);
@@ -386,7 +388,7 @@ bool ModuleSceneStage1::loadMap()
 	{
 		coll = { x,y,50,50 };
 		App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-		y += 17;
+		y += 15;
 	}
 
 	// line down stage
@@ -396,6 +398,8 @@ bool ModuleSceneStage1::loadMap()
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//volcano
+	coll = { 3730,268,224,30 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 3730,298,224,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 3744,310,154,18 };

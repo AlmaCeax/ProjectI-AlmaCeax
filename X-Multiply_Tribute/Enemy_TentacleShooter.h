@@ -10,7 +10,7 @@ private:
 	Animation anim;
 	int shootTimer = 0;
 public:
-	Enemy_TentacleShooter(int x, int y);
+	Enemy_TentacleShooter(int x, int y, bool up);
 
 	void Move();
 };
