@@ -420,6 +420,7 @@ update_status ModulePlayer::Update()
 }
 
 void ModulePlayer::Die() {
+	if (App->ui->current_step != clear_step::none) return;
 	position.x -= 5;
 	position.y -=10;
 	dead = true;
@@ -437,7 +438,12 @@ void ModulePlayer::Die() {
 }
 
 void ModulePlayer::BlitPlayer() {
-	App->render->Blit(graphics, position.x, position.y, &idle.GetCurrentFrame());
+	App->render->Blit(graphics, position.x, position.y, &current_animation->GetCurrentFrame());
+	if (activePU[TENTACLES])
+	{
+		App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
+		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
+	}
 }
 
 // -------------------------------------------------------------

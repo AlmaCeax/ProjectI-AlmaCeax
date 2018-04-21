@@ -5,6 +5,13 @@
 #include "p2Point.h"
 
 struct _Mix_Music;
+enum clear_step
+{
+	none,
+	fade,
+	player_moving,
+	player_stopped
+};
 
 class ModuleUI :
 	public Module
@@ -28,6 +35,7 @@ public:
 	void ReadyDone();
 
 	bool ui_visible = false;
+	clear_step current_step = clear_step::none;
 
 private:
 	SDL_Texture* graphics;
@@ -71,13 +79,7 @@ private:
 		dontshow_text
 	} current_ready_step = ready_step::not;
 
-	enum clear_step
-	{
-		none,
-		fade,
-		player_moving,
-		player_stopped
-	} current_step = clear_step::none;
+
 };
 
 #endif

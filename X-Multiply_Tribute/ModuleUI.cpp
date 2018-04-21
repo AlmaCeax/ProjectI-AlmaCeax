@@ -107,6 +107,8 @@ void ModuleUI::ClearUpdate() {
 				origin_position = { App->player->position.x, App->player->position.y };
 				distance = origin_position.DistanceTo(clear_position);
 				direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
+				if (clear_position.y < origin_position.y) App->player->current_animation = &App->player->up;
+				if (clear_position.y > origin_position.y) App->player->current_animation = &App->player->down;
 
 				current_step = clear_step::player_moving;
 				start_time = SDL_GetTicks();
@@ -122,6 +124,7 @@ void ModuleUI::ClearUpdate() {
 
 			if (origin_position.DistanceTo(App->player->position) >= distance)
 			{
+				App->player->current_animation = &App->player->idle;
 				App->player->position = clear_position;
 				current_step = clear_step::player_stopped;
 			}
