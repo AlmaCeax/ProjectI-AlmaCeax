@@ -64,6 +64,9 @@ update_status ModuleSceneStage2::Update()
 	App->render->Blit(bossTextures[0], 85, 160, &boss[0], 0.5f);
 	App->render->Blit(bossTextures[1], 146, 130, &boss[1], 0.5f);
 	App->render->Blit(bossTextures[2], 658, 160, &boss[2], 0.5f); //the y is not correct
+
+	//if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage2);
+
 	return update_status::UPDATE_CONTINUE;
 }
 
