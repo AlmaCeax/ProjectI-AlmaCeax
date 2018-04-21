@@ -51,6 +51,7 @@ public:
 	Collider* collider;
 	Tentacle tentacle;
 	Tentacle tentacle2;
+	//Alma Ceax
 
 	Animation* current_animation = nullptr;
 	Animation up;
