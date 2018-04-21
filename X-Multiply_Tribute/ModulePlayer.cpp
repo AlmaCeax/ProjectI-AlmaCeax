@@ -191,6 +191,12 @@ update_status ModulePlayer::Update()
 		{
 			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+
+			App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
+			App->particles->AddParticle(App->particles->baseShot, tentacle.position.x + 25, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
+
+			App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
+			App->particles->AddParticle(App->particles->baseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
 		}
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
 		{
@@ -200,6 +206,12 @@ update_status ModulePlayer::Update()
 			else {
 				App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 				App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+
+				App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
+				App->particles->AddParticle(App->particles->baseShot, tentacle.position.x + 25, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
+
+				App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
+				App->particles->AddParticle(App->particles->baseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
 				if (activePU[BOMB] == true)App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 				cooldown = 0;
 			}
