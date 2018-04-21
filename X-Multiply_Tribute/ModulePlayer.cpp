@@ -130,6 +130,12 @@ update_status ModulePlayer::Update()
 	{
 		if (startime == 35) {
 			App->particles->AddParticle(App->particles->playerBoost, position.x - 42, position.y, COLLIDER_NONE, { 3,0 });
+
+			tentacle2.position.x = position.x;
+			tentacle2.position.y = position.y + 75;
+			tentacle.position.x = position.x;
+			tentacle.position.y = position.y - 75;
+
 		}
 		position.x += speed.x;
 		startime--;
@@ -145,17 +151,46 @@ update_status ModulePlayer::Update()
 	if (canMove) {
 		current_animation = &idle;
 		state = idl;
+		bool tent = true;
+		for (int i = 0; i < MAX_KEYS; ++i)
+		{
+			if (App->input->keyboard[i] != KEY_IDLE) {
+				tent = false;
+			}
+		}
 
-			tentacle.position.x = position.x;
-			tentacle.position.y = position.y - 75;
-			tentacle2.position.x = position.x;
-			tentacle2.position.y = position.y + 75;
+		fPoint clear_position = {position.x,position.y-75};
+		fPoint origin_position = { tentacle.position.x, tentacle.position.y };
+		float distance = origin_position.DistanceTo(clear_position);
+		fPoint direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
+
+		tentacle.position.x += direction.x*2;
+		tentacle.position.y += direction.y;
+
+		if (origin_position.DistanceTo(tentacle.position) >= distance)
+		{
+			tentacle.position = clear_position;
+		}
+		
+		clear_position = { position.x,position.y + 75 };
+		origin_position = { tentacle2.position.x, tentacle2.position.y };
+		distance = origin_position.DistanceTo(clear_position);
+		direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
+
+		tentacle2.position.x += direction.x * 2;
+		tentacle2.position.y += direction.y;
+
+		if (origin_position.DistanceTo(tentacle2.position) >= distance)
+		{
+			tentacle2.position = clear_position;
+		}
 
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 		{
 			current_animation = &idle;
 			position.x += speed.x;
-			//tentacle.position.x -= speed.x;
+			tentacle.position.x -= speed.x;
+			tentacle2.position.x -= speed.x;
 			if (((position.x + 36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
 			state = idl;
 		}
@@ -163,7 +198,8 @@ update_status ModulePlayer::Update()
 		{
 			current_animation = &idle;
 			position.x -= speed.x;
-			//tentacle.position.x += speed.x;
+			tentacle.position.x += speed.x;
+			tentacle2.position.x += speed.x;
 			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
 			state = idl;
 		}
@@ -173,6 +209,8 @@ update_status ModulePlayer::Update()
 				current_animation = &up;
 			}
 			position.y -= speed.x;
+			tentacle.position.y += speed.x;
+			tentacle2.position.y += speed.x;
 			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
 			state = top;
 		}
@@ -183,6 +221,8 @@ update_status ModulePlayer::Update()
 				current_animation = &down;
 			}
 			position.y += speed.x;
+			tentacle.position.y -= speed.x;
+			tentacle2.position.y -= speed.x;
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
 			state = bot;
 		}

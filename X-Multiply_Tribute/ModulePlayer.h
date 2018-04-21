@@ -14,7 +14,7 @@ struct Tentacle
 {
 	Collider* collider = nullptr;
 	Animation anim;
-	iPoint position;
+	fPoint position;
 	int w, h = 0;
 
 	Tentacle();
