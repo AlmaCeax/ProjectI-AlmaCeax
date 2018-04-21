@@ -43,7 +43,7 @@ bool ModulePlayer::Init() {
 
 	death.PushBack({ 11, 386, 40, 42 });
 	death.PushBack({ 67, 386, 40, 42 });
-	death.PushBack({ 150, 386, 40, 42 });
+	death.PushBack({ 120, 386, 40, 42 });
 	death.PushBack({ 174, 386, 40, 42 });
 	death.PushBack({ 219, 386, 40, 42 });
 	death.loop = false;
@@ -51,8 +51,8 @@ bool ModulePlayer::Init() {
 
 	tentacle.anim.PushBack({ 90, 18, 19, 9 });
 	tentacle.anim.PushBack({ 122, 19, 19, 7 });
-	tentacle.anim.PushBack({ 154, 50, 19, 6 });
-	tentacle.anim.PushBack({ 186, 50, 19, 7 });
+	tentacle.anim.PushBack({ 154, 20, 19, 6 });
+	tentacle.anim.PushBack({ 186, 20, 19, 7 });
 	tentacle.anim.PushBack({ 218, 19, 19, 9 });
 	tentacle.anim.PushBack({ 10, 34, 19, 10 });
 	tentacle.anim.loop = true;
@@ -60,8 +60,8 @@ bool ModulePlayer::Init() {
 
 	tentacle2.anim.PushBack({ 90, 18, 19, 9 });
 	tentacle2.anim.PushBack({ 122, 19, 19, 7 });
-	tentacle2.anim.PushBack({ 154, 50, 19, 6 });
-	tentacle2.anim.PushBack({ 186, 50, 19, 7 });
+	tentacle2.anim.PushBack({ 154, 20, 19, 6 });
+	tentacle2.anim.PushBack({ 186, 20, 19, 7 });
 	tentacle2.anim.PushBack({ 218, 19, 19, 9 });
 	tentacle2.anim.PushBack({ 10, 34, 19, 10 });
 	tentacle2.anim.loop = true;
@@ -96,12 +96,12 @@ bool ModulePlayer::Start()
 	tentacle.position = { position.x, position.y -50};
 	tentacle2.position = { position.x, position.y +50};
 
-	tentacle.coll = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
-	tentacle2.coll = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
+	tentacle.collider = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
+	tentacle2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
 
 	if (!activePU[TENTACLES]) {
-		tentacle.coll->enable = false;
-		tentacle2.coll->enable = false;
+		tentacle.collider->enable = false;
+		tentacle2.collider->enable = false;
 	}
 
 	current_animation = &idle;
@@ -120,17 +120,11 @@ bool ModulePlayer::CleanUp() {
 	App->audio->UnloadSFX(deadsfx);
 	deadsfx = nullptr;
 
-	Mix_PlayChannel(-1, deadsfx, 0);
-	for (int i = 0; i < sizeof(activePU); i++)
-	{
-		activePU[i] = false;
-	}
+	if(tentacle.collider)tentacle.collider->to_delete = true;
+	tentacle.collider = nullptr;
 
-	if(tentacle.coll) tentacle.coll->to_delete = true;
-	tentacle.coll = nullptr;
-
-	if (tentacle2.coll) tentacle2.coll->to_delete = true;
-	tentacle2.coll = nullptr;
+	if (tentacle2.collider)tentacle2.collider->to_delete = true;
+	tentacle2.collider = nullptr;
 
 	return true;
 }
@@ -184,45 +178,36 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		fPoint clear_position = {position.x,position.y - 50};
+		fPoint clear_position = {position.x,position.y-50};
 		fPoint origin_position = { tentacle.position.x, tentacle.position.y };
 		float distance = origin_position.DistanceTo(clear_position);
-		fPoint direction;
-		if(distance <= 0.01f && distance >= -0.01f) tentacle.position = clear_position;
-		else
+		fPoint direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
+
+		tentacle.position.x += direction.x*2;
+		tentacle.position.y += direction.y;
+
+		tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
+		tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
+
+		if (origin_position.DistanceTo(tentacle.position) >= distance)
 		{
-			 direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
-
-			tentacle.position.x += direction.x * 2;
-			tentacle.position.y += direction.y;
-
-			tentacle.coll->SetPos(tentacle.position.x, tentacle.position.y);
-			tentacle2.coll->SetPos(tentacle2.position.x, tentacle2.position.y);
-
-			if (origin_position.DistanceTo(tentacle.position) >= distance)
-			{
-				tentacle.position = clear_position;
-			}
+			tentacle.position = clear_position;
 		}
 		
 		clear_position = { position.x,position.y + 50 };
 		origin_position = { tentacle2.position.x, tentacle2.position.y };
 		distance = origin_position.DistanceTo(clear_position);
+		direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
 
-		if (distance <= 0.01f && distance >= -0.01f) tentacle2.position = clear_position;
-		else {
-			direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
+		tentacle2.position.x += direction.x * 2;
+		tentacle2.position.y += direction.y;
 
-			tentacle2.position.x += direction.x * 2;
-			tentacle2.position.y += direction.y;
-
-			if (origin_position.DistanceTo(tentacle2.position) >= distance)
-			{
-				tentacle2.position = clear_position;
-			}
+		if (origin_position.DistanceTo(tentacle2.position) >= distance)
+		{
+			tentacle2.position = clear_position;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 		{
 			current_animation = &idle;
 			position.x += speed.x;
@@ -259,7 +244,7 @@ update_status ModulePlayer::Update()
 			if (((position.x + 36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
 			state = idl;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		{
 			current_animation = &idle;
 			position.x -= speed.x;
@@ -297,7 +282,7 @@ update_status ModulePlayer::Update()
 			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
 			state = idl;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
 		{
 			if (activePU[TENTACLES] == false) {
 				current_animation = &up;
@@ -322,7 +307,7 @@ update_status ModulePlayer::Update()
 			state = top;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 		{
 			if (activePU[TENTACLES] == false) {
 				current_animation = &down;
@@ -388,8 +373,8 @@ update_status ModulePlayer::Update()
 		if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN && !dead) Die();
 		if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && !activePU[TENTACLES]) {
 			activePU[TENTACLES] = true;
-			App->player->tentacle.coll->enable = true;
-			App->player->tentacle2.coll->enable = true;
+			App->player->tentacle.collider->enable = true;
+			App->player->tentacle2.collider->enable = true;
 		}
 
 
@@ -404,7 +389,7 @@ update_status ModulePlayer::Update()
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
-	if (collider != nullptr) collider->SetPos(position.x, position.y);
+	if(collider != nullptr) collider->SetPos(position.x, position.y);
 	App->render->Blit(graphics, position.x, position.y, &r);
 	if (activePU[TENTACLES])
 	{
@@ -435,10 +420,20 @@ void ModulePlayer::Die() {
 	speed.x = 2;
 	speed.y = 2;
 	
+	Mix_PlayChannel(-1, deadsfx, 0);
+	for (int i = 0; i < sizeof(activePU); i++)
+	{
+		activePU[i] = false;
+	}
 }
 
 void ModulePlayer::BlitPlayer() {
 	App->render->Blit(graphics, position.x, position.y, &current_animation->GetCurrentFrame());
+	if (activePU[TENTACLES])
+	{
+		App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
+		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
+	}
 }
 
 // -------------------------------------------------------------
@@ -449,6 +444,6 @@ Tentacle::Tentacle()
 
 Tentacle::~Tentacle()
 {
-	if (coll != nullptr)
-		coll->to_delete = true;
+	if (collider != nullptr)
+		collider->to_delete = true;
 }
