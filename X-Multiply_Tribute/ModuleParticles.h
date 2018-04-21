@@ -58,6 +58,7 @@ private:
 
 public:
 	Particle baseShot;
+	Particle tentacleBaseShot;
 	Particle baseShotExp;
 	Particle baseShotColExp;
 	Particle bombshot;

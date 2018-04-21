@@ -51,6 +51,7 @@ public:
 	Collider* collider;
 	Tentacle tentacle;
 	Tentacle tentacle2;
+	//Alma Ceax
 
 	Animation* current_animation = nullptr;
 	Animation up;
@@ -65,6 +66,7 @@ private:
 	Animation death;
 	Animation ejecting;
 	int cooldown = 0;
+	int cooldownBombs = 0;
 	uint startime;
 
 };

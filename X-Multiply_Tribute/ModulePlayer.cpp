@@ -222,83 +222,75 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT  )
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 		{
 			current_animation = &idle;
 			position.x += speed.x;
-			
-			if (activePU[TENTACLES])
+			if (tentacle.position.x >= position.x - 75) {
+				tentacle.position.x -= (speed.x*2);
+			}
+			else
 			{
-				if (tentacle.position.x >= position.x - 75) {
-					tentacle.position.x -= (speed.x * 2);
+				tentacle.position.x += speed.x;
+				if (tentacle.position.y <= position.y-5) {
+					tentacle.position.y += speed.x*2;
 				}
 				else
 				{
-					tentacle.position.x += speed.x;
-					if (tentacle.position.y <= position.y - 5) {
-						tentacle.position.y += speed.x * 2;
-					}
-					else
-					{
-						tentacle.position.y -= speed.x;
-					}
+					tentacle.position.y -= speed.x;
 				}
-
-				if (tentacle2.position.x >= position.x - 75) {
-					tentacle2.position.x -= speed.x;
+			}
+			
+			if (tentacle2.position.x >= position.x - 75) {
+				tentacle2.position.x -= speed.x*2;
+			}
+			else
+			{
+				tentacle2.position.x += speed.x;
+				if (tentacle2.position.y >= position.y+5) {
+					tentacle2.position.y -= speed.x*2;
 				}
 				else
 				{
-					tentacle2.position.x += speed.x;
-					if (tentacle2.position.y >= position.y + 5) {
-						tentacle2.position.y -= speed.x * 2;
-					}
-					else
-					{
-						tentacle2.position.y += speed.x;
-					}
+					tentacle2.position.y += speed.x;
 				}
 			}
 
 			if (((position.x + 36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
 			state = idl;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT )
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 		{
 			current_animation = &idle;
 			position.x -= speed.x;
 
-			if (activePU[TENTACLES])
+			if (tentacle.position.x <= position.x + 75) {
+			tentacle.position.x += (speed.x*2);
+			}
+			else
 			{
-				if (tentacle.position.x <= position.x + 75) {
-					tentacle.position.x += (speed.x * 2);
+				tentacle.position.x -= speed.x;
+				if (tentacle.position.y <= position.y-5) {
+					tentacle.position.y += speed.x*2;
 				}
 				else
 				{
-					tentacle.position.x -= speed.x;
-					if (tentacle.position.y <= position.y - 5) {
-						tentacle.position.y += speed.x * 2;
-					}
-					else
-					{
-						tentacle.position.y -= speed.x;
-					}
+					tentacle.position.y -= speed.x;
 				}
+			}
 
-				if (tentacle2.position.x <= position.x + 75) {
-					tentacle2.position.x += speed.x * 2;
+			if (tentacle2.position.x <= position.x + 75) {
+				tentacle2.position.x += speed.x*2;
+			}
+			else
+			{
+				tentacle2.position.x -= speed.x;
+				if (tentacle2.position.y >= position.y+5) {
+					tentacle2.position.y -= speed.x*2;
 				}
 				else
 				{
-					tentacle2.position.x -= speed.x;
-					if (tentacle2.position.y >= position.y + 5) {
-						tentacle2.position.y -= speed.x * 2;
-					}
-					else
-					{
-						tentacle2.position.y += speed.x;
-					}
+					tentacle2.position.y += speed.x;
 				}
 			}
 
@@ -311,25 +303,21 @@ update_status ModulePlayer::Update()
 				current_animation = &up;
 			}
 			position.y -= speed.x;
-
-			if (activePU[TENTACLES])
-			{
-				if (tentacle2.position.y <= position.y + 75) {
-					tentacle2.position.y += speed.x;
-				}
-				else
-				{
-					tentacle2.position.y -= speed.x;
-				}
-				if (tentacle.position.y <= position.y + 15) {
-					tentacle.position.y += speed.x;
-				}
-				else
-				{
-					tentacle.position.y -= speed.x;
-				}
+			if (tentacle2.position.y <= position.y + 75) {
+				tentacle2.position.y += speed.x;
 			}
-
+			else
+			{
+				tentacle2.position.y -= speed.x;
+			}
+			if (tentacle.position.y <= position.y + 15) {
+				tentacle.position.y += speed.x;
+			}
+			else
+			{
+				tentacle.position.y -= speed.x;
+			}
+			
 			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
 			state = top;
 		}
@@ -340,63 +328,70 @@ update_status ModulePlayer::Update()
 				current_animation = &down;
 			}
 			position.y += speed.x;
-
-			if (activePU[TENTACLES])
-			{
-				if (tentacle.position.y >= position.y - 75) {
-					tentacle.position.y -= speed.x;
-				}
-				else
-				{
-					tentacle.position.y += speed.x;
-				}
-				if (tentacle2.position.y >= position.y - 15) {
-					tentacle2.position.y -= speed.x;
-				}
-				else
-				{
-					tentacle2.position.y += speed.x;
-				}
+			if (tentacle.position.y >= position.y - 75) {
+				tentacle.position.y -= speed.x;
 			}
-
+			else
+			{
+				tentacle.position.y += speed.x;
+			}
+			if (tentacle2.position.y >= position.y - 15) {
+				tentacle2.position.y -= speed.x;
+			}
+			else
+			{
+				tentacle2.position.y += speed.x;
+			}
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
 			state = bot;
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 		{
+
 			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 			if (activePU[TENTACLES])
 			{
 				App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
-				App->particles->AddParticle(App->particles->baseShot, tentacle.position.x + 25, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
 
 				App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
-				App->particles->AddParticle(App->particles->baseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
 			}
+			cooldown = 0;
+			
 		}
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
 		{
-			if (cooldown < 25) {
-				cooldown++;
+
+			if (activePU[BOMB] == true && cooldownBombs >= 40)
+			{
+				App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+				cooldownBombs = 0;
 			}
-			else {
+			if (cooldown >= 25)
+			{
 				App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 				App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 				if (activePU[TENTACLES])
 				{
 					App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
-					App->particles->AddParticle(App->particles->baseShot, tentacle.position.x + 25, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
+					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT);
 
 					App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
-					App->particles->AddParticle(App->particles->baseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
+					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
 				}
-				if (activePU[BOMB] == true)App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 				cooldown = 0;
 			}
 		}
 		if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN && !dead) Die();
+		if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && !activePU[TENTACLES]) {
+			activePU[TENTACLES] = true;
+			App->player->tentacle.coll->enable = true;
+			App->player->tentacle2.coll->enable = true;
+		}
+
 
 		if (last_animation != current_animation) {
 			current_animation->Reset();
@@ -417,6 +412,15 @@ update_status ModulePlayer::Update()
 		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
 
 	}
+
+	if (cooldown < 25) {
+		cooldown++;
+	}
+
+	if (cooldownBombs < 40) {
+		cooldownBombs++;
+	}
+
 	return UPDATE_CONTINUE;
 }
 

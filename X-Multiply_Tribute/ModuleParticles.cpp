@@ -45,6 +45,13 @@ ModuleParticles::ModuleParticles()
 	baseShot.speed = { 10,0 };
 	baseShot.id = 1;
 
+	tentacleBaseShot.anim.PushBack({ 115, 38, 13, 5 });
+	tentacleBaseShot.anim.loop = false;
+	tentacleBaseShot.anim.speed = 0.3f;
+	tentacleBaseShot.life = 1000;
+	tentacleBaseShot.speed = { 10,0 };
+	tentacleBaseShot.id = 1;
+
 	playerBoost.h = 4;
 	playerBoost.anim.PushBack({ 251, 208, 42, 14 });
 	playerBoost.anim.PushBack({ 295, 208, 42, 13 });

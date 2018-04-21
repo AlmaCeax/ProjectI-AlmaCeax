@@ -48,6 +48,7 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 - D: Move to right
 - SPACEBAR: Shoot
 - F1: Show colliders
+- F2: Turn on Tentacles
 - F3: Win
 - F4: Lose
 - F5: God Mode
