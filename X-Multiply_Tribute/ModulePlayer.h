@@ -52,15 +52,16 @@ public:
 	Tentacle tentacle;
 	Tentacle tentacle2;
 
+	Animation* current_animation = nullptr;
+	Animation up;
+	Animation down;
+	Animation idle;
+
 private:
 	void Die();
 
 	SDL_Texture * graphics = nullptr;
-	Animation* current_animation = nullptr;
 	Animation* last_animation = nullptr;
-	Animation idle;
-	Animation up;
-	Animation down;
 	Animation death;
 	Animation ejecting;
 	int cooldown = 0;
