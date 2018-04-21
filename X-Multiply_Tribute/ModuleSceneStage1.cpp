@@ -105,7 +105,7 @@ bool ModuleSceneStage1::Start() {
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 615, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 400, 100, false, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 450, 100, false, 1);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 80);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 120);

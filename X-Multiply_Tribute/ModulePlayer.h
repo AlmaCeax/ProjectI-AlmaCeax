@@ -49,6 +49,8 @@ public:
 	bool startBoost = false;
 	void BlitPlayer();
 	Collider* collider;
+	Tentacle tentacle;
+	Tentacle tentacle2;
 
 private:
 	void Die();
@@ -61,8 +63,6 @@ private:
 	Animation down;
 	Animation death;
 	Animation ejecting;
-	Tentacle tentacle;
-	Tentacle tentacle2;
 	int cooldown = 0;
 	uint startime;
 

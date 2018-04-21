@@ -93,10 +93,16 @@ bool ModulePlayer::Start()
 	SDL_Rect rect_tentaclecol2 = { tentacle2.position.x,tentacle2.position.y,19,9 };
 
 	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
+	tentacle.position = { position.x, position.y -75};
+	tentacle2.position = { position.x, position.y +75};
+
 	tentacle.collider = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
-	tentacle.position = { -20, 0 };
 	tentacle2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
 
+	if (!activePU[TENTACLES]) {
+		tentacle.collider->enable = false;
+		tentacle2.collider->enable = false;
+	}
 
 	current_animation = &idle;
 	state = idl;
@@ -179,6 +185,9 @@ update_status ModulePlayer::Update()
 
 		tentacle.position.x += direction.x*2;
 		tentacle.position.y += direction.y;
+
+		tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
+		tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
 
 		if (origin_position.DistanceTo(tentacle.position) >= distance)
 		{
@@ -375,8 +384,6 @@ update_status ModulePlayer::Update()
 	{
 		App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
 		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
-		tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
-		tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
 
 	}
 	return UPDATE_CONTINUE;
