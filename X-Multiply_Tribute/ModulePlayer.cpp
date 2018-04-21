@@ -179,36 +179,45 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		fPoint clear_position = {position.x,position.y-50};
+		fPoint clear_position = { position.x,position.y - 50 };
 		fPoint origin_position = { tentacle.position.x, tentacle.position.y };
 		float distance = origin_position.DistanceTo(clear_position);
-		fPoint direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
-
-		tentacle.position.x += direction.x*2;
-		tentacle.position.y += direction.y;
-
-		tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
-		tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
-
-		if (origin_position.DistanceTo(tentacle.position) >= distance)
+		fPoint direction;
+		if (distance <= 0.01f && distance >= -0.01f) tentacle.position = clear_position;
+		else
 		{
-			tentacle.position = clear_position;
+			direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
+
+			tentacle.position.x += direction.x * 2;
+			tentacle.position.y += direction.y;
+
+			tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
+			tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
+
+			if (origin_position.DistanceTo(tentacle.position) >= distance)
+			{
+				tentacle.position = clear_position;
+			}
 		}
-		
+
 		clear_position = { position.x,position.y + 50 };
 		origin_position = { tentacle2.position.x, tentacle2.position.y };
 		distance = origin_position.DistanceTo(clear_position);
-		direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
 
-		tentacle2.position.x += direction.x * 2;
-		tentacle2.position.y += direction.y;
+		if (distance <= 0.01f && distance >= -0.01f) tentacle2.position = clear_position;
+		else {
+			direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
 
-		if (origin_position.DistanceTo(tentacle2.position) >= distance)
-		{
-			tentacle2.position = clear_position;
+			tentacle2.position.x += direction.x * 2;
+			tentacle2.position.y += direction.y;
+
+			if (origin_position.DistanceTo(tentacle2.position) >= distance)
+			{
+				tentacle2.position = clear_position;
+			}
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 		{
 			current_animation = &idle;
 			position.x += speed.x;
@@ -245,7 +254,7 @@ update_status ModulePlayer::Update()
 			if (((position.x + 36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
 			state = idl;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 		{
 			current_animation = &idle;
 			position.x -= speed.x;
@@ -283,7 +292,7 @@ update_status ModulePlayer::Update()
 			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
 			state = idl;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 		{
 			if (activePU[TENTACLES] == false) {
 				current_animation = &up;
@@ -308,7 +317,7 @@ update_status ModulePlayer::Update()
 			state = top;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 		{
 			if (activePU[TENTACLES] == false) {
 				current_animation = &down;
