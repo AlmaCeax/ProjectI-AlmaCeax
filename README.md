@@ -51,7 +51,5 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 - F3: Win
 - F4: Lose
 - F5: God Mode
-- F6: Previous Stage
-- F7: Next Stage
 - ESC: Quit game
 
