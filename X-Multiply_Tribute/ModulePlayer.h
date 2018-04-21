@@ -10,6 +10,19 @@ struct SDL_Texture;
 struct Mix_Chunk;
 struct Collider;
 
+struct Tentacle
+{
+	Collider* collider = nullptr;
+	Animation anim;
+	iPoint position;
+	int w, h = 0;
+
+	Tentacle();
+	~Tentacle();
+	//void Update();
+};
+
+
 class ModulePlayer : public Module
 {
 public:
@@ -35,7 +48,6 @@ public:
 	bool injecting = true;
 	bool startBoost = false;
 	void BlitPlayer();
-
 	Collider* collider;
 
 private:
@@ -49,6 +61,8 @@ private:
 	Animation down;
 	Animation death;
 	Animation ejecting;
+	Tentacle tentacle;
+	Tentacle tentacle2;
 	int cooldown = 0;
 	uint startime;
 
