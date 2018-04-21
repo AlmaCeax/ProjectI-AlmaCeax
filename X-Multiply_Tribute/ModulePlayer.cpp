@@ -49,6 +49,23 @@ bool ModulePlayer::Init() {
 	death.loop = false;
 	death.speed = 0.3f;
 
+	tentacle.anim.PushBack({ 90, 18, 19, 9 });
+	tentacle.anim.PushBack({ 122, 19, 19, 7 });
+	tentacle.anim.PushBack({ 154, 20, 19, 6 });
+	tentacle.anim.PushBack({ 186, 20, 19, 7 });
+	tentacle.anim.PushBack({ 218, 19, 19, 9 });
+	tentacle.anim.PushBack({ 10, 34, 19, 10 });
+	tentacle.anim.loop = true;
+	tentacle.anim.speed = 0.2f;
+
+	tentacle2.anim.PushBack({ 90, 18, 19, 9 });
+	tentacle2.anim.PushBack({ 122, 19, 19, 7 });
+	tentacle2.anim.PushBack({ 154, 20, 19, 6 });
+	tentacle2.anim.PushBack({ 186, 20, 19, 7 });
+	tentacle2.anim.PushBack({ 218, 19, 19, 9 });
+	tentacle2.anim.PushBack({ 10, 34, 19, 10 });
+	tentacle2.anim.loop = true;
+	tentacle2.anim.speed = 0.2f;
 	return true;
 }
 
@@ -129,14 +146,16 @@ update_status ModulePlayer::Update()
 		current_animation = &idle;
 		state = idl;
 
-		if (activePU[TENTACLES] == true) {
-			
-		}
+			tentacle.position.x = position.x;
+			tentacle.position.y = position.y - 75;
+			tentacle2.position.x = position.x;
+			tentacle2.position.y = position.y + 75;
 
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 		{
 			current_animation = &idle;
 			position.x += speed.x;
+			//tentacle.position.x -= speed.x;
 			if (((position.x + 36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
 			state = idl;
 		}
@@ -144,6 +163,7 @@ update_status ModulePlayer::Update()
 		{
 			current_animation = &idle;
 			position.x -= speed.x;
+			//tentacle.position.x += speed.x;
 			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
 			state = idl;
 		}
@@ -171,6 +191,12 @@ update_status ModulePlayer::Update()
 		{
 			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+
+			App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
+			App->particles->AddParticle(App->particles->baseShot, tentacle.position.x + 25, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
+
+			App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
+			App->particles->AddParticle(App->particles->baseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
 		}
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
 		{
@@ -180,6 +206,12 @@ update_status ModulePlayer::Update()
 			else {
 				App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 				App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+
+				App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
+				App->particles->AddParticle(App->particles->baseShot, tentacle.position.x + 25, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
+
+				App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
+				App->particles->AddParticle(App->particles->baseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
 				if (activePU[BOMB] == true)App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 				cooldown = 0;
 			}
@@ -199,7 +231,8 @@ update_status ModulePlayer::Update()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	if(collider != nullptr) collider->SetPos(position.x, position.y);
 	App->render->Blit(graphics, position.x, position.y, &r);
-
+	App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
+	App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
 	return UPDATE_CONTINUE;
 }
 
@@ -222,4 +255,16 @@ void ModulePlayer::Die() {
 
 void ModulePlayer::BlitPlayer() {
 	App->render->Blit(graphics, position.x, position.y, &idle.GetCurrentFrame());
+}
+
+// -------------------------------------------------------------
+// -------------------------------------------------------------
+
+Tentacle::Tentacle()
+{}
+
+Tentacle::~Tentacle()
+{
+	if (collider != nullptr)
+		collider->to_delete = true;
 }

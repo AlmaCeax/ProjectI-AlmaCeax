@@ -49,15 +49,6 @@ ModulePowerUPS::ModulePowerUPS()
 	tentacles.type = TENTACLES;
 	tentacles.enabled = false;
 
-	tentacle.anim.PushBack({ 90, 18, 19, 9 });
-	tentacle.anim.PushBack({ 122, 19, 19, 7 });
-	tentacle.anim.PushBack({ 154, 20, 19, 6 });
-	tentacle.anim.PushBack({ 186, 20, 19, 7 });
-	tentacle.anim.PushBack({ 218, 19, 19, 9 });
-	tentacle.anim.PushBack({ 10, 34, 19, 10 });
-	tentacle.anim.loop = true;
-	tentacle.anim.speed = 0.2f;
-
 }
 
 ModulePowerUPS::~ModulePowerUPS()
