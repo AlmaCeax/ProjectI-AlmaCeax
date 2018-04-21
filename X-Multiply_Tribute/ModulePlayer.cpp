@@ -224,9 +224,9 @@ update_status ModulePlayer::Update()
 			}	
 			else
 			{
-				fPoint clear_position = { position.x - 50,tentacle.position.y };
-				fPoint origin_position = { tentacle.position.x, tentacle.position.y };
-				float distance = origin_position.DistanceTo(clear_position);
+				clear_position = { position.x - 50,tentacle.position.y };
+				origin_position = { tentacle.position.x, tentacle.position.y };
+				distance = origin_position.DistanceTo(clear_position);
 				if (5 >= distance)
 				{
 					tentacle.position = clear_position;
@@ -250,9 +250,9 @@ update_status ModulePlayer::Update()
 			}
 			else
 			{
-				fPoint clear_position = { position.x - 50,tentacle2.position.y };
-				fPoint origin_position = { tentacle2.position.x, tentacle2.position.y };
-				float distance = origin_position.DistanceTo(clear_position);
+				clear_position = { position.x - 50,tentacle2.position.y };
+				origin_position = { tentacle2.position.x, tentacle2.position.y };
+				distance = origin_position.DistanceTo(clear_position);
 				if (5 >= distance)
 				{
 					tentacle2.position = clear_position;
@@ -282,9 +282,9 @@ update_status ModulePlayer::Update()
 			}
 			else
 			{
-				fPoint clear_position = { position.x + 50,tentacle.position.y };
-				fPoint origin_position = { tentacle.position.x, tentacle.position.y };
-				float distance = origin_position.DistanceTo(clear_position);
+				clear_position = { position.x + 50,tentacle.position.y };
+				origin_position = { tentacle.position.x, tentacle.position.y };
+				distance = origin_position.DistanceTo(clear_position);
 				if (5 >= distance)
 				{
 					tentacle.position = clear_position;
@@ -307,9 +307,9 @@ update_status ModulePlayer::Update()
 			}
 			else
 			{
-				fPoint clear_position = { position.x + 50,tentacle2.position.y };
-				fPoint origin_position = { tentacle2.position.x, tentacle2.position.y };
-				float distance = origin_position.DistanceTo(clear_position);
+				clear_position = { position.x + 50,tentacle2.position.y };
+				origin_position = { tentacle2.position.x, tentacle2.position.y };
+				distance = origin_position.DistanceTo(clear_position);
 				if (5 >= distance)
 				{
 					tentacle2.position = clear_position;
@@ -345,10 +345,38 @@ update_status ModulePlayer::Update()
 			{
 				tentacle2.position = clear_position;
 			}
-			if (tentacle.position.y < position.y+5) {
+			clear_position = { position.x - 50,tentacle2.position.y };
+			origin_position = { tentacle2.position.x, tentacle2.position.y };
+			distance = origin_position.DistanceTo(clear_position);
+			if (5 >= distance)
+			{
+				tentacle2.position = clear_position;
+			}
+			clear_position = { position.x + 50,tentacle2.position.y };
+			origin_position = { tentacle2.position.x, tentacle2.position.y };
+			distance = origin_position.DistanceTo(clear_position);
+			if (5 >= distance)
+			{
+				tentacle2.position = clear_position;
+			}
+			if (tentacle.position.y < position.y + 5) {
 				tentacle.position.y += speed.x;
 			}
-			clear_position = { tentacle.position.x,position.y+5};
+			clear_position = { tentacle.position.x,position.y + 5};
+			origin_position = { tentacle.position.x, tentacle.position.y };
+			distance = origin_position.DistanceTo(clear_position);
+			if (5 >= distance)
+			{
+				tentacle.position = clear_position;
+			}
+			clear_position = { position.x - 50,tentacle.position.y };
+			origin_position = { tentacle.position.x, tentacle.position.y };
+			distance = origin_position.DistanceTo(clear_position);
+			if (5 >= distance)
+			{
+				tentacle.position = clear_position;
+			}
+			clear_position = { position.x + 50,tentacle.position.y };
 			origin_position = { tentacle.position.x, tentacle.position.y };
 			distance = origin_position.DistanceTo(clear_position);
 			if (5 >= distance)
@@ -376,16 +404,40 @@ update_status ModulePlayer::Update()
 			{
 				tentacle.position = clear_position;
 			}
+			clear_position = { position.x - 50,tentacle.position.y };
+			origin_position = { tentacle.position.x, tentacle.position.y };
+			distance = origin_position.DistanceTo(clear_position);
+			if (5 >= distance)
+			{
+				tentacle.position = clear_position;
+			}
+			clear_position = { position.x + 50,tentacle.position.y };
+			origin_position = { tentacle.position.x, tentacle.position.y };
+			distance = origin_position.DistanceTo(clear_position);
+			if (5 >= distance)
+			{
+				tentacle.position = clear_position;
+			}
 			if (tentacle2.position.y >= position.y - 5) {
 				tentacle2.position.y -= speed.x;
 			}
-			clear_position = { tentacle2.position.x,position.y -5};
+			clear_position = { tentacle2.position.x,position.y - 5};
 			origin_position = { tentacle2.position.x, tentacle2.position.y };
 			distance = origin_position.DistanceTo(clear_position);
 			if (5 >= distance)
 			{
 				tentacle2.position = clear_position;
 			}
+			clear_position = { position.x - 50,tentacle2.position.y };
+			origin_position = { tentacle2.position.x, tentacle2.position.y };
+			distance = origin_position.DistanceTo(clear_position);
+			if (5 >= distance)
+			{
+				tentacle2.position = clear_position;
+			}
+			clear_position = { position.x + 50,tentacle2.position.y };
+			origin_position = { tentacle2.position.x, tentacle2.position.y };
+			distance = origin_position.DistanceTo(clear_position);
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
 			state = bot;
 		}
@@ -398,7 +450,7 @@ update_status ModulePlayer::Update()
 			if (activePU[TENTACLES])
 			{
 				App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
-				App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT);
 
 				App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
 				App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
