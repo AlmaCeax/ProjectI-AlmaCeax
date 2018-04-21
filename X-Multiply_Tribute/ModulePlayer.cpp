@@ -196,7 +196,7 @@ update_status ModulePlayer::Update()
 			else
 			{
 				tentacle.position.x += speed.x;
-				if (tentacle.position.y <= position.y) {
+				if (tentacle.position.y <= position.y-5) {
 					tentacle.position.y += speed.x*2;
 				}
 				else
@@ -211,7 +211,7 @@ update_status ModulePlayer::Update()
 			else
 			{
 				tentacle2.position.x += speed.x;
-				if (tentacle2.position.y >= position.y) {
+				if (tentacle2.position.y >= position.y+5) {
 					tentacle2.position.y -= speed.x*2;
 				}
 				else
@@ -234,7 +234,7 @@ update_status ModulePlayer::Update()
 			else
 			{
 				tentacle.position.x -= speed.x;
-				if (tentacle.position.y <= position.y) {
+				if (tentacle.position.y <= position.y-5) {
 					tentacle.position.y += speed.x*2;
 				}
 				else
@@ -249,7 +249,7 @@ update_status ModulePlayer::Update()
 			else
 			{
 				tentacle2.position.x -= speed.x;
-				if (tentacle2.position.y >= position.y) {
+				if (tentacle2.position.y >= position.y+5) {
 					tentacle2.position.y -= speed.x*2;
 				}
 				else
