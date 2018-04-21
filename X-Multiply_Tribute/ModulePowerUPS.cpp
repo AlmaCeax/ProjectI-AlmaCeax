@@ -168,7 +168,7 @@ void PowerUP::Effect()
 	switch (type)
 	{
 	case TENTACLES:
-		App->player->activePU[TENTACLES] = true;
+		if(!App->player->activePU[TENTACLES])App->player->activePU[TENTACLES] = true;
 		App->player->tentacle.collider->enable = true;
 		App->player->tentacle2.collider->enable = true;
 
