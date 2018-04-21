@@ -169,8 +169,8 @@ void PowerUP::Effect()
 	{
 	case TENTACLES:
 		App->player->activePU[TENTACLES] = true;
-		App->player->tentacle.collider->enable = true;
-		App->player->tentacle2.collider->enable = true;
+		App->player->tentacle.coll->enable = true;
+		App->player->tentacle2.coll->enable = true;
 
 		break;
 	case LASER:

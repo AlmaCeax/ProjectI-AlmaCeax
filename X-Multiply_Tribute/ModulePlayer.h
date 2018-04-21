@@ -12,7 +12,7 @@ struct Collider;
 
 struct Tentacle
 {
-	Collider* collider = nullptr;
+	Collider* coll = nullptr;
 	Animation anim;
 	fPoint position;
 	int w, h = 0;

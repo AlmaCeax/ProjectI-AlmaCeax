@@ -96,12 +96,12 @@ bool ModulePlayer::Start()
 	tentacle.position = { position.x, position.y -75};
 	tentacle2.position = { position.x, position.y +75};
 
-	tentacle.collider = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
-	tentacle2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
+	tentacle.coll = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
+	tentacle2.coll = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
 
 	if (!activePU[TENTACLES]) {
-		tentacle.collider->enable = false;
-		tentacle2.collider->enable = false;
+		tentacle.coll->enable = false;
+		tentacle2.coll->enable = false;
 	}
 
 	current_animation = &idle;
@@ -120,11 +120,17 @@ bool ModulePlayer::CleanUp() {
 	App->audio->UnloadSFX(deadsfx);
 	deadsfx = nullptr;
 
-	if(tentacle.collider)tentacle.collider->to_delete = true;
-	tentacle.collider = nullptr;
+	Mix_PlayChannel(-1, deadsfx, 0);
+	for (int i = 0; i < sizeof(activePU); i++)
+	{
+		activePU[i] = false;
+	}
 
-	if (tentacle2.collider)tentacle2.collider->to_delete = true;
-	tentacle2.collider = nullptr;
+	if(tentacle.coll) tentacle.coll->to_delete = true;
+	tentacle.coll = nullptr;
+
+	if (tentacle2.coll) tentacle2.coll->to_delete = true;
+	tentacle2.coll = nullptr;
 
 	return true;
 }
@@ -181,31 +187,41 @@ update_status ModulePlayer::Update()
 		fPoint clear_position = {position.x,position.y-75};
 		fPoint origin_position = { tentacle.position.x, tentacle.position.y };
 		float distance = origin_position.DistanceTo(clear_position);
-		fPoint direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
-
-		tentacle.position.x += direction.x*2;
-		tentacle.position.y += direction.y;
-
-		tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
-		tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
-
-		if (origin_position.DistanceTo(tentacle.position) >= distance)
+		fPoint direction;
+		if(distance <= 0.01f && distance >= -0.01f) tentacle.position = clear_position;
+		else
 		{
-			tentacle.position = clear_position;
+			 direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
+
+			tentacle.position.x += direction.x * 2;
+			tentacle.position.y += direction.y;
+
+			tentacle.coll->SetPos(tentacle.position.x, tentacle.position.y);
+			tentacle2.coll->SetPos(tentacle2.position.x, tentacle2.position.y);
+
+			if (origin_position.DistanceTo(tentacle.position) >= distance)
+			{
+				tentacle.position = clear_position;
+			}
 		}
 		
 		clear_position = { position.x,position.y + 75 };
 		origin_position = { tentacle2.position.x, tentacle2.position.y };
 		distance = origin_position.DistanceTo(clear_position);
-		direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
 
-		tentacle2.position.x += direction.x * 2;
-		tentacle2.position.y += direction.y;
+		if (distance <= 0.01f && distance >= -0.01f) tentacle2.position = clear_position;
+		else {
+			direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
 
-		if (origin_position.DistanceTo(tentacle2.position) >= distance)
-		{
-			tentacle2.position = clear_position;
+			tentacle2.position.x += direction.x * 2;
+			tentacle2.position.y += direction.y;
+
+			if (origin_position.DistanceTo(tentacle2.position) >= distance)
+			{
+				tentacle2.position = clear_position;
+			}
 		}
+
 
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT  )
 		{
@@ -393,7 +409,7 @@ update_status ModulePlayer::Update()
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
-	if(collider != nullptr) collider->SetPos(position.x, position.y);
+	if (collider != nullptr) collider->SetPos(position.x, position.y);
 	App->render->Blit(graphics, position.x, position.y, &r);
 	if (activePU[TENTACLES])
 	{
@@ -415,20 +431,10 @@ void ModulePlayer::Die() {
 	speed.x = 2;
 	speed.y = 2;
 	
-	Mix_PlayChannel(-1, deadsfx, 0);
-	for (int i = 0; i < sizeof(activePU); i++)
-	{
-		activePU[i] = false;
-	}
 }
 
 void ModulePlayer::BlitPlayer() {
 	App->render->Blit(graphics, position.x, position.y, &current_animation->GetCurrentFrame());
-	if (activePU[TENTACLES])
-	{
-		App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
-		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
-	}
 }
 
 // -------------------------------------------------------------
@@ -439,6 +445,6 @@ Tentacle::Tentacle()
 
 Tentacle::~Tentacle()
 {
-	if (collider != nullptr)
-		collider->to_delete = true;
+	if (coll != nullptr)
+		coll->to_delete = true;
 }
