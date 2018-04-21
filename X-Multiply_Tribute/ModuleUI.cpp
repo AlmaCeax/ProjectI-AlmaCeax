@@ -42,6 +42,9 @@ bool ModuleUI::Init()
 	life = { 392,0,8,16 };
 	screen = { 0, 0, SCREEN_WIDTH * SCREEN_SIZE, SCREEN_HEIGHT * SCREEN_SIZE };
 
+	current_step = clear_step::none;
+	current_ready_step = ready_step::not;
+
 	return true;
 }
 
@@ -94,12 +97,13 @@ void ModuleUI::ClearUpdate() {
 
 	Uint32 now = SDL_GetTicks() - start_time;
 	float normalized = MIN(1.0f, (float)now / (float)total_time);
+	if (App->player->collider != nullptr) App->player->collider->to_delete = true; // this souldnt be here
 
 	switch (current_step) {
 		case clear_step::fade: {
 			if (now >= total_time) {
 				App->player->canMove = false;
-				clear_position = { (float)((App->render->camera.x + (SCREEN_WIDTH*SCREEN_SIZE / 2))/SCREEN_SIZE)-36, (float)(App->render->camera.y/SCREEN_SIZE)+50 };
+				clear_position = { (float)((App->render->camera.x + (SCREEN_WIDTH*SCREEN_SIZE / 2))/SCREEN_SIZE)-18, (float)(App->render->camera.y/SCREEN_SIZE)+50 };
 				origin_position = { App->player->position.x, App->player->position.y };
 				distance = origin_position.DistanceTo(clear_position);
 				direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
@@ -228,8 +232,10 @@ void ModuleUI::ReadyDone() {
 }
 
 void ModuleUI::StageCleared() {
+	if (current_step != clear_step::none || current_ready_step != ready_step::not) return;
+
 	Mix_PlayMusic(clear_song, false);
-	if(App->player->collider != nullptr) App->player->collider->to_delete = true;
+	//if(App->player->collider != nullptr) App->player->collider->to_delete = true;
 	App->stage1->right = false;
 	total_time = (Uint32)(4.0f * 1000.0f);
 	start_time = SDL_GetTicks();

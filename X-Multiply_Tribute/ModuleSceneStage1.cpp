@@ -494,7 +494,7 @@ void ModuleSceneStage1::injection()
 					else {
 						startAnimationHook.hold = false;
 						if (startAnimationHook.GetCurrentFrameIndex() == 1) {
-							Mix_PlayMusic(music, -1);
+							if(!Mix_PlayingMusic()) Mix_PlayMusic(music, -1);
 							right = true;
 							App->player->injecting = false;
 							App->player->startBoost = true;
