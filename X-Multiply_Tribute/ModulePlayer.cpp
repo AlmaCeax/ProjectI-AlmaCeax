@@ -43,7 +43,7 @@ bool ModulePlayer::Init() {
 
 	death.PushBack({ 11, 386, 40, 42 });
 	death.PushBack({ 67, 386, 40, 42 });
-	death.PushBack({ 120, 386, 40, 42 });
+	death.PushBack({ 150, 386, 40, 42 });
 	death.PushBack({ 174, 386, 40, 42 });
 	death.PushBack({ 219, 386, 40, 42 });
 	death.loop = false;
@@ -51,8 +51,8 @@ bool ModulePlayer::Init() {
 
 	tentacle.anim.PushBack({ 90, 18, 19, 9 });
 	tentacle.anim.PushBack({ 122, 19, 19, 7 });
-	tentacle.anim.PushBack({ 154, 20, 19, 6 });
-	tentacle.anim.PushBack({ 186, 20, 19, 7 });
+	tentacle.anim.PushBack({ 154, 50, 19, 6 });
+	tentacle.anim.PushBack({ 186, 50, 19, 7 });
 	tentacle.anim.PushBack({ 218, 19, 19, 9 });
 	tentacle.anim.PushBack({ 10, 34, 19, 10 });
 	tentacle.anim.loop = true;
@@ -60,8 +60,8 @@ bool ModulePlayer::Init() {
 
 	tentacle2.anim.PushBack({ 90, 18, 19, 9 });
 	tentacle2.anim.PushBack({ 122, 19, 19, 7 });
-	tentacle2.anim.PushBack({ 154, 20, 19, 6 });
-	tentacle2.anim.PushBack({ 186, 20, 19, 7 });
+	tentacle2.anim.PushBack({ 154, 50, 19, 6 });
+	tentacle2.anim.PushBack({ 186, 50, 19, 7 });
 	tentacle2.anim.PushBack({ 218, 19, 19, 9 });
 	tentacle2.anim.PushBack({ 10, 34, 19, 10 });
 	tentacle2.anim.loop = true;
@@ -93,8 +93,9 @@ bool ModulePlayer::Start()
 	SDL_Rect rect_tentaclecol2 = { tentacle2.position.x,tentacle2.position.y,19,9 };
 
 	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
-	tentacle.position = { position.x, position.y - 75};
-	tentacle2.position = { position.x, position.y + 75};
+
+	tentacle.position = { position.x, position.y -50};
+	tentacle2.position = { position.x, position.y +50};
 
 	tentacle.coll = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
 	tentacle2.coll = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
@@ -157,9 +158,9 @@ update_status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->playerBoost, position.x - 42, position.y, COLLIDER_NONE, { 3,0 });
 
 			tentacle2.position.x = position.x;
-			tentacle2.position.y = position.y + 75;
+			tentacle2.position.y = position.y + 50;
 			tentacle.position.x = position.x;
-			tentacle.position.y = position.y - 75;
+			tentacle.position.y = position.y - 50;
 
 		}
 		position.x += speed.x;
@@ -184,7 +185,7 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		fPoint clear_position = {position.x,position.y-75};
+		fPoint clear_position = {position.x,position.y - 50};
 		fPoint origin_position = { tentacle.position.x, tentacle.position.y };
 		float distance = origin_position.DistanceTo(clear_position);
 		fPoint direction;
@@ -205,7 +206,7 @@ update_status ModulePlayer::Update()
 			}
 		}
 		
-		clear_position = { position.x,position.y + 75 };
+		clear_position = { position.x,position.y + 50 };
 		origin_position = { tentacle2.position.x, tentacle2.position.y };
 		distance = origin_position.DistanceTo(clear_position);
 
@@ -226,7 +227,7 @@ update_status ModulePlayer::Update()
 		{
 			current_animation = &idle;
 			position.x += speed.x;
-			if (tentacle.position.x >= position.x - 75) {
+			if (tentacle.position.x >= position.x - 50) {
 				tentacle.position.x -= (speed.x*2);
 			}
 			else
@@ -241,7 +242,7 @@ update_status ModulePlayer::Update()
 				}
 			}
 			
-			if (tentacle2.position.x >= position.x - 75) {
+			if (tentacle2.position.x >= position.x - 50) {
 				tentacle2.position.x -= speed.x*2;
 			}
 			else
@@ -264,7 +265,7 @@ update_status ModulePlayer::Update()
 			current_animation = &idle;
 			position.x -= speed.x;
 
-			if (tentacle.position.x <= position.x + 75) {
+			if (tentacle.position.x <= position.x + 50) {
 			tentacle.position.x += (speed.x*2);
 			}
 			else
@@ -279,7 +280,7 @@ update_status ModulePlayer::Update()
 				}
 			}
 
-			if (tentacle2.position.x <= position.x + 75) {
+			if (tentacle2.position.x <= position.x + 50) {
 				tentacle2.position.x += speed.x*2;
 			}
 			else
@@ -303,7 +304,7 @@ update_status ModulePlayer::Update()
 				current_animation = &up;
 			}
 			position.y -= speed.x;
-			if (tentacle2.position.y <= position.y + 75) {
+			if (tentacle2.position.y <= position.y + 50) {
 				tentacle2.position.y += speed.x;
 			}
 			else
@@ -328,7 +329,7 @@ update_status ModulePlayer::Update()
 				current_animation = &down;
 			}
 			position.y += speed.x;
-			if (tentacle.position.y >= position.y - 75) {
+			if (tentacle.position.y >= position.y - 50) {
 				tentacle.position.y -= speed.x;
 			}
 			else
@@ -441,7 +442,7 @@ void ModulePlayer::BlitPlayer() {
 	App->render->Blit(graphics, position.x, position.y, &current_animation->GetCurrentFrame());
 
 	if (!canMove && activePU[TENTACLES]) {
-		fPoint clear_position = { position.x,position.y - 75 };
+		fPoint clear_position = { position.x,position.y - 50 };
 		fPoint origin_position = { tentacle.position.x, tentacle.position.y };
 		float distance = origin_position.DistanceTo(clear_position);
 		fPoint direction;
@@ -462,7 +463,7 @@ void ModulePlayer::BlitPlayer() {
 			}
 		}
 
-		clear_position = { position.x,position.y + 75 };
+		clear_position = { position.x,position.y + 50 };
 		origin_position = { tentacle2.position.x, tentacle2.position.y };
 		distance = origin_position.DistanceTo(clear_position);
 
