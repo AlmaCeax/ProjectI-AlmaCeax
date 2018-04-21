@@ -189,8 +189,37 @@ update_status ModulePlayer::Update()
 		{
 			current_animation = &idle;
 			position.x += speed.x;
-			tentacle.position.x -= speed.x;
-			tentacle2.position.x -= speed.x;
+		    
+			if (tentacle.position.x >= position.x - 75) {
+				tentacle.position.x -= speed.x;
+			}
+			else
+			{
+				tentacle.position.x += speed.x;
+				if (tentacle.position.y <= position.y) {
+					tentacle.position.y += speed.x*2;
+				}
+				else
+				{
+					tentacle.position.y -= speed.x;
+				}
+			}
+			
+			if (tentacle2.position.x >= position.x - 75) {
+				tentacle2.position.x -= speed.x;
+			}
+			else
+			{
+				tentacle2.position.x += speed.x;
+				if (tentacle2.position.y >= position.y) {
+					tentacle2.position.y -= speed.x*2;
+				}
+				else
+				{
+					tentacle2.position.y += speed.x;
+				}
+			}
+
 			if (((position.x + 36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
 			state = idl;
 		}
@@ -198,8 +227,37 @@ update_status ModulePlayer::Update()
 		{
 			current_animation = &idle;
 			position.x -= speed.x;
-			tentacle.position.x += speed.x;
-			tentacle2.position.x += speed.x;
+
+			if (tentacle.position.x <= position.x + 75) {
+				tentacle.position.x += speed.x*2;
+			}
+			else
+			{
+				tentacle.position.x -= speed.x;
+				if (tentacle.position.y <= position.y) {
+					tentacle.position.y += speed.x*2;
+				}
+				else
+				{
+					tentacle.position.y -= speed.x;
+				}
+			}
+
+			if (tentacle2.position.x <= position.x + 75) {
+				tentacle2.position.x += speed.x*2;
+			}
+			else
+			{
+				tentacle2.position.x -= speed.x;
+				if (tentacle2.position.y >= position.y) {
+					tentacle2.position.y -= speed.x*2;
+				}
+				else
+				{
+					tentacle2.position.y += speed.x;
+				}
+			}
+
 			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
 			state = idl;
 		}
@@ -209,8 +267,21 @@ update_status ModulePlayer::Update()
 				current_animation = &up;
 			}
 			position.y -= speed.x;
-			tentacle.position.y += speed.x;
-			tentacle2.position.y += speed.x;
+			if (tentacle2.position.y <= position.y + 75) {
+				tentacle2.position.y += speed.x;
+			}
+			else
+			{
+				tentacle2.position.y -= speed.x;
+			}
+			if (tentacle.position.y <= position.y + 15) {
+				tentacle.position.y += speed.x;
+			}
+			else
+			{
+				tentacle.position.y -= speed.x;
+			}
+			
 			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
 			state = top;
 		}
@@ -221,8 +292,20 @@ update_status ModulePlayer::Update()
 				current_animation = &down;
 			}
 			position.y += speed.x;
-			tentacle.position.y -= speed.x;
-			tentacle2.position.y -= speed.x;
+			if (tentacle.position.y >= position.y - 75) {
+				tentacle.position.y -= speed.x;
+			}
+			else
+			{
+				tentacle.position.y += speed.x;
+			}
+			if (tentacle2.position.y >= position.y - 15) {
+				tentacle2.position.y -= speed.x;
+			}
+			else
+			{
+				tentacle2.position.y += speed.x;
+			}
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
 			state = bot;
 		}
