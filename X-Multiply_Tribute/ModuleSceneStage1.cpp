@@ -105,7 +105,6 @@ bool ModuleSceneStage1::Start() {
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 615, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 450, 100, false, 1);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 80);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 120);
@@ -131,6 +130,7 @@ bool ModuleSceneStage1::Start() {
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 900, 175);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1130, 120, false, 1);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1160, 50);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 60);
