@@ -53,18 +53,20 @@ public:
 	Tentacle tentacle2;
 	//Alma Ceax
 
+	Animation* current_animation = nullptr;
+	Animation up;
+	Animation down;
+	Animation idle;
+
 private:
 	void Die();
 
 	SDL_Texture * graphics = nullptr;
-	Animation* current_animation = nullptr;
 	Animation* last_animation = nullptr;
-	Animation idle;
-	Animation up;
-	Animation down;
 	Animation death;
 	Animation ejecting;
 	int cooldown = 0;
+	int cooldownBombs = 0;
 	uint startime;
 
 };

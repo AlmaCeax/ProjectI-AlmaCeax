@@ -73,7 +73,7 @@ ModuleParticles::ModuleParticles()
 	bombshot.anim.PushBack({ 78, 164, 4, 15 });
 	bombshot.anim.loop = false;
 	bombshot.anim.speed = 0.03f;
-	bombshot.life = 1500;
+	bombshot.life = 2000;
 	bombshot.speed = { 4, 1 };
 	bombshot.id = 2;
 
