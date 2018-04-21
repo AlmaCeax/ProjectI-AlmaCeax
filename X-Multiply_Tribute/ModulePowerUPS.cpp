@@ -66,7 +66,7 @@ bool ModulePowerUPS::Start()
 	graphics = App->textures->Load("Assets/Sprites/PowerUP/spr_powerup.png");
 
 	bomb.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-021.wav");
-	tentacles.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
+	tentacles.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-021.wav");
 	life.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
 
 	if (!graphics)return false;
@@ -171,6 +171,7 @@ void PowerUP::Effect()
 		if(!App->player->activePU[TENTACLES])App->player->activePU[TENTACLES] = true;
 		App->player->tentacle.collider->enable = true;
 		App->player->tentacle2.collider->enable = true;
+		Mix_PlayChannel(-1, App->powerups->tentacles.sfx, 0);
 
 		break;
 	case LASER:
