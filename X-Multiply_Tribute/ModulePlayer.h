@@ -40,7 +40,7 @@ public:
 
 	fPoint position;
 	enum state { top, bot, idl };
-	bool activePU[6];
+	bool activePU[8];
 	state state;
 	fPoint speed = {2, 0};
 	bool dead = false;
@@ -49,6 +49,8 @@ public:
 	bool startBoost = false;
 	void BlitPlayer();
 	Collider* collider;
+	Tentacle tentacle;
+	Tentacle tentacle2;
 
 private:
 	void Die();
@@ -61,8 +63,6 @@ private:
 	Animation down;
 	Animation death;
 	Animation ejecting;
-	Tentacle tentacle;
-	Tentacle tentacle2;
 	int cooldown = 0;
 	uint startime;
 

@@ -200,9 +200,12 @@ void ModuleCollision::GodMode()
 
 bool Collider::CheckCollision(const SDL_Rect& r) const
 {
-	if ((r.x < rect.x + rect.w) && (rect.x < r.x + r.w) 
-		&& (r.y < rect.y + rect.h) && (rect.y < r.y + r.h)) {
-		return true;
-	}
-	return false;
+	if (enable) {
+
+		if ((r.x < rect.x + rect.w) && (rect.x < r.x + r.w)
+			&& (r.y < rect.y + rect.h) && (rect.y < r.y + r.h)) {
+			return true;
+		}
+		return false;
+	}else return false;
 }
