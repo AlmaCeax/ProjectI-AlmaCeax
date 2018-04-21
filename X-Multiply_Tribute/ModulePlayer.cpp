@@ -207,7 +207,7 @@ update_status ModulePlayer::Update()
 			tentacle2.position = clear_position;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT  )
 		{
 			current_animation = &idle;
 			position.x += speed.x;
