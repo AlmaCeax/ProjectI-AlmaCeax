@@ -93,8 +93,8 @@ bool ModulePlayer::Start()
 	SDL_Rect rect_tentaclecol2 = { tentacle2.position.x,tentacle2.position.y,19,9 };
 
 	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
-	tentacle.position = { position.x, position.y -75};
-	tentacle2.position = { position.x, position.y +75};
+	tentacle.position = { position.x, position.y - 75};
+	tentacle2.position = { position.x, position.y + 75};
 
 	tentacle.coll = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
 	tentacle2.coll = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
@@ -439,6 +439,50 @@ void ModulePlayer::Die() {
 
 void ModulePlayer::BlitPlayer() {
 	App->render->Blit(graphics, position.x, position.y, &current_animation->GetCurrentFrame());
+
+	if (!canMove && activePU[TENTACLES]) {
+		fPoint clear_position = { position.x,position.y - 75 };
+		fPoint origin_position = { tentacle.position.x, tentacle.position.y };
+		float distance = origin_position.DistanceTo(clear_position);
+		fPoint direction;
+		if (distance <= 0.01f && distance >= -0.01f) tentacle.position = clear_position;
+		else
+		{
+			direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
+
+			tentacle.position.x += direction.x * 2;
+			tentacle.position.y += direction.y;
+
+			tentacle.coll->SetPos(tentacle.position.x, tentacle.position.y);
+			tentacle2.coll->SetPos(tentacle2.position.x, tentacle2.position.y);
+
+			if (origin_position.DistanceTo(tentacle.position) >= distance)
+			{
+				tentacle.position = clear_position;
+			}
+		}
+
+		clear_position = { position.x,position.y + 75 };
+		origin_position = { tentacle2.position.x, tentacle2.position.y };
+		distance = origin_position.DistanceTo(clear_position);
+
+		if (distance <= 0.01f && distance >= -0.01f) tentacle2.position = clear_position;
+		else {
+			direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
+
+			tentacle2.position.x += direction.x * 2;
+			tentacle2.position.y += direction.y;
+
+			if (origin_position.DistanceTo(tentacle2.position) >= distance)
+			{
+				tentacle2.position = clear_position;
+			}
+		}
+	}
+	if(activePU[TENTACLES]){
+	App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
+	App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
+	}
 }
 
 // -------------------------------------------------------------
