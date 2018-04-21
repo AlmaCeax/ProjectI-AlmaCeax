@@ -349,6 +349,7 @@ update_status ModulePlayer::Update()
 
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 		{
+
 			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 			if (activePU[TENTACLES])
@@ -359,13 +360,19 @@ update_status ModulePlayer::Update()
 				App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
 				App->particles->AddParticle(App->particles->baseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
 			}
+			cooldown = 0;
+			
 		}
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
 		{
-			if (cooldown < 25) {
-				cooldown++;
+
+			if (activePU[BOMB] == true && cooldownBombs >= 40)
+			{
+				App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+				cooldownBombs = 0;
 			}
-			else {
+			if (cooldown >= 25)
+			{
 				App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 				App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 				if (activePU[TENTACLES])
@@ -376,7 +383,6 @@ update_status ModulePlayer::Update()
 					App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
 					App->particles->AddParticle(App->particles->baseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
 				}
-				if (activePU[BOMB] == true)App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 				cooldown = 0;
 			}
 		}
@@ -401,6 +407,15 @@ update_status ModulePlayer::Update()
 		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
 
 	}
+
+	if (cooldown < 25) {
+		cooldown++;
+	}
+
+	if (cooldownBombs < 40) {
+		cooldownBombs++;
+	}
+
 	return UPDATE_CONTINUE;
 }
 

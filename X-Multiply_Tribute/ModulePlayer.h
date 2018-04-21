@@ -64,6 +64,7 @@ private:
 	Animation death;
 	Animation ejecting;
 	int cooldown = 0;
+	int cooldownBombs = 0;
 	uint startime;
 
 };
