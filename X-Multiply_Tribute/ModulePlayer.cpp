@@ -88,13 +88,13 @@ bool ModulePlayer::Start()
 	deadsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-018.wav");
 
 	SDL_Rect rect_collider = { position.x,position.y,36,14 };
-	SDL_Rect rect_tentaclecol = { tentacle.position.x,tentacle.position.y,19,9 };
-	SDL_Rect rect_tentaclecol2 = { tentacle2.position.x,tentacle2.position.y,19,9 };
+	SDL_Rect rect_tentaclecol = { tentacle.position.x,tentacle.position.y,19,10 };
+	SDL_Rect rect_tentaclecol2 = { tentacle2.position.x,tentacle2.position.y,19,10 };
 
 	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
 
 	tentacle.position = { position.x, position.y -50};
-	tentacle2.position = { position.x, position.y +50};
+	tentacle2.position = { position.x, position.y +54};
 
 	tentacle.collider = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
 	tentacle2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
@@ -151,7 +151,7 @@ update_status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->playerBoost, position.x - 42, position.y, COLLIDER_NONE, { 3,0 });
 
 			tentacle2.position.x = position.x;
-			tentacle2.position.y = position.y + 50;
+			tentacle2.position.y = position.y + 54;
 			tentacle.position.x = position.x;
 			tentacle.position.y = position.y - 50;
 		}
@@ -198,8 +198,8 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		clear_position = { position.x,position.y + 50 };
-		origin_position = { tentacle2.position.x, tentacle2.position.y };
+		clear_position = { position.x,position.y + 54 };
+		origin_position = { tentacle2.position.x, tentacle2.position.y};
 		distance = origin_position.DistanceTo(clear_position);
 
 		if (distance <= 0.01f && distance >= -0.01f) tentacle2.position = clear_position;
@@ -232,12 +232,12 @@ update_status ModulePlayer::Update()
 					tentacle.position = clear_position;
 				}
 
-				if (tentacle.position.y < position.y) {
+				if (tentacle.position.y < position.y + 4) {
 					tentacle.position.y += speed.x * 2;
 				}
 
-				clear_position = { tentacle.position.x,position.y};
-				origin_position = { tentacle.position.x, tentacle.position.y };
+				clear_position = { tentacle.position.x,position.y+4};
+				origin_position = { tentacle.position.x, tentacle.position.y};
 				distance = origin_position.DistanceTo(clear_position);
 				if (5 >= distance)
 				{
@@ -257,10 +257,10 @@ update_status ModulePlayer::Update()
 				{
 					tentacle2.position = clear_position;
 				}
-				if (tentacle2.position.y > position.y) {
+				if (tentacle2.position.y > position.y + 4) {
 					tentacle2.position.y -= speed.x*2;
 				}
-				clear_position = { tentacle2.position.x,position.y };
+				clear_position = { tentacle2.position.x,position.y + 4 };
 				origin_position = { tentacle2.position.x, tentacle2.position.y };
 				distance = origin_position.DistanceTo(clear_position);
 				if (5 >= distance)
@@ -290,11 +290,11 @@ update_status ModulePlayer::Update()
 					tentacle.position = clear_position;
 				}
 
-				if (tentacle.position.y < position.y ) {
+				if (tentacle.position.y < position.y +4) {
 					tentacle.position.y += speed.x * 2;
 				}
 
-				clear_position = { tentacle.position.x,position.y };
+				clear_position = { tentacle.position.x,position.y +4};
 				origin_position = { tentacle.position.x, tentacle.position.y };
 				distance = origin_position.DistanceTo(clear_position);
 				if (5 >= distance)
@@ -314,10 +314,10 @@ update_status ModulePlayer::Update()
 				{
 					tentacle2.position = clear_position;
 				}
-				if (tentacle2.position.y > position.y ) {
+				if (tentacle2.position.y > position.y +4) {
 					tentacle2.position.y -= speed.x * 2;
 				}
-				clear_position = { tentacle2.position.x,position.y };
+				clear_position = { tentacle2.position.x,position.y +4};
 				origin_position = { tentacle2.position.x, tentacle2.position.y };
 				distance = origin_position.DistanceTo(clear_position);
 				if (5 >= distance)
@@ -335,10 +335,10 @@ update_status ModulePlayer::Update()
 				current_animation = &up;
 			}
 			position.y -= speed.x;
-			if (tentacle2.position.y < position.y + 50) {
+			if (tentacle2.position.y < position.y + 54) {
 				tentacle2.position.y += speed.x;
 			}
-			clear_position = { tentacle2.position.x,position.y + 50};
+			clear_position = { tentacle2.position.x,position.y + 54};
 			origin_position = { tentacle2.position.x, tentacle2.position.y };
 			distance = origin_position.DistanceTo(clear_position);
 			if (5 >= distance)
@@ -511,7 +511,7 @@ void ModulePlayer::BlitPlayer() {
 			}
 		}
 
-		clear_position = { position.x,position.y + 50 };
+		clear_position = { position.x,position.y + 54 };
 		origin_position = { tentacle2.position.x, tentacle2.position.y };
 		distance = origin_position.DistanceTo(clear_position);
 
