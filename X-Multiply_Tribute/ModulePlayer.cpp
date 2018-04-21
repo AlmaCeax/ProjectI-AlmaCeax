@@ -355,10 +355,10 @@ update_status ModulePlayer::Update()
 			if (activePU[TENTACLES])
 			{
 				App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
-				App->particles->AddParticle(App->particles->baseShot, tentacle.position.x + 25, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x + 25, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
 
 				App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
-				App->particles->AddParticle(App->particles->baseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
+				App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
 			}
 			cooldown = 0;
 			
@@ -378,10 +378,10 @@ update_status ModulePlayer::Update()
 				if (activePU[TENTACLES])
 				{
 					App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
-					App->particles->AddParticle(App->particles->baseShot, tentacle.position.x + 25, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
+					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x + 25, tentacle.position.y + 5, COLLIDER_PLAYER_SHOT);
 
 					App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
-					App->particles->AddParticle(App->particles->baseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
+					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x + 25, tentacle2.position.y + 5, COLLIDER_PLAYER_SHOT);
 				}
 				cooldown = 0;
 			}
