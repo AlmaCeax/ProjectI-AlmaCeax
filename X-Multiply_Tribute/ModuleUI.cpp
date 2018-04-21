@@ -232,7 +232,7 @@ void ModuleUI::ReadyDone() {
 }
 
 void ModuleUI::StageCleared() {
-	if (current_step != clear_step::none || current_ready_step != ready_step::not) return;
+	if (current_step != clear_step::none || current_ready_step != ready_step::not || App->player->dead) return;
 
 	Mix_PlayMusic(clear_song, false);
 	//if(App->player->collider != nullptr) App->player->collider->to_delete = true;
