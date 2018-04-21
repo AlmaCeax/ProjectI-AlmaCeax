@@ -371,6 +371,12 @@ update_status ModulePlayer::Update()
 			}
 		}
 		if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN && !dead) Die();
+		if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && !activePU[TENTACLES]) {
+			activePU[TENTACLES] = true;
+			App->player->tentacle.collider->enable = true;
+			App->player->tentacle2.collider->enable = true;
+		}
+
 
 		if (last_animation != current_animation) {
 			current_animation->Reset();
