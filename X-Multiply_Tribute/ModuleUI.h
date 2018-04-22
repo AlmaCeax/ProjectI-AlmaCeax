@@ -77,6 +77,8 @@ private:
 	int letter = 0;
 	float timer = 0;
 
+	int life_increased = false;
+
 	enum ready_step {
 		not,
 		show_text,

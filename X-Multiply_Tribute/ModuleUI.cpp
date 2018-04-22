@@ -205,7 +205,7 @@ void ModuleUI::Reset() {
 	game_over = false;
 	player_lives = 2;
 
-	if (score > top_score && !App->collision->god_used) {
+	if (score > top_score && !App->collision->god_used && !life_increased) {
 		top_score = score;
 		char str[8];
 		_itoa_s(top_score, str, 10);
@@ -271,4 +271,5 @@ void ModuleUI::StageCleared() {
 
 void ModuleUI::IncreaseLife() {
 	if (player_lives < 8) player_lives++;
+	life_increased = true;
 }
