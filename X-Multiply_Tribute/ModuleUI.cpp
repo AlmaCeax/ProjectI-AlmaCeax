@@ -221,7 +221,7 @@ void ModuleUI::Reset() {
 			new_position--;
 		}
 	}
-
+	life_increased = false;
 	App->collision->god_used = false;
 	if (App->collision->god)App->collision->GodMode();
 
