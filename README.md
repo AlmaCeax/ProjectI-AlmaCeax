@@ -40,6 +40,8 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 
 # How to play the game
 
+## Installation
+Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 
 ## Controls
 - W: Move to up
