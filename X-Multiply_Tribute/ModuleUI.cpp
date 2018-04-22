@@ -206,6 +206,7 @@ void ModuleUI::Reset() {
 	player_lives = 2;
 	score = 0;
 	memset(score_text, '0', 8);
+	App->player->ResetPU();
 }
 
 void ModuleUI::DeathFade() {

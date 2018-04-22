@@ -532,10 +532,7 @@ void ModulePlayer::Die() {
 	speed.y = 2;
 	
 	Mix_PlayChannel(-1, deadsfx, 0);
-	for (int i = 0; i < sizeof(activePU); i++)
-	{
-		activePU[i] = false;
-	}
+	ResetPU();
 }
 
 void ModulePlayer::BlitPlayer() {
@@ -583,6 +580,13 @@ void ModulePlayer::BlitPlayer() {
 	if(activePU[TENTACLES]){
 	App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
 	App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
+	}
+}
+
+void ModulePlayer::ResetPU() {
+	for (int i = 0; i < sizeof(activePU); i++)
+	{
+		activePU[i] = false;
 	}
 }
 

@@ -35,6 +35,7 @@ public:
 	void OnCollision(Collider*, Collider*);
 	update_status PreUpdate();
 	update_status Update();
+	void ResetPU();
 
 	Mix_Chunk* deadsfx = nullptr;
 
