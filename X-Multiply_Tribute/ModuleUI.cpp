@@ -56,7 +56,7 @@ update_status ModuleUI::Update()
 		App->fonts->BlitText(30, 240, score_font, "1up");
 		App->fonts->BlitText(62, 240, score_font, score_text);
 		App->fonts->BlitText(144, 240, score_font, "top");
-		App->fonts->BlitText(176, 240, score_font, "00500000");
+		App->fonts->BlitText(176, 240, score_font, top_score_text);
 		App->fonts->BlitText(258, 240, score_font, "2up");
 		App->fonts->BlitText(290, 240, score_font, "00000000");
 		if(game_over) App->fonts->BlitText(120, 100, pink_font, "game over");
@@ -204,6 +204,23 @@ void ModuleUI::Reset() {
 	App->player->dead = false;
 	game_over = false;
 	player_lives = 2;
+
+	if (score > top_score) {
+		top_score = score;
+		char str[8];
+		_itoa_s(top_score, str, 10);
+		int new_position = 7;
+		int total = 0;
+
+		for (int i = 0; i < 7; i++) {
+			if (str[i] == NULL) break;
+			total++;
+		}
+		for (int i = total - 1; i >= 0; i--) {
+			top_score_text[new_position] = str[i];
+			new_position--;
+		}
+	}
 	score = 0;
 	memset(score_text, '0', 8);
 	App->player->ResetPU();
