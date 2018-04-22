@@ -81,6 +81,7 @@ bool ModulePlayer::Start()
 	death.Reset();
 	canMove = false;
 	startBoost = false;
+	current_animation = &idle;
 
 	LOG("Loading player textures");
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png"); // arcade version
@@ -536,7 +537,7 @@ void ModulePlayer::Die() {
 }
 
 void ModulePlayer::BlitPlayer() {
-	App->render->Blit(graphics, position.x, position.y, &current_animation->GetCurrentFrame());
+	if(App->player->IsEnabled()) App->render->Blit(graphics, position.x, position.y, &current_animation->GetCurrentFrame());
 
 	if (!canMove && activePU[TENTACLES]) {
 		fPoint clear_position = { position.x,position.y - 50 };
