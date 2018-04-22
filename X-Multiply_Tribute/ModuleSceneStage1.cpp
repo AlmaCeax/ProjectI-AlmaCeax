@@ -202,7 +202,7 @@ update_status ModuleSceneStage1::Update()
 
 	//if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage2);
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) App->ui->StageCleared();
-
+	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN) App->ui->IncreaseLife();
 
 	return update_status::UPDATE_CONTINUE;
 }

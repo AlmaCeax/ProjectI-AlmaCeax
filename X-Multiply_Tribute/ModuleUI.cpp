@@ -268,3 +268,7 @@ void ModuleUI::StageCleared() {
 	start_time = SDL_GetTicks();
 	current_step = clear_step::fade;
 }
+
+void ModuleUI::IncreaseLife() {
+	if (player_lives < 8) player_lives++;
+}

@@ -24,6 +24,8 @@ public:
 	update_status Update();
 	void StageCleared();
 
+	void IncreaseLife();
+
 	bool CleanUp();
 
 	void AddScore(uint points);

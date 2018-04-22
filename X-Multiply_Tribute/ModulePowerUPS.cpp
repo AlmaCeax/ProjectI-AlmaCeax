@@ -6,6 +6,7 @@
 #include "ModulePowerUPS.h"
 #include "Enemy_PowerUPShip.h"
 #include "ModuleParticles.h"
+#include "ModuleUI.h"
 #include "ModuleAudio.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 
@@ -179,6 +180,7 @@ void PowerUP::Effect()
 		break;		
 	case LIFE: 
 		Mix_PlayChannel(-1, App->powerups->life.sfx, 0);
+		App->ui->IncreaseLife();
 		break;		
 	case SPEED_BOOST: App->player->speed.x += 0.3f;
 		App->player->speed.y += 0.3f;
