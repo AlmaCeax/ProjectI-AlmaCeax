@@ -228,7 +228,7 @@ update_status ModulePlayer::Update()
 				clear_position = { position.x - 50,tentacle.position.y };
 				origin_position = { tentacle.position.x, tentacle.position.y };
 				distance = origin_position.DistanceTo(clear_position);
-				if (5 >= distance)
+				if (1 <= distance)
 				{
 					tentacle.position = clear_position;
 				}
@@ -240,7 +240,7 @@ update_status ModulePlayer::Update()
 				clear_position = { tentacle.position.x,position.y+4};
 				origin_position = { tentacle.position.x, tentacle.position.y};
 				distance = origin_position.DistanceTo(clear_position);
-				if (5 >= distance)
+				if (1 <= distance)
 				{
 					tentacle.position = clear_position;
 				}
@@ -254,7 +254,7 @@ update_status ModulePlayer::Update()
 				clear_position = { position.x - 50,tentacle2.position.y };
 				origin_position = { tentacle2.position.x, tentacle2.position.y };
 				distance = origin_position.DistanceTo(clear_position);
-				if (5 >= distance)
+				if (1 <= distance)
 				{
 					tentacle2.position = clear_position;
 				}
@@ -264,7 +264,7 @@ update_status ModulePlayer::Update()
 				clear_position = { tentacle2.position.x,position.y + 4 };
 				origin_position = { tentacle2.position.x, tentacle2.position.y };
 				distance = origin_position.DistanceTo(clear_position);
-				if (5 >= distance)
+				if (1 <= distance)
 				{
 					tentacle2.position = clear_position;
 				}
@@ -286,7 +286,7 @@ update_status ModulePlayer::Update()
 				clear_position = { position.x + 50,tentacle.position.y };
 				origin_position = { tentacle.position.x, tentacle.position.y };
 				distance = origin_position.DistanceTo(clear_position);
-				if (5 >= distance)
+				if (1 <= distance)
 				{
 					tentacle.position = clear_position;
 				}
@@ -298,7 +298,7 @@ update_status ModulePlayer::Update()
 				clear_position = { tentacle.position.x,position.y +4};
 				origin_position = { tentacle.position.x, tentacle.position.y };
 				distance = origin_position.DistanceTo(clear_position);
-				if (5 >= distance)
+				if (1 <= distance)
 				{
 					tentacle.position = clear_position;
 				}
@@ -311,7 +311,7 @@ update_status ModulePlayer::Update()
 				clear_position = { position.x + 50,tentacle2.position.y };
 				origin_position = { tentacle2.position.x, tentacle2.position.y };
 				distance = origin_position.DistanceTo(clear_position);
-				if (5 >= distance)
+				if (1 <= distance)
 				{
 					tentacle2.position = clear_position;
 				}
@@ -321,7 +321,7 @@ update_status ModulePlayer::Update()
 				clear_position = { tentacle2.position.x,position.y +4};
 				origin_position = { tentacle2.position.x, tentacle2.position.y };
 				distance = origin_position.DistanceTo(clear_position);
-				if (5 >= distance)
+				if (1 <= distance)
 				{
 					tentacle2.position = clear_position;
 				}
