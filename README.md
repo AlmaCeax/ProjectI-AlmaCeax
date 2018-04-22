@@ -54,3 +54,36 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 - F5: God Mode
 - ESC: Quit game
 
+***
+
+# Previous Versions
+
+## V_0.1 Background and Audio
+- Background first stage
+- Music first stage
+- Fx ship start
+
+## V_0.2 Ship animation and Background
+- Ship animation
+- Background animation
+
+## V_0.2.1 Change scenes with fade
+- Start background 
+- Stage 2 background 
+- Exit with X 
+
+## V_0.3 Bullets
+- Ship Bullets
+
+## V_0.4 Colliders
+- Background colliders
+- Ship collider
+
+## V_0.5 UI
+- Win/Lose condition
+- Debug functionality: god mode, collision boxes, direct win/lose.
+- UI for the score.
+- 3 types of enemies
+- 2 types of powerups / weapons
+- Tentacles
+
