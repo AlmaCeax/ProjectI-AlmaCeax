@@ -194,6 +194,7 @@ void ModuleCollision::GodMode()
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = god;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_PLAYER] = god;
 	god = !god;
+	god_used = true;
 }
 
 // -----------------------------------------------------

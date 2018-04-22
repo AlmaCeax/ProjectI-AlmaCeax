@@ -205,7 +205,7 @@ void ModuleUI::Reset() {
 	game_over = false;
 	player_lives = 2;
 
-	if (score > top_score) {
+	if (score > top_score && !App->collision->god_used) {
 		top_score = score;
 		char str[8];
 		_itoa_s(top_score, str, 10);
@@ -221,6 +221,10 @@ void ModuleUI::Reset() {
 			new_position--;
 		}
 	}
+
+	App->collision->god_used = false;
+	if (App->collision->god)App->collision->GodMode();
+
 	score = 0;
 	memset(score_text, '0', 8);
 	App->player->ResetPU();

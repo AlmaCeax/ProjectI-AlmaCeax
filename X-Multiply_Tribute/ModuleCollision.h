@@ -60,7 +60,7 @@ public:
 	Collider* AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module* callback = nullptr);
 	void GodMode();
 	void DebugDraw();
-	bool god = false;
+	bool god = false, god_used = false;
 
 private:
 
