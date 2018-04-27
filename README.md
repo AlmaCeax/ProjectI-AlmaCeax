@@ -48,6 +48,8 @@ The highest score is saved in the "Top" section of the lower bar. But, if you us
 Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 
 ## Controls
+
+### PC
 - W: Move to up
 - S: Move to down
 - A: Move to left
@@ -60,6 +62,14 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 - F5: God Mode
 - F6: Extra Life
 - ESC: Quit game
+
+### Gamepad Xbox
+- Right stick: Move 
+- A button: Shoot
+
+### Gamepad PS4
+- Right stick: Move 
+- X button: Shoot
 
 ***
 
