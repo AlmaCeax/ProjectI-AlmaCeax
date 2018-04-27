@@ -11,7 +11,9 @@ ModuleInput::ModuleInput() : Module()
 
 // Destructor
 ModuleInput::~ModuleInput()
-{}
+{
+
+}
 
 // Called before render is available
 bool ModuleInput::Init()
@@ -26,6 +28,19 @@ bool ModuleInput::Init()
 		ret = false;
 	}
 
+	SDL_JoystickEventState(SDL_ENABLE);
+
+	for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+		if (SDL_IsGameController(i)) {
+			controller_1 = SDL_GameControllerOpen(i);
+			if (controller_1) {
+				LOG("Controller %i loaded correctly", i);
+				break;
+			}
+			else LOG("Could not open gamecontroller %i: %s", i, SDL_GetError());
+		}
+	}
+
 	return ret;
 }
 
@@ -36,11 +51,18 @@ update_status ModuleInput::PreUpdate()
 
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 
-	SDL_Event close;
-	SDL_PollEvent(&close);
+	SDL_Event event;
 
-	if (close.type == SDL_QUIT)
-		return update_status::UPDATE_STOP;
+	while (SDL_PollEvent(&event)) {
+		if (event.type == SDL_QUIT)
+			return update_status::UPDATE_STOP;
+		else if (event.type == SDL_JOYDEVICEADDED) {
+			LOG("Joystick added!\n");
+		}
+		else if (event.type == SDL_JOYDEVICEREMOVED) {
+			LOG("Joystick removed!\n");
+		}
+	}
 
 	for (int i = 0; i < MAX_KEYS; ++i)
 	{

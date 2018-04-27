@@ -4,8 +4,10 @@
 #include "Module.h"
 #include "Globals.h"
 #include "SDL\include\SDL_scancode.h"
+#include "SDL/include/SDL_gamecontroller.h"
 
 #define MAX_KEYS 300
+
 
 enum KEY_STATE
 {
@@ -19,6 +21,7 @@ class ModuleInput : public Module
 {
 public:
 
+	SDL_GameController* controller_1;
 	ModuleInput();
 	~ModuleInput();
 
