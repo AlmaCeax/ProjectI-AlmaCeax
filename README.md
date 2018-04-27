@@ -65,11 +65,15 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 
 ### Gamepad Xbox
 - Right stick: Move 
-- A button: Shoot and Start Game
+- A button: Shoot 
+- Y button: Insert Coin
+- Start button: Start Game
 
 ### Gamepad PS4
 - Right stick: Move 
-- X button: Shoot and Start Game
+- X button: Shoot
+- Triangle button: Insert Coin
+- Start button: Start Game
 
 ***
 
