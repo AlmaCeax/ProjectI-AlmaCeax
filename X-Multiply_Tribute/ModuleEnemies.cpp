@@ -12,7 +12,7 @@
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
 
-#define SPAWN_MARGIN 80
+#define SPAWN_MARGIN 60
 
 ModuleEnemies::ModuleEnemies()
 {
