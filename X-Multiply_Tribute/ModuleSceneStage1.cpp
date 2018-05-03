@@ -2,14 +2,12 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
-#include "ModulePlayer.h"
 #include "ModuleEnemies.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneStage2.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
-#include "ModuleUI.h"
 #include "ModulePowerUPS.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "ModuleSceneStage1.h"
@@ -66,9 +64,8 @@ bool ModuleSceneStage1::Start() {
 	up = false;
 	down = false;
 	left = false;
-	shake = false;
 	stopped = false;
-	aux = 10;
+
 	unhooked = false;
 	first_time = true;
 	startAnimationHook.setCurrentFrameIndex(0);
