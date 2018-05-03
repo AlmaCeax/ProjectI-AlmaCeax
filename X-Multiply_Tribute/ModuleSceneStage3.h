@@ -10,7 +10,6 @@ class ModuleSceneStage3 :
 {
 private:
 	SDL_Texture * textures[2];
-	_Mix_Music* music = nullptr;
 
 	int x = 0;
 	int y = 0;

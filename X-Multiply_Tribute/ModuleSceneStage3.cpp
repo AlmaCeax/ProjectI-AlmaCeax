@@ -36,8 +36,11 @@ bool ModuleSceneStage3::Start() {
 	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage3/Backgroundbg03.png");
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage3/Layerbg03.png");
 
-	Mix_PlayMusic(music, -1);
-	right = true;
+	right = false;
+	left = false;
+	up = false;
+	down = false;
+
 
 	return true;
 }
