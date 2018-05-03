@@ -5,8 +5,10 @@
 
 ModuleInput::ModuleInput() : Module()
 {
-	for (uint i = 0; i < MAX_KEYS; ++i)
+	for (uint i = 0; i < MAX_KEYS; ++i) {
 		keyboard[i] = KEY_IDLE;
+	}
+	controller_A_button = KEY_IDLE;
 }
 
 // Destructor
@@ -30,16 +32,13 @@ bool ModuleInput::Init()
 
 	SDL_JoystickEventState(SDL_ENABLE);
 
-	for (int i = 0; i < SDL_NumJoysticks(); ++i) {
-		if (SDL_IsGameController(i)) {
-			controller_1 = SDL_GameControllerOpen(i);
-			if (controller_1) {
-				LOG("Controller %i loaded correctly", i);
-				break;
+	if(SDL_NumJoysticks() > 0) {
+			controller = SDL_GameControllerOpen(0);
+			if (controller) {
+				LOG("Controller loaded correctly");
 			}
-			else LOG("Could not open gamecontroller %i: %s", i, SDL_GetError());
+			else LOG("Could not open gamecontroller: %s", SDL_GetError());
 		}
-	}
 
 	return ret;
 }
@@ -56,11 +55,38 @@ update_status ModuleInput::PreUpdate()
 	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT)
 			return update_status::UPDATE_STOP;
-		else if (event.type == SDL_JOYDEVICEADDED) {
-			LOG("Joystick added!\n");
+		else if (event.type == SDL_CONTROLLERDEVICEADDED) {
+			if(!controller){
+				controller = SDL_GameControllerOpen(0);
+				if (controller) {
+					LOG("Controller loaded correctly");
+				}
+				else LOG("Could not open gamecontroller: %s", SDL_GetError());
+			}
 		}
-		else if (event.type == SDL_JOYDEVICEREMOVED) {
-			LOG("Joystick removed!\n");
+		else if (event.type == SDL_CONTROLLERDEVICEREMOVED) {
+			if (event.cdevice.which == 0) {
+				SDL_GameControllerClose(controller);
+				controller = nullptr;
+				LOG("Controller removed!\n");
+			}
+		}
+
+		else if (event.type == SDL_CONTROLLERBUTTONDOWN) {
+			if (event.cbutton.which == 0) {
+				if (event.cbutton.button == SDL_CONTROLLER_BUTTON_A) {
+					if (event.cbutton.state == SDL_PRESSED) controller_A_button = KEY_REPEAT;
+					else controller_A_button = KEY_DOWN;
+				}
+			}
+		}
+		else if (event.type == SDL_CONTROLLERBUTTONUP) {
+			if (event.cbutton.which == 0) {
+				if (event.cbutton.button == SDL_CONTROLLER_BUTTON_A) {
+					if (event.cbutton.state == SDL_PRESSED) controller_A_button = KEY_UP;
+					else controller_A_button = KEY_IDLE;
+				}
+			}
 		}
 	}
 
@@ -92,6 +118,9 @@ update_status ModuleInput::PreUpdate()
 bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
+	SDL_GameControllerClose(controller);
+	controller = nullptr;
+
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }
