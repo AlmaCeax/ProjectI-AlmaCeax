@@ -71,7 +71,7 @@ update_status ModuleUI::Update()
 	if (game_over) {
 		Uint32 now = SDL_GetTicks() - start_time;
 		if (now >= total_time) {
-			App->fade->FadeToBlack(App->current_scene, App->start);
+			App->fade->FadeToBlack(App->current_stage, App->start);
 		}
 	}
 	
@@ -131,6 +131,14 @@ void ModuleUI::ClearUpdate() {
 				App->player->current_animation = &App->player->idle;
 				App->player->position = clear_position;
 				current_step = clear_step::player_stopped;
+
+				char base_text[19] = "stage bonus ";
+				char value[6];
+				_itoa_s(App->current_stage->score_bonus, value, 10);
+				strcat_s(base_text, value);
+				strcpy_s(final_text2, base_text);
+
+				final_text1[6] = App->current_stage->index+'0';
 			}
 		
 		}break;
@@ -139,14 +147,12 @@ void ModuleUI::ClearUpdate() {
 			normalized = 1.0;
 			if (current_text1[14] != final_text1[14] && timer >= 1)
 			{
-				LOG("text 1 letter is = %f", letter);
 				current_text1[letter] = final_text1[letter];
 				letter++;
 				timer = 0;
 				if (letter > 14) letter = 0;
 			}
 			else if (current_text2[16] != final_text2[16] && timer>= 1) {
-				LOG("text 2 letter is = %f", letter);
 				current_text2[letter] = final_text2[letter];
 				letter++;
 				timer = 0;
@@ -158,7 +164,7 @@ void ModuleUI::ClearUpdate() {
 				timer = 0;
 				memset(current_text1, 0, sizeof(current_text1));
 				memset(current_text2, 0, sizeof(current_text2));
-				App->fade->FadeToBlack(App->current_scene, App->start, 0.0f);
+				App->fade->FadeToBlack(App->current_stage, App->start, 0.0f);
 				current_step = clear_step::none;
 			}
 		}break;
@@ -206,7 +212,7 @@ void ModuleUI::Reset() {
 	game_over = false;
 	player_lives = 2;
 
-	if (score > top_score && !App->collision->god_used && !life_increased) {
+	/*if (score > top_score && !App->collision->god_used && !life_increased) {
 		top_score = score;
 		char str[8];
 		_itoa_s(top_score, str, 10);
@@ -221,7 +227,7 @@ void ModuleUI::Reset() {
 			top_score_text[new_position] = str[i];
 			new_position--;
 		}
-	}
+	}*/
 	life_increased = false;
 	App->collision->god_used = false;
 	if (App->collision->god)App->collision->GodMode();
@@ -232,7 +238,7 @@ void ModuleUI::Reset() {
 }
 
 void ModuleUI::DeathFade() {
-	if (player_lives > 0) App->fade->FadeToBlack(App->current_scene, App->current_scene);
+	if (player_lives > 0) App->fade->FadeToBlack(App->current_stage, App->current_stage);
 	else if(!game_over) { 
 		Mix_PlayMusic(over_song,false);
 		total_time = (Uint32)(4.0f * 1000.0f);

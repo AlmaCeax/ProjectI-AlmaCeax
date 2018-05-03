@@ -159,6 +159,9 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleStage.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

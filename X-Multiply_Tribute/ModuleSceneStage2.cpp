@@ -28,7 +28,7 @@ ModuleSceneStage2::~ModuleSceneStage2()
 
 
 bool ModuleSceneStage2::Start() {
-	App->current_scene = this;
+	App->current_stage = this;
 
 	App->collision->Enable();
 	App->player->Enable();
