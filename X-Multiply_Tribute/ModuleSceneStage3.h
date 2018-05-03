@@ -1,23 +1,20 @@
 #ifndef __ModuleSceneStage3_H__
 #define __ModuleSceneStage3_H__
 
-#include "Module.h"
+#include "ModuleStage.h"
 
 struct SDL_Rect;
-struct SDL_Texture;
-struct _Mix_Music;
-struct Mix_Chunk;
 
 class ModuleSceneStage3 :
-	public Module
+	public ModuleStage
 {
 private:
-	SDL_Texture * textures[3];
+	SDL_Texture * textures[2];
 	_Mix_Music* music = nullptr;
 
 	int x = 0;
 	int y = 0;
-	SDL_Rect rect[3];
+	SDL_Rect rect[2];
 
 public:
 	update_status Update();
