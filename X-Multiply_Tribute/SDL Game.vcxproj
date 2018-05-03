@@ -14,7 +14,7 @@
     <ProjectGuid>{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}</ProjectGuid>
     <RootNamespace>SDLGame</RootNamespace>
     <ProjectName>X-Multiply_Tribute</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -92,6 +92,7 @@
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModulePowerUPS.h" />
     <ClInclude Include="ModuleSceneStage2.h" />
+    <ClInclude Include="ModuleSceneStage3.h" />
     <ClInclude Include="ModuleSceneStart.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="p2Point.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleSceneStage2.cpp" />
+    <ClCompile Include="ModuleSceneStage3.cpp" />
     <ClCompile Include="ModuleSceneStart.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleUI.cpp" />

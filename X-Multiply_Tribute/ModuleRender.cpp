@@ -140,3 +140,9 @@ void ModuleRender::ResetCamera()
 	camera.x = 0;
 	camera.y = 0;
 }
+
+void ModuleRender::SetCameraPosition(int x, int y)
+{
+	camera.x = x;
+	camera.y = y;
+}

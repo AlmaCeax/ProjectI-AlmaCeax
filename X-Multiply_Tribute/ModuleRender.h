@@ -22,6 +22,7 @@ public:
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera = true);
 
 	void ResetCamera();
+	void SetCameraPosition(int x, int y);
 
 public:
 	SDL_Renderer* renderer = nullptr;
