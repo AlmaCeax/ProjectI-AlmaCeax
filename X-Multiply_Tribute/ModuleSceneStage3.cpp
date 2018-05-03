@@ -1,14 +1,11 @@
 #include "Application.h"
+#include "ModuleSceneStage3.h"
+#include "ModulePlayer.h"
+#include "ModuleAudio.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModuleAudio.h"
-#include "ModuleInput.h"
-#include "ModulePlayer.h"
-#include "ModuleFadeToBlack.h"
 #include "ModuleCollision.h"
-#include "ModuleSceneStart.h"
-#include "SDL_mixer/include/SDL_mixer.h"
-#include "ModuleSceneStage3.h"
+#include "SDL_mixer\include\SDL_mixer.h"
 
 
 
@@ -30,8 +27,8 @@ ModuleSceneStage3::~ModuleSceneStage3()
 bool ModuleSceneStage3::Start() {
 	App->current_scene = this;
 
-	App->collision->Enable();
 	App->player->Enable();
+	App->player->position.y = 400;
 
 	App->render->SetCameraPosition(0, 337);
 
@@ -74,4 +71,3 @@ bool ModuleSceneStage3::CleanUp()
 
 	return true;
 }
-

@@ -8,7 +8,7 @@ struct SDL_Texture;
 struct _Mix_Music;
 struct Mix_Chunk;
 
-class ModuleSceneStage3:
+class ModuleSceneStage3 :
 	public Module
 {
 private:
@@ -29,4 +29,6 @@ public:
 };
 
 #endif
+
+
 

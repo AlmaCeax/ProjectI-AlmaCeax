@@ -200,7 +200,7 @@ update_status ModuleSceneStage1::Update()
 	injection();
 	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, &textrect[2],0.5f);
 
-	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage3);
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->modules[8]);
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) App->ui->StageCleared();
 	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN) App->ui->IncreaseLife();
 

@@ -13,7 +13,6 @@ class ModuleAudio;
 class ModuleSceneStart;
 class ModuleSceneStage1;
 class ModuleSceneStage2;
-class ModuleSceneStage3;
 class ModulePlayer;
 class ModuleFadeToBlack;
 class ModuleParticles;
@@ -22,6 +21,7 @@ class ModuleEnemies;
 class ModulePowerUPS;
 class ModuleFonts;
 class ModuleUI;
+class ModuleSceneStage3;
 class Module;
 
 
@@ -38,7 +38,6 @@ public:
 	ModuleSceneStart* start = nullptr;
 	ModuleSceneStage1* stage1 = nullptr;
 	ModuleSceneStage2* stage2 = nullptr;
-	ModuleSceneStage3* stage3 = nullptr;
 	ModulePlayer* player = nullptr;
 	ModuleEnemies* enemies = nullptr;
 	ModulePowerUPS* powerups = nullptr;
@@ -47,7 +46,7 @@ public:
 	ModuleCollision* collision = nullptr;
 	ModuleFonts* fonts = nullptr;
 	ModuleUI* ui = nullptr;
-
+	ModuleSceneStage3* stage3 = nullptr;
 
 	Module* current_scene = nullptr;
 
