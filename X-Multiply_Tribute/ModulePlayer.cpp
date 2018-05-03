@@ -170,13 +170,6 @@ update_status ModulePlayer::Update()
 	if (canMove) {
 		current_animation = &idle;
 		state = idl;
-		bool tent = true;
-		for (int i = 0; i < MAX_KEYS; ++i)
-		{
-			if (App->input->keyboard[i] != KEY_IDLE) {
-				tent = false;
-			}
-		}
 
 		fPoint clear_position = { position.x,position.y - 50 };
 		fPoint origin_position = { tentacle.position.x, tentacle.position.y };
@@ -216,7 +209,7 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEAD_ZONE)
 		{
 			current_animation = &idle;
 			position.x += speed.x;
@@ -273,7 +266,7 @@ update_status ModulePlayer::Update()
 			if (((position.x + 36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
 			state = idl;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) < -CONTROLLER_DEAD_ZONE)
 		{
 			current_animation = &idle;
 			position.x -= speed.x;
@@ -330,7 +323,7 @@ update_status ModulePlayer::Update()
 			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
 			state = idl;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE)
 		{
 			if (activePU[TENTACLES] == false) {
 				current_animation = &up;
@@ -389,7 +382,7 @@ update_status ModulePlayer::Update()
 			state = top;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE)
 		{
 			if (activePU[TENTACLES] == false) {
 				current_animation = &down;
@@ -443,9 +436,8 @@ update_status ModulePlayer::Update()
 			state = bot;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->controller_A_button == KEY_STATE::KEY_DOWN)
 		{
-
 			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 			if (activePU[TENTACLES])
@@ -457,11 +449,9 @@ update_status ModulePlayer::Update()
 				App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
 			}
 			cooldown = 0;
-			
 		}
-		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT || App->input->controller_A_button == KEY_STATE::KEY_REPEAT)
 		{
-
 			if (activePU[BOMB] == true && cooldownBombs >= 40)
 			{
 				App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
@@ -488,7 +478,6 @@ update_status ModulePlayer::Update()
 			App->player->tentacle.collider->enable = true;
 			App->player->tentacle2.collider->enable = true;
 		}
-
 
 		if (last_animation != current_animation) {
 			current_animation->Reset();

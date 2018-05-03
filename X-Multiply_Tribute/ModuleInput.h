@@ -21,7 +21,7 @@ class ModuleInput : public Module
 {
 public:
 
-	SDL_GameController* controller_1;
+	SDL_GameController* controller;
 	ModuleInput();
 	~ModuleInput();
 
@@ -31,6 +31,7 @@ public:
 
 public:
 	KEY_STATE keyboard[MAX_KEYS];
+	KEY_STATE controller_A_button;
 };
 
 #endif // __ModuleInput_H__
