@@ -249,7 +249,8 @@ void ModuleUI::DeathFade() {
 
 void ModuleUI::PlayerReady() {
 	Mix_PlayMusic(ready_song, false);
-	App->stage1->first_time = false;
+	if(App->current_stage->index == 1) App->stage1->first_time = false;
+
 	total_time = (Uint32)(3.5f * 1000.0f);
 	start_time = SDL_GetTicks();
 	current_ready_step = ready_step::show_text;
@@ -260,8 +261,10 @@ void ModuleUI::ReadyDone() {
 	App->player->position.x = -36;
 	App->player->injecting = false;
 	App->player->startBoost = true;
-	App->stage1->right = true;
-	Mix_PlayMusic(App->stage1->music, true);
+
+	App->current_stage->right = true;
+	Mix_PlayMusic(App->current_stage->music, true);
+
 	current_ready_step = ready_step::not;
 }
 
