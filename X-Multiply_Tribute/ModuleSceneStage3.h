@@ -14,7 +14,10 @@ private:
 
 	int x = 0;
 	int y = 0;
+	int timer;
 	SDL_Rect rect[2];
+
+	void UpdateCamera();
 
 public:
 	update_status Update();

@@ -37,6 +37,8 @@ bool ModuleSceneStage3::Start() {
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage3/Layerbg03.png");
 
 	Mix_PlayMusic(music, -1);
+	right = true;
+
 	return true;
 }
 
@@ -49,10 +51,42 @@ bool ModuleSceneStage3::Init()
 	return true;
 }
 
+void ModuleSceneStage3::UpdateCamera()
+{
+	int speed = 1;
+	if (stopped || !App->player->canMove) return;
+
+	if (right) {
+		App->render->camera.x += speed * SCREEN_SIZE;
+		App->player->position.x += speed;
+	}
+	if (left)App->render->camera.x -= speed * SCREEN_SIZE;
+	if (up) {
+		timer++;
+		if (timer >= 3) {
+			App->render->camera.y -= speed * SCREEN_SIZE;
+			timer = 0;
+		}
+	}
+	if (down) {
+		timer++;
+		if (timer >= 3) {
+			App->render->camera.y += speed * SCREEN_SIZE;
+			App->player->position.y += 1;
+			timer = 0;
+		}
+
+	}
+}
+
 update_status ModuleSceneStage3::Update()
 {
+
 	App->render->Blit(textures[0], 0, -158, &rect[0], 0.5f);
 	App->render->Blit(textures[1], 0, 0, &rect[1]);
+
+	UpdateCamera();
+
 	return update_status::UPDATE_CONTINUE;
 }
 
