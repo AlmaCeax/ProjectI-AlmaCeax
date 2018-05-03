@@ -35,7 +35,6 @@ bool ModuleSceneStart::CleanUp()
 
 bool ModuleSceneStart::Start()
 {
-	App->current_scene = this;
 	App->render->ResetCamera();
 	App->ui->ui_visible = false;
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_2.png");

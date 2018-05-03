@@ -20,6 +20,7 @@ class ModuleCollision;
 class ModuleEnemies;
 class ModulePowerUPS;
 class ModuleFonts;
+class ModuleStage;
 class ModuleUI;
 class ModuleSceneStage3;
 class Module;
@@ -48,7 +49,7 @@ public:
 	ModuleUI* ui = nullptr;
 	ModuleSceneStage3* stage3 = nullptr;
 
-	Module* current_scene = nullptr;
+	ModuleStage* current_stage = nullptr;
 
 public:
 

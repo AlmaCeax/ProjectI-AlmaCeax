@@ -47,11 +47,13 @@ bool ModuleSceneStage1::Init()
 	textrect[2] = { 28,24,48,106 };
 	textrect[4] = { 120,159,35,14 };
 
+	score_bonus = 10000;
+	index = 1;
 	return true;
 }
 
 bool ModuleSceneStage1::Start() {
-	App->current_scene = this;
+	App->current_stage = this;
 	App->player->Disable();
 	App->particles->Enable();
 	App->enemies->Enable();
@@ -520,8 +522,4 @@ void ModuleSceneStage1::injection()
 			}
 		}
 	}
-}
-
-void ModuleSceneStage1::OnFade() {
-	if (App->player->dead) App->ui->PlayerDeath();
 }

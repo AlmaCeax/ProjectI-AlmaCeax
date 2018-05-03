@@ -94,6 +94,7 @@
     <ClInclude Include="ModuleSceneStage2.h" />
     <ClInclude Include="ModuleSceneStage3.h" />
     <ClInclude Include="ModuleSceneStart.h" />
+    <ClInclude Include="ModuleStage.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="MemLeaks.h" />

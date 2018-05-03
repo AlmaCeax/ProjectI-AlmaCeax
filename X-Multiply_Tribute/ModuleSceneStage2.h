@@ -1,7 +1,7 @@
 #ifndef __ModuleSceneStage2_H__
 #define __ModuleSceneStage2_H__
 
-#include "Module.h"
+#include "ModuleStage.h"
 
 struct SDL_Rect;
 struct SDL_Texture;
@@ -9,7 +9,7 @@ struct _Mix_Music;
 struct Mix_Chunk;
 
 class ModuleSceneStage2 : 
-	public Module
+	public ModuleStage
 {
 private :
 	SDL_Texture * bossTextures[3];

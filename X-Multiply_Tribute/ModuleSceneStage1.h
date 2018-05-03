@@ -1,8 +1,7 @@
 #ifndef __ModuleSceneStage1_H__
 #define __ModuleSceneStage1_H__
 
-#include "Module.h"
-#include "Globals.h"
+#include "ModuleStage.h"
 #include "Animation.h"
 #include "p2Point.h"
 
@@ -15,7 +14,7 @@ struct Mix_Chunk;
 struct Collider;
 
 class ModuleSceneStage1 :
-	public Module
+	public ModuleStage
 {
 private:
 	int timer, startTime, aux;
@@ -41,7 +40,6 @@ public:
 	update_status Update();
 	bool CleanUp();
 	bool Start();
-	void OnFade();
 
 	bool first_time,right;
 	_Mix_Music* music = nullptr;
