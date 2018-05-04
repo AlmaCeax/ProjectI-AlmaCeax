@@ -65,11 +65,11 @@ bool ModuleSceneStage3::Init()
 	rect[2] = {0, 0, 775, 225};
 
 	door.PushBack({ 0, 0, 57, 57 });
-	door.PushBack({ 61, 0, 58, 57 });
-	door.PushBack({ 124, 0, 58, 57 });
+	door.PushBack({ 61, 0, 57, 57 });
+	door.PushBack({ 124, 0, 57, 56 });
 	door.PushBack({ 188, 0, 57, 55 });
-	door.PushBack({ 251, 0, 58, 56 });
-	door.PushBack({ 315, 0, 56, 56 });
+	door.PushBack({ 251, 0, 56, 56 });
+	door.PushBack({ 312, 0, 56, 56 });
 	door.speed = 0.05f;
 	door.loop = false;
 
@@ -139,7 +139,7 @@ void ModuleSceneStage3::BackgroundEvents()
 
 	if (App->render->camera.x >= 4708)
 	{
-		App->render->Blit(textures[3], 4692, 178, &door.GetCurrentFrame());
+		App->render->Blit(textures[3], 4692, 177, &door.GetCurrentFrame());
 		App->render->Blit(textures[3], 5074, 178, &door.GetCurrentFrame());
 	}
 
