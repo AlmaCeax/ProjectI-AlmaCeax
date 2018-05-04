@@ -146,3 +146,8 @@ void ModuleRender::SetCameraPosition(int x, int y)
 	camera.x = x;
 	camera.y = y;
 }
+
+void ModuleRender::setAlpha(SDL_Texture* texture, int alpha)
+{
+	SDL_SetTextureAlphaMod(texture, alpha);
+}

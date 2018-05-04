@@ -20,6 +20,7 @@ public:
 
 	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed = 1.0f, bool use_camera = true);
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera = true);
+	void setAlpha(SDL_Texture* texture, int alpha);
 
 	void ResetCamera();
 	void SetCameraPosition(int x, int y);
