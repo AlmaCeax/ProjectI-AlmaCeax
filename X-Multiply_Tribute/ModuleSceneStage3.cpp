@@ -1,6 +1,8 @@
 #include "Application.h"
 #include "ModuleAudio.h"
 #include "ModuleTextures.h"
+#include "ModuleParticles.h"
+#include "ModulePowerUPS.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "SDL_mixer\include\SDL_mixer.h"
@@ -27,6 +29,9 @@ bool ModuleSceneStage3::Start() {
 	App->current_stage = this;
 
 	App->player->Enable();
+	App->collision->Enable();
+	App->powerups->Enable();
+	App->particles->Enable();
 	App->ui->PlayerReady();
 	App->player->position = { -100, 450 };
 
@@ -104,6 +109,8 @@ bool ModuleSceneStage3::CleanUp()
 {
 	App->player->Disable();
 	App->collision->Disable();
+	App->powerups->Disable();
+	App->particles->Disable();
 
 	for (int i = 0; i < 3; ++i)
 	{
