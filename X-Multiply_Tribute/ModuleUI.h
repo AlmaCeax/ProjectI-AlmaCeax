@@ -30,11 +30,11 @@ public:
 	void PlayerReady();
 	void ReadyDone();
 	void InsertCoin();
-	void PlayerCoins();
+	void PlayerCoins(bool pink);
 
 	bool ui_visible = false;
-
-
+	int coins = 0;
+	SDL_Rect screen;
 	enum clear_step
 	{
 		none,
@@ -46,7 +46,6 @@ public:
 private:
 	SDL_Texture* graphics;
 	SDL_Rect ui_rect;
-	SDL_Rect screen;
 	SDL_Rect life;
 	_Mix_Music* clear_song;
 	_Mix_Music* ready_song;
@@ -60,7 +59,6 @@ private:
 	char score_text[9] = "00000000";
 	uint top_score = 0;
 	char top_score_text[9] = "00500000";
-	int coins = 0;
 
 	int score_font = -1;
 	int blue_font = -1;
