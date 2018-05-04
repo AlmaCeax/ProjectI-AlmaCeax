@@ -180,7 +180,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 	{
 		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
-			App->particles->AddParticle(App->particles->enemyExplosion, enemies[i]->position.x, enemies[i]->position.y, COLLIDER_NONE, { 0,0 });
+			
 			switch (enemies[i]->type)
 			{
 			case NO_TYPE:
@@ -188,12 +188,14 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				delete enemies[i];
 				enemies[i] = nullptr;
 				break;
-			case HELLBALL:Mix_PlayChannel(-1, hellballDeadsfx, 0);
+			case HELLBALL:
+				//Mix_PlayChannel(-1, hellballDeadsfx, 0);
 				enemies[i]->OnCollision(c2);
 				delete enemies[i];
 				enemies[i] = nullptr;
 				break;
-			case FLYINGWORM:Mix_PlayChannel(-1, flyerDeadsfx, 0);
+			case FLYINGWORM:
+				//Mix_PlayChannel(-1, flyerDeadsfx, 0);
 				enemies[i]->OnCollision(c2);
 				delete enemies[i];
 				enemies[i] = nullptr;
@@ -201,13 +203,17 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			case TENTACLESHOOTER:
 				lives[i]--;
 				if (lives[i] == 0) {
-					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					//Mix_PlayChannel(-1, nemonaDeadsfx, 0);
 					enemies[i]->OnCollision(c2);
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}
+				else {
+					enemies[i]->Shine(c2);
+				}
 				break;
-			case POWERUPSHIP:Mix_PlayChannel(-1, pushipDeadsfx, 0);
+			case POWERUPSHIP:
+				Mix_PlayChannel(-1, pushipDeadsfx, 0);
 				enemies[i]->OnCollision(c2);
 				delete enemies[i];
 				enemies[i] = nullptr;
