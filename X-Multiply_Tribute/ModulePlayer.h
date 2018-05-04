@@ -10,16 +10,22 @@ struct SDL_Texture;
 struct Mix_Chunk;
 struct Collider;
 
-struct Tentacle
+class Tentacle 
 {
+public:
 	Collider* collider = nullptr;
 	Animation anim;
 	fPoint position;
+	fPoint base_position;
+	fPoint final_position;
+	fPoint origin_position;
+	float distance;
 	int w, h = 0;
+	enum movement { up, down, right, left, rest };
 
 	Tentacle();
 	~Tentacle();
-	//void Update();
+	void MoveTentacle(movement movement, int location_position);
 };
 
 
