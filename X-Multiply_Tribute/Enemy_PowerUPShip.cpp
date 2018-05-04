@@ -39,7 +39,6 @@ void Enemy_PowerUPShip::OnCollision(Collider * collider)
 {
 	if(pu != nullptr)pu->enabled = true;
 
-	Mix_PlayChannel(-1, deadsfx, 0);
 }
 
 void Enemy_PowerUPShip::Move()

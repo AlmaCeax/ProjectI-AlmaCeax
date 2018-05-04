@@ -18,7 +18,6 @@ protected:
 
 public:
 	iPoint position;
-	Mix_Chunk* deadsfx;
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 public:
 	Enemy(int x, int y);

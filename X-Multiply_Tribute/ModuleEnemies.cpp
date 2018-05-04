@@ -39,6 +39,7 @@ bool ModuleEnemies::Start()
 	flyerDeadsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-066.wav");
 	nemonaDeadsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-063.wav");
 	pushipDeadsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-027.wav");
+	hitEnemysfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-070.wav");
 	return true;
 }
 
@@ -189,13 +190,13 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				enemies[i] = nullptr;
 				break;
 			case HELLBALL:
-				//Mix_PlayChannel(-1, hellballDeadsfx, 0);
+				Mix_PlayChannel(-1, hellballDeadsfx, 0);
 				enemies[i]->OnCollision(c2);
 				delete enemies[i];
 				enemies[i] = nullptr;
 				break;
 			case FLYINGWORM:
-				//Mix_PlayChannel(-1, flyerDeadsfx, 0);
+				Mix_PlayChannel(-1, flyerDeadsfx, 0);
 				enemies[i]->OnCollision(c2);
 				delete enemies[i];
 				enemies[i] = nullptr;
@@ -203,12 +204,13 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			case TENTACLESHOOTER:
 				lives[i]--;
 				if (lives[i] == 0) {
-					//Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
 					enemies[i]->OnCollision(c2);
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}
 				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
 					enemies[i]->Shine(c2);
 				}
 				break;

@@ -50,6 +50,8 @@ protected:
 	Mix_Chunk * hellballDeadsfx;
 	Mix_Chunk * flyerDeadsfx;
 
+	Mix_Chunk * hitEnemysfx;
+
 };
 
 #endif // __ModuleEnemies_H__
