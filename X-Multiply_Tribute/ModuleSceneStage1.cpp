@@ -54,10 +54,11 @@ bool ModuleSceneStage1::Init()
 bool ModuleSceneStage1::Start() {
 	App->current_stage = this;
 	App->player->Disable();
-	App->particles->Enable();
 	App->enemies->Enable();
 	App->powerups->Enable();
 	App->collision->Enable();
+	App->powerups->Enable();
+	App->particles->Enable();
 	App->ui->ui_visible = true;
 
 	right = false;
@@ -212,7 +213,8 @@ bool ModuleSceneStage1::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 	App->collision->Disable();
-
+	App->powerups->Disable();
+	App->particles->Disable();
 
 	for (int i = 0; i < NUM_LAYERS; ++i)
 	{

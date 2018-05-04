@@ -10,6 +10,13 @@ struct SDL_Texture;
 struct _Mix_Music;
 struct Mix_Chunk;
 
+enum start_steps
+{
+	none,
+	logo_movement,
+	show_coins,
+};
+
 class ModuleSceneStart : public Module
 {
 private:
@@ -18,6 +25,7 @@ private:
 	SDL_Rect background;
 	SDL_Rect company;
 	_Mix_Music* music = nullptr;
+	start_steps current_step = start_steps::logo_movement;
 	
 public:
 	update_status Update();

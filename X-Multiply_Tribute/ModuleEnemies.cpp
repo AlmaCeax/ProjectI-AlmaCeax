@@ -16,8 +16,12 @@
 
 ModuleEnemies::ModuleEnemies()
 {
-	for(uint i = 0; i < MAX_ENEMIES; ++i)
+	for (uint i = 0; i < MAX_ENEMIES; ++i) {
 		enemies[i] = nullptr;
+		lives[i] = 0;
+	}
+	
+		
 }
 
 // Destructor
@@ -161,6 +165,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			break;
 			case ENEMY_TYPES::TENTACLESHOOTER:
 			enemies[i] = new Enemy_TentacleShooter(info.x, info.y, info.going_up);
+			lives[i] = 3;
 			break;
 			case ENEMY_TYPES::POWERUPSHIP:
 			enemies[i] = new Enemy_PowerUPShip(info.x, info.y, info.powerUpid);
@@ -179,21 +184,38 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			switch (enemies[i]->type)
 			{
 			case NO_TYPE:
+				enemies[i]->OnCollision(c2);
+				delete enemies[i];
+				enemies[i] = nullptr;
 				break;
 			case HELLBALL:Mix_PlayChannel(-1, hellballDeadsfx, 0);
+				enemies[i]->OnCollision(c2);
+				delete enemies[i];
+				enemies[i] = nullptr;
 				break;
 			case FLYINGWORM:Mix_PlayChannel(-1, flyerDeadsfx, 0);
+				enemies[i]->OnCollision(c2);
+				delete enemies[i];
+				enemies[i] = nullptr;
 				break;
-			case TENTACLESHOOTER:Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+			case TENTACLESHOOTER:
+				lives[i]--;
+				if (lives[i] == 0) {
+					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					enemies[i]->OnCollision(c2);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
 				break;
 			case POWERUPSHIP:Mix_PlayChannel(-1, pushipDeadsfx, 0);
+				enemies[i]->OnCollision(c2);
+				delete enemies[i];
+				enemies[i] = nullptr;
 				break;
 			default:
 				break;
 			}
- 			enemies[i]->OnCollision(c2);
-			delete enemies[i];
-			enemies[i] = nullptr;
+ 			
 			break;
 		}
 	}

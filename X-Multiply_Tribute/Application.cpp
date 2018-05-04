@@ -56,8 +56,9 @@ bool Application::Init()
 	stage2->Disable();
 	stage3->Disable();
 	enemies->Disable();
-	powerups->Disable();
 	collision->Disable();
+	powerups->Disable();
+	particles->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

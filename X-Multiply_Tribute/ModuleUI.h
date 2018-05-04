@@ -5,13 +5,7 @@
 #include "p2Point.h"
 
 struct _Mix_Music;
-enum clear_step
-{
-	none,
-	fade,
-	player_moving,
-	player_stopped
-};
+
 
 class ModuleUI :
 	public Module
@@ -35,9 +29,19 @@ public:
 	void DeathFade();
 	void PlayerReady();
 	void ReadyDone();
+	void InsertCoin();
+	void PlayerCoins();
 
 	bool ui_visible = false;
-	clear_step current_step = clear_step::none;
+
+
+	enum clear_step
+	{
+		none,
+		fade,
+		player_moving,
+		player_stopped
+	} current_step = clear_step::none;
 
 private:
 	SDL_Texture* graphics;
@@ -47,6 +51,7 @@ private:
 	_Mix_Music* clear_song;
 	_Mix_Music* ready_song;
 	_Mix_Music* over_song;
+	Mix_Chunk* coin_sfx;
 
 	void ClearUpdate();
 	void ReadyUpdate();
@@ -54,7 +59,8 @@ private:
 	uint score = 0;
 	char score_text[9] = "00000000";
 	uint top_score = 0;
-	char top_score_text[9] = "00000000";
+	char top_score_text[9] = "00500000";
+	int coins = 0;
 
 	int score_font = -1;
 	int blue_font = -1;
@@ -84,6 +90,7 @@ private:
 		show_text,
 		dontshow_text
 	} current_ready_step = ready_step::not;
+
 
 
 };

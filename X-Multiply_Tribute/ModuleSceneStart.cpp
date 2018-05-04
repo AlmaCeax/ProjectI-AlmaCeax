@@ -6,18 +6,32 @@
 #include "ModuleInput.h"
 #include "ModuleUI.h"
 #include "ModuleSceneStage1.h"
+#include "ModuleFonts.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "ModuleSceneStart.h"
 
-
 update_status ModuleSceneStart::Update()
 {
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) App->fade->FadeToBlack(this, App->stage1, 2);
+	if (App->input->keyboard[SDL_SCANCODE_5] == 1) {
+		App->ui->InsertCoin();
+		if (current_step == start_steps::logo_movement) {
+			Mix_PauseMusic();
+			current_step = start_steps::show_coins;
+		}
+	}
 
-	App->render->Blit(graphics, 0, 0, &background);
-	App->render->Blit(graphics, 0, 0, &title);
-	App->render->Blit(graphics, 116,200, &company);
+	switch (current_step) {
+		case start_steps::logo_movement: {
+			App->render->Blit(graphics, 0, 0, &background);
+			App->render->Blit(graphics, 0, 0, &title);
+			App->render->Blit(graphics, 116, 200, &company);
+		}break;
+		case start_steps::show_coins: {
+			App->ui->PlayerCoins();
+		} break;
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
