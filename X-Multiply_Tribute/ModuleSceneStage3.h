@@ -9,14 +9,17 @@ class ModuleSceneStage3 :
 	public ModuleStage
 {
 private:
-	SDL_Texture * textures[2];
-
+	SDL_Texture * textures[4];
+	_Mix_Music* secondTrack = nullptr;
 	int x = 0;
 	int y = 0;
 	int timer;
-	SDL_Rect rect[2];
+	int bgalpha = 255;
+	SDL_Rect rect[3];
+	Animation door;
 
 	void UpdateCamera();
+	void BackgroundEvents();
 
 public:
 	update_status Update();

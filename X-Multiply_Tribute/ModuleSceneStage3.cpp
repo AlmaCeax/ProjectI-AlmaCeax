@@ -38,8 +38,13 @@ bool ModuleSceneStage3::Start() {
 	App->render->SetCameraPosition(0, 336);
 
 	music = App->audio->LoadMusic("Assets/Audio/Music/06_The_Rolling_Worms_Stage_3-1_.ogg");
+	secondTrack = App->audio->LoadMusic("Assets/Audio/Music/07_The_Rolling_Worms_Stage_3-2_.ogg");
 	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage3/Backgroundbg03.png");
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage3/Layerbg03.png");
+	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage3/BackgroundFinalbg03.png");
+	textures[3] = App->textures->Load("Assets/Sprites/Stages/Stage3/Door.png");
+
+
 
 	right = false;
 	left = false;
@@ -54,8 +59,19 @@ bool ModuleSceneStage3::Init()
 {
 	score_bonus = 20000;
 	index = 3;
-	rect[0] = { 0,0,3546,544 };
-	rect[1] = { 0,0,5104,561 };
+	rect[0] = {0, 0, 2260, 208};
+	rect[1] = {0, 0, 5104, 561};
+	rect[2] = {0, 0, 775, 225};
+
+	door.PushBack({ 0, 0, 57, 57 });
+	door.PushBack({ 61, 0, 58, 57 });
+	door.PushBack({ 124, 0, 58, 57 });
+	door.PushBack({ 188, 0, 57, 55 });
+	door.PushBack({ 251, 0, 58, 56 });
+	door.PushBack({ 315, 0, 56, 56 });
+	door.speed = 0.1f;
+	door.loop = false;
+
 	return true;
 }
 
@@ -88,18 +104,57 @@ void ModuleSceneStage3::UpdateCamera()
 	}
 }
 
-update_status ModuleSceneStage3::Update()
+void ModuleSceneStage3::BackgroundEvents()
 {
-
-	App->render->Blit(textures[0], 0, -110, &rect[0], 0.65f);
-	App->render->Blit(textures[1], 0, 0, &rect[1]);
-
 	if (App->render->camera.x > 3150 && App->render->camera.x < 3874)
 	{
-		if (!up) up = true;
-	}
-	else if (up) up = false;
+		if (!up)
+		{
+			up = true;
+			Mix_PlayMusic(secondTrack, -1);
+		}
 
+	}
+	else if (up) {
+		up = false;
+	}
+
+	if (App->render->camera.x > 2560 && App->render->camera.x < 4080)
+	{
+		if (bgalpha > 0)
+		{
+			bgalpha--;
+		}
+	}
+	else {
+		if (bgalpha < 255)
+		{
+			bgalpha++;
+		}
+	}
+
+	if (App->render->camera.x >= 4708)
+	{
+		App->render->Blit(textures[3], 4692, 178, &door.GetCurrentFrame());
+		App->render->Blit(textures[3], 5074, 178, &door.GetCurrentFrame());
+	}
+
+	if (App->render->camera.x >= 4718)
+	{
+		right = false;
+	}
+}
+
+update_status ModuleSceneStage3::Update()
+{
+	App->render->setAlpha(textures[0], bgalpha);
+	App->render->setAlpha(textures[2], bgalpha);
+
+	App->render->Blit(textures[0], 0, 226, &rect[0], 0.65f);
+	App->render->Blit(textures[2], 4346, 95, &rect[2]);
+	App->render->Blit(textures[1], 0, 0, &rect[1]);
+
+	BackgroundEvents();
 	UpdateCamera();
 
 	return update_status::UPDATE_CONTINUE;
