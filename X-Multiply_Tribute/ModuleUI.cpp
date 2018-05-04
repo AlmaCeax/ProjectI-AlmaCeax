@@ -278,8 +278,12 @@ void ModuleUI::InsertCoin()
 	}
 }
 
-void ModuleUI::PlayerCoins()
+void ModuleUI::PlayerCoins(bool pink)
 {
+	int font;
+	if (pink) font = pink_font;
+	else font = blue_font;
+
 	char credit_text[10] = { "credit " };
 	if (coins<10) credit_text[7] = coins + '0';
 	else {
@@ -289,10 +293,10 @@ void ModuleUI::PlayerCoins()
 		credit_text[8] = str[1];
 	}
 
-	App->fonts->BlitText(55, 35, pink_font, "push start button");
-	if (coins > 1) App->fonts->BlitText(65, 96, pink_font, "1 or 2 players");
-	else App->fonts->BlitText(60, 96, pink_font, "1 player only");
-	App->fonts->BlitText(65, 160, pink_font, credit_text);
+	App->fonts->BlitText(55, 35, font, "push start button");
+	if (coins > 1) App->fonts->BlitText(80, 96, font, "1 or 2 players");
+	else App->fonts->BlitText(80, 96, font, "1 player only");
+	App->fonts->BlitText(120, 160, font, credit_text);
 }
 
 void ModuleUI::StageCleared() {

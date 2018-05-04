@@ -11,6 +11,8 @@ class ModuleSceneStage3 :
 private:
 	SDL_Texture * textures[4];
 	_Mix_Music* secondTrack = nullptr;
+	_Mix_Music* bossTrack = nullptr;
+
 	int x = 0;
 	int y = 0;
 	int timer;

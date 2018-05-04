@@ -39,6 +39,7 @@ bool ModuleSceneStage3::Start() {
 
 	music = App->audio->LoadMusic("Assets/Audio/Music/06_The_Rolling_Worms_Stage_3-1_.ogg");
 	secondTrack = App->audio->LoadMusic("Assets/Audio/Music/07_The_Rolling_Worms_Stage_3-2_.ogg");
+	bossTrack = App->audio->LoadMusic("Assets/Audio/Music/03_Boss_Theme.ogg");
 	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage3/Backgroundbg03.png");
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage3/Layerbg03.png");
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage3/BackgroundFinalbg03.png");
@@ -69,7 +70,7 @@ bool ModuleSceneStage3::Init()
 	door.PushBack({ 188, 0, 57, 55 });
 	door.PushBack({ 251, 0, 58, 56 });
 	door.PushBack({ 315, 0, 56, 56 });
-	door.speed = 0.1f;
+	door.speed = 0.05f;
 	door.loop = false;
 
 	return true;
@@ -132,6 +133,9 @@ void ModuleSceneStage3::BackgroundEvents()
 			bgalpha++;
 		}
 	}
+
+	if (App->render->camera.x == 4670)	Mix_PlayMusic(bossTrack, -1);
+
 
 	if (App->render->camera.x >= 4708)
 	{
