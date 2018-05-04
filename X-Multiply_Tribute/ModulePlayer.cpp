@@ -16,9 +16,7 @@
 enum pu_type;
 
 ModulePlayer::ModulePlayer()
-{
-
-}
+{}
 
 ModulePlayer::~ModulePlayer()
 {}
@@ -48,23 +46,6 @@ bool ModulePlayer::Init() {
 	death.loop = false;
 	death.speed = 0.3f;
 
-	tentacle.anim.PushBack({ 90, 18, 19, 9 });
-	tentacle.anim.PushBack({ 122, 19, 19, 7 });
-	tentacle.anim.PushBack({ 154, 20, 19, 6 });
-	tentacle.anim.PushBack({ 186, 20, 19, 7 });
-	tentacle.anim.PushBack({ 218, 19, 19, 9 });
-	tentacle.anim.PushBack({ 10, 34, 19, 10 });
-	tentacle.anim.loop = true;
-	tentacle.anim.speed = 0.2f;
-
-	tentacle2.anim.PushBack({ 90, 18, 19, 9 });
-	tentacle2.anim.PushBack({ 122, 19, 19, 7 });
-	tentacle2.anim.PushBack({ 154, 20, 19, 6 });
-	tentacle2.anim.PushBack({ 186, 20, 19, 7 });
-	tentacle2.anim.PushBack({ 218, 19, 19, 9 });
-	tentacle2.anim.PushBack({ 10, 34, 19, 10 });
-	tentacle2.anim.loop = true;
-	tentacle2.anim.speed = 0.2f;
 	return true;
 }
 
@@ -94,8 +75,8 @@ bool ModulePlayer::Start()
 
 	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
 
-	tentacle.position = { position.x, position.y -50};
-	tentacle2.position = { position.x, position.y +54};
+	tentacle.base_position = { position.x, position.y - 50};
+	tentacle2.base_position = { position.x, position.y + 54};
 
 	tentacle.collider = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
 	tentacle2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
@@ -171,97 +152,23 @@ update_status ModulePlayer::Update()
 		current_animation = &idle;
 		state = idl;
 
-		fPoint clear_position = { position.x,position.y - 50 };
-		fPoint origin_position = { tentacle.position.x, tentacle.position.y };
-		float distance = origin_position.DistanceTo(clear_position);
-		fPoint direction;
-		if (distance <= 0.01f && distance >= -0.01f) tentacle.position = clear_position;
-		else
-		{
-			direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
+		tentacle.base_position = { position.x, position.y - 50 };
+		tentacle2.base_position = { position.x, position.y + 54 };
 
-			tentacle.position.x += direction.x * 2;
-			tentacle.position.y += direction.y;
+			tentacle.MoveTentacle(tentacle.rest, 1);
+			tentacle2.MoveTentacle(tentacle2.rest, 2);
 
 			tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
 			tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
 
-			if (origin_position.DistanceTo(tentacle.position) >= distance)
-			{
-				tentacle.position = clear_position;
-			}
-		}
-
-		clear_position = { position.x,position.y + 54 };
-		origin_position = { tentacle2.position.x, tentacle2.position.y};
-		distance = origin_position.DistanceTo(clear_position);
-
-		if (distance <= 0.01f && distance >= -0.01f) tentacle2.position = clear_position;
-		else {
-			direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
-
-			tentacle2.position.x += direction.x * 2;
-			tentacle2.position.y += direction.y;
-
-			if (origin_position.DistanceTo(tentacle2.position) >= distance)
-			{
-				tentacle2.position = clear_position;
-			}
-		}
 
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEAD_ZONE)
 		{
 			current_animation = &idle;
 			position.x += speed.x;
-			if (tentacle.position.x >= position.x - 50) {
-				tentacle.position.x -= (speed.x*2);
-			}	
-			else
-			{
-				clear_position = { position.x - 50,tentacle.position.y };
-				origin_position = { tentacle.position.x, tentacle.position.y };
-				distance = origin_position.DistanceTo(clear_position);
-				if (8 >= distance)
-				{
-					tentacle.position = clear_position;
-				}
-
-				if (tentacle.position.y < position.y + 4) {
-					tentacle.position.y += speed.x * 2;
-				}
-
-				clear_position = { tentacle.position.x,position.y+4};
-				origin_position = { tentacle.position.x, tentacle.position.y};
-				distance = origin_position.DistanceTo(clear_position);
-				if (8 >= distance)
-				{
-					tentacle.position = clear_position;
-				}
-			}
+			tentacle.MoveTentacle(tentacle.right, 1);
+			tentacle2.MoveTentacle(tentacle2.right, 2);
 			
-			if (tentacle2.position.x >= position.x - 50) {
-				tentacle2.position.x -= speed.x*2;
-			}
-			else
-			{
-				clear_position = { position.x - 50,tentacle2.position.y };
-				origin_position = { tentacle2.position.x, tentacle2.position.y };
-				distance = origin_position.DistanceTo(clear_position);
-				if (8 >= distance)
-				{
-					tentacle2.position = clear_position;
-				}
-				if (tentacle2.position.y > position.y + 4) {
-					tentacle2.position.y -= speed.x*2;
-				}
-				clear_position = { tentacle2.position.x,position.y + 4 };
-				origin_position = { tentacle2.position.x, tentacle2.position.y };
-				distance = origin_position.DistanceTo(clear_position);
-				if (8 >= distance)
-				{
-					tentacle2.position = clear_position;
-				}
-			}
 
 			if (((position.x + 36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
 			state = idl;
@@ -270,55 +177,8 @@ update_status ModulePlayer::Update()
 		{
 			current_animation = &idle;
 			position.x -= speed.x;
-
-			if (tentacle.position.x <= position.x + 50) {
-			tentacle.position.x += (speed.x*2);
-			}
-			else
-			{
-				clear_position = { position.x + 50,tentacle.position.y };
-				origin_position = { tentacle.position.x, tentacle.position.y };
-				distance = origin_position.DistanceTo(clear_position);
-				if (8 >= distance)
-				{
-					tentacle.position = clear_position;
-				}
-
-				if (tentacle.position.y < position.y +4) {
-					tentacle.position.y += speed.x * 2;
-				}
-
-				clear_position = { tentacle.position.x,position.y +4};
-				origin_position = { tentacle.position.x, tentacle.position.y };
-				distance = origin_position.DistanceTo(clear_position);
-				if (8 >= distance)
-				{
-					tentacle.position = clear_position;
-				}
-			}
-			if (tentacle2.position.x <= position.x + 50) {
-				tentacle2.position.x += speed.x*2;
-			}
-			else
-			{
-				clear_position = { position.x + 50,tentacle2.position.y };
-				origin_position = { tentacle2.position.x, tentacle2.position.y };
-				distance = origin_position.DistanceTo(clear_position);
-				if (8 >= distance)
-				{
-					tentacle2.position = clear_position;
-				}
-				if (tentacle2.position.y > position.y +4) {
-					tentacle2.position.y -= speed.x * 2;
-				}
-				clear_position = { tentacle2.position.x,position.y +4};
-				origin_position = { tentacle2.position.x, tentacle2.position.y };
-				distance = origin_position.DistanceTo(clear_position);
-				if (8 >= distance)
-				{
-					tentacle2.position = clear_position;
-				}
-			}
+			tentacle.MoveTentacle(tentacle.left, 1);
+			tentacle2.MoveTentacle(tentacle2.left, 2);
 
 			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
 			state = idl;
@@ -329,54 +189,8 @@ update_status ModulePlayer::Update()
 				current_animation = &up;
 			}
 			position.y -= speed.x;
-			if (tentacle2.position.y < position.y + 54) {
-				tentacle2.position.y += speed.x;
-			}
-			clear_position = { tentacle2.position.x,position.y + 54};
-			origin_position = { tentacle2.position.x, tentacle2.position.y };
-			distance = origin_position.DistanceTo(clear_position);
-			if (8 >= distance)
-			{
-				tentacle2.position = clear_position;
-			}
-			clear_position = { position.x - 50,tentacle2.position.y };
-			origin_position = { tentacle2.position.x, tentacle2.position.y };
-			distance = origin_position.DistanceTo(clear_position);
-			if (8 >= distance)
-			{
-				tentacle2.position = clear_position;
-			}
-			clear_position = { position.x + 50,tentacle2.position.y };
-			origin_position = { tentacle2.position.x, tentacle2.position.y };
-			distance = origin_position.DistanceTo(clear_position);
-			if (8 >= distance)
-			{
-				tentacle2.position = clear_position;
-			}
-			if (tentacle.position.y < position.y + 5) {
-				tentacle.position.y += speed.x;
-			}
-			clear_position = { tentacle.position.x,position.y + 5};
-			origin_position = { tentacle.position.x, tentacle.position.y };
-			distance = origin_position.DistanceTo(clear_position);
-			if (8 >= distance)
-			{
-				tentacle.position = clear_position;
-			}
-			clear_position = { position.x - 50,tentacle.position.y };
-			origin_position = { tentacle.position.x, tentacle.position.y };
-			distance = origin_position.DistanceTo(clear_position);
-			if (8 >= distance)
-			{
-				tentacle.position = clear_position;
-			}
-			clear_position = { position.x + 50,tentacle.position.y };
-			origin_position = { tentacle.position.x, tentacle.position.y };
-			distance = origin_position.DistanceTo(clear_position);
-			if (8 >= distance)
-			{
-				tentacle.position = clear_position;
-			}
+			tentacle.MoveTentacle(tentacle.up, 1);
+			tentacle2.MoveTentacle(tentacle2.up, 2);
 			
 			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
 			state = top;
@@ -388,50 +202,9 @@ update_status ModulePlayer::Update()
 				current_animation = &down;
 			}
 			position.y += speed.x;
-			if (tentacle.position.y > position.y - 50) {
-				tentacle.position.y -= speed.x;
-			}
-			clear_position = { tentacle.position.x,position.y - 50 };
-			origin_position = { tentacle.position.x, tentacle.position.y };
-			distance = origin_position.DistanceTo(clear_position);
-			if (8 >= distance)
-			{
-				tentacle.position = clear_position;
-			}
-			clear_position = { position.x - 50,tentacle.position.y };
-			origin_position = { tentacle.position.x, tentacle.position.y };
-			distance = origin_position.DistanceTo(clear_position);
-			if (8 >= distance)
-			{
-				tentacle.position = clear_position;
-			}
-			clear_position = { position.x + 50,tentacle.position.y };
-			origin_position = { tentacle.position.x, tentacle.position.y };
-			distance = origin_position.DistanceTo(clear_position);
-			if (8 >= distance)
-			{
-				tentacle.position = clear_position;
-			}
-			if (tentacle2.position.y >= position.y - 5) {
-				tentacle2.position.y -= speed.x;
-			}
-			clear_position = { tentacle2.position.x,position.y - 5};
-			origin_position = { tentacle2.position.x, tentacle2.position.y };
-			distance = origin_position.DistanceTo(clear_position);
-			if (8 >= distance)
-			{
-				tentacle2.position = clear_position;
-			}
-			clear_position = { position.x - 50,tentacle2.position.y };
-			origin_position = { tentacle2.position.x, tentacle2.position.y };
-			distance = origin_position.DistanceTo(clear_position);
-			if (8 >= distance)
-			{
-				tentacle2.position = clear_position;
-			}
-			clear_position = { position.x + 50,tentacle2.position.y };
-			origin_position = { tentacle2.position.x, tentacle2.position.y };
-			distance = origin_position.DistanceTo(clear_position);
+			tentacle.MoveTentacle(tentacle.down,1);
+			tentacle2.MoveTentacle(tentacle2.down,2);
+		
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
 			state = bot;
 		}
@@ -583,11 +356,275 @@ void ModulePlayer::ResetPU() {
 // -------------------------------------------------------------
 // -------------------------------------------------------------
 
+
 Tentacle::Tentacle()
-{}
+{
+
+	anim.PushBack({ 90, 18, 19, 9 });
+	anim.PushBack({ 122, 19, 19, 7 });
+	anim.PushBack({ 154, 20, 19, 6 });
+	anim.PushBack({ 186, 20, 19, 7 });
+	anim.PushBack({ 218, 19, 19, 9 });
+	anim.PushBack({ 10, 34, 19, 10 });
+	anim.loop = true;
+	anim.speed = 0.2f;
+
+	anim.PushBack({ 90, 18, 19, 9 });
+	anim.PushBack({ 122, 19, 19, 7 });
+	anim.PushBack({ 154, 20, 19, 6 });
+	anim.PushBack({ 186, 20, 19, 7 });
+	anim.PushBack({ 218, 19, 19, 9 });
+	anim.PushBack({ 10, 34, 19, 10 });
+	anim.loop = true;
+	anim.speed = 0.2f;
+
+	position = base_position;
+
+}
 
 Tentacle::~Tentacle()
 {
 	if (collider != nullptr)
 		collider->to_delete = true;
+}
+
+void Tentacle::MoveTentacle(movement movement, int location_position)
+{
+	switch (movement)
+	{
+	case Tentacle::up:
+		if (location_position == 1) {
+			if (position.y < App->player->position.y + 5) {
+				position.y += App->player->speed.x;
+			}
+			final_position = { position.x,App->player->position.y + 5 };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+			if (8 >= distance)
+			{
+				position = final_position;
+			}
+			final_position = { App->player->position.x - 50,position.y };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+			if (8 >= distance)
+			{
+				position = final_position;
+			}
+			final_position = { App->player->position.x + 50,position.y };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+			if (8 >= distance)
+			{
+				position = final_position;
+			}
+		}
+		else
+		{
+			if (position.y < App->player->position.y + 54) {
+				position.y += App->player->speed.x;
+			}
+			final_position = { position.x,App->player->position.y + 54 };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+			if (8 >= distance)
+			{
+				position = final_position;
+			}
+			final_position = { App->player->position.x - 50,position.y };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+			if (8 >= distance)
+			{
+				position = final_position;
+			}
+			final_position = { App->player->position.x + 50,position.y };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+			if (8 >= distance)
+			{
+				position = final_position;
+			}
+		}
+		break;
+	case Tentacle::down:
+		if (location_position == 1) {
+			if (position.y > App->player->position.y - 50) {
+				position.y -= App->player->speed.x;
+			}
+			final_position = { position.x,App->player->position.y - 50 };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+			if (8 >= distance)
+			{
+				position = final_position;
+			}
+			final_position = { App->player->position.x - 50,position.y };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+			if (8 >= distance)
+			{
+				position = final_position;
+			}
+			final_position = { App->player->position.x + 50,position.y };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+			if (8 >= distance)
+			{
+				position = final_position;
+			}
+		}
+		else
+		{
+			if (position.y >= App->player->position.y - 5) {
+				position.y -= App->player->speed.x;
+			}
+			final_position = { position.x,App->player->position.y - 5 };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+			if (8 >= distance)
+			{
+				position = final_position;
+			}
+			final_position = { App->player->position.x - 50,position.y };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+			if (8 >= distance)
+			{
+				position = final_position;
+			}
+			final_position = { App->player->position.x + 50, position.y };
+			origin_position = { position.x, position.y };
+			distance = origin_position.DistanceTo(final_position);
+		}
+		break;
+	case Tentacle::right:
+		if (location_position == 1) {
+			if (position.x >= App->player->position.x - 50) {
+				position.x -= (App->player->speed.x * 2);
+			}
+			else
+			{
+				final_position = { App->player->position.x - 50,position.y };
+				origin_position = { position.x, position.y };
+				distance = origin_position.DistanceTo(final_position);
+				if (8 >= distance)
+				{
+					position = final_position;
+				}
+
+				if (position.y < App->player->position.y + 4) {
+					position.y += App->player->speed.x * 2;
+				}
+
+				final_position = { position.x,App->player->position.y + 4 };
+				origin_position = { position.x, position.y };
+				distance = origin_position.DistanceTo(final_position);
+				if (8 >= distance)
+				{
+					position = final_position;
+				}
+			}
+		}
+		else
+		{
+			if (position.x >= App->player->position.x - 50) {
+				position.x -= App->player->speed.x * 2;
+			}
+			else
+			{
+				final_position = { App->player->position.x - 50,position.y };
+				origin_position = { position.x, position.y };
+				distance = origin_position.DistanceTo(final_position);
+				if (8 >= distance)
+				{
+					position = final_position;
+				}
+				if (position.y > App->player->position.y + 4) {
+					position.y -= App->player->speed.x * 2;
+				}
+				final_position = { position.x,App->player->position.y + 4 };
+				origin_position = { position.x, position.y };
+				distance = origin_position.DistanceTo(final_position);
+				if (8 >= distance)
+				{
+					position = final_position;
+				}
+			}
+		}
+		break;
+	case Tentacle::left:
+
+		if (location_position == 1) {
+			if (position.x <= App->player->position.x + 50) {
+				position.x += (App->player->speed.x * 2);
+			}
+			else
+			{
+				final_position = { App->player->position.x + 50,position.y };
+				origin_position = { position.x, position.y };
+				distance = origin_position.DistanceTo(final_position);
+				if (8 >= distance)
+				{
+					position = final_position;
+				}
+
+				if (position.y < App->player->position.y + 4) {
+					position.y += App->player->speed.x * 2;
+				}
+
+				final_position = { position.x, App->player->position.y + 4 };
+				origin_position = { position.x, position.y };
+				distance = origin_position.DistanceTo(final_position);
+				if (8 >= distance)
+				{
+					position = final_position;
+				}
+			}
+		}
+		else {
+			if (position.x <= App->player->position.x + 50) {
+				position.x += App->player->speed.x * 2;
+			}
+			else
+			{
+				final_position = { App->player->position.x + 50,position.y };
+				origin_position = { position.x, position.y };
+				distance = origin_position.DistanceTo(final_position);
+				if (8 >= distance)
+				{
+					position = final_position;
+				}
+				if (position.y > App->player->position.y + 4) {
+					position.y -= App->player->speed.x * 2;
+				}
+				final_position = { App->player->position.x,position.y + 4 };
+				origin_position = { position.x, position.y };
+				distance = origin_position.DistanceTo(final_position);
+				if (8 >= distance)
+				{
+					position = final_position;
+				}
+			}
+		}
+		break;
+	default:
+		origin_position = { position.x, position.y };
+		distance = origin_position.DistanceTo(base_position);
+		fPoint direction;
+		if (distance <= 0.01f && distance >= -0.01f) position = base_position;
+		else
+		{
+			direction = { base_position.x / distance - origin_position.x / distance, base_position.y / distance - origin_position.y / distance };
+
+			position.x += direction.x * 2;
+			position.y += direction.y;
+
+			if (origin_position.DistanceTo(position) >= distance)
+			{
+				position = base_position;
+			}
+		}
+		break;
+	}
 }

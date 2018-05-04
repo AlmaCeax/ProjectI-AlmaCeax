@@ -35,3 +35,7 @@ void Enemy::OnCollision(Collider* collider)
 	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
 	App->ui->AddScore(points);
 }
+void Enemy::Shine(Collider* collider)
+{
+	Mix_PlayChannel(-1, deadsfx, 0);
+}
