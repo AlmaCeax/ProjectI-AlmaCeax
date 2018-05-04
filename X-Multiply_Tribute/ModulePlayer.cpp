@@ -284,7 +284,7 @@ update_status ModulePlayer::Update()
 }
 
 void ModulePlayer::Die() {
-	if (App->ui->current_step != clear_step::none) return;
+	if (App->ui->current_step != none) return;
 	position.x -= 5;
 	position.y -=10;
 	dead = true;

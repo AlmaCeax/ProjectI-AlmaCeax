@@ -37,6 +37,8 @@ bool ModuleUI::Init()
 	clear_song = App->audio->LoadMusic("Assets/Audio/Music/04_Stage_Clear.ogg");
 	ready_song = App->audio->LoadMusic("Assets/Audio/Music/14_Player_Ready.ogg");
 	over_song = App->audio->LoadMusic("Assets/Audio/Music/15_Game_Over.ogg");
+	coin_sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-017.wav");
+	Mix_VolumeChunk(coin_sfx, 5);
 
 	ui_rect = { 0,0,384,32 };
 	life = { 392,0,8,16 };
@@ -212,7 +214,7 @@ void ModuleUI::Reset() {
 	game_over = false;
 	player_lives = 2;
 
-	/*if (score > top_score && !App->collision->god_used && !life_increased) {
+	if (score > top_score && !App->collision->god_used && !life_increased) {
 		top_score = score;
 		char str[8];
 		_itoa_s(top_score, str, 10);
@@ -227,7 +229,7 @@ void ModuleUI::Reset() {
 			top_score_text[new_position] = str[i];
 			new_position--;
 		}
-	}*/
+	}
 	life_increased = false;
 	App->collision->god_used = false;
 	if (App->collision->god)App->collision->GodMode();
@@ -266,6 +268,31 @@ void ModuleUI::ReadyDone() {
 	Mix_PlayMusic(App->current_stage->music, true);
 
 	current_ready_step = ready_step::not;
+}
+
+void ModuleUI::InsertCoin()
+{
+	if (coins < 99) {
+		coins++;
+		Mix_PlayChannel(-1, coin_sfx, 0);
+	}
+}
+
+void ModuleUI::PlayerCoins()
+{
+	char credit_text[10] = { "credit " };
+	if (coins<10) credit_text[7] = coins + '0';
+	else {
+		char str[3];
+		_itoa_s(coins, str, 10);
+		credit_text[7] = str[0];
+		credit_text[8] = str[1];
+	}
+
+	App->fonts->BlitText(55, 35, pink_font, "push start button");
+	if (coins > 1) App->fonts->BlitText(65, 96, pink_font, "1 or 2 players");
+	else App->fonts->BlitText(60, 96, pink_font, "1 player only");
+	App->fonts->BlitText(65, 160, pink_font, credit_text);
 }
 
 void ModuleUI::StageCleared() {
