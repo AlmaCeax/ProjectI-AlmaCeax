@@ -211,8 +211,6 @@ bool ModuleSceneStage1::CleanUp()
 {
 	App->player->Disable();
 	App->enemies->Disable();
-	App->particles->Disable();
-	App->powerups->Disable();
 	App->collision->Disable();
 
 

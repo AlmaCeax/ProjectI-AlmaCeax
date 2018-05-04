@@ -49,7 +49,7 @@ bool ModuleSceneStage3::Init()
 {
 	score_bonus = 20000;
 	index = 3;
-	rect[0] = { 0,0,5098,544 };
+	rect[0] = { 0,0,3546,544 };
 	rect[1] = { 0,0,5104,561 };
 	return true;
 }
@@ -68,6 +68,7 @@ void ModuleSceneStage3::UpdateCamera()
 		timer++;
 		if (timer >= 3) {
 			App->render->camera.y -= speed * SCREEN_SIZE;
+			App->player->position.y -= 1;
 			timer = 0;
 		}
 	}
@@ -85,8 +86,14 @@ void ModuleSceneStage3::UpdateCamera()
 update_status ModuleSceneStage3::Update()
 {
 
-	App->render->Blit(textures[0], 0, -158, &rect[0], 0.5f);
+	App->render->Blit(textures[0], 0, -110, &rect[0], 0.65f);
 	App->render->Blit(textures[1], 0, 0, &rect[1]);
+
+	if (App->render->camera.x > 3150 && App->render->camera.x < 3874)
+	{
+		if (!up) up = true;
+	}
+	else if (up) up = false;
 
 	UpdateCamera();
 
