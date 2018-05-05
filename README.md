@@ -55,13 +55,21 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 - A: Move to left
 - D: Move to right
 - SPACEBAR: Shoot
+- 5: Insert Coin
+- 1: Start Player 1
+- ESC: Quit game
+
 - F1: Show colliders
 - F2: Turn on Tentacles
 - F3: Win
 - F4: Lose
+
 - F5: God Mode
 - F6: Extra Life
-- ESC: Quit game
+- F7: Previous Stage
+- F8: Next Stage
+
+
 
 ### Gamepad Xbox
 - Right stick: Move 
@@ -71,7 +79,7 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 
 ### Gamepad PS4
 - Right stick: Move 
-- X button: Shoot and Start Game
+- X button: Shoot
 - Triangle button: Insert Coin
 
 ***

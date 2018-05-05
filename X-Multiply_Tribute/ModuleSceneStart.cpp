@@ -15,7 +15,7 @@
 
 update_status ModuleSceneStart::Update()
 {
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1 && App->ui->coins > 0) App->fade->FadeToBlack(this, App->stage1, 2);
+	if (App->input->keyboard[SDL_SCANCODE_1] == 1 && App->ui->coins > 0) App->fade->FadeToBlack(this, App->stage1, 2);
 	if (App->input->keyboard[SDL_SCANCODE_5] == 1) App->ui->InsertCoin();
 	if (App->ui->coins > 0 && current_step == start_steps::logo_movement) {
 		Mix_PauseMusic();

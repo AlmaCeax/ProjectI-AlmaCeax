@@ -24,23 +24,26 @@ private:
 
 	SDL_Rect textrect[NUM_LAYERS];
 	SDL_Texture* textures[NUM_LAYERS];
-
+	SDL_Rect coll;
 
 	Mix_Chunk* shipSpawn = nullptr;
 
+	void checkCameraEvents();
+	void updateCamera();
+	bool loadMap();
+	void loadEnemies();
+	void loadAudio();
+	void injection();
 
 public:
 	bool Init();
-	bool loadMap();
+	
 	update_status Update();
 	bool CleanUp();
 	bool Start();
 
 	bool first_time;
-
-	void checkCameraEvents();
-	void updateCamera();
-	void injection();
+	
 	ModuleSceneStage1();
 	~ModuleSceneStage1();
 };
