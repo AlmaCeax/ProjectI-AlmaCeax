@@ -141,6 +141,12 @@ void ModuleSceneStage3::BackgroundEvents()
 	{
 		App->render->Blit(textures[3], 4692, 179, &door.GetCurrentFrame());
 		App->render->Blit(textures[3], 5074, 178, &door.GetCurrentFrame());
+		if (collider) {
+			coll = { 4691,179,59,56 };
+			App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+			collider = false;
+		}
+		
 	}
 
 	if (App->render->camera.x >= 4718)
@@ -205,16 +211,34 @@ bool ModuleSceneStage3::loadMap()
 	coll = { 268,374,95,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
+	coll = { 395,374,100,6 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 404,380,74,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 411,388,61,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
+	coll = { 505,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Crater
 	coll = { 652,374,95,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
+	coll = { 854,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
+	coll = { 906,374,100,6 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 915,380,74,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 922,388,61,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Crater
 	coll = { 1035,374,95,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
+	coll = { 1238,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Crater
 	coll = { 1290,374,95,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -222,6 +246,12 @@ bool ModuleSceneStage3::loadMap()
 	coll = { 1418,374,95,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
+	coll = { 1545,374,100,6 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1554,380,74,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1561,388,61,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Crater
 	coll = { 1674,374,95,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -229,27 +259,186 @@ bool ModuleSceneStage3::loadMap()
 	coll = { 1801,374,95,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
+	coll = { 2004,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
+	coll = { 2132,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Crater
 	coll = { 2185,374,95,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
+	coll = { 2387,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
+	coll = { 2515,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Ciclop
+	coll = { 2572,374,180,9 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2614,383,135,18 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2637,401,112,27 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2653,428,66,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2663,436,52,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
+	coll = { 2899,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
+	coll = { 3027,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 
 
 
 	//bottom
-	coll = { 0,523,3176,38 };
+	coll = { 0,524,3176,38 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
+	coll = { 140,518,100,6 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 147,510,74,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 156,499,61,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Crater
+	coll = { 269,513,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
+	coll = { 396,518,100,6 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 403,510,74,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 412,499,61,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
+	coll = { 524,518,100,6 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 531,510,74,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 540,499,61,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Crater
+	coll = { 653,513,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 760,517,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 982,517,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Crater
+	coll = { 1036,513,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 1238,517,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Crater
+	coll = { 1291,513,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Volcano
+	coll = { 1418,518,100,6 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1425,510,74,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 1434,499,61,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Crater
+	coll = { 1547,513,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 1749,517,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Crater
+	coll = { 1802,513,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 1910,517,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Crater
+	coll = { 2058,513,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Volcano
+	coll = { 2185,518,100,6 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2192,510,74,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2201,499,61,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 2293,517,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Ciclop
+	coll = { 2468,516,180,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2470,496,135,20 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2471,469,112,27 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2501,461,66,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2506,449,52,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 2771,517,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Ciclop
+	coll = { 2852,516,180,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2854,496,135,20 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2855,469,112,27 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2885,461,66,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2890,449,52,12 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//diagonal top
+	int y = 273;
+	int x = 3182;
+	for (int i = 0; i < 4 ; i++)
+	{
+		coll = { x,y,128,61 };
+		App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+		y -= 32;
+		x += 128;
+	}
+	coll = { 3693,103,128,61 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//diagonal bottom
+	coll = { 3451,526,75,36 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	y = 490;
+	x = 3525;
+	for (int i = 0; i < 5; i++)
+	{
+		coll = { x,y,128,71 };
+		App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+		y -= 30;
+		x += 128;
+	}
+	coll = { 4076,309,121,35 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//top
+	coll = { 4346,95,758,16 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//bottom
+	coll = { 4346,303,758,16 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+
+	//end
+	coll = { 4691,111,59,68 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 4691,235,59,68 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 5075,111,29,192 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 
 	if (textures[0] == nullptr) {
