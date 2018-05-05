@@ -40,7 +40,7 @@ void Enemy::OnCollision(Collider* collider)
 	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
 	App->ui->AddScore(points);
 }
-void Enemy::Shine(Collider* collider, SDL_Texture* sprites)
+void Enemy::Shine()
 {
 	hit = true;
 }

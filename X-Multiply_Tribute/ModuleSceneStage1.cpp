@@ -71,8 +71,6 @@ bool ModuleSceneStage1::Start() {
 	startAnimationHook.setCurrentFrameIndex(0);
 
 
-
-
 	injectionposition.x = 80;
 	injectionposition.y = -100;
 	injectionhookposition.x = 90;
@@ -84,104 +82,9 @@ bool ModuleSceneStage1::Start() {
 	if (!loadMap()) {
 		return false;
 	}
-	//top
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 450, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 465, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 480, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 495, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 510, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 525, 60, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 540, 60, false);
-	//bottom
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 450, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 465, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 480, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 495, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 510, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 525, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 540, 60, true);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 530, 150);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 615, 80);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 80);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 120);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 750, 140, false, 3);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 770, 90, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 785, 90, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 800, 90, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 815, 90, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 830, 90, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 845, 90, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 860, 90, false);
-	//bottom
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 770, 90, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 785, 90, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 800, 90, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 815, 90, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 830, 90, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 845, 90, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 860, 90, true);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 900, 175);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1130, 120, false, 1);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1160, 50);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 60);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 100);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1315, 12, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1290, 150);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2270, 175);
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2305, 175);
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2400, 175);
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2485, 175);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3110, 60, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3500, 185, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3670, 245, true);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 170);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 210);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3260, 220);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3260, 250);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3300, 150);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3400, 270);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3460, 270);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3460, 330);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3480, 270);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3500, 270);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3500, 330);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3520, 330);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3540, 270);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3540, 330);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3560, 230);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3560, 270);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3580, 230);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3580, 270);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3600, 230);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3600, 270);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3600, 310);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 230);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 270);
-	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 310);
-
+	loadEnemies();
+	loadAudio();
 	
-
-
-
-
-	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1.ogg");
-	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
-
-
 
 	App->render->ResetCamera();
 
@@ -200,9 +103,7 @@ update_status ModuleSceneStage1::Update()
 	injection();
 	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, &textrect[2],0.5f);
 
-	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage3);
-	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN) App->ui->StageCleared();
-	if (App->input->keyboard[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN) App->ui->IncreaseLife();
+	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage3);
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -287,7 +188,7 @@ bool ModuleSceneStage1::loadMap()
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/injection.png");
 
 
-	SDL_Rect coll = { 0,212,2862,12 };
+	coll = { 0,212,2862,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 496,0,2033,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -460,6 +361,104 @@ bool ModuleSceneStage1::loadMap()
 	else return true;
 }
 	
+void ModuleSceneStage1::loadEnemies()
+{
+	//top
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 450, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 465, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 480, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 495, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 510, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 525, 60, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 540, 60, false);
+	//bottom
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 450, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 465, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 480, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 495, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 510, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 525, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 540, 60, true);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 530, 150);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 615, 80);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 80);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 120);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 750, 140, false, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 770, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 785, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 800, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 815, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 830, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 845, 90, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 860, 90, false);
+	//bottom
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 770, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 785, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 800, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 815, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 830, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 845, 90, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 860, 90, true);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 900, 175);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1130, 120, false, 1);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1160, 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 100);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1315, 12, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1290, 150);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2270, 175);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2305, 175);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2400, 175);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2485, 175);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3110, 60, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3500, 185, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3670, 245, true);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 170);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 210);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3260, 220);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3260, 250);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3300, 150);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3400, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3460, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3460, 330);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3480, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3500, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3500, 330);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3520, 330);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3540, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3540, 330);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3560, 230);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3560, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3580, 230);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3580, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3600, 230);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3600, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3600, 310);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 230);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 270);
+	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 310);
+
+}
+
+void ModuleSceneStage1::loadAudio()
+{
+	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1.ogg");
+	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
+}
 
 void ModuleSceneStage1::injection()
 {

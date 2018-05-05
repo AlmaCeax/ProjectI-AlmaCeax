@@ -1,11 +1,15 @@
 #include "Application.h"
-#include "ModuleAudio.h"
 #include "ModuleTextures.h"
-#include "ModuleParticles.h"
-#include "ModulePowerUPS.h"
 #include "ModuleRender.h"
+#include "ModuleAudio.h"
+#include "ModuleEnemies.h"
+#include "ModuleInput.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleParticles.h"
 #include "ModuleCollision.h"
+#include "ModulePowerUPS.h"
 #include "SDL_mixer\include\SDL_mixer.h"
+#include "ModuleSceneStage1.h"
 #include "ModuleSceneStage3.h"
 
 
@@ -37,20 +41,16 @@ bool ModuleSceneStage3::Start() {
 
 	App->render->SetCameraPosition(0, 336);
 
-	music = App->audio->LoadMusic("Assets/Audio/Music/06_The_Rolling_Worms_Stage_3-1_.ogg");
-	secondTrack = App->audio->LoadMusic("Assets/Audio/Music/07_The_Rolling_Worms_Stage_3-2_.ogg");
-	bossTrack = App->audio->LoadMusic("Assets/Audio/Music/03_Boss_Theme.ogg");
-	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage3/Backgroundbg03.png");
-	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage3/Layerbg03.png");
-	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage3/BackgroundFinalbg03.png");
-	textures[3] = App->textures->Load("Assets/Sprites/Stages/Stage3/Door.png");
-
-
-
 	right = false;
 	left = false;
 	up = false;
 	down = false;
+
+	if (!loadMap()) {
+		return false;
+	}
+	loadEnemies();
+	loadAudio();
 
 
 	return true;
@@ -161,6 +161,8 @@ update_status ModuleSceneStage3::Update()
 	BackgroundEvents();
 	UpdateCamera();
 
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage1);
+
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -181,4 +183,89 @@ bool ModuleSceneStage3::CleanUp()
 	music = nullptr;
 
 	return true;
+}
+
+
+bool ModuleSceneStage3::loadMap()
+{
+	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage3/Backgroundbg03.png");
+	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage3/Layerbg03.png");
+	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage3/BackgroundFinalbg03.png");
+	textures[3] = App->textures->Load("Assets/Sprites/Stages/Stage3/Door.png");
+
+
+
+	//top
+	coll = { 0,336,3176,38 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Crater
+	coll = { 140,374,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Crater
+	coll = { 268,374,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Volcano
+	//Eye
+	//Crater
+	coll = { 652,374,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	//Volcano
+	//Crater
+	coll = { 1035,374,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	//Crater
+	coll = { 1290,374,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Crater
+	coll = { 1418,374,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Volcano
+	//Crater
+	coll = { 1674,374,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Crater
+	coll = { 1801,374,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	//Eye
+	//Crater
+	coll = { 2185,374,95,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	//Eye
+	//Ciclop
+	//Eye
+	//Eye
+
+
+
+
+	//bottom
+	coll = { 0,523,3176,38 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Volcano
+	//Crater
+	//Volcano
+	//Volcano
+	//Crater
+
+
+	if (textures[0] == nullptr) {
+		return false;
+	}
+	else return true;
+}
+
+void ModuleSceneStage3::loadEnemies()
+{
+
+}
+
+void ModuleSceneStage3::loadAudio()
+{
+	music = App->audio->LoadMusic("Assets/Audio/Music/06_The_Rolling_Worms_Stage_3-1_.ogg");
+	secondTrack = App->audio->LoadMusic("Assets/Audio/Music/07_The_Rolling_Worms_Stage_3-2_.ogg");
+	bossTrack = App->audio->LoadMusic("Assets/Audio/Music/03_Boss_Theme.ogg");
 }

@@ -18,10 +18,14 @@ private:
 	int timer;
 	int bgalpha = 255;
 	SDL_Rect rect[3];
+	SDL_Rect coll;
 	Animation door;
 
 	void UpdateCamera();
 	void BackgroundEvents();
+	bool loadMap();
+	void loadEnemies();
+	void loadAudio();
 
 public:
 	update_status Update();

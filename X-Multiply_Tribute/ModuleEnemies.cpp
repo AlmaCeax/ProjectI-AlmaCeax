@@ -211,7 +211,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				}
 				else {
 					Mix_PlayChannel(-1, hitEnemysfx, 0);
-					enemies[i]->Shine(c2, sprites);
+					enemies[i]->Shine();
 				}
 				break;
 			case POWERUPSHIP:
