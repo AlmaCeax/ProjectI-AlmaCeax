@@ -209,6 +209,24 @@ void ModuleUI::AddScore(uint points) {
 	}
 }
 
+void ModuleUI::ContinueTextBlit()
+{
+	App->fonts->BlitText(140, 45, pink_font, "continue");
+
+	if (coins > 0) {
+		char credit_text[10] = { "credit " };
+		if (coins<10) credit_text[7] = coins + '0';
+		else {
+			char str[3];
+			_itoa_s(coins, str, 10);
+			credit_text[7] = str[0];
+			credit_text[8] = str[1];
+		}
+		App->fonts->BlitText(135, 210, pink_font, credit_text);
+	}
+	else App->fonts->BlitText(40, 210, pink_font, "please deposit coin");
+}
+
 void ModuleUI::PlayerDeath() {
 	player_lives--;
 	PlayerReady();

@@ -31,7 +31,20 @@ bool ModuleSceneContinue::Init()
 
 update_status ModuleSceneContinue::Update()
 {
-	Uint32 now = SDL_GetTicks() - start_time;
+	App->ui->ContinueTextBlit();
+	NumberSwap();
+	BlitNumber();
+
+	return update_status::UPDATE_CONTINUE;
+}
+
+bool ModuleSceneContinue::CleanUp()
+{
+	return true;
+}
+
+void ModuleSceneContinue::NumberSwap() {
+	Uint32 now = SDL_GetTicks() - number_start_time;
 
 	if (numberswap) {
 		if (current_sequence[sequence_iterator] >= 0) {
@@ -41,7 +54,7 @@ update_status ModuleSceneContinue::Update()
 				test[0] = 0 + '0';
 				test[1] = current_sequence[sequence_iterator] + '0';
 			}
-			else _itoa_s(current_sequence[sequence_iterator], test, 10);			
+			else _itoa_s(current_sequence[sequence_iterator], test, 10);
 
 			number_display[test[0] - '0'][test[1] - '0'] = !number_display[test[0] - '0'][test[1] - '0'];
 			sequence_iterator++;
@@ -53,7 +66,7 @@ update_status ModuleSceneContinue::Update()
 		}
 	}
 
-	if (now >= total_time) {
+	if (now >= number_total_time) {
 
 		if (current_number < 0) App->fade->FadeToBlack(this, App->start);
 		else {
@@ -61,23 +74,47 @@ update_status ModuleSceneContinue::Update()
 				current_sequence[i] = sequences[current_number][i];
 			}
 
-			total_time = (Uint32)(1.0f * 1000.0f);
-			start_time = SDL_GetTicks();
+			number_total_time = (Uint32)(1.0f * 1000.0f);
+			number_start_time = SDL_GetTicks();
 			numberswap = true;
 		}
 
 
 	}
 
-	BlitNumber();
-	return update_status::UPDATE_CONTINUE;
-}
 
-bool ModuleSceneContinue::CleanUp()
-{
-	return true;
-}
+	//continue text fade
+	now = SDL_GetTicks() - fade_start_time;
 
+	if (!hold) {
+		if (fading) {
+			alpha += 10;
+			if (alpha >= 255) {
+				fading = false;
+				alpha = 255;
+			}
+		}
+		else {
+			alpha -= 10;
+			if (alpha <= 1) {
+				hold = true;
+				alpha = 0;
+				fade_total_time = (Uint32)(1.5f * 1000.0f);
+				fade_start_time = SDL_GetTicks();
+			}
+		}
+	}
+	else {
+		if (now >= fade_total_time) {
+			fading = true;
+			hold = false;
+		}
+	}
+
+	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (Uint8)(alpha));
+	SDL_RenderFillRect(App->render->renderer, &fade_rect);
+
+}
 bool ModuleSceneContinue::Start()
 {
 	App->render->ResetCamera();
@@ -85,11 +122,27 @@ bool ModuleSceneContinue::Start()
 	ResetNumber();
 	//music = App->audio->LoadMusic("Assets/Audio/Music/01_X-Multiply_Title.ogg");
 	//Mix_PlayMusic(music, -1);
-
-	total_time = (Uint32)(1.0f * 1000.0f);
-	start_time = SDL_GetTicks();
+	
+	alpha = 255;
+	fading = false;
+	number_total_time = (Uint32)(1.0f * 1000.0f);
+	number_start_time = SDL_GetTicks();
 
 	return true;
+}
+void ModuleSceneContinue::BlitNumber()
+{
+	int x, y;
+	for (int line = 0; line < 7; line++) {
+		for (int row = 0; row < 7; row++) {
+			if (number_display[line][row]) {
+				x = 145; y = 85;
+				x += row * BALL_WIDTH;
+				y += line * BALL_HEIGHT;
+				App->render->Blit(graphics, x, y, &ball_rect);
+			}
+		}
+	}
 }
 
 void ModuleSceneContinue::ResetNumber() {
@@ -121,22 +174,7 @@ void ModuleSceneContinue::ResetNumber() {
 	number_display[6][2] = true;
 	number_display[6][3] = true;
 	number_display[6][4] = true;
-	number_display[6][5] = true; 
-}
-
-void ModuleSceneContinue::BlitNumber()
-{
-	int x, y;
-	for (int line = 0; line < 7; line++) {
-		for (int row = 0; row < 7; row++) {
-			if (number_display[line][row]) {
-				x = 145; y = 85;
-				x += row * BALL_WIDTH;
-				y += line * BALL_HEIGHT;
-				App->render->Blit(graphics, x, y, &ball_rect);
-			}
-		}
-	}
+	number_display[6][5] = true;
 }
 
 

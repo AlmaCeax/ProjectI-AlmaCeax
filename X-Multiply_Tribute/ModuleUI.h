@@ -24,6 +24,7 @@ public:
 
 	void AddScore(uint points);
 
+	void ContinueTextBlit();
 	void PlayerDeath();
 	void Reset();
 	void DeathFade();
@@ -66,7 +67,6 @@ private:
 
 	bool game_over = false;
 
-	float alpha = 0;
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
 	fPoint clear_position;

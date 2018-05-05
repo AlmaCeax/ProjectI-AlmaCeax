@@ -36,7 +36,7 @@ update_status ModuleSceneStart::Update()
 			if (alpha >= 255) {
 				alpha = 255;
 				current_step = start_steps::hold;
-				total_time = (Uint32)(1.0f * 1000.0f);
+				total_time = (Uint32)(1.5f * 1000.0f);
 				start_time = SDL_GetTicks();
 			}
 			App->ui->PlayerCoins(font_color);
