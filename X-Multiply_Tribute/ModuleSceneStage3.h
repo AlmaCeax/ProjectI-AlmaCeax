@@ -17,6 +17,7 @@ private:
 	int y = 0;
 	int timer;
 	int bgalpha = 255;
+	bool collider = true;
 	SDL_Rect rect[3];
 	SDL_Rect coll;
 	Animation door;
