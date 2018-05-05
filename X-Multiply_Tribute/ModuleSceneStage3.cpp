@@ -186,7 +186,11 @@ bool ModuleSceneStage3::CleanUp()
 	}
 
 	App->audio->UnloadMusic(music);
+	App->audio->UnloadMusic(secondTrack);
+	App->audio->UnloadMusic(bossTrack);
 	music = nullptr;
+	secondTrack = nullptr;
+	bossTrack = nullptr;
 
 	return true;
 }
@@ -421,7 +425,7 @@ bool ModuleSceneStage3::loadMap()
 		y -= 30;
 		x += 128;
 	}
-	coll = { 4076,309,121,35 };
+	coll = { 4076,309,121,61 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//top
