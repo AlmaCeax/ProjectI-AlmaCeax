@@ -25,8 +25,14 @@ void Enemy::Draw(SDL_Texture* sprites)
 	if(collider != nullptr)
 		collider->SetPos(position.x, position.y);
 
-	if (animation != nullptr)
-		App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+	if (animation != nullptr) {
+		if(!hit)App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+		else {
+			hitAnimation->setCurrentFrameIndex(animation->GetCurrentFrameIndex());
+			App->render->Blit(sprites, position.x, position.y, &(hitAnimation->GetCurrentFrame()));
+			hit = false;
+		}
+	}
 }
 
 void Enemy::OnCollision(Collider* collider)
@@ -34,7 +40,7 @@ void Enemy::OnCollision(Collider* collider)
 	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
 	App->ui->AddScore(points);
 }
-void Enemy::Shine(Collider* collider)
+void Enemy::Shine(Collider* collider, SDL_Texture* sprites)
 {
-	//shine enemies
+	hit = true;
 }

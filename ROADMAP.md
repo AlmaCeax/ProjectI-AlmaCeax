@@ -30,7 +30,7 @@ v.0.7 (13/05/2018) enemies and checkpoints
 		-attack
 		-audio
 		-HP
-	-Worm                                                  Marc
+	-Worm                                                  Alejandro
 		-animation and movement
 		-attack
 		-audio

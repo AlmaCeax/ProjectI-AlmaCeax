@@ -139,7 +139,7 @@ void ModuleSceneStage3::BackgroundEvents()
 
 	if (App->render->camera.x >= 4708)
 	{
-		App->render->Blit(textures[3], 4692, 177, &door.GetCurrentFrame());
+		App->render->Blit(textures[3], 4692, 179, &door.GetCurrentFrame());
 		App->render->Blit(textures[3], 5074, 178, &door.GetCurrentFrame());
 	}
 

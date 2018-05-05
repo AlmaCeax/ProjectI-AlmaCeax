@@ -13,16 +13,25 @@ Enemy_TentacleShooter::Enemy_TentacleShooter(int x, int y, bool _up):Enemy(x,y)
 		anim.PushBack({ 37, 419, 54, 42 });
 		anim.PushBack({ 95, 419, 54, 42 });
 		anim.PushBack({ 157, 419, 54, 42 });
+
+		hitanim.PushBack({ 524, 419, 54, 42 });
+		hitanim.PushBack({ 582, 419, 54, 42 });
+		hitanim.PushBack({ 644, 419, 54, 42 });
 	}
 	else {
 		anim.PushBack({ 37, 10, 54, 42 });
 		anim.PushBack({ 94, 10, 54, 42 });
 		anim.PushBack({ 155, 10, 54, 42 });
+
+		hitanim.PushBack({ 524, 10, 54, 42 });
+		hitanim.PushBack({ 582, 10, 54, 42 });
+		hitanim.PushBack({ 644, 10, 54, 42 });
 	}
 	
 	anim.speed = 0.05f;
 
 	animation = &anim;
+	hitAnimation = &hitanim;
 
 	collider = App->collision->AddCollider({ 0, 0, 48, 41 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 

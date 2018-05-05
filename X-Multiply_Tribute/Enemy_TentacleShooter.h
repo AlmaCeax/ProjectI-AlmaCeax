@@ -8,6 +8,7 @@ class Enemy_TentacleShooter :
 {
 private:
 	Animation anim;
+	Animation hitanim;
 	int shootTimer = 0;
 	bool up = false;
 public:

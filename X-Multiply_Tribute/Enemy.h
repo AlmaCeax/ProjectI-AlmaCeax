@@ -12,11 +12,13 @@ struct Mix_Chunk;
 class Enemy
 {
 protected:
-	Animation* animation = nullptr;
 	Collider* collider = nullptr;
 	uint points = 0;
 
 public:
+	Animation * animation = nullptr;
+	Animation * hitAnimation = nullptr;
+	bool hit = false;
 	iPoint position;
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 public:
@@ -28,7 +30,7 @@ public:
 	virtual void Move() {};
 	virtual void Draw(SDL_Texture* sprites);
 	virtual void OnCollision(Collider* collider);
-	virtual void Shine(Collider* collider);
+	virtual void Shine(Collider* collider, SDL_Texture* sprites);
 };
 
 #endif // __ENEMY_H__
