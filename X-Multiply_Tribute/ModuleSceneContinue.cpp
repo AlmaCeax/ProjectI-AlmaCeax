@@ -6,13 +6,13 @@
 #include "ModuleInput.h"
 #include "ModuleUI.h"
 #include "ModuleFonts.h"
+#include "ModuleSceneStart.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
 #include "ModuleSceneContinue.h"
 #include <stdlib.h>
-
 
 ModuleSceneContinue::ModuleSceneContinue()
 {
@@ -31,11 +31,10 @@ bool ModuleSceneContinue::Init()
 
 update_status ModuleSceneContinue::Update()
 {
-	//strcpy_s(current_sequence, sequence_9to8);
-	if (App->input->keyboard[SDL_SCANCODE_O] == 1) numberswap = true;
+	Uint32 now = SDL_GetTicks() - start_time;
 
 	if (numberswap) {
-		if (current_sequence[sequence_iterator] > 0) {
+		if (current_sequence[sequence_iterator] >= 0) {
 			char test[3];
 
 			if (current_sequence[sequence_iterator] < 10) {
@@ -49,7 +48,25 @@ update_status ModuleSceneContinue::Update()
 		}
 		else {
 			numberswap = false;
+			current_number--;
+			sequence_iterator = 0;
 		}
+	}
+
+	if (now >= total_time) {
+
+		if (current_number < 0) App->fade->FadeToBlack(this, App->start);
+		else {
+			for (int i = 0; i < MAX_SEQUENCE; i++) {
+				current_sequence[i] = sequences[current_number][i];
+			}
+
+			total_time = (Uint32)(1.0f * 1000.0f);
+			start_time = SDL_GetTicks();
+			numberswap = true;
+		}
+
+
 	}
 
 	BlitNumber();
@@ -68,6 +85,9 @@ bool ModuleSceneContinue::Start()
 	ResetNumber();
 	//music = App->audio->LoadMusic("Assets/Audio/Music/01_X-Multiply_Title.ogg");
 	//Mix_PlayMusic(music, -1);
+
+	total_time = (Uint32)(1.0f * 1000.0f);
+	start_time = SDL_GetTicks();
 
 	return true;
 }
