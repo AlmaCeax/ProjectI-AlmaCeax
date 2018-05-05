@@ -5,7 +5,6 @@
 #include "ModuleEnemies.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleSceneStage2.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "ModulePowerUPS.h"

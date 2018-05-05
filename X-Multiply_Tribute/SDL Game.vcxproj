@@ -91,6 +91,7 @@
     <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModulePowerUPS.h" />
+    <ClInclude Include="ModuleSceneContinue.h" />
     <ClInclude Include="ModuleSceneStage2.h" />
     <ClInclude Include="ModuleSceneStage3.h" />
     <ClInclude Include="ModuleSceneStart.h" />
@@ -124,6 +125,7 @@
     <ClCompile Include="ModuleFonts.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModulePowerUPS.cpp" />
+    <ClCompile Include="ModuleSceneContinue.cpp" />
     <ClCompile Include="ModuleSceneStage1.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />

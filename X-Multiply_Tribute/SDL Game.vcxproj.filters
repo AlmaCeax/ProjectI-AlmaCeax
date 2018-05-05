@@ -76,6 +76,9 @@
     <ClCompile Include="ModuleUI.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleSceneContinue.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -166,6 +169,9 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleStage.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneContinue.h">
       <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>

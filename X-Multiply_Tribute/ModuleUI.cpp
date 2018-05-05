@@ -6,6 +6,7 @@
 #include "ModuleSceneStart.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
+#include "ModuleSceneStage3.h"
 #include "ModuleCollision.h"
 #include "ModuleAudio.h"
 #include "ModuleSceneStage1.h"
@@ -166,7 +167,11 @@ void ModuleUI::ClearUpdate() {
 				timer = 0;
 				memset(current_text1, 0, sizeof(current_text1));
 				memset(current_text2, 0, sizeof(current_text2));
-				App->fade->FadeToBlack(App->current_stage, App->start, 0.0f);
+
+				switch (App->current_stage->index) {
+				case 1: App->fade->FadeToBlack(App->current_stage, App->stage3, 0.0f); break;
+				case 3: App->fade->FadeToBlack(App->current_stage, App->start, 0.0f); break;
+				}		
 				current_step = clear_step::none;
 			}
 		}break;

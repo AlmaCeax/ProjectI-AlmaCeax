@@ -5,6 +5,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModuleSceneStart.h"
+#include "ModuleSceneContinue.h"
 #include "ModuleSceneStage1.h"
 #include "ModuleSceneStage2.h"
 #include "ModuleSceneStage3.h"
@@ -27,6 +28,7 @@ Application::Application()
 	modules[i++] = textures = new ModuleTextures();
 	modules[i++] = audio = new ModuleAudio();
 	modules[i++] = start = new ModuleSceneStart();
+	modules[i++] = scene_continue = new ModuleSceneContinue();
 	modules[i++] = stage1 = new ModuleSceneStage1();
 	modules[i++] = stage2 = new ModuleSceneStage2();
 	modules[i++] = stage3 = new ModuleSceneStage3();
@@ -59,6 +61,7 @@ bool Application::Init()
 	collision->Disable();
 	powerups->Disable();
 	particles->Disable();
+	scene_continue->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

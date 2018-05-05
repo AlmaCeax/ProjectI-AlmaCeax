@@ -7,6 +7,7 @@
 #include "ModuleUI.h"
 #include "ModuleSceneStage1.h"
 #include "ModuleFonts.h"
+#include "ModuleSceneContinue.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #include "SDL/include/SDL_render.h"
@@ -17,6 +18,8 @@ update_status ModuleSceneStart::Update()
 {
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1 && App->ui->coins > 0) App->fade->FadeToBlack(this, App->stage1, 2);
 	if (App->input->keyboard[SDL_SCANCODE_5] == 1) App->ui->InsertCoin();
+	if (App->input->keyboard[SDL_SCANCODE_L] == 1) App->fade->FadeToBlack(this, App->scene_continue);
+
 	if (App->ui->coins > 0 && current_step == start_steps::logo_movement) {
 		Mix_PauseMusic();
 		current_step = start_steps::show_coins;
@@ -87,9 +90,6 @@ bool ModuleSceneStart::Start()
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_2.png");
 	music = App->audio->LoadMusic("Assets/Audio/Music/01_X-Multiply_Title.ogg");
 	Mix_PlayMusic(music, -1);
-
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
 
 	return true;
 }
