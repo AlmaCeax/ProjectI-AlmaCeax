@@ -33,7 +33,7 @@ bool ModuleSceneContinue::Init()
 update_status ModuleSceneContinue::Update()
 {
 	if (App->input->keyboard[SDL_SCANCODE_5] == KEY_DOWN) App->ui->InsertCoin();
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && App->ui->coins > 0) {
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_DOWN && App->ui->coins > 0) {
 		App->fade->FadeToBlack(this, App->current_stage);
 		App->ui->is_continue = true;
 	}
@@ -49,6 +49,9 @@ bool ModuleSceneContinue::CleanUp()
 {
 	SDL_DestroyTexture(graphics);
 	graphics = nullptr;
+
+	App->audio->UnloadMusic(music);
+	music = nullptr;
 
 	return true;
 }
@@ -132,8 +135,8 @@ bool ModuleSceneContinue::Start()
 	App->render->ResetCamera();
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_2.png");
 	ResetNumber();
-	//music = App->audio->LoadMusic("Assets/Audio/Music/01_X-Multiply_Title.ogg");
-	//Mix_PlayMusic(music, -1);
+	music = App->audio->LoadMusic("Assets/Audio/Music/16_Continue.ogg");
+	Mix_PlayMusic(music, -1);
 	
 	alpha = 255;
 	fading = false;
