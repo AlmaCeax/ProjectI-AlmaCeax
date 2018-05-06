@@ -1,4 +1,4 @@
-v.0.6 (7/05/2018) Level 3 with scroll, textures,colliders and audio. UI. Tentacles. Gamepad
+v.0.6 (7/05/2018) Level 3 with scroll, textures,colliders and audio. UI. Tentacles. Gamepad. Fullscreen.
 
 -level 3:
 	-camera movement                         Marc
@@ -13,6 +13,9 @@ v.0.6 (7/05/2018) Level 3 with scroll, textures,colliders and audio. UI. Tentacl
 	-Intro animation                         Axel
 
 -Enemies hit effect                              Marc
+
+-Fullscreen                                      Marc y Alejandro
+-Gamepad                                         Axel
 	
 	
 
