@@ -41,6 +41,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 	bool Start();
+	void OnFade();
 
 	bool first_time;
 	

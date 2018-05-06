@@ -54,8 +54,7 @@ bool ModulePlayer::Start()
 {
 	dead = false;
 
-	position.x = 84;
-	position.y = 115;
+	position.x = 85;
 
 	injecting = true;
 	startime = 35;

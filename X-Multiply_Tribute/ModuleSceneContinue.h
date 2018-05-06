@@ -19,6 +19,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 	bool Start();
+	void OnFade();
 
 private:
 	bool number_display[7][7];

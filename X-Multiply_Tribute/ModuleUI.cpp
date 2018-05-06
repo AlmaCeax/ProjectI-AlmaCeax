@@ -9,6 +9,7 @@
 #include "ModuleSceneStage3.h"
 #include "ModuleCollision.h"
 #include "ModuleAudio.h"
+#include "ModuleSceneContinue.h"
 #include "ModuleSceneStage1.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
@@ -74,7 +75,7 @@ update_status ModuleUI::Update()
 	if (game_over) {
 		Uint32 now = SDL_GetTicks() - start_time;
 		if (now >= total_time) {
-			App->fade->FadeToBlack(App->current_stage, App->start);
+			App->fade->FadeToBlack(App->current_stage, App->scene_continue);
 		}
 	}
 	
@@ -169,8 +170,8 @@ void ModuleUI::ClearUpdate() {
 				memset(current_text2, 0, sizeof(current_text2));
 
 				switch (App->current_stage->index) {
-				case 1: App->fade->FadeToBlack(App->current_stage, App->stage3, 0.0f); break;
-				case 3: App->fade->FadeToBlack(App->current_stage, App->start, 0.0f); break;
+					case 1: App->fade->FadeToBlack(App->current_stage, App->stage3, 0.0f); break;
+					case 3: App->fade->FadeToBlack(App->current_stage, App->start, 0.0f); break;
 				}		
 				current_step = clear_step::none;
 			}
@@ -269,21 +270,30 @@ void ModuleUI::DeathFade() {
 		total_time = (Uint32)(4.0f * 1000.0f);
 		start_time = SDL_GetTicks();
 		game_over = true;
+		App->ui->coins--;
 	}
 }
 
 void ModuleUI::PlayerReady() {
-	Mix_PlayMusic(ready_song, false);
-	if(App->current_stage->index == 1) App->stage1->first_time = false;
+	if (current_ready_step == ready_step::not) {
+		Mix_PlayMusic(ready_song, false);
+		if (App->current_stage->index == 1) App->stage1->first_time = false;
+		is_continue = false;
 
-	total_time = (Uint32)(3.5f * 1000.0f);
-	start_time = SDL_GetTicks();
-	current_ready_step = ready_step::show_text;
+		total_time = (Uint32)(3.5f * 1000.0f);
+		start_time = SDL_GetTicks();
+		current_ready_step = ready_step::show_text;
+	}
 }
 
 void ModuleUI::ReadyDone() {
 	App->player->Enable();
+	
 	App->player->position.x = -36;
+
+	if(App->current_stage->index == 1) App->player->position.y = 115;
+	else App->player->position.y = 450;
+
 	App->player->injecting = false;
 	App->player->startBoost = true;
 

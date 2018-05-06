@@ -34,6 +34,7 @@ public:
 	void PlayerCoins(bool pink);
 
 	bool ui_visible = false;
+	bool is_continue = false;
 	int coins = 0;
 	SDL_Rect screen;
 	enum clear_step

@@ -32,12 +32,11 @@ ModuleSceneStage3::~ModuleSceneStage3()
 bool ModuleSceneStage3::Start() {
 	App->current_stage = this;
 
-	App->player->Enable();
 	App->collision->Enable();
 	App->powerups->Enable();
 	App->particles->Enable();
 	App->ui->PlayerReady();
-	App->player->position = { -100, 450 };
+	App->ui->ui_visible = true;
 
 	App->render->SetCameraPosition(0, 336);
 

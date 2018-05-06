@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleUI.h"
+#include "ModuleStage.h"
 #include "ModuleFonts.h"
 #include "ModuleSceneStart.h"
 #include "ModuleFadeToBlack.h"
@@ -31,6 +32,12 @@ bool ModuleSceneContinue::Init()
 
 update_status ModuleSceneContinue::Update()
 {
+	if (App->input->keyboard[SDL_SCANCODE_5] == KEY_DOWN) App->ui->InsertCoin();
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN && App->ui->coins > 0) {
+		App->fade->FadeToBlack(this, App->current_stage);
+		App->ui->is_continue = true;
+	}
+
 	App->ui->ContinueTextBlit();
 	NumberSwap();
 	BlitNumber();
@@ -40,6 +47,9 @@ update_status ModuleSceneContinue::Update()
 
 bool ModuleSceneContinue::CleanUp()
 {
+	SDL_DestroyTexture(graphics);
+	graphics = nullptr;
+
 	return true;
 }
 
@@ -117,6 +127,8 @@ void ModuleSceneContinue::NumberSwap() {
 }
 bool ModuleSceneContinue::Start()
 {
+	App->ui->ui_visible = false;
+
 	App->render->ResetCamera();
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_2.png");
 	ResetNumber();
@@ -125,6 +137,9 @@ bool ModuleSceneContinue::Start()
 	
 	alpha = 255;
 	fading = false;
+	current_number = 8;
+	sequence_iterator = 0;
+
 	number_total_time = (Uint32)(1.0f * 1000.0f);
 	number_start_time = SDL_GetTicks();
 
@@ -176,5 +191,10 @@ void ModuleSceneContinue::ResetNumber() {
 	number_display[6][4] = true;
 	number_display[6][5] = true;
 }
+
+void ModuleSceneContinue::OnFade() {
+	App->ui->Reset();
+}
+
 
 

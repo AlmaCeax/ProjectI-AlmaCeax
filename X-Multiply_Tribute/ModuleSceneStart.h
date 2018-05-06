@@ -38,12 +38,11 @@ private:
 	
 public:
 	update_status Update();
-	void CoinsText();
 	bool CleanUp();
 	bool Start();
+	void OnFade();
 	ModuleSceneStart();
 	~ModuleSceneStart();
-	void OnFade();
 };
 #endif
 

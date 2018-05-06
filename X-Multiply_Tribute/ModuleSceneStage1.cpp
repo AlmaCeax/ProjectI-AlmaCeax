@@ -519,3 +519,8 @@ void ModuleSceneStage1::injection()
 		}
 	}
 }
+
+void ModuleSceneStage1::OnFade() {
+	ModuleStage::OnFade();
+	if (App->ui->is_continue) App->ui->PlayerReady();
+}
