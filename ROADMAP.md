@@ -11,15 +11,13 @@ v.0.6 (7/05/2018) level 3 with scroll, textures,colliders and audio. UI. Tentacl
 	-continue screen                         Axel
  	-insert coin screen                      Axel
 	-Intro animation                         Axel
-	
--Tentacles:
-	-ropes                                   Alejandro
 
+-Enemies hit effect                              Marc
 	
 	
+
 v.0.7 (13/05/2018) enemies and checkpoints
 
--Enemies hit effect                                    Marc
 
 -Checkpoints                                           Axel
 
@@ -78,9 +76,6 @@ v.0.7 (13/05/2018) enemies and checkpoints
 		-HP
 	
 
-
-
-
 v.0.8 (20/05/2018) power ups
 
 -Laser                                                       Alejandro
@@ -105,3 +100,6 @@ v.0.9 (27/05/2018) Bosses
 v.1.0 (1/06/2018) Polish
 
 -Background colour                                           Marc
+
+-Tentacles:
+	-ropes                                               Alejandro
