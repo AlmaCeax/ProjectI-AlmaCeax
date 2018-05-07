@@ -35,7 +35,7 @@ bool ModulePlayer::Init() {
 
 	uptoidle.PushBack({ 5, 2, 36, 14 });
 	uptoidle.PushBack({ 53, 2, 36, 14 });
-	uptoidle.speed = 0.1f;
+	uptoidle.speed = 0.18f;
 	uptoidle.loop = false;
 
 	down.PushBack({ 149, 1, 36, 14 });
@@ -45,7 +45,7 @@ bool ModulePlayer::Init() {
 
 	downtoidle.PushBack({ 198, 1, 36, 14 });
 	downtoidle.PushBack({ 149, 1, 36, 14 });
-	downtoidle.speed = 0.1f;
+	downtoidle.speed = 0.18f;
 	downtoidle.loop = false;
 
 	death.PushBack({ 11, 386, 40, 42 });
@@ -158,8 +158,21 @@ update_status ModulePlayer::Update()
 		}
 	}
 	if (canMove) {
-		current_animation = &idle;
-		state = idl;
+		if (current_animation == &uptoidle)
+		{
+			if (current_animation->isDone()) {
+				current_animation = &idle;
+				state = idl;
+			}
+		}
+
+		if (current_animation == &downtoidle)
+		{
+			if (current_animation->isDone()) {
+				current_animation = &idle;
+				state = idl;
+			}
+		}
 
 		tentacle.base_position = { position.x, position.y - 50 };
 		tentacle2.base_position = { position.x, position.y + 54 };
@@ -210,7 +223,7 @@ update_status ModulePlayer::Update()
 		{
 			if (activePU[TENTACLES] == false) {
 				
-				if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE) current_animation = &idle;
+				if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE)current_animation = &idle;
 				else current_animation = &down;
 			}
 			position.y += speed.x;
@@ -220,6 +233,13 @@ update_status ModulePlayer::Update()
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
 			state = bot;
 		}
+
+		if (!activePU[TENTACLES])
+		{
+			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)current_animation = &downtoidle;
+			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP)current_animation = &uptoidle;
+		}
+
 
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->controller_A_button == KEY_STATE::KEY_DOWN)
 		{
