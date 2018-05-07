@@ -7,10 +7,8 @@ v.0.6 (7/05/2018) Level 3 with scroll, textures,colliders and audio. UI. Gamepad
 	-audio                                   Marc
 
 -UI:
-	-high scores screen                      Axel
 	-continue screen                         Axel
  	-insert coin screen                      Axel
-	-Intro animation                         Axel
 
 -Enemies hit effect                              Marc
 
@@ -23,6 +21,9 @@ v.0.7 (13/05/2018) enemies and checkpoints
 
 
 -Checkpoints                                           Axel
+-UI:
+	-high scores screen                      Axel
+	-Intro animation                         Axel
 
 -Level 3 Enemies
 
