@@ -36,9 +36,9 @@ typedef unsigned int uint;
 #define SCREEN_WIDTH 384
 #define SCREEN_HEIGHT 254
 #define WIN_FULLSCREEN 0
-#define WIN_FULLSCREEN_DESKTOP 0
-#define WIN_BORDERLESS 1
-#define WIN_RESIZABLE 0
+#define WIN_FULLSCREEN_DESKTOP 1
+#define WIN_BORDERLESS 0
+#define WIN_RESIZABLE 1
 #define REN_VSYNC 1
 #define CONTROLLER_DEAD_ZONE 8000
 
