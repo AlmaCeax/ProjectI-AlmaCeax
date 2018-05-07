@@ -64,6 +64,8 @@ public:
 	Animation up;
 	Animation down;
 	Animation idle;
+	Animation uptoidle;
+	Animation downtoidle;
 
 private:
 	void Die();
