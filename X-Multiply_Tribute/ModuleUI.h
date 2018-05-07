@@ -33,6 +33,7 @@ public:
 	void InsertCoin();
 	void PlayerCoins(bool pink);
 
+	Uint8 current_checkpoint;
 	bool ui_visible = false;
 	bool is_continue = false;
 	int coins = 0;

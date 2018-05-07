@@ -97,6 +97,7 @@ update_status ModuleSceneStage1::Update()
 {
 	checkCameraEvents();
 	updateCamera();
+	CheckpointsUpdate();
 
 	App->render->Blit(textures[0], 0, 0, &textrect[0], 0.5f);
 	App->render->Blit(textures[1], 0, 0, &textrect[1]);
@@ -186,6 +187,12 @@ bool ModuleSceneStage1::loadMap()
 	textures[0] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/FirstLvlMap.png");
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/BG01.png");
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage1/Background/injection.png");
+
+	checkpoints[0] = {0,0};
+	checkpoints[1] = { 1326,0 };
+	checkpoints[2] = { 2441,0 };
+	checkpoints[3] = { 3800,256 };
+	checkpoints[4] = { -1,-1 };
 
 
 	coll = { 0,212,2862,12 };
