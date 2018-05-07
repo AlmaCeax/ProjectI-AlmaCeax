@@ -49,7 +49,6 @@ protected:
 	Mix_Chunk * nemonaDeadsfx;
 	Mix_Chunk * hellballDeadsfx;
 	Mix_Chunk * flyerDeadsfx;
-
 	Mix_Chunk * hitEnemysfx;
 
 };

@@ -202,8 +202,6 @@ bool ModuleSceneStage3::loadMap()
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage3/BackgroundFinalbg03.png");
 	textures[3] = App->textures->Load("Assets/Sprites/Stages/Stage3/Door.png");
 
-
-
 	//top
 	coll = { 0,336,3176,38 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -452,7 +450,7 @@ bool ModuleSceneStage3::loadMap()
 
 void ModuleSceneStage3::loadEnemies()
 {
-
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 200, 450, 1);
 }
 
 void ModuleSceneStage3::loadAudio()

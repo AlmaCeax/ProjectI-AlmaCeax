@@ -28,7 +28,7 @@ void Enemy::Draw(SDL_Texture* sprites)
 	if (animation != nullptr) {
 		if(!hit)App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
 		else {
-			hitAnimation->setCurrentFrameIndex(animation->GetCurrentFrameIndex());
+			hitAnimation->setCurrentFrameIndex(animation->GetCurrentFrameIndex()-1);
 			App->render->Blit(sprites, position.x, position.y, &(hitAnimation->GetCurrentFrame()));
 			hit = false;
 		}
