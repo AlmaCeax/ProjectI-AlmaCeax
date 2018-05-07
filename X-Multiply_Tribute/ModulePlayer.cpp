@@ -33,10 +33,20 @@ bool ModulePlayer::Init() {
 	up.speed = 0.1f;
 	up.loop = false;
 
+	uptoidle.PushBack({ 5, 2, 36, 14 });
+	uptoidle.PushBack({ 53, 2, 36, 14 });
+	uptoidle.speed = 0.1f;
+	uptoidle.loop = false;
+
 	down.PushBack({ 149, 1, 36, 14 });
 	down.PushBack({ 198, 1, 36, 14 });
 	down.speed = 0.1f;
 	down.loop = false;
+
+	downtoidle.PushBack({ 198, 1, 36, 14 });
+	downtoidle.PushBack({ 149, 1, 36, 14 });
+	downtoidle.speed = 0.1f;
+	downtoidle.loop = false;
 
 	death.PushBack({ 11, 386, 40, 42 });
 	death.PushBack({ 67, 386, 40, 42 });
@@ -185,7 +195,8 @@ update_status ModulePlayer::Update()
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE)
 		{
 			if (activePU[TENTACLES] == false) {
-				current_animation = &up;
+				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE) current_animation = &idle;
+				else current_animation = &up;
 			}
 			position.y -= speed.x;
 			tentacle.MoveTentacle(tentacle.up, 1);
@@ -198,7 +209,9 @@ update_status ModulePlayer::Update()
 		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE)
 		{
 			if (activePU[TENTACLES] == false) {
-				current_animation = &down;
+				
+				if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE) current_animation = &idle;
+				else current_animation = &down;
 			}
 			position.y += speed.x;
 			tentacle.MoveTentacle(tentacle.down,1);
