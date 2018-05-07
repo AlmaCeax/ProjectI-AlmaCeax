@@ -84,11 +84,17 @@ bool ModuleSceneStart::CleanUp()
 
 bool ModuleSceneStart::Start()
 {
+	if (App->ui->coins > 0) {
+		current_step = start_steps::show_coins;	
+	}
+	else {
+		current_step = start_steps::logo_movement;
+		music = App->audio->LoadMusic("Assets/Audio/Music/01_X-Multiply_Title.ogg");
+		Mix_PlayMusic(music, -1);
+	}
 	App->render->ResetCamera();
 	App->ui->ui_visible = false;
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_2.png");
-	music = App->audio->LoadMusic("Assets/Audio/Music/01_X-Multiply_Title.ogg");
-	Mix_PlayMusic(music, -1);
 
 	return true;
 }

@@ -81,7 +81,9 @@ void ModuleSceneContinue::NumberSwap() {
 
 	if (now >= number_total_time) {
 
-		if (current_number < 0) App->fade->FadeToBlack(this, App->start);
+		if (current_number < 0) {
+			App->fade->FadeToBlack(this, App->start, 1.0f);
+		}
 		else {
 			for (int i = 0; i < MAX_SEQUENCE; i++) {
 				current_sequence[i] = sequences[current_number][i];
@@ -134,14 +136,15 @@ bool ModuleSceneContinue::Start()
 
 	App->render->ResetCamera();
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_2.png");
-	ResetNumber();
 	music = App->audio->LoadMusic("Assets/Audio/Music/16_Continue.ogg");
-	Mix_PlayMusic(music, -1);
+	Mix_PlayMusic(music, 0);
 	
+	ResetNumber();
 	alpha = 255;
 	fading = false;
 	current_number = 8;
 	sequence_iterator = 0;
+	numberswap = false;
 
 	number_total_time = (Uint32)(1.0f * 1000.0f);
 	number_start_time = SDL_GetTicks();
@@ -164,9 +167,9 @@ void ModuleSceneContinue::BlitNumber()
 }
 
 void ModuleSceneContinue::ResetNumber() {
-	for (int row = 0; row < 7; row++) {
-		for (int line = 0; line < 7; line++) {
-			number_display[row][line] = false;
+	for (int line = 0; line < 7; line++) {
+		for (int row = 0; row < 7; row++) {
+			number_display[line][row] = false;
 		}
 	}
 

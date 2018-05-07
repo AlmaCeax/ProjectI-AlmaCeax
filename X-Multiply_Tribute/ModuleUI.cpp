@@ -208,6 +208,11 @@ void ModuleUI::AddScore(uint points) {
 		score_text[new_position] = str[i];
 		new_position--;
 	}
+
+	if (score > top_score) {
+		top_score = score;
+		strcpy_s(top_score_text, score_text);
+	}
 }
 
 void ModuleUI::ContinueTextBlit()
@@ -238,7 +243,7 @@ void ModuleUI::Reset() {
 	game_over = false;
 	player_lives = 2;
 
-	if (score > top_score && !App->collision->god_used && !life_increased) {
+	/*if (score > top_score && !App->collision->god_used && !life_increased) {
 		top_score = score;
 		char str[8];
 		_itoa_s(top_score, str, 10);
@@ -253,7 +258,7 @@ void ModuleUI::Reset() {
 			top_score_text[new_position] = str[i];
 			new_position--;
 		}
-	}
+	}*/
 	life_increased = false;
 	App->collision->god_used = false;
 	if (App->collision->god)App->collision->GodMode();
