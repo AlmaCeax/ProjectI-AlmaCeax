@@ -295,7 +295,7 @@ void ModuleUI::PlayerReady() {
 
 void ModuleUI::ReadyDone() {
 	App->player->Enable();
-	App->player->position = { (float)App->current_stage->checkpoints[current_checkpoint].x - 36, (float)App->current_stage->checkpoints[current_checkpoint].y + (SCREEN_HEIGHT/2)};
+	App->player->position = { (float)App->current_stage->checkpoints[current_checkpoint].x - 36, (float)App->current_stage->checkpoints[current_checkpoint].y + ((SCREEN_HEIGHT/2)-20)};
 
 	App->player->injecting = false;
 	App->player->startBoost = true;
