@@ -24,7 +24,6 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Init() {
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({ 100, 1, 36, 14 });
-	idle.PushBack({ 100, 1, 36, 14 });
 	idle.speed = 0.2f;
 
 	// walk forward animation (arcade sprite sheet)
@@ -35,7 +34,8 @@ bool ModulePlayer::Init() {
 
 	uptoidle.PushBack({ 5, 2, 36, 14 });
 	uptoidle.PushBack({ 53, 2, 36, 14 });
-	uptoidle.speed = 0.18f;
+	uptoidle.PushBack({ 100, 1, 36, 14 });
+	uptoidle.speed = 0.2f;
 	uptoidle.loop = false;
 
 	down.PushBack({ 149, 1, 36, 14 });
@@ -45,7 +45,8 @@ bool ModulePlayer::Init() {
 
 	downtoidle.PushBack({ 198, 1, 36, 14 });
 	downtoidle.PushBack({ 149, 1, 36, 14 });
-	downtoidle.speed = 0.18f;
+	downtoidle.PushBack({ 100, 1, 36, 14 });
+	downtoidle.speed = 0.2f;
 	downtoidle.loop = false;
 
 	death.PushBack({ 11, 386, 40, 42 });
@@ -205,42 +206,42 @@ update_status ModulePlayer::Update()
 			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
 			state = idl;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE)
+		if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE) && !movedDown)
 		{
-			if (activePU[TENTACLES] == false) {
-				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE) current_animation = &idle;
-				else current_animation = &up;
+			
+			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE) current_animation = &uptoidle;
+			else {
+				current_animation = &up;
+				position.y -= speed.x;
+				tentacle.MoveTentacle(tentacle.up, 1);
+				tentacle2.MoveTentacle(tentacle2.up, 2);
 			}
-			position.y -= speed.x;
-			tentacle.MoveTentacle(tentacle.up, 1);
-			tentacle2.MoveTentacle(tentacle2.up, 2);
 			
 			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
 			state = top;
 		}
-
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE)
+		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE)
 		{
-			if (activePU[TENTACLES] == false) {
-				
-				if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE)current_animation = &idle;
-				else current_animation = &down;
+			
+			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE)current_animation = &downtoidle;
+			else {
+				current_animation = &down;
+				position.y += speed.x;
+				tentacle.MoveTentacle(tentacle.down, 1);
+				tentacle2.MoveTentacle(tentacle2.down, 2);
+				movedDown = true;
 			}
-			position.y += speed.x;
-			tentacle.MoveTentacle(tentacle.down,1);
-			tentacle2.MoveTentacle(tentacle2.down,2);
-		
+			
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
 			state = bot;
 		}
 
-		if (!activePU[TENTACLES])
-		{
-			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)current_animation = &downtoidle;
-			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP)current_animation = &uptoidle;
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP) {
+			current_animation = &downtoidle;
+			movedDown = false;
 		}
-
-
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP)current_animation = &uptoidle;
+		
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->controller_A_button == KEY_STATE::KEY_DOWN)
 		{
 			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);

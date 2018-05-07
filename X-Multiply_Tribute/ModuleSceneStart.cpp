@@ -94,6 +94,7 @@ bool ModuleSceneStart::Start()
 	}
 	App->render->ResetCamera();
 	App->ui->ui_visible = false;
+	App->ui->current_checkpoint = 0;
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_2.png");
 
 	return true;

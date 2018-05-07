@@ -168,6 +168,7 @@ void ModuleUI::ClearUpdate() {
 				timer = 0;
 				memset(current_text1, 0, sizeof(current_text1));
 				memset(current_text2, 0, sizeof(current_text2));
+				current_checkpoint = 0;
 
 				switch (App->current_stage->index) {
 					case 1: App->fade->FadeToBlack(App->current_stage, App->stage3, 0.0f); break;
@@ -270,7 +271,7 @@ void ModuleUI::Reset() {
 
 void ModuleUI::DeathFade() {
 	if (player_lives > 0) App->fade->FadeToBlack(App->current_stage, App->current_stage);
-	else if(!game_over) { 
+	else if(!game_over) {
 		Mix_PlayMusic(over_song,false);
 		total_time = (Uint32)(4.0f * 1000.0f);
 		start_time = SDL_GetTicks();
@@ -284,6 +285,7 @@ void ModuleUI::PlayerReady() {
 		Mix_PlayMusic(ready_song, false);
 		if (App->current_stage->index == 1) App->stage1->first_time = false;
 		is_continue = false;
+		App->render->SetCameraPosition(App->current_stage->checkpoints[current_checkpoint].x, App->current_stage->checkpoints[current_checkpoint].y);
 
 		total_time = (Uint32)(3.5f * 1000.0f);
 		start_time = SDL_GetTicks();
@@ -293,11 +295,7 @@ void ModuleUI::PlayerReady() {
 
 void ModuleUI::ReadyDone() {
 	App->player->Enable();
-	
-	App->player->position.x = -36;
-
-	if(App->current_stage->index == 1) App->player->position.y = 115;
-	else App->player->position.y = 450;
+	App->player->position = { (float)App->current_stage->checkpoints[current_checkpoint].x - 36, (float)App->current_stage->checkpoints[current_checkpoint].y + ((SCREEN_HEIGHT/2)-20)};
 
 	App->player->injecting = false;
 	App->player->startBoost = true;

@@ -35,10 +35,7 @@ bool ModuleSceneStage3::Start() {
 	App->collision->Enable();
 	App->powerups->Enable();
 	App->particles->Enable();
-	App->ui->PlayerReady();
 	App->ui->ui_visible = true;
-
-	App->render->SetCameraPosition(0, 336);
 
 	right = false;
 	left = false;
@@ -51,6 +48,7 @@ bool ModuleSceneStage3::Start() {
 	loadEnemies();
 	loadAudio();
 
+	App->ui->PlayerReady();
 
 	return true;
 }
@@ -165,6 +163,7 @@ update_status ModuleSceneStage3::Update()
 
 	BackgroundEvents();
 	UpdateCamera();
+	CheckpointsUpdate();
 
 	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage1);
 
@@ -201,6 +200,12 @@ bool ModuleSceneStage3::loadMap()
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage3/Layerbg03.png");
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage3/BackgroundFinalbg03.png");
 	textures[3] = App->textures->Load("Assets/Sprites/Stages/Stage3/Door.png");
+
+	checkpoints[0] = { 0, 336 };
+	checkpoints[1] = { 1555, 336 };
+	checkpoints[2] = { 3100, 336 };
+	checkpoints[3] = { 4348, 95 };
+	checkpoints[4] = { -1, -1 };
 
 	//top
 	coll = { 0,336,3176,38 };

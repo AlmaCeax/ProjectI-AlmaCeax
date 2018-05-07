@@ -71,24 +71,18 @@ update_status ModuleInput::PreUpdate()
 				LOG("Controller removed!\n");
 			}
 		}
-
-		else if (event.type == SDL_CONTROLLERBUTTONDOWN) {
-			if (event.cbutton.which == 0) {
-				if (event.cbutton.button == SDL_CONTROLLER_BUTTON_A) {
-					if (event.cbutton.state == SDL_PRESSED) controller_A_button = KEY_REPEAT;
-					else controller_A_button = KEY_DOWN;
-				}
-			}
-		}
-		else if (event.type == SDL_CONTROLLERBUTTONUP) {
-			if (event.cbutton.which == 0) {
-				if (event.cbutton.button == SDL_CONTROLLER_BUTTON_A) {
-					if (event.cbutton.state == SDL_PRESSED) controller_A_button = KEY_UP;
-					else controller_A_button = KEY_IDLE;
-				}
-			}
-		}
 	}
+	Uint8 button_state = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_A);
+
+	if (button_state) {
+		if (controller_A_button == KEY_IDLE) controller_A_button = KEY_DOWN;
+		else controller_A_button = KEY_REPEAT;
+	}
+	else {
+		if (controller_A_button == KEY_REPEAT || controller_A_button == KEY_DOWN) controller_A_button = KEY_UP;
+		else controller_A_button = KEY_IDLE;
+	}
+	
 
 	for (int i = 0; i < MAX_KEYS; ++i)
 	{
