@@ -363,7 +363,6 @@ bool ModuleSceneStage1::loadMap()
 	
 void ModuleSceneStage1::loadEnemies()
 {
-	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 300, 60);
 	//top
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 450, 60, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 465, 60, false);
