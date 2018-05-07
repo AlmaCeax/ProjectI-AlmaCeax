@@ -178,11 +178,11 @@ update_status ModulePlayer::Update()
 		tentacle.base_position = { position.x, position.y - 50 };
 		tentacle2.base_position = { position.x, position.y + 54 };
 
-			tentacle.MoveTentacle(tentacle.rest, 1);
-			tentacle2.MoveTentacle(tentacle2.rest, 2);
+		tentacle.MoveTentacle(tentacle.rest, 1);
+		tentacle2.MoveTentacle(tentacle2.rest, 2);
 
-			tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
-			tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
+		tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
+		tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
 
 
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEAD_ZONE)

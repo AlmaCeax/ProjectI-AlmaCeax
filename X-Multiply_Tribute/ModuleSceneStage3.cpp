@@ -37,8 +37,6 @@ bool ModuleSceneStage3::Start() {
 	App->particles->Enable();
 	App->ui->ui_visible = true;
 
-	//App->render->SetCameraPosition(0, 336);
-
 	right = false;
 	left = false;
 	up = false;
@@ -457,7 +455,7 @@ bool ModuleSceneStage3::loadMap()
 
 void ModuleSceneStage3::loadEnemies()
 {
-
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 200, 450, 1);
 }
 
 void ModuleSceneStage3::loadAudio()
