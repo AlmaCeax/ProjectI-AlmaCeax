@@ -1,4 +1,4 @@
-v.0.6 (7/05/2018) Level 3 with scroll, textures,colliders and audio. UI. Tentacles. Gamepad. Fullscreen.
+v.0.6 (7/05/2018) Level 3 with scroll, textures,colliders and audio. UI. Gamepad. Fullscreen.
 
 -level 3:
 	-camera movement                         Marc
