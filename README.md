@@ -81,6 +81,7 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 - Right stick: Move 
 - X button: Shoot
 - Triangle button: Insert Coin
+- Options button: Start Game
 
 ***
 
