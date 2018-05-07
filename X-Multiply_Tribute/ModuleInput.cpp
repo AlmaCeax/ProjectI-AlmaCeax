@@ -9,6 +9,7 @@ ModuleInput::ModuleInput() : Module()
 		keyboard[i] = KEY_IDLE;
 	}
 	controller_A_button = KEY_IDLE;
+	controller_Y_button = KEY_IDLE;
 }
 
 // Destructor
@@ -72,9 +73,11 @@ update_status ModuleInput::PreUpdate()
 			}
 		}
 	}
-	Uint8 button_state = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_A);
+	Uint8 button_state_A = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_A);
+	Uint8 button_state_Y = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_Y);
+	Uint8 button_state_START = SDL_GameControllerGetButton(controller, SDL_CONTROLLER_BUTTON_START);
 
-	if (button_state) {
+	if (button_state_A) {
 		if (controller_A_button == KEY_IDLE) controller_A_button = KEY_DOWN;
 		else controller_A_button = KEY_REPEAT;
 	}
@@ -82,7 +85,22 @@ update_status ModuleInput::PreUpdate()
 		if (controller_A_button == KEY_REPEAT || controller_A_button == KEY_DOWN) controller_A_button = KEY_UP;
 		else controller_A_button = KEY_IDLE;
 	}
-	
+	if (button_state_Y) {
+		if (controller_Y_button == KEY_IDLE) controller_Y_button = KEY_DOWN;
+		else controller_Y_button = KEY_REPEAT;
+	}
+	else {
+		if (controller_Y_button == KEY_REPEAT || controller_Y_button == KEY_DOWN) controller_Y_button = KEY_UP;
+		else controller_Y_button = KEY_IDLE;
+	}
+	if (button_state_START) {
+		if (controller_START_button == KEY_IDLE) controller_START_button = KEY_DOWN;
+		else controller_START_button = KEY_REPEAT;
+	}
+	else {
+		if (controller_START_button == KEY_REPEAT || controller_START_button == KEY_DOWN) controller_START_button = KEY_UP;
+		else controller_START_button = KEY_IDLE;
+	}
 
 	for (int i = 0; i < MAX_KEYS; ++i)
 	{

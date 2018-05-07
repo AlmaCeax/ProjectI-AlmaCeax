@@ -32,6 +32,8 @@ public:
 public:
 	KEY_STATE keyboard[MAX_KEYS];
 	KEY_STATE controller_A_button;
+	KEY_STATE controller_Y_button;
+	KEY_STATE controller_START_button;
 };
 
 #endif // __ModuleInput_H__
