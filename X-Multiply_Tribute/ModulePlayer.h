@@ -77,6 +77,7 @@ private:
 	int cooldown = 0;
 	int cooldownBombs = 0;
 	uint startime;
+	bool movedDown = false;
 
 };
 

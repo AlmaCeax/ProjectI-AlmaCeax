@@ -7,7 +7,8 @@
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
-
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>  
 #include "SDL/include/SDL_timer.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 
@@ -120,6 +121,19 @@ ModuleParticles::ModuleParticles()
 	enemyBossExplosion.anim.speed = 0.5f;
 	enemyBossExplosion.life = 200;
 	enemyBossExplosion.speed = { 0, 0 };
+
+	cyclopshot.anim.PushBack({ 9,234,12,12 });
+	cyclopshot.anim.PushBack({ 26,234,12,12 });
+	cyclopshot.anim.PushBack({ 45,234,12,12 });
+	cyclopshot.anim.PushBack({ 61,234,12,12 });
+	cyclopshot.anim.PushBack({ 9,252,12,12 });
+	cyclopshot.anim.PushBack({ 26,252,12,12 });
+	cyclopshot.anim.PushBack({ 44,252,12,12 });
+	cyclopshot.anim.speed = 0.2f;
+	cyclopshot.life = 2000;
+	cyclopshot.speed = { 0,0 };
+	cyclopshot.anim.loop;
+	cyclopshot.id = 7;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -277,6 +291,11 @@ bool Particle::Update()
 	case 3: 
 		position.x = App->player->position.x-42;
 		position.y = App->player->position.y;
+		break;
+	case 7:
+		position.x += speed.x;
+		position.y += speed.y;	
+		speed.y += 0.1f;
 		break;
 	default:
 		position.x += speed.x;

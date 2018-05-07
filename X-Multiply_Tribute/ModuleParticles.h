@@ -67,7 +67,7 @@ public:
 	Particle enemyExplosion;
 	Particle enemyBossExplosion;
 	Particle playerBoost;
-
+	Particle cyclopshot;
 };
 
 #endif // __MODULEPARTICLES_H__
