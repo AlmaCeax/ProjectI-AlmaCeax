@@ -32,7 +32,19 @@ Enemy_Alien::Enemy_Alien(int x, int y) :Enemy(x, y)
 
 void Enemy_Alien::Move()
 {
-	position.x -= 1;
+
+	if (original_x - position.x < -20 ) {
+		right = false;
+	}
+	if (original_x - position.x > 20 ) {
+		right = true;
+	}
+	if (right) {
+		position.x += 1;
+	}
+	else {
+		position.x -= 1;
+	}
 
 	shootTimer++;
 
@@ -48,7 +60,7 @@ void Enemy_Alien::Move()
 			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
 			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
 		}
-		else if (App->player->position.x > position.x ) {
+		else if (App->player->position.x > position.x) {
 			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
 			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
 			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });

@@ -60,8 +60,8 @@ private:
 	int player_lives = 2;
 	uint score = 0;
 	char score_text[9] = "00000000";
-	uint top_score = 500000;
-	char top_score_text[9] = "00500000";
+	uint top_score = 15000;
+	char top_score_text[9] = "00015000";
 
 	int score_font = -1;
 	int blue_font = -1;

@@ -373,6 +373,7 @@ bool ModuleSceneStage1::loadMap()
 	
 void ModuleSceneStage1::loadEnemies()
 {
+	
 	//top
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 450, 60, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 465, 60, false);
@@ -421,7 +422,7 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1130, 120, false, 1);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::ALIEN, 400, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::ALIEN, 1100, 154);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1160, 50);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 60);

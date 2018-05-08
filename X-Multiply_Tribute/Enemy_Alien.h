@@ -12,6 +12,7 @@ private:
 	int original_y;
 	int original_x;
 	int shootTimer = 0;
+	bool right = false;
 
 public:
 	Enemy_Alien(int x, int y);

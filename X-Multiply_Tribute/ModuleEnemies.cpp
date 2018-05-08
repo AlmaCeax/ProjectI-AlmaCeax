@@ -174,7 +174,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				enemies[i] = new Enemy_PowerUPShip(info.x, info.y, info.powerUpid);
 				break;
 			case ENEMY_TYPES::CYCLOP:
-				enemies[i] = new Enemy_Cyclop(info.x, info.y);
+				enemies[i] = new Enemy_Cyclop(info.x, info.y, info.going_up);
 				lives[i] = 14;
 				break;
 			case ENEMY_TYPES::ALIEN:
