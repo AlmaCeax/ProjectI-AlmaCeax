@@ -82,6 +82,9 @@
     <ClCompile Include="Enemy_Cyclop.cpp">
       <Filter>Modules\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy_Alien.cpp">
+      <Filter>Modules\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -178,6 +181,9 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="Enemy_Cyclop.h">
+      <Filter>Modules\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Alien.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
   </ItemGroup>

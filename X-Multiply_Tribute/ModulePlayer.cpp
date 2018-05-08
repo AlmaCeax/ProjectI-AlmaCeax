@@ -156,22 +156,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 	if (canMove) {
-		if (current_animation == &uptoidle)
-		{
-			if (current_animation->isDone()) {
-				current_animation = &idle;
-				state = idl;
-			}
-		}
-
-		if (current_animation == &downtoidle)
-		{
-			if (current_animation->isDone()) {
-				current_animation = &idle;
-				state = idl;
-			}
-		}
-
+		
 		tentacle.base_position = { position.x, position.y - 50 };
 		tentacle2.base_position = { position.x, position.y + 54 };
 

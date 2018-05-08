@@ -421,6 +421,8 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false, 2);
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1130, 120, false, 1);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::ALIEN, 400, 60);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1160, 50);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 100);

@@ -26,7 +26,8 @@ enum ENEMY_TYPES
 	FLYINGWORM,
 	TENTACLESHOOTER,
 	POWERUPSHIP,
-	CYCLOP
+	CYCLOP,
+	ALIEN
 };
 
 // Useful typedefs ---------

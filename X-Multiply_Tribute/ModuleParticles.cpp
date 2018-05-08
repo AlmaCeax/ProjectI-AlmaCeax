@@ -134,6 +134,15 @@ ModuleParticles::ModuleParticles()
 	cyclopshot.speed = { 0,0 };
 	cyclopshot.anim.loop;
 	cyclopshot.id = 7;
+
+	alienshot.anim.PushBack({ 278,248,14,12 });
+	alienshot.anim.PushBack({ 278,248,14,12 });
+	alienshot.anim.PushBack({ 278,248,14,12 });
+	alienshot.anim.speed = 0.2f;
+	alienshot.life = 2000;
+	alienshot.speed = { 0,0 };
+	alienshot.anim.loop;
+	alienshot.id = 7;
 }
 
 ModuleParticles::~ModuleParticles()

@@ -10,6 +10,7 @@
 #include "Enemy_TentacleShooter.h"
 #include "Enemy_PowerUPShip.h"
 #include "Enemy_Cyclop.h"
+#include "Enemy_Alien.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
 
@@ -160,22 +161,26 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		switch(info.type)
 		{
 			case ENEMY_TYPES::HELLBALL:
-			enemies[i] = new Enemy_HellBall(info.x,info.y,info.going_up);
-			break;
+				enemies[i] = new Enemy_HellBall(info.x,info.y,info.going_up);
+				break;
 			case ENEMY_TYPES::FLYINGWORM:
-			enemies[i] = new Enemy_FlyingWorm(info.x, info.y);
-			break;
+				enemies[i] = new Enemy_FlyingWorm(info.x, info.y);
+				break;
 			case ENEMY_TYPES::TENTACLESHOOTER:
-			enemies[i] = new Enemy_TentacleShooter(info.x, info.y, info.going_up);
-			lives[i] = 3;
-			break;
+				enemies[i] = new Enemy_TentacleShooter(info.x, info.y, info.going_up);
+				lives[i] = 3;
+				break;
 			case ENEMY_TYPES::POWERUPSHIP:
-			enemies[i] = new Enemy_PowerUPShip(info.x, info.y, info.powerUpid);
-			break;
+				enemies[i] = new Enemy_PowerUPShip(info.x, info.y, info.powerUpid);
+				break;
 			case ENEMY_TYPES::CYCLOP:
-			enemies[i] = new Enemy_Cyclop(info.x, info.y);
-			lives[i] = 14;
-			break;
+				enemies[i] = new Enemy_Cyclop(info.x, info.y);
+				lives[i] = 14;
+				break;
+			case ENEMY_TYPES::ALIEN:
+				enemies[i] = new Enemy_Alien(info.x, info.y);
+				lives[i] = 20;
+				break;
 		}
 	}
 }
@@ -226,6 +231,18 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				enemies[i] = nullptr;
 				break;
 			case CYCLOP:
+				lives[i]--;
+				if (lives[i] == 0) {
+					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					enemies[i]->OnCollision(c2);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
+					enemies[i]->Shine();
+				}
+			case ALIEN:
 				lives[i]--;
 				if (lives[i] == 0) {
 					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
