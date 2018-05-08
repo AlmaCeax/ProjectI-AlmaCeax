@@ -79,18 +79,22 @@ bool ModulePlayer::Start()
 	SDL_Rect rect_collider = { position.x,position.y,36,14 };
 	SDL_Rect rect_tentaclecol = { tentacle.position.x,tentacle.position.y,19,10 };
 	SDL_Rect rect_tentaclecol2 = { tentacle2.position.x,tentacle2.position.y,19,10 };
+	SDL_Rect rect_tentacle_piece1 = { tentacle_piece1.position.x,tentacle_piece1.position.y,6,6 };
 
 	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
 
 	tentacle.base_position = { position.x, position.y - 50};
 	tentacle2.base_position = { position.x, position.y + 54};
+	tentacle_piece1.position = { position.x, position.y - 30 };
 
 	tentacle.collider = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
 	tentacle2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
+	tentacle_piece1.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
 
 	if (!activePU[TENTACLES]) {
 		tentacle.collider->enable = false;
 		tentacle2.collider->enable = false;
+		tentacle_piece1.collider->enable = false;
 	}
 
 	current_animation = &idle;
@@ -114,6 +118,9 @@ bool ModulePlayer::CleanUp() {
 
 	if (tentacle2.collider)tentacle2.collider->to_delete = true;
 	tentacle2.collider = nullptr;
+
+	if (tentacle_piece1.collider)tentacle_piece1.collider->to_delete = true;
+	tentacle_piece1.collider = nullptr;
 
 	return true;
 }
@@ -174,12 +181,14 @@ update_status ModulePlayer::Update()
 
 		tentacle.base_position = { position.x, position.y - 50 };
 		tentacle2.base_position = { position.x, position.y + 54 };
+		tentacle_piece1.position = { position.x,position.y - 20 };
 
 		tentacle.MoveTentacle(tentacle.rest, 1);
 		tentacle2.MoveTentacle(tentacle2.rest, 2);
 
 		tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
 		tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
+		tentacle_piece1.collider->SetPos(tentacle_piece1.position.x, tentacle_piece1.position.y);
 
 
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEAD_ZONE)
@@ -324,6 +333,7 @@ update_status ModulePlayer::Update()
 			activePU[TENTACLES] = true;
 			App->player->tentacle.collider->enable = true;
 			App->player->tentacle2.collider->enable = true;
+			App->player->tentacle_piece1.collider->enable = true;
 		}
 
 		if (last_animation != current_animation) {
@@ -343,6 +353,7 @@ update_status ModulePlayer::Update()
 	{
 		App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
 		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
+		App->render->Blit(graphics, tentacle_piece1.position.x, tentacle_piece1.position.y, &(tentacle_piece1.anim.GetCurrentFrame()));
 
 	}
 
@@ -417,6 +428,7 @@ void ModulePlayer::BlitPlayer() {
 	if(activePU[TENTACLES]){
 	App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
 	App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
+	App->render->Blit(graphics, tentacle_piece1.position.x, tentacle_piece1.position.y, &(tentacle_piece1.anim.GetCurrentFrame()));
 	}
 }
 
@@ -701,4 +713,27 @@ void Tentacle::MoveTentacle(movement movement, int location_position)
 		}
 		break;
 	}
+}
+
+// -------------------------------------------------------------
+// -------------------------------------------------------------
+
+Tentacle_Piece::Tentacle_Piece()
+{
+	anim.PushBack({ 3, 9, 6, 2});
+	anim.PushBack({ 10, 9, 5, 4});
+	anim.PushBack({ 18, 10, 4, 5});
+	anim.PushBack({ 25, 10, 3, 5});
+	anim.PushBack({ 33, 11, 2, 6});
+
+	anim.loop = true;
+	anim.speed = 0.2f;
+}
+
+Tentacle_Piece::~Tentacle_Piece()
+{
+}
+
+void Tentacle_Piece::MoveTentacle_Piece(movement movement, int location_position)
+{
 }

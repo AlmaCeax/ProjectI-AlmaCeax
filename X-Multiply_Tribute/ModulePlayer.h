@@ -28,6 +28,22 @@ public:
 	void MoveTentacle(movement movement, int location_position);
 };
 
+class Tentacle_Piece
+{
+public:
+	Collider * collider = nullptr;
+	Animation anim;
+	fPoint position;
+	float angle;
+	fPoint nextposition;
+	int w, h = 0;
+	enum movement { up, down, right, left, rest };
+
+	Tentacle_Piece();
+	~Tentacle_Piece();
+	void MoveTentacle_Piece(movement movement, int location_position);
+};
+
 
 class ModulePlayer : public Module
 {
@@ -58,6 +74,7 @@ public:
 	Collider* collider;
 	Tentacle tentacle;
 	Tentacle tentacle2;
+	Tentacle_Piece tentacle_piece1;
 	//Alma Ceax
 
 	Animation* current_animation = nullptr;
