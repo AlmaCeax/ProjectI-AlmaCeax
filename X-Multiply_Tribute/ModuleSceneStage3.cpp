@@ -35,6 +35,7 @@ bool ModuleSceneStage3::Start() {
 	App->collision->Enable();
 	App->powerups->Enable();
 	App->particles->Enable();
+	App->enemies->Enable();
 	App->ui->ui_visible = true;
 
 	right = false;
@@ -458,7 +459,7 @@ bool ModuleSceneStage3::loadMap()
 
 void ModuleSceneStage3::loadEnemies()
 {
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 200, 450, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 500, 400, 1);
 }
 
 void ModuleSceneStage3::loadAudio()

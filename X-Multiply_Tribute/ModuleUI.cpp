@@ -54,7 +54,6 @@ bool ModuleUI::Init()
 
 update_status ModuleUI::Update()
  {
-	LOG("CHECKPOINT %i", current_checkpoint);
 	if (ui_visible) { 
 		if (App->collision->god) App->fonts->BlitText(0, 0, score_font, "godmode");
 		App->render->Blit(graphics, 0, 224, &ui_rect, false); 
