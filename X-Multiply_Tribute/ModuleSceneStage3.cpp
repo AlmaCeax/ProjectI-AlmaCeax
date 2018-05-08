@@ -56,7 +56,7 @@ bool ModuleSceneStage3::Start() {
 
 bool ModuleSceneStage3::Init()
 {
-	score_bonus = 20000;
+	score_bonus = 30000;
 	index = 3;
 	rect[0] = {0, 0, 2260, 208};
 	rect[1] = {0, 0, 5104, 561};
