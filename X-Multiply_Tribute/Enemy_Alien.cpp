@@ -33,7 +33,7 @@ Enemy_Alien::Enemy_Alien(int x, int y) :Enemy(x, y)
 void Enemy_Alien::Move()
 {
 
-	if (original_x - position.x < -20 ) {
+	if (original_x - position.x < -100 ) {
 		right = false;
 	}
 	if (original_x - position.x > 20 ) {
