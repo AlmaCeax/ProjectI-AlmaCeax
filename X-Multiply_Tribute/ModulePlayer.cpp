@@ -64,9 +64,6 @@ bool ModulePlayer::Init() {
 bool ModulePlayer::Start()
 {
 	dead = false;
-
-	position.x = 85;
-
 	injecting = true;
 	startime = 35;
 	death.Reset();

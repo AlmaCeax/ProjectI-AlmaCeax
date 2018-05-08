@@ -54,6 +54,7 @@ bool ModuleUI::Init()
 
 update_status ModuleUI::Update()
  {
+	LOG("CHECKPOINT %i", current_checkpoint);
 	if (ui_visible) { 
 		if (App->collision->god) App->fonts->BlitText(0, 0, score_font, "godmode");
 		App->render->Blit(graphics, 0, 224, &ui_rect, false); 
@@ -286,6 +287,7 @@ void ModuleUI::PlayerReady() {
 		if (App->current_stage->index == 1) App->stage1->first_time = false;
 		is_continue = false;
 		App->render->SetCameraPosition(App->current_stage->checkpoints[current_checkpoint].x, App->current_stage->checkpoints[current_checkpoint].y);
+		App->player->position = { (float)App->current_stage->checkpoints[current_checkpoint].x - 36, (float)App->current_stage->checkpoints[current_checkpoint].y + ((SCREEN_HEIGHT / 2) - 20) };
 
 		total_time = (Uint32)(3.5f * 1000.0f);
 		start_time = SDL_GetTicks();
@@ -295,7 +297,6 @@ void ModuleUI::PlayerReady() {
 
 void ModuleUI::ReadyDone() {
 	App->player->Enable();
-	App->player->position = { (float)App->current_stage->checkpoints[current_checkpoint].x - 36, (float)App->current_stage->checkpoints[current_checkpoint].y + ((SCREEN_HEIGHT/2)-20)};
 
 	App->player->injecting = false;
 	App->player->startBoost = true;

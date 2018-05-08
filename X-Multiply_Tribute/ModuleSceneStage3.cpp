@@ -165,7 +165,10 @@ update_status ModuleSceneStage3::Update()
 	UpdateCamera();
 	CheckpointsUpdate();
 
-	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage1);
+	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) {
+		App->fade->FadeToBlack(this, App->stage1, 0.0f);
+		App->ui->current_checkpoint = 0;
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }

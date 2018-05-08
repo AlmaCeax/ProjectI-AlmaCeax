@@ -104,7 +104,10 @@ update_status ModuleSceneStage1::Update()
 	injection();
 	App->render->Blit(textures[2], injectionposition.x, injectionposition.y, &textrect[2],0.5f);
 
-	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_STATE::KEY_DOWN) App->fade->FadeToBlack(this, App->stage3);
+	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_STATE::KEY_DOWN) {
+		App->fade->FadeToBlack(this, App->stage3, 0.0f);
+		App->ui->current_checkpoint = 0;
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -491,6 +494,7 @@ void ModuleSceneStage1::injection()
 					if (injectionhookposition.y < 96 && !unhooked)
 					{
 						App->player->Enable();
+						App->player->position.x = 85;
 						App->player->position.y = injectionhookposition.y + 16;
 						startAnimationHook.hold = true;
 						injectionhookposition.y++;
