@@ -106,7 +106,6 @@ void ModuleUI::ClearUpdate() {
 	switch (current_step) {
 		case clear_step::fade: {
 			if (now >= total_time) {
-				score += 10000;
 				App->player->canMove = false;
 
 				clear_position = { (float)((App->render->camera.x + (SCREEN_WIDTH*SCREEN_SIZE / 2))/SCREEN_SIZE)-18, (float)(App->render->camera.y/SCREEN_SIZE)+50 };
