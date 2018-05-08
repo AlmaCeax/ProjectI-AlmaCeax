@@ -8,7 +8,7 @@ class Enemy_Alien :
 {
 private:
 	Animation walk;
-	Animation shoot;
+	Animation hitanim;
 	int original_y;
 	int original_x;
 	int shootTimer = 0;

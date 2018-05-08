@@ -21,11 +21,12 @@ Enemy_Alien::Enemy_Alien(int x, int y) :Enemy(x, y)
 	walk.PushBack({ 263, 269, 57, 58 });
 	walk.speed = 0.2f;
 
-	shoot.PushBack({ 263, 269, 57, 58 });
-	shoot.PushBack({ 263, 269, 57, 58 });
-	shoot.speed = 0.2f;
+	hitanim.PushBack({ 570, 562, 42, 57 });
+	hitanim.PushBack({ 512, 562, 42, 57 });
+
 
 	animation = &walk;
+	hitAnimation = &hitanim;
 
 	collider = App->collision->AddCollider({ 0, 0, 57, 58 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 }
@@ -51,9 +52,9 @@ void Enemy_Alien::Move()
 	if (shootTimer == 80) {
 		if (App->player->position.x > position.x - 50 && App->player->position.x < position.x + 50)
 		{
-			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
-			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
-			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
+			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { 1, 1 });
+			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { 1, 2 });
+			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { 1, 3 });
 		}
 		else if (App->player->position.x < position.x) {
 			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
