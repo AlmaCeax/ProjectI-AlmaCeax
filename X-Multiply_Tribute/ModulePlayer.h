@@ -78,6 +78,7 @@ private:
 	int cooldownBombs = 0;
 	uint startime;
 	bool movedDown = false;
+	bool gamepadActived = false;
 
 };
 

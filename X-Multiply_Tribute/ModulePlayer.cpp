@@ -206,10 +206,10 @@ update_status ModulePlayer::Update()
 			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
 			state = idl;
 		}
-		if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE) && !movedDown)
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT  && !movedDown)
 		{
 			
-			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE) current_animation = &uptoidle;
+			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) current_animation = &uptoidle;
 			else {
 				current_animation = &up;
 				position.y -= speed.x;
@@ -220,10 +220,25 @@ update_status ModulePlayer::Update()
 			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
 			state = top;
 		}
-		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE)
+		else if ( SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE && !movedDown)
+		{
+
+			if (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE) current_animation = &uptoidle;
+			else {
+				current_animation = &up;
+				position.y -= speed.x;
+				tentacle.MoveTentacle(tentacle.up, 1);
+				tentacle2.MoveTentacle(tentacle2.up, 2);
+				gamepadActived = true;
+			}
+
+			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
+			state = top;
+		}
+		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 		{
 			
-			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE)current_animation = &downtoidle;
+			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)current_animation = &downtoidle;
 			else {
 				current_animation = &down;
 				position.y += speed.x;
@@ -235,16 +250,38 @@ update_status ModulePlayer::Update()
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
 			state = bot;
 		}
+		else if (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE)
+		{
 
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP) {
+			if (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE)current_animation = &downtoidle;
+			else {
+				current_animation = &down;
+				position.y += speed.x;
+				tentacle.MoveTentacle(tentacle.down, 1);
+				tentacle2.MoveTentacle(tentacle2.down, 2);
+				movedDown = true;
+				gamepadActived = true;
+			}
+
+			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
+			state = bot;
+		}
+		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP) {
 			current_animation = &downtoidle;
 			movedDown = false;
 		}
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP)current_animation = &uptoidle;
-		if (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < CONTROLLER_DEAD_ZONE &&
-			SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > -CONTROLLER_DEAD_ZONE) {
-			current_animation = &idle;
+		else if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP)current_animation = &uptoidle;
+		else if (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < CONTROLLER_DEAD_ZONE &&
+			SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > -CONTROLLER_DEAD_ZONE && gamepadActived && movedDown) {
+			current_animation = &downtoidle;
 			movedDown = false;
+			gamepadActived = false;
+		}
+		else if(SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < CONTROLLER_DEAD_ZONE &&
+			SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > -CONTROLLER_DEAD_ZONE && gamepadActived){
+			current_animation = &uptoidle;
+			movedDown = false;
+			gamepadActived = false;
 		}
 		
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->controller_A_button == KEY_STATE::KEY_DOWN)
