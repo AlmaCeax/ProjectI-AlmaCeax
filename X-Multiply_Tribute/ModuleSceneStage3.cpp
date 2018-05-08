@@ -459,7 +459,10 @@ bool ModuleSceneStage3::loadMap()
 
 void ModuleSceneStage3::loadEnemies()
 {
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 500, 400, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2488, 450, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2688, 392, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2870, 450, false);
+
 }
 
 void ModuleSceneStage3::loadAudio()
