@@ -37,7 +37,7 @@ void Enemy_Alien::Move()
 	shootTimer++;
 
 	if (shootTimer == 80) {
-		if (App->player->position.x > position.x - 50 && App->player->position.x < position.x + 50   )
+		if (App->player->position.x > position.x - 50 && App->player->position.x < position.x + 50)
 		{
 			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
 			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
