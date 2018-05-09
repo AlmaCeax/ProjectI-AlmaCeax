@@ -246,6 +246,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					Mix_PlayChannel(-1, hitEnemysfx, 0);
 					enemies[i]->Shine();
 				}
+				break;
 			case ALIEN:
 				lives[i]--;
 				if (lives[i] == 0) {
@@ -258,6 +259,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					Mix_PlayChannel(-1, hitEnemysfx, 0);
 					enemies[i]->Shine();
 				}
+				break;
 			case GREENEYE:
 				Mix_PlayChannel(-1, flyerDeadsfx, 0);
 				enemies[i]->OnCollision(c2);

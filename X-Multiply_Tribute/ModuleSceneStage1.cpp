@@ -431,6 +431,8 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1315, 12, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1290, 150);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::ALIEN, 1600, 156);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2270, 175);
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2305, 175);
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2400, 175);
