@@ -183,7 +183,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				lives[i] = 20;
 				break;
 			case ENEMY_TYPES::GREENEYE:
-				enemies[i] = new Enemy_GreenEye(info.x, info.y);
+				enemies[i] = new Enemy_GreenEye(info.x, info.y, info.going_up);
 				break;
 		}
 	}

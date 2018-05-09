@@ -8,7 +8,7 @@
 
 
 
-Enemy_GreenEye::Enemy_GreenEye(int x, int y) :Enemy(x, y)
+Enemy_GreenEye::Enemy_GreenEye(int x, int y,bool going_up) :Enemy(x, y)
 {
 	type = GREENEYE;
 	original_y = y;
@@ -23,10 +23,19 @@ Enemy_GreenEye::Enemy_GreenEye(int x, int y) :Enemy(x, y)
 
 	animation = &greeneye;
 
+	going_up_ = going_up;
+
 	collider = App->collision->AddCollider({ 0, 0, 46, 35 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_GreenEye::Move()
 {
-	position.x -= 2;
+	if (!going_up_) {
+		position.y += 1;
+		position.x -= 2;
+	}
+	else if(going_up_){
+		position.y -= 1;
+		position.x -= 2;
+	}
 }

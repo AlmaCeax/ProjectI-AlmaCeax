@@ -464,7 +464,10 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 230);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 270);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 310);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 675, 108);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 259, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 280, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 394, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 427, true);
 
 }
 

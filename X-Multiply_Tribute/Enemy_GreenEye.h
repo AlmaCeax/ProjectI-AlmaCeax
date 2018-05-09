@@ -8,12 +8,12 @@ class Enemy_GreenEye :
 {
 private:
 	Animation greeneye;
-	bool going_up = true;
+	bool going_up_;
 	int original_y;
 	int original_x;
 
 public:
-	Enemy_GreenEye(int x, int y);
+	Enemy_GreenEye(int x, int y, bool going_up);
 
 	void Move();
 };
