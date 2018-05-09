@@ -27,7 +27,8 @@ enum ENEMY_TYPES
 	TENTACLESHOOTER,
 	POWERUPSHIP,
 	CYCLOP,
-	ALIEN
+	ALIEN,
+	GREENEYE
 };
 
 // Useful typedefs ---------

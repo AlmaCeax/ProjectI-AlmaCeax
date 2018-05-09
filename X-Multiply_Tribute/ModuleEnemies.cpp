@@ -7,6 +7,7 @@
 #include "ModuleTextures.h"
 #include "Enemy_HellBall.h"
 #include "Enemy_FlyingWorm.h"
+#include "Enemy_GreenEye.h"
 #include "Enemy_TentacleShooter.h"
 #include "Enemy_PowerUPShip.h"
 #include "Enemy_Cyclop.h"
@@ -181,6 +182,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				enemies[i] = new Enemy_Alien(info.x, info.y);
 				lives[i] = 20;
 				break;
+			case ENEMY_TYPES::GREENEYE:
+				enemies[i] = new Enemy_GreenEye(info.x, info.y);
+				break;
 		}
 	}
 }
@@ -254,6 +258,12 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					Mix_PlayChannel(-1, hitEnemysfx, 0);
 					enemies[i]->Shine();
 				}
+			case GREENEYE:
+				Mix_PlayChannel(-1, flyerDeadsfx, 0);
+				enemies[i]->OnCollision(c2);
+				delete enemies[i];
+				enemies[i] = nullptr;
+				break;
 			default:
 				break;
 			}
