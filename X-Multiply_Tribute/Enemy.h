@@ -14,7 +14,7 @@ class Enemy
 protected:
 	Collider* collider = nullptr;
 	uint points = 0;
-
+	uint numExplosions = 1;
 public:
 	Animation * animation = nullptr;
 	Animation * hitAnimation = nullptr;
