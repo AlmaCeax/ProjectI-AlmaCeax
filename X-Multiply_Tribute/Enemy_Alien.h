@@ -7,7 +7,10 @@ class Enemy_Alien :
 	public Enemy
 {
 private:
+	Animation walkright;
 	Animation walk;
+	Animation shoot;
+	Animation shootright;
 	Animation hitanim;
 	int original_y;
 	int original_x;
