@@ -7,7 +7,9 @@ class Enemy_BrownEye :
 	public Enemy
 {
 private:
-	Animation shoot;
+	Animation leftright;
+	Animation left;
+	Animation leftup;
 	Animation hitanim;
 	int original_y;
 	int original_x;

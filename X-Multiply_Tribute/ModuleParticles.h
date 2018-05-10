@@ -72,7 +72,14 @@ public:
 	Particle playerBoost;
 	Particle cyclopshot;
 	Particle alienshot;
-	Particle browneyeshot;
+	Particle browneyeshot1;
+	Particle browneyeshot2;
+	Particle browneyeshot3;
+	Particle browneyeshot4;
+	Particle browneyeshot5;
+	Particle browneyeshot6;
+	Particle browneyeshot7;
+	Particle browneyeshot8;
 	Particle multipleLittleExplosion;
 	Particle multipleBigExplosion;
 

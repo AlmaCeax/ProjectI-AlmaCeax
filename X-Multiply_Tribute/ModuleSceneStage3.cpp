@@ -288,9 +288,9 @@ bool ModuleSceneStage3::loadMap()
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 2614,383,135,18 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2637,401,112,27 };
+	coll = { 2637,401,50,27 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2653,428,66,8 };
+	coll = { 2653,428,50,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 2663,436,52,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -386,9 +386,9 @@ bool ModuleSceneStage3::loadMap()
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 2470,496,135,20 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2471,469,112,27 };
+	coll = { 2521,469,50,27 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2501,461,66,8 };
+	coll = { 2521,461,50,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 2506,449,52,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -400,9 +400,9 @@ bool ModuleSceneStage3::loadMap()
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 2854,496,135,20 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2855,469,112,27 };
+	coll = { 2900,469,50,27 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2885,461,66,8 };
+	coll = { 2900,461,50,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 2890,449,52,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);

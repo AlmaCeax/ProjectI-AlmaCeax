@@ -471,10 +471,10 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 394, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 427, true);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4312, 427);
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4312, 457);
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4312, 527);
-	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4412, 457);
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 275);
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 340);
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4477, 340);
+	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 410);
 
 }
 
