@@ -152,6 +152,9 @@ ModuleParticles::ModuleParticles()
 	browneyeshot.life = 2000;
 	browneyeshot.speed = { 0,0 };
 	browneyeshot.anim.loop = true;
+
+	multipleLittleExplosion.life = 2000;
+	multipleLittleExplosion.id = 8;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -224,7 +227,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay, int nTimes, bool isMultiple)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -272,7 +275,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id)
+	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple)
 {}
 
 Particle::~Particle()
@@ -314,6 +317,9 @@ bool Particle::Update()
 		position.x += speed.x;
 		position.y += speed.y;	
 		speed.y += 0.1f;
+		break;
+	case 8:
+		App->particles->AddParticle(App->particles->enemyExplosion, position.x + rand() % 40 + (-20), position.y + rand() % 40 + (-20));
 		break;
 	default:
 		position.x += speed.x;
