@@ -32,6 +32,7 @@ struct Particle
 	int id = 0;
 	int nTimes;
 	bool isMultiple;
+	int timebeforeanotherexplosion = 0;
 
 	Particle();
 	Particle(const Particle& p);

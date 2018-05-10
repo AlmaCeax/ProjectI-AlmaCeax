@@ -153,8 +153,11 @@ ModuleParticles::ModuleParticles()
 	browneyeshot.speed = { 0,0 };
 	browneyeshot.anim.loop = true;
 
-	multipleLittleExplosion.life = 2000;
+	multipleLittleExplosion.life = 500;
 	multipleLittleExplosion.id = 8;
+
+	multipleBigExplosion.life = 1500;
+	multipleBigExplosion.id = 9;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -319,11 +322,24 @@ bool Particle::Update()
 		speed.y += 0.1f;
 		break;
 	case 8:
-		App->particles->AddParticle(App->particles->enemyExplosion, position.x + rand() % 40 + (-20), position.y + rand() % 40 + (-20));
+		timebeforeanotherexplosion++;
+		if (timebeforeanotherexplosion == 10)
+		{
+			App->particles->AddParticle(App->particles->enemyExplosion, position.x + rand() % 40 + (-20), position.y + rand() % 40 + (-20));
+			timebeforeanotherexplosion = 0;
+		}
+		break;
+	case 9:
+		timebeforeanotherexplosion++;
+		if (timebeforeanotherexplosion == 5)
+		{
+			App->particles->AddParticle(App->particles->enemyBossExplosion, position.x + rand() % 150 + (-75), position.y + rand() % 150 + (-75));
+			timebeforeanotherexplosion = 0;
+		}
 		break;
 	default:
 		position.x += speed.x;
-		position.y += speed.y;
+		position.y += speed.y; break;
 	}
 
 
