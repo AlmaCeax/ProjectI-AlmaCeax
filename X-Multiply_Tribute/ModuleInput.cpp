@@ -34,12 +34,12 @@ bool ModuleInput::Init()
 	SDL_JoystickEventState(SDL_ENABLE);
 
 	if(SDL_NumJoysticks() > 0) {
-			controller = SDL_GameControllerOpen(0);
-			if (controller) {
-				LOG("Controller loaded correctly");
-			}
-			else LOG("Could not open gamecontroller: %s", SDL_GetError());
+		controller = SDL_GameControllerOpen(0);
+		if (controller) {
+			LOG("Controller loaded correctly");
 		}
+		else LOG("Could not open gamecontroller: %s", SDL_GetError());
+	}
 
 	return ret;
 }
@@ -85,6 +85,7 @@ update_status ModuleInput::PreUpdate()
 		if (controller_A_button == KEY_REPEAT || controller_A_button == KEY_DOWN) controller_A_button = KEY_UP;
 		else controller_A_button = KEY_IDLE;
 	}
+
 	if (button_state_Y) {
 		if (controller_Y_button == KEY_IDLE) controller_Y_button = KEY_DOWN;
 		else controller_Y_button = KEY_REPEAT;
@@ -93,6 +94,7 @@ update_status ModuleInput::PreUpdate()
 		if (controller_Y_button == KEY_REPEAT || controller_Y_button == KEY_DOWN) controller_Y_button = KEY_UP;
 		else controller_Y_button = KEY_IDLE;
 	}
+
 	if (button_state_START) {
 		if (controller_START_button == KEY_IDLE) controller_START_button = KEY_DOWN;
 		else controller_START_button = KEY_REPEAT;

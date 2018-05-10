@@ -9,6 +9,7 @@
 #include "Enemy_FlyingWorm.h"
 #include "Enemy_GreenEye.h"
 #include "Enemy_BrownEye.h"
+#include "Enemy_Jumper.h"
 #include "Enemy_TentacleShooter.h"
 #include "Enemy_PowerUPShip.h"
 #include "Enemy_Cyclop.h"
@@ -23,9 +24,7 @@ ModuleEnemies::ModuleEnemies()
 	for (uint i = 0; i < MAX_ENEMIES; ++i) {
 		enemies[i] = nullptr;
 		lives[i] = 0;
-	}
-	
-		
+	}	
 }
 
 // Destructor
@@ -190,6 +189,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				enemies[i] = new Enemy_BrownEye(info.x, info.y);
 				lives[i] = 15;
 				break;
+			case ENEMY_TYPES::JUMPER:
+				enemies[i] = new Enemy_Jumper(info.x, info.y);
+				break;
 		}
 	}
 }
@@ -198,9 +200,15 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 	{
+		if (enemies[i] != nullptr && enemies[i]->type == JUMPER) {
+			if (((Enemy_Jumper*)enemies[i])->ground_collider == c1) {
+				((Enemy_Jumper*)enemies[i])->SetDownAnim();
+				break;
+			}
+		}
+
 		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
-		{
-			
+		{	
 			switch (enemies[i]->type)
 			{
 			case NO_TYPE:
@@ -283,6 +291,17 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				enemies[i]->OnCollision(c2);
 				delete enemies[i];
 				enemies[i] = nullptr;
+				break;
+			case JUMPER:
+				if (c2->type == COLLIDER_WALL) {
+					((Enemy_Jumper*)enemies[i])->TouchGround();
+				}
+				else {
+					Mix_PlayChannel(-1, flyerDeadsfx, 0);
+					enemies[i]->OnCollision(c2);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
 				break;
 			default:
 				break;

@@ -29,7 +29,8 @@ enum ENEMY_TYPES
 	CYCLOP,
 	ALIEN,
 	GREENEYE,
-	BROWNEYE
+	BROWNEYE,
+	JUMPER
 };
 
 // Useful typedefs ---------
