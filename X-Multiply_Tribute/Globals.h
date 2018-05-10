@@ -28,7 +28,8 @@ enum ENEMY_TYPES
 	POWERUPSHIP,
 	CYCLOP,
 	ALIEN,
-	GREENEYE
+	GREENEYE,
+	BROWNEYE
 };
 
 // Useful typedefs ---------

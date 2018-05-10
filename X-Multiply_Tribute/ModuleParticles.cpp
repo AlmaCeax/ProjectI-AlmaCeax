@@ -143,6 +143,15 @@ ModuleParticles::ModuleParticles()
 	alienshot.life = 2000;
 	alienshot.speed = { 0,0 };
 	alienshot.anim.loop = true;
+
+	browneyeshot.anim.PushBack({ 10,276,14,12 });
+	browneyeshot.anim.PushBack({ 32,276,14,12 });
+	browneyeshot.anim.PushBack({ 55,275,16,14 });
+	browneyeshot.anim.PushBack({ 32,276,14,12 });
+	browneyeshot.anim.speed = 0.2f;
+	browneyeshot.life = 2000;
+	browneyeshot.speed = { 0,0 };
+	browneyeshot.anim.loop = true;
 }
 
 ModuleParticles::~ModuleParticles()

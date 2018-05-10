@@ -69,6 +69,7 @@ public:
 	Particle playerBoost;
 	Particle cyclopshot;
 	Particle alienshot;
+	Particle browneyeshot;
 };
 
 #endif // __MODULEPARTICLES_H__

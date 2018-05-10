@@ -2,94 +2,47 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
-#include "Enemy_Alien.h"
+#include "Enemy_BrownEye.h"
 #include "ModuleEnemies.h"
 
 
 
 
-Enemy_Alien::Enemy_Alien(int x, int y) :Enemy(x, y)
+Enemy_BrownEye::Enemy_BrownEye(int x, int y) :Enemy(x, y)
 {
-	type = ALIEN;
+	type = BROWNEYE;
 	original_y = y;
 	original_x = x;
 
 	points = 5000;
 
-	walk.PushBack({ 264, 411, 57, 58 });
-	walk.PushBack({ 331, 411, 57, 58 });
-	walk.PushBack({ 264, 477, 57, 58 });
-	walk.PushBack({ 331, 411, 57, 58 });
-	walk.speed = 0.2f;
-	walk.loop = true;
-
-	walkright.PushBack({ 263, 269, 57, 58 });
-	walkright.PushBack({ 332, 269, 57, 58 });
-	walkright.PushBack({ 265, 335, 57, 58 });
-	walkright.PushBack({ 332, 269, 57, 58 });
-	walkright.speed = 0.2f;
-	walkright.loop = true;
-
-	shoot.PushBack({ 340, 475, 53, 65 });
-	shoot.PushBack({ 340, 475, 53, 65 });
-	shoot.PushBack({ 407, 409, 53, 64 });
-	shoot.PushBack({ 407, 409, 53, 64 });
-	shoot.PushBack({ 407, 409, 53, 64 });
-	shoot.PushBack({ 407, 409, 53, 64 });
-	shoot.PushBack({ 340, 475, 53, 65 });
-	shoot.PushBack({ 340, 475, 53, 65 });
+	shoot.PushBack({ 24, 183, 64, 60 });
+	shoot.PushBack({ 24, 183, 64, 60 });
+	shoot.PushBack({ 24, 183, 64, 60 });
+	shoot.PushBack({ 24, 183, 64, 60 });
+	shoot.PushBack({ 24, 183, 64, 60 });
+	shoot.PushBack({ 24, 183, 64, 60 });
+	shoot.PushBack({ 24, 183, 64, 60 });
 	shoot.speed = 0.1f;
-
-	shootright.PushBack({ 332, 333, 53, 66 });
-	shootright.PushBack({ 332, 333, 53, 66 });
-	shootright.PushBack({ 404, 267, 53, 64 });
-	shootright.PushBack({ 404, 267, 53, 64 });
-	shootright.PushBack({ 404, 267, 53, 64 });
-	shootright.PushBack({ 404, 267, 53, 64 });
-	shootright.PushBack({ 332, 333, 53, 66 });
-	shootright.PushBack({ 332, 333, 53, 66 });
-	shootright.speed = 0.1f;
 
 	hitanim.PushBack({ 751, 269, 56, 58 });
 
 
-	animation = &walk;
-	
+	animation = &shoot;
+
 	hitAnimation = &hitanim;
 
 	collider = App->collision->AddCollider({ 0, 0, 57, 58 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 }
 
-void Enemy_Alien::Move()
+void Enemy_BrownEye::Move()
 {
 
-	if (shootTimer == 80 && right) {
-		animation = &shootright;
-	}
-	else if (shootTimer == 80 && !right) {
-		animation = &shoot;
-	}else if (shootTimer < 80 && right) {
-		animation = &walkright;
-		position.x += 1;
-	}
-	else if (shootTimer < 80 && !right) {
-		animation = &walk;
-		position.x -= 1;
-	}
-
-	if (original_x - position.x < -110 ) {
-		right = false;
-	}
-	if (original_x - position.x > 20 ) {
-		right = true;
-	}
 	
-	
-
 	shootTimer++;
-	
+
 	if (shootTimer == 120) {
-		
+
 		if (App->player->position.x > position.x - 50 && App->player->position.x < position.x + 50)
 		{
 			App->particles->AddParticle(App->particles->alienshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
