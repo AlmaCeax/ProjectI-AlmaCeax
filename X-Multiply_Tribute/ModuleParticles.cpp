@@ -144,14 +144,81 @@ ModuleParticles::ModuleParticles()
 	alienshot.speed = { 0,0 };
 	alienshot.anim.loop = true;
 
-	browneyeshot.anim.PushBack({ 10,276,14,12 });
-	browneyeshot.anim.PushBack({ 32,276,14,12 });
-	browneyeshot.anim.PushBack({ 55,275,16,14 });
-	browneyeshot.anim.PushBack({ 32,276,14,12 });
-	browneyeshot.anim.speed = 0.2f;
-	browneyeshot.life = 2000;
-	browneyeshot.speed = { 0,0 };
-	browneyeshot.anim.loop = true;
+	browneyeshot1.anim.PushBack({ 651,40,11,8 });
+	browneyeshot1.anim.PushBack({ 652,64,18,11 });
+	//browneyeshot1.anim.PushBack({ 652,64,18,11 });
+	//browneyeshot1.anim.PushBack({ 651,49,16,14 });
+	browneyeshot1.anim.speed = 0.1f;
+	browneyeshot1.life = 3000;
+	browneyeshot1.speed = { 0,0 };
+	browneyeshot1.anim.loop = true;
+
+	browneyeshot2.anim.PushBack({ 746,224,8,19 });
+	browneyeshot2.anim.PushBack({ 707,184,10,24 });
+	//browneyeshot2.anim.PushBack({ 724,179,11,30 });
+	//browneyeshot2.anim.PushBack({ 707,184,10,24 });
+	browneyeshot2.anim.speed = 0.1f;
+	browneyeshot2.life = 3000;
+	browneyeshot2.speed = { 0,0 };
+	browneyeshot2.anim.loop = true;
+
+	browneyeshot3.anim.PushBack({ 537,225,10,8 });
+	browneyeshot3.anim.PushBack({ 535,199,16,15 });
+	//browneyeshot3.anim.PushBack({ 533,188,18,11 });
+	//browneyeshot3.anim.PushBack({ 535,199,16,15 });
+	browneyeshot3.anim.speed = 0.1f;
+	browneyeshot3.life = 3000;
+	browneyeshot3.speed = { 0,0 };
+	browneyeshot3.anim.loop = true;
+
+	browneyeshot4.anim.PushBack({ 680,56,19,8 });
+	browneyeshot4.anim.PushBack({ 680,70,30,11 });
+	//browneyeshot4.anim.PushBack({ 681,106,31,12 });
+	//browneyeshot4.anim.PushBack({ 680,70,30,11 });
+	browneyeshot4.anim.speed = 0.1f;
+	browneyeshot4.life = 3000;
+	browneyeshot4.speed = { 0,0 };
+	browneyeshot4.anim.loop = true;
+
+	browneyeshot5.anim.PushBack({ 531,150,25,10 });
+	browneyeshot5.anim.PushBack({ 560,144,30,11 });
+	//browneyeshot5.anim.PushBack({ 528,136,30,13 });
+	//browneyeshot5.anim.PushBack({ 560,144,30,11 });
+	browneyeshot5.anim.speed = 0.1f;
+	browneyeshot5.life = 3000;
+	browneyeshot5.speed = { 0,0 };
+	browneyeshot5.anim.loop = true;
+
+	browneyeshot6.anim.PushBack({ 537,53,10,9 });
+	browneyeshot6.anim.PushBack({ 533,35,18,11 });
+	//browneyeshot6.anim.PushBack({ 528,136,30,13 });
+	//browneyeshot6.anim.PushBack({ 560,144,30,11 });
+	browneyeshot6.anim.speed = 0.1f;
+	browneyeshot6.life = 3000;
+	browneyeshot6.speed = { 0,0 };
+	browneyeshot6.anim.loop = true;
+
+	browneyeshot7.anim.PushBack({ 586,129,7,11 });
+	browneyeshot7.anim.PushBack({ 567,95,8,18 });
+	browneyeshot7.anim.speed = 0.1f;
+	browneyeshot7.life = 3000;
+	browneyeshot7.speed = { 0,0 };
+	browneyeshot7.anim.loop = true;
+
+	browneyeshot8.anim.PushBack({ 720,75,18,11 });
+	browneyeshot8.anim.PushBack({ 598,151,21,15 });
+	browneyeshot8.anim.speed = 0.1f;
+	browneyeshot8.life = 3000;
+	browneyeshot8.speed = { 0,0 };
+	browneyeshot8.anim.loop = true;
+
+	
+
+	multipleLittleExplosion.life = 500;
+	multipleLittleExplosion.id = 8;
+
+	multipleBigExplosion.life = 1500;
+	multipleBigExplosion.id = 9;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -224,7 +291,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay, int nTimes, bool isMultiple)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -272,7 +339,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id)
+	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple)
 {}
 
 Particle::~Particle()
@@ -315,9 +382,25 @@ bool Particle::Update()
 		position.y += speed.y;	
 		speed.y += 0.1f;
 		break;
+	case 8:
+		timebeforeanotherexplosion++;
+		if (timebeforeanotherexplosion == 10)
+		{
+			App->particles->AddParticle(App->particles->enemyExplosion, position.x + rand() % 40 + (-20), position.y + rand() % 40 + (-20));
+			timebeforeanotherexplosion = 0;
+		}
+		break;
+	case 9:
+		timebeforeanotherexplosion++;
+		if (timebeforeanotherexplosion == 5)
+		{
+			App->particles->AddParticle(App->particles->enemyBossExplosion, position.x + rand() % 150 + (-75), position.y + rand() % 150 + (-75));
+			timebeforeanotherexplosion = 0;
+		}
+		break;
 	default:
 		position.x += speed.x;
-		position.y += speed.y;
+		position.y += speed.y; break;
 	}
 
 

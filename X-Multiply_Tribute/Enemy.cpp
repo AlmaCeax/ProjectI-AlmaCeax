@@ -42,7 +42,7 @@ void Enemy::OnCollision(Collider* collider)
 	{
 		if(i == 0)App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
 		else {
-			App->particles->AddParticle(App->particles->enemyExplosion, position.x+ rand() % 40 + (-20), position.y + rand() % 40 + (-20));
+			App->particles->AddParticle(App->particles->multipleLittleExplosion, position.x, position.y, COLLIDER_TYPE::COLLIDER_NONE, {0, 0},0, 4, true);
 		}
 	}
 	App->ui->AddScore(points);
