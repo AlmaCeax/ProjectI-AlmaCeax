@@ -135,10 +135,10 @@ ModuleParticles::ModuleParticles()
 	cyclopshot.anim.loop;
 	cyclopshot.id = 7;
 
-	alienshot.anim.PushBack({ 10,276,14,12 });
-	alienshot.anim.PushBack({ 32,276,14,12 });
-	alienshot.anim.PushBack({ 55,275,16,14 });
-	alienshot.anim.PushBack({ 32,276,14,12 });
+	alienshot.anim.PushBack({ 9,275,16,14 });
+	alienshot.anim.PushBack({ 31,275,16,14 });
+	//alienshot.anim.PushBack({ 54,275,16,14 });
+	alienshot.anim.PushBack({ 31,275,16,14 });
 	alienshot.anim.speed = 0.2f;
 	alienshot.life = 2000;
 	alienshot.speed = { 0,0 };
@@ -146,8 +146,6 @@ ModuleParticles::ModuleParticles()
 
 	browneyeshot1.anim.PushBack({ 651,40,11,8 });
 	browneyeshot1.anim.PushBack({ 652,64,18,11 });
-	//browneyeshot1.anim.PushBack({ 652,64,18,11 });
-	//browneyeshot1.anim.PushBack({ 651,49,16,14 });
 	browneyeshot1.anim.speed = 0.1f;
 	browneyeshot1.life = 3000;
 	browneyeshot1.speed = { 0,0 };
@@ -155,8 +153,6 @@ ModuleParticles::ModuleParticles()
 
 	browneyeshot2.anim.PushBack({ 746,224,8,19 });
 	browneyeshot2.anim.PushBack({ 707,184,10,24 });
-	//browneyeshot2.anim.PushBack({ 724,179,11,30 });
-	//browneyeshot2.anim.PushBack({ 707,184,10,24 });
 	browneyeshot2.anim.speed = 0.1f;
 	browneyeshot2.life = 3000;
 	browneyeshot2.speed = { 0,0 };
@@ -164,8 +160,6 @@ ModuleParticles::ModuleParticles()
 
 	browneyeshot3.anim.PushBack({ 537,225,10,8 });
 	browneyeshot3.anim.PushBack({ 535,199,16,15 });
-	//browneyeshot3.anim.PushBack({ 533,188,18,11 });
-	//browneyeshot3.anim.PushBack({ 535,199,16,15 });
 	browneyeshot3.anim.speed = 0.1f;
 	browneyeshot3.life = 3000;
 	browneyeshot3.speed = { 0,0 };
@@ -173,8 +167,6 @@ ModuleParticles::ModuleParticles()
 
 	browneyeshot4.anim.PushBack({ 680,56,19,8 });
 	browneyeshot4.anim.PushBack({ 680,70,30,11 });
-	//browneyeshot4.anim.PushBack({ 681,106,31,12 });
-	//browneyeshot4.anim.PushBack({ 680,70,30,11 });
 	browneyeshot4.anim.speed = 0.1f;
 	browneyeshot4.life = 3000;
 	browneyeshot4.speed = { 0,0 };
@@ -182,8 +174,6 @@ ModuleParticles::ModuleParticles()
 
 	browneyeshot5.anim.PushBack({ 531,150,25,10 });
 	browneyeshot5.anim.PushBack({ 560,144,30,11 });
-	//browneyeshot5.anim.PushBack({ 528,136,30,13 });
-	//browneyeshot5.anim.PushBack({ 560,144,30,11 });
 	browneyeshot5.anim.speed = 0.1f;
 	browneyeshot5.life = 3000;
 	browneyeshot5.speed = { 0,0 };
@@ -191,8 +181,6 @@ ModuleParticles::ModuleParticles()
 
 	browneyeshot6.anim.PushBack({ 537,53,10,9 });
 	browneyeshot6.anim.PushBack({ 533,35,18,11 });
-	//browneyeshot6.anim.PushBack({ 528,136,30,13 });
-	//browneyeshot6.anim.PushBack({ 560,144,30,11 });
 	browneyeshot6.anim.speed = 0.1f;
 	browneyeshot6.life = 3000;
 	browneyeshot6.speed = { 0,0 };

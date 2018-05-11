@@ -139,7 +139,7 @@ bool ModuleSceneStage1::CleanUp()
 
 void ModuleSceneStage1::checkCameraEvents()
 {
-	if (App->render->camera.x > 2666 * SCREEN_SIZE && App->render->camera.x < 3434 * SCREEN_SIZE)
+	if (App->render->camera.x > 2666 * SCREEN_SIZE && App->render->camera.x < 3436 * SCREEN_SIZE)
 	{
 		down = true;
 	}
