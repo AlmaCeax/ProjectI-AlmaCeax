@@ -144,6 +144,7 @@ update_status ModulePlayer::Update()
 			tentacle.position.x = position.x;
 			tentacle.position.y = position.y - 50;
 		}
+		lastY = position.y;
 		position.x += speed.x;
 		startime--;
 		current_animation = &idle;
@@ -156,8 +157,12 @@ update_status ModulePlayer::Update()
 		}
 	}
 	if (canMove) {
-		
 
+		if (lastY > position.y)state = top;
+		else if (lastY < position.y)state = bot;
+		else state = idl;
+
+		lastY = position.y;
 		tentacle.base_position = { position.x, position.y - 50 };
 		tentacle2.base_position = { position.x, position.y + 54 };
 
@@ -166,6 +171,8 @@ update_status ModulePlayer::Update()
 
 		tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
 		tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
+
+
 
 
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEAD_ZONE)
@@ -177,7 +184,6 @@ update_status ModulePlayer::Update()
 			
 
 			if (((position.x + 36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
-			state = idl;
 		}
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) < -CONTROLLER_DEAD_ZONE)
 		{
@@ -187,12 +193,11 @@ update_status ModulePlayer::Update()
 			tentacle2.MoveTentacle(tentacle2.left, 2);
 
 			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
-			state = idl;
 		}
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT  && !movedDown)
 		{
 			
-			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) current_animation = &uptoidle;
+			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)current_animation = &uptoidle;
 			else {
 				current_animation = &up;
 				position.y -= speed.x;
@@ -201,7 +206,6 @@ update_status ModulePlayer::Update()
 			}
 			
 			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
-			state = top;
 		}
 		else if ( SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE && !movedDown)
 		{
@@ -216,12 +220,11 @@ update_status ModulePlayer::Update()
 			}
 
 			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
-			state = top;
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 		{
 			
-			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)current_animation = &downtoidle;
+			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)current_animation = &downtoidle; 
 			else {
 				current_animation = &down;
 				position.y += speed.x;
@@ -231,12 +234,11 @@ update_status ModulePlayer::Update()
 			}
 			
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
-			state = bot;
 		}
 		else if (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE)
 		{
 
-			if (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE)current_animation = &downtoidle;
+			if (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE)current_animation = &downtoidle;		
 			else {
 				current_animation = &down;
 				position.y += speed.x;
@@ -247,7 +249,6 @@ update_status ModulePlayer::Update()
 			}
 
 			if (((position.y + 44) * SCREEN_SIZE) > (App->render->camera.y + SCREEN_HEIGHT * SCREEN_SIZE)) position.y -= speed.x;
-			state = bot;
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP) {
 			current_animation = &downtoidle;
