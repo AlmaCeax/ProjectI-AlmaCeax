@@ -15,16 +15,16 @@ Enemy_Jumper::Enemy_Jumper(int x, int y): Enemy(x,y)
 
 	air.PushBack({276,179,23,24});
 
-	down.PushBack({ 309, 181, 40, 20 });
+	down.PushBack({ 309, 181, 40, 24 });
 
-	idle.PushBack({ 270, 218, 40, 11 });
-	idle.PushBack({ 320, 215, 40, 16 });
+	idle.PushBack({ 270, 213, 40, 24 });
+	idle.PushBack({ 320, 215, 40, 24 });
 	idle.speed = 0.05f;
 
 	animation = &air;
 
-	collider = App->collision->AddCollider({ 0, 0, 30, 25 }, COLLIDER_TYPE::COLLIDER_ENEMY_GROUND, (Module*)App->enemies);
-	ground_collider = App->collision->AddCollider({ x, y + 20, 25, 25 }, COLLIDER_TYPE::COLLIDER_GROUND, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 30, 18 }, COLLIDER_TYPE::COLLIDER_ENEMY_GROUND, (Module*)App->enemies);
+	ground_collider = App->collision->AddCollider({ x, y + 20, 25, 24 }, COLLIDER_TYPE::COLLIDER_GROUND, (Module*)App->enemies);
 }
 
 
@@ -35,7 +35,7 @@ Enemy_Jumper::~Enemy_Jumper()
 
 void Enemy_Jumper::SetDownAnim()
 {
-	if(animation == &air) animation = &down;
+	if(going_down) animation = &down;
 }
 
 void Enemy_Jumper::TouchGround()
@@ -94,3 +94,11 @@ void Enemy_Jumper::Wait()
 		animation = &air;
 	}
 }
+
+/*void Enemy_Jumper::Shoot() {
+	App->particles->AddParticle(App->particles->blueBall, position.x, position.y + 20, COLLIDER_ENEMY_SHOT, { -2, -1 });
+	App->particles->AddParticle(App->particles->blueBall, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT, { -1, -2 });
+	App->particles->AddParticle(App->particles->blueBall, position.x + 24, position.y, COLLIDER_ENEMY_SHOT, { 0, -2 });
+	App->particles->AddParticle(App->particles->blueBall, position.x + 36, position.y + 10, COLLIDER_ENEMY_SHOT, { 1, -2 });
+	App->particles->AddParticle(App->particles->blueBall, position.x + 48, position.y + 20, COLLIDER_ENEMY_SHOT, { 2, -1 });
+}*/
