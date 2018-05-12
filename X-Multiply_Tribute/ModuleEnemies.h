@@ -15,6 +15,7 @@ struct EnemyInfo
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 	int x, y, powerUpid;
 	bool going_up;
+	bool normal_spawn;
 };
 
 class ModuleEnemies : public Module
@@ -29,11 +30,8 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
-	bool AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up = false, int powerUPid = -1);
+	bool AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up = false, int powerUPid = -1, bool normal_spawn = true);
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
-
-private:
-
 	void SpawnEnemy(const EnemyInfo& info);
 
 private:
