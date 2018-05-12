@@ -475,6 +475,12 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4477, 340);
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 410);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 2322, 22);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 2372, 22);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 2478, 130);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 2552, 113);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3161, 277, false, -1, false);
+
 }
 
 void ModuleSceneStage1::loadAudio()

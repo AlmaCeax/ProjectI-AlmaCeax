@@ -151,6 +151,30 @@ void ModuleSceneStage3::BackgroundEvents()
 	{
 		right = false;
 	}
+
+	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4200) {
+		EnemyInfo info;
+		info.type = ENEMY_TYPES::JUMPER;
+		info.x = 4099;
+		info.y = 96;
+		info.going_up = true;
+		info.normal_spawn = true;
+		App->enemies->SpawnEnemy(info);
+		info.x = 4200;
+		info.y = -100;
+		App->enemies->SpawnEnemy(info);
+		info.x = 4250;
+		info.y = -200;
+		App->enemies->SpawnEnemy(info);
+
+		info.normal_spawn = false;
+		info.y = 0;
+		info.x = 4000;
+		App->enemies->SpawnEnemy(info);
+		info.y = -150;
+		info.x = 4000;
+		App->enemies->SpawnEnemy(info);
+	}
 }
 
 update_status ModuleSceneStage3::Update()
@@ -459,12 +483,27 @@ bool ModuleSceneStage3::loadMap()
 
 void ModuleSceneStage3::loadEnemies()
 {
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 500, 420);
-
 	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2488, 450, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2688, 392, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2870, 450, false);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 572, 472, false, -1, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3074, 484, false, -1, false); 
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3464, 450, true, -1, true); 
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3486, 438, true, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3559, 435, true, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3654, 421, true, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3809, 208, true, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3957, 193, true, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4373, 268);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4411, 222);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4429, 224);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4429, 200);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4547, 224);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4589, 200);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4600, 180);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4638, 185);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4680, 180);
 }
 
 void ModuleSceneStage3::loadAudio()

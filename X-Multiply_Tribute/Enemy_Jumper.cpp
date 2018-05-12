@@ -7,7 +7,7 @@
 
 
 
-Enemy_Jumper::Enemy_Jumper(int x, int y): Enemy(x,y)
+Enemy_Jumper::Enemy_Jumper(int x, int y, bool back, bool normal_spawn): Enemy(x,y)
 {
 	type = JUMPER;
 
@@ -22,9 +22,14 @@ Enemy_Jumper::Enemy_Jumper(int x, int y): Enemy(x,y)
 	idle.speed = 0.05f;
 
 	animation = &air;
+	canBackJump = back;
+
+	if (!normal_spawn) {
+		speed = { 1,1 };
+	}
 
 	collider = App->collision->AddCollider({ 0, 0, 30, 18 }, COLLIDER_TYPE::COLLIDER_ENEMY_GROUND, (Module*)App->enemies);
-	ground_collider = App->collision->AddCollider({ x, y + 20, 25, 24 }, COLLIDER_TYPE::COLLIDER_GROUND, (Module*)App->enemies);
+	ground_collider = App->collision->AddCollider({ x, y + 30, 25, 24 }, COLLIDER_TYPE::COLLIDER_GROUND, (Module*)App->enemies);
 }
 
 
@@ -62,7 +67,7 @@ void Enemy_Jumper::Move()
 	if (jumping) Jump();
 	else Wait();
 
-	ground_collider->SetPos(position.x, position.y + 20);
+	ground_collider->SetPos(position.x, position.y + 30);
 }
 
 void Enemy_Jumper::Jump()
@@ -73,7 +78,7 @@ void Enemy_Jumper::Jump()
 	{
 		speed.y += 0.1f;
 		if (speed.y >= 0) {
-			//Shoot();
+			Shoot();
 			going_down = true;
 		}
 	}
@@ -87,18 +92,32 @@ void Enemy_Jumper::Wait()
 			speed = {2,-3};
 		}
 		else {
-			speed = {0,-3};
+			if (canBackJump) speed = { -1,-3 };
+			else speed = {0,-3};
 		}
 		going_down = false;
 		jumping = true;
+		canShoot = true;
 		animation = &air;
 	}
 }
 
-/*void Enemy_Jumper::Shoot() {
-	App->particles->AddParticle(App->particles->blueBall, position.x, position.y + 20, COLLIDER_ENEMY_SHOT, { -2, -1 });
-	App->particles->AddParticle(App->particles->blueBall, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT, { -1, -2 });
-	App->particles->AddParticle(App->particles->blueBall, position.x + 24, position.y, COLLIDER_ENEMY_SHOT, { 0, -2 });
-	App->particles->AddParticle(App->particles->blueBall, position.x + 36, position.y + 10, COLLIDER_ENEMY_SHOT, { 1, -2 });
-	App->particles->AddParticle(App->particles->blueBall, position.x + 48, position.y + 20, COLLIDER_ENEMY_SHOT, { 2, -1 });
-}*/
+void Enemy_Jumper::Shoot() {
+	if (canShoot)
+	{
+		App->particles->AddParticle(App->particles->blueBall, position.x + 11, position.y + 24, COLLIDER_ENEMY_SHOT, { -2, 0 });
+		App->particles->AddParticle(App->particles->blueBall, position.x + 11, position.y + 24, COLLIDER_ENEMY_SHOT, { -1.5, -1 });
+		App->particles->AddParticle(App->particles->blueBall, position.x + 11, position.y + 24, COLLIDER_ENEMY_SHOT, { -1, -1.5 });
+		App->particles->AddParticle(App->particles->blueBall, position.x + 11, position.y + 24, COLLIDER_ENEMY_SHOT, { 0, -2 });
+		App->particles->AddParticle(App->particles->blueBall, position.x + 11, position.y + 24, COLLIDER_ENEMY_SHOT, { 2, -1 });
+		App->particles->AddParticle(App->particles->blueBall, position.x + 11, position.y + 24, COLLIDER_ENEMY_SHOT, { 1.5, -1.5 });
+		App->particles->AddParticle(App->particles->blueBall, position.x + 11, position.y + 24, COLLIDER_ENEMY_SHOT, { 2, 0 });
+		canShoot = false;
+	}
+
+}
+
+void Enemy_Jumper::OnCollision(Collider* collider) {
+	Enemy::OnCollision(collider);
+	ground_collider->to_delete = true;
+}

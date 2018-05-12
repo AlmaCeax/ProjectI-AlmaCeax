@@ -17,7 +17,7 @@
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
 
-#define SPAWN_MARGIN 60
+#define SPAWN_MARGIN 20
 
 ModuleEnemies::ModuleEnemies()
 {
@@ -53,11 +53,21 @@ update_status ModuleEnemies::PreUpdate()
 	{
 		if(queue[i].type != ENEMY_TYPES::NO_TYPE)
 		{
-			if (queue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN && queue[i].x * SCREEN_SIZE> App->render->camera.x + (App->render->camera.w * SCREEN_SIZE))
-			{
-				SpawnEnemy(queue[i]);
-				queue[i].type = ENEMY_TYPES::NO_TYPE;
-				LOG("Spawning enemy at %d", queue[i].x * SCREEN_SIZE);
+			if (queue[i].normal_spawn) {
+				if (queue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN && queue[i].x * SCREEN_SIZE> App->render->camera.x + (App->render->camera.w * SCREEN_SIZE))
+				{
+					SpawnEnemy(queue[i]);
+					queue[i].type = ENEMY_TYPES::NO_TYPE;
+					LOG("Spawning enemy at %d", queue[i].x * SCREEN_SIZE);
+				}
+			}
+			else {
+				if (queue[i].x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
+				{
+					SpawnEnemy(queue[i]);
+					queue[i].type = ENEMY_TYPES::NO_TYPE;
+					LOG("Spawning enemy at %d", queue[i].x * SCREEN_SIZE);
+				}
 			}
 		}
 	}
@@ -84,7 +94,7 @@ update_status ModuleEnemies::PostUpdate()
 	{
 		if(enemies[i] != nullptr)
 		{
-			if(enemies[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
+			if(enemies[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - (SPAWN_MARGIN*2))
 			{
 				LOG("DeSpawning enemy at %d", enemies[i]->position.x * SCREEN_SIZE);
 				delete enemies[i];
@@ -130,7 +140,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up, int powerUPid)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up, int powerUPid, bool normal_spawn)
 {
 	bool ret = false;
 
@@ -143,6 +153,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up, int 
 			queue[i].y = y;
 			queue[i].going_up = going_up;
 			queue[i].powerUpid = powerUPid;
+			queue[i].normal_spawn = normal_spawn;
 			ret = true;
 			break;
 		}
@@ -190,7 +201,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				lives[i] = 15;
 				break;
 			case ENEMY_TYPES::JUMPER:
-				enemies[i] = new Enemy_Jumper(info.x, info.y);
+				enemies[i] = new Enemy_Jumper(info.x, info.y, info.going_up, info.normal_spawn);
 				break;
 		}
 	}
