@@ -200,7 +200,11 @@ ModuleParticles::ModuleParticles()
 	browneyeshot8.speed = { 0,0 };
 	browneyeshot8.anim.loop = true;
 
-	
+	greenBall.anim.PushBack({ 644,273,12,10 });
+	greenBall.anim.PushBack({ 599,303,14,14 });
+	greenBall.anim.speed = 0.02f;
+	greenBall.life = 3000;
+	greenBall.speed = { 0,0 };
 
 	multipleLittleExplosion.life = 500;
 	multipleLittleExplosion.id = 8;

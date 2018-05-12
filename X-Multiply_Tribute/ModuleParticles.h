@@ -82,6 +82,7 @@ public:
 	Particle browneyeshot8;
 	Particle multipleLittleExplosion;
 	Particle multipleBigExplosion;
+	Particle greenBall;
 
 };
 

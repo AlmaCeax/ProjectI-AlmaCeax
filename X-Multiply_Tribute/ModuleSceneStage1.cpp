@@ -475,6 +475,12 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4477, 340);
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 410);
 
+	//App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 491, 112,true);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2726, 164,true);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2751, 189,true);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2795, 181,true);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2807, 191,true);
+
 }
 
 void ModuleSceneStage1::loadAudio()

@@ -30,7 +30,8 @@ enum ENEMY_TYPES
 	ALIEN,
 	GREENEYE,
 	BROWNEYE,
-	JUMPER
+	JUMPER,
+	BLUEMOUTH
 };
 
 // Useful typedefs ---------
