@@ -517,6 +517,9 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2688, 392, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2870, 450, false);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::WORM, 500, 320, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORM, 500, 450, false);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 572, 472, false, -1, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3074, 484, false, -1, false); 
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3464, 450, true, -1, true); 
