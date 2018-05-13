@@ -13,7 +13,7 @@ class Enemy;
 struct EnemyInfo
 {
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
-	int x, y, powerUpid;
+	int x, y, powerUpid, speed;
 	bool going_up;
 	bool normal_spawn;
 };
@@ -30,7 +30,7 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
-	bool AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up = false, int powerUPid = -1, bool normal_spawn = true);
+	bool AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up = false, int speed = 0, int powerUPid = -1, bool normal_spawn = true);
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 	void SpawnEnemy(const EnemyInfo& info);
 

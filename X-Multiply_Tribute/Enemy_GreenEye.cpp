@@ -5,12 +5,12 @@
 #include "Enemy_GreenEye.h"
 #include "ModuleEnemies.h"
 
-Enemy_GreenEye::Enemy_GreenEye(int x, int y,bool going_up) :Enemy(x, y)
+Enemy_GreenEye::Enemy_GreenEye(int x, int y,bool going_up, int _speed) :Enemy(x, y)
 {
 	type = GREENEYE;
 	original_y = y;
 	original_x = x;
-
+	speed = _speed;
 	points = 200;
 
 	greeneye.PushBack({ 155, 69, 46, 35 });
@@ -28,14 +28,14 @@ Enemy_GreenEye::Enemy_GreenEye(int x, int y,bool going_up) :Enemy(x, y)
 void Enemy_GreenEye::Move()
 {
 	goingdown++;
-	if (goingdown == 5) {
+	if (goingdown == speed) {
 		if (!going_up_) {
-			position.y += 1;
+			position.y += (speed-2);
 		}
 		else if (going_up_) {
-			position.y -= 1;
+			position.y -= (speed-2);
 		}
 		goingdown = 0;
 	}
-	position.x -= 2;
+	position.x -= speed;
 }

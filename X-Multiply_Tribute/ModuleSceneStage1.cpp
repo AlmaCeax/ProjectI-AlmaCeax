@@ -398,7 +398,7 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 80);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 120);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 750, 140, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 750, 140, false,0, 3);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 770, 90, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 785, 90, false);
@@ -418,8 +418,8 @@ void ModuleSceneStage1::loadEnemies()
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 900, 175);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1130, 120, false, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false,0, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1130, 120, false,0, 1);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::ALIEN, 1100, 156);
 
@@ -465,10 +465,12 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 230);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 270);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 310);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 259, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 280, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 394, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 427, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 259, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 280, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 394, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 427, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4212, 259, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4212, 427, true, 3);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 275);
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 340);
@@ -485,7 +487,7 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 2372, 22);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 2478, 130);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 2552, 113);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3161, 277, false, -1, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3161, 277, false,0, -1, false);
 }
 
 void ModuleSceneStage1::loadAudio()

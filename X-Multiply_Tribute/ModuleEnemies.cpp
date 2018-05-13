@@ -143,7 +143,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up, int powerUPid, bool normal_spawn)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up, int speed, int powerUPid, bool normal_spawn)
 {
 	bool ret = false;
 
@@ -155,6 +155,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up, int 
 			queue[i].x = x;
 			queue[i].y = y;
 			queue[i].going_up = going_up;
+			queue[i].speed = speed;
 			queue[i].powerUpid = powerUPid;
 			queue[i].normal_spawn = normal_spawn;
 			ret = true;
@@ -197,7 +198,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				lives[i] = 20;
 				break;
 			case ENEMY_TYPES::GREENEYE:
-				enemies[i] = new Enemy_GreenEye(info.x, info.y, info.going_up);
+				enemies[i] = new Enemy_GreenEye(info.x, info.y, info.going_up, info.speed);
 				break;
 			case ENEMY_TYPES::BROWNEYE:
 				enemies[i] = new Enemy_BrownEye(info.x, info.y);
