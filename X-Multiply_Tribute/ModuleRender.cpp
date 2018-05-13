@@ -140,7 +140,15 @@ bool ModuleRender::BlitFlipped(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 	rect.w *= SCREEN_SIZE;
 	rect.h *= SCREEN_SIZE;
 
-	SDL_RendererFlip flip = (SDL_RendererFlip) (flipX | flipY);
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+	if (flipX)
+	{
+		if(flipY) flip = (SDL_RendererFlip)(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
+		else flip = SDL_FLIP_HORIZONTAL;
+	}
+	else {
+		if (flipY) flip = SDL_FLIP_VERTICAL;
+	}
 
 	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, &center, flip))
 	{
