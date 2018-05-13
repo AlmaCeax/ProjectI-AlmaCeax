@@ -335,6 +335,10 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 						delete enemies[i];
 						enemies[i] = nullptr;
 					}
+					else {
+						Mix_PlayChannel(-1, hitEnemysfx, 0);
+						enemies[i]->Shine();
+					}
 				}
 				break;
 			case BLUEMOUTH:
