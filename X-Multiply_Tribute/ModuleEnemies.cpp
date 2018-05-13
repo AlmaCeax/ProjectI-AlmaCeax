@@ -16,6 +16,7 @@
 #include "Enemy_PowerUPShip.h"
 #include "Enemy_Cyclop.h"
 #include "Enemy_Alien.h"
+#include "Enemy_BluePatrol.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
 
@@ -212,6 +213,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				enemies[i] = new Enemy_BlueFlyer(info.x, info.y);
 				lives[i] = 3;
 				break;
+			case ENEMY_TYPES::BLUEPATROL:
+				enemies[i] = new Enemy_BluePatrol(info.x, info.y);
+				lives[i] = 2;
+				break;
 		}
 	}
 }
@@ -345,6 +350,20 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}
+				break;
+			case BLUEPATROL:
+				lives[i]--;
+				if (lives[i] == 0) {
+					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					enemies[i]->OnCollision(c2);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
+					enemies[i]->Shine();
+				}
+				break;
 			default:
 				break;
 			}
