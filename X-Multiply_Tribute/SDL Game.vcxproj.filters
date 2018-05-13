@@ -107,7 +107,7 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Enemy_BluePatrol.cpp">
-      <Filter>Modules\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,7 +253,7 @@
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Enemy_BluePatrol.h">
-      <Filter>Modules\Enemies</Filter>
+      <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
