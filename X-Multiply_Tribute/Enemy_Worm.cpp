@@ -11,10 +11,16 @@ Enemy_Worm::Enemy_Worm(int x, int y, bool _up) :Enemy(x, y)
 
 	up = _up;
 
-	if (up)flipX = true;
+	if (up) {
+		flipY = true;
+	}
+	else
+	{
 
-	anim.PushBack({ 42, 635, 16, 16 });
+	}
+
 	anim.PushBack({ 23, 636, 16, 16 });
+	anim.PushBack({ 42, 635, 16, 16 });
 	anim.PushBack({ 26, 653, 16, 16 });
 
 	hitanim.PushBack({ 512, 636, 16, 16 });
