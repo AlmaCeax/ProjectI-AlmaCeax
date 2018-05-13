@@ -17,6 +17,8 @@
 #include "Enemy_Cyclop.h"
 #include "Enemy_Alien.h"
 #include "Enemy_BluePatrol.h"
+#include "Enemy_Worm.h"
+#include "Enemy_WormHole.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
 
@@ -217,6 +219,13 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				enemies[i] = new Enemy_BluePatrol(info.x, info.y);
 				lives[i] = 2;
 				break;
+			case ENEMY_TYPES::WORM:
+				enemies[i] = new Enemy_Worm(info.x, info.y,info.going_up);
+				lives[i] = 2;
+				break;
+			case ENEMY_TYPES::WORMHOLE:
+				enemies[i] = new Enemy_WormHole(info.x, info.y);
+				break;
 		}
 	}
 }
@@ -340,6 +349,10 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 						delete enemies[i];
 						enemies[i] = nullptr;
 					}
+					else {
+						Mix_PlayChannel(-1, hitEnemysfx, 0);
+						enemies[i]->Shine();
+					}
 				}
 				break;
 			case BLUEMOUTH:
@@ -364,11 +377,31 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					enemies[i]->Shine();
 				}
 				break;
+			case WORM:
+				lives[i]--;
+				if (lives[i] == 0) {
+					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					enemies[i]->OnCollision(c2);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
+					enemies[i]->Shine();
+				}
+				break;
+			case WORMHOLE:
+				lives[i]--;
+				if (lives[i] == 0) {
+					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					enemies[i]->OnCollision(c2);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				break;
 			default:
 				break;
 			}
- 			
-			break;
 		}
 	}
 }
