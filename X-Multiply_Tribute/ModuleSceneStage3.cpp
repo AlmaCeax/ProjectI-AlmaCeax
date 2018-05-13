@@ -176,7 +176,7 @@ void ModuleSceneStage3::BackgroundEvents()
 		App->enemies->SpawnEnemy(info);
 	}
 
-	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4150) {
+	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4100) {
 		EnemyInfo info;
 		info.type = ENEMY_TYPES::BLUEFLYER;
 		info.x = 4050;
