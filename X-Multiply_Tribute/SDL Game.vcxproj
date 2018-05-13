@@ -92,6 +92,7 @@
     <ClInclude Include="Enemy_TentacleShooter.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Enemy_GreenEye.h" />
+    <ClInclude Include="Enemy_WormHole.h" />
     <ClInclude Include="ModuleCollision.h" />
     <ClInclude Include="ModuleEnemies.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="Enemy_Jumper.cpp" />
     <ClCompile Include="Enemy_PowerUPShip.cpp" />
     <ClCompile Include="Enemy_TentacleShooter.cpp" />
+    <ClCompile Include="Enemy_WormHole.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Enemy_GreenEye.cpp" />
     <ClCompile Include="Main.cpp" />
