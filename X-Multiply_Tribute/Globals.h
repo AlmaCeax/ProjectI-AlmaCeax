@@ -33,7 +33,8 @@ enum ENEMY_TYPES
 	JUMPER,
 	BLUEMOUTH,
 	BLUEFLYER,
-	WORM
+	WORM,
+	WORMHOLE
 };
 
 // Useful typedefs ---------

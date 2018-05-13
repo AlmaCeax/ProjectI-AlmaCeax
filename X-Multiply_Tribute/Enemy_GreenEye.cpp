@@ -5,9 +5,6 @@
 #include "Enemy_GreenEye.h"
 #include "ModuleEnemies.h"
 
-
-
-
 Enemy_GreenEye::Enemy_GreenEye(int x, int y,bool going_up) :Enemy(x, y)
 {
 	type = GREENEYE;
@@ -30,12 +27,15 @@ Enemy_GreenEye::Enemy_GreenEye(int x, int y,bool going_up) :Enemy(x, y)
 
 void Enemy_GreenEye::Move()
 {
-	if (!going_up_) {
-		position.y += 1;
-		position.x -= 2;
+	goingdown++;
+	if (goingdown == 5) {
+		if (!going_up_) {
+			position.y += 1;
+		}
+		else if (going_up_) {
+			position.y -= 1;
+		}
+		goingdown = 0;
 	}
-	else if(going_up_){
-		position.y -= 1;
-		position.x -= 2;
-	}
+	position.x -= 2;
 }

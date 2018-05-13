@@ -9,6 +9,7 @@ class Enemy_GreenEye :
 private:
 	Animation greeneye;
 	bool going_up_;
+	int goingdown;
 	int original_y;
 	int original_x;
 
