@@ -16,6 +16,7 @@
 #include "Enemy_PowerUPShip.h"
 #include "Enemy_Cyclop.h"
 #include "Enemy_Alien.h"
+#include "Enemy_WormHole.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
 
@@ -212,6 +213,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				enemies[i] = new Enemy_BlueFlyer(info.x, info.y);
 				lives[i] = 3;
 				break;
+			case ENEMY_TYPES::WORMHOLE:
+				enemies[i] = new Enemy_WormHole(info.x, info.y);
+				break;
 		}
 	}
 }
@@ -342,6 +346,14 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				}
 				break;
 			case BLUEMOUTH:
+				lives[i]--;
+				if (lives[i] == 0) {
+					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					enemies[i]->OnCollision(c2);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+			case WORMHOLE:
 				lives[i]--;
 				if (lives[i] == 0) {
 					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
