@@ -16,6 +16,7 @@
     <ClCompile Include="Enemy_BlueMouth.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+
     <ClCompile Include="Enemy_BrownEye.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
