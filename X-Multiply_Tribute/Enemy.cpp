@@ -27,10 +27,10 @@ void Enemy::Draw(SDL_Texture* sprites)
 		collider->SetPos(position.x, position.y);
 
 	if (animation != nullptr) {
-		if(!hit)App->render->Blit(sprites, position.x, position.y, &(animation->GetCurrentFrame()));
+		if(!hit)App->render->BlitFlipped(sprites, position.x, position.y, &(animation->GetCurrentFrame()), flipX, flipY);
 		else {
 			hitAnimation->setCurrentFrameIndex(animation->GetCurrentFrameIndex()-1);
-			App->render->Blit(sprites, position.x, position.y, &(hitAnimation->GetCurrentFrame()));
+			App->render->BlitFlipped(sprites, position.x, position.y, &(hitAnimation->GetCurrentFrame()), flipX, flipY);
 			hit = false;
 		}
 	}

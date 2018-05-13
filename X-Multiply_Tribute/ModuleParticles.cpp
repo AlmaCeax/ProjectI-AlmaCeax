@@ -211,6 +211,14 @@ ModuleParticles::ModuleParticles()
 
 	multipleBigExplosion.life = 1500;
 	multipleBigExplosion.id = 9;
+
+	yellowCircle.anim.PushBack({ 14,321,16,15 });
+	yellowCircle.anim.PushBack({ 38,318,16,15 });
+	yellowCircle.anim.PushBack({ 65,316,16,15 });
+	yellowCircle.anim.speed = 0.1f;
+	yellowCircle.anim.loop = false;
+	yellowCircle.life = 3000;
+	yellowCircle.speed = { 0,0 };
 }
 
 ModuleParticles::~ModuleParticles()

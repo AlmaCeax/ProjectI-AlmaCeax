@@ -15,6 +15,7 @@ protected:
 	Collider* collider = nullptr;
 	uint points = 0;
 	uint numExplosions = 1;
+	bool flipX, flipY;
 public:
 	Animation * animation = nullptr;
 	Animation * hitAnimation = nullptr;

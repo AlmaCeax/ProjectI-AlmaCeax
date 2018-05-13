@@ -152,7 +152,7 @@ void ModuleSceneStage3::BackgroundEvents()
 		right = false;
 	}
 
-	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4200) {
+	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4250) {
 		EnemyInfo info;
 		info.type = ENEMY_TYPES::JUMPER;
 		info.x = 4099;
@@ -175,6 +175,36 @@ void ModuleSceneStage3::BackgroundEvents()
 		info.x = 4000;
 		App->enemies->SpawnEnemy(info);
 	}
+
+	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4150) {
+		EnemyInfo info;
+		info.type = ENEMY_TYPES::BLUEFLYER;
+		info.x = 4050;
+		info.y = 90;
+		App->enemies->SpawnEnemy(info);
+		info.x = 4025;
+		info.y = 50;
+		App->enemies->SpawnEnemy(info);
+		info.x = 4100;
+		info.y = 20;
+		App->enemies->SpawnEnemy(info);
+		info.x = 4000;
+		info.y = -10;
+		App->enemies->SpawnEnemy(info);
+		info.x = 4060;
+		info.y = -10;
+		App->enemies->SpawnEnemy(info);
+		info.x = 4120;
+		info.y = -50;
+		App->enemies->SpawnEnemy(info);
+		info.x = 4080;
+		info.y = -80;
+		App->enemies->SpawnEnemy(info);
+		info.x = 4150;
+		info.y = -110;
+		App->enemies->SpawnEnemy(info);
+	}
+	
 }
 
 update_status ModuleSceneStage3::Update()

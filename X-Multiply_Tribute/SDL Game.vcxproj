@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Enemy_BlueFlyer.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Alien.h" />
     <ClInclude Include="Enemy_BlueMouth.h" />
@@ -117,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Enemy_BlueFlyer.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy_Alien.cpp" />
     <ClCompile Include="Enemy_BlueMouth.cpp" />

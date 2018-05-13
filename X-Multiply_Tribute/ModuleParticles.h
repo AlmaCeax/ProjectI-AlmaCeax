@@ -83,7 +83,7 @@ public:
 	Particle multipleLittleExplosion;
 	Particle multipleBigExplosion;
 	Particle greenBall;
-
+	Particle yellowCircle;
 };
 
 #endif // __MODULEPARTICLES_H__

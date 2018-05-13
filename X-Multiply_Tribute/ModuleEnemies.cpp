@@ -12,6 +12,7 @@
 #include "Enemy_Jumper.h"
 #include "Enemy_TentacleShooter.h"
 #include "Enemy_BlueMouth.h"
+#include "Enemy_BlueFlyer.h"
 #include "Enemy_PowerUPShip.h"
 #include "Enemy_Cyclop.h"
 #include "Enemy_Alien.h"
@@ -207,6 +208,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			case ENEMY_TYPES::BLUEMOUTH:
 				enemies[i] = new Enemy_BlueMouth(info.x, info.y,info.going_up);
 				break;
+			case ENEMY_TYPES::BLUEFLYER:
+				enemies[i] = new Enemy_BlueFlyer(info.x, info.y);
+				lives[i] = 3;
+				break;
 		}
 	}
 }
@@ -316,6 +321,20 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					enemies[i]->OnCollision(c2);
 					delete enemies[i];
 					enemies[i] = nullptr;
+				}
+				break;
+			case BLUEFLYER:
+				if (c2->type == COLLIDER_WALL) {
+					((Enemy_BlueFlyer*)enemies[i])->TouchGround();
+				}
+				else {
+					lives[i]--;
+					if (lives[i] == 0) {
+						Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+						enemies[i]->OnCollision(c2);
+						delete enemies[i];
+						enemies[i] = nullptr;
+					}
 				}
 				break;
 			case BLUEMOUTH:
