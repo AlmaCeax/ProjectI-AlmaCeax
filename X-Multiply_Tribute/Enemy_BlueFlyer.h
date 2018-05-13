@@ -12,6 +12,7 @@ public:
 private:
 	bool canShoot;
 	bool falling = true;
+	Animation hitanim;
 	Animation idle;
 	void Move();
 	void Shoot();

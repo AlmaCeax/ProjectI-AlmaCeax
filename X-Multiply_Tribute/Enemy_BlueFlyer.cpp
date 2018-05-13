@@ -12,7 +12,9 @@ Enemy_BlueFlyer::Enemy_BlueFlyer(int x, int y):Enemy(x,y)
 	points = 1000;
 
 	idle.PushBack({ 284,106,29,30 });
+	hitanim.PushBack({ 884, 182, 29, 30 });
 
+	hitAnimation = &hitanim;
 	animation = &idle;
 
 	collider = App->collision->AddCollider({ 0, 0, 30, 18 }, COLLIDER_TYPE::COLLIDER_ENEMY_GROUND, (Module*)App->enemies);
