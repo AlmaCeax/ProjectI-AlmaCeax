@@ -7,11 +7,47 @@
     <ClCompile Include="Globals.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="Enemy_Alien.cpp">
+      <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="ModulePowerUPS.cpp">
-      <Filter>Modules</Filter>
+    <ClCompile Include="Enemy_BlueFlyer.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_BlueMouth.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_BrownEye.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Cyclop.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_FlyingWorm.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_GreenEye.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_HellBall.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Jumper.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_PowerUPShip.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_TentacleShooter.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Worm.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_WormHole.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Modules</Filter>
@@ -25,6 +61,9 @@
     <ClCompile Include="ModuleFadeToBlack.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleFonts.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
     <ClCompile Include="ModuleInput.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -34,7 +73,13 @@
     <ClCompile Include="ModulePlayer.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ModulePowerUPS.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
     <ClCompile Include="ModuleRender.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneContinue.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneStage1.cpp">
@@ -52,56 +97,17 @@
     <ClCompile Include="ModuleTextures.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleWindow.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_HellBall.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_FlyingWorm.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_TentacleShooter.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleFonts.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_PowerUPShip.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleUI.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleSceneContinue.cpp">
+    <ClCompile Include="ModuleWindow.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy_Cyclop.cpp">
-      <Filter>Modules\Enemies</Filter>
+    <ClCompile Include="Main.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy_Alien.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_GreenEye.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_BrownEye.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_Jumper.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_BlueMouth.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_BlueFlyer.cpp">
-      <Filter>Modules\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy_WormHole.cpp">
-      <Filter>Modules\Enemies</Filter>
+    <ClCompile Include="Enemy_BluePatrol.cpp">
+      <Filter>Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,20 +117,59 @@
     <ClInclude Include="Globals.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="MemLeaks.h">
+    <ClInclude Include="p2Point.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Path.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
-      <Filter>Containers</Filter>
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="p2Point.h">
-      <Filter>Containers</Filter>
+    <ClInclude Include="Enemy_Alien.h">
+      <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Path.h">
-      <Filter>Containers</Filter>
+    <ClInclude Include="Enemy_BlueFlyer.h">
+      <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="ModulePowerUPS.h">
-      <Filter>Modules</Filter>
+    <ClInclude Include="Enemy_BlueMouth.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_BrownEye.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Cyclop.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_FlyingWorm.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_GreenEye.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_HellBall.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Jumper.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_PowerUPShip.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_TentacleShooter.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Worm.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_WormHole.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="MemLeaks.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Module.h">
       <Filter>Modules</Filter>
@@ -141,6 +186,9 @@
     <ClInclude Include="ModuleFadeToBlack.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleFonts.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
     <ClInclude Include="ModuleInput.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -150,7 +198,13 @@
     <ClInclude Include="ModulePlayer.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModulePowerUPS.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
     <ClInclude Include="ModuleRender.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneContinue.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneStage1.h">
@@ -165,37 +219,16 @@
     <ClInclude Include="ModuleSceneStart.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleStage.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
     <ClInclude Include="ModuleTextures.h">
       <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleWindow.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Modules\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy_HellBall.h">
-      <Filter>Modules\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy_FlyingWorm.h">
-      <Filter>Modules\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy_TentacleShooter.h">
-      <Filter>Modules\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleFonts.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy_PowerUPShip.h">
-      <Filter>Modules\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="ModuleUI.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleStage.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleSceneContinue.h">
+    <ClInclude Include="ModuleWindow.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="Enemy_Cyclop.h">
@@ -219,22 +252,19 @@
     <ClInclude Include="Enemy_BlueFlyer.h">
       <Filter>Modules\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy_WormHole.h">
-      <Filter>Modules\Enemies</Filter>
+    <ClInclude Include="Enemy_BluePatrol.h">
+      <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
-      <UniqueIdentifier>{c9cd6129-9da9-4321-bf87-c13f8a3178d4}</UniqueIdentifier>
+      <UniqueIdentifier>{995432fa-ea8f-4d26-abee-bacfdf094b3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemies">
+      <UniqueIdentifier>{1715d776-ddbc-4903-ac7d-a47663069f99}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules">
-      <UniqueIdentifier>{05e33933-b058-4ba8-8d79-744ef95a6a8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Enemies">
-      <UniqueIdentifier>{84c3675c-5a04-46ce-b040-e213c6cb9d56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Containers">
-      <UniqueIdentifier>{80da982e-4eac-4444-a9bf-c361caa4df49}</UniqueIdentifier>
+      <UniqueIdentifier>{2a6fa183-d0a8-4266-b3c5-5c76f6ae0a64}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

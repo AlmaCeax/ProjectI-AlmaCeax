@@ -83,6 +83,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Alien.h" />
     <ClInclude Include="Enemy_BlueMouth.h" />
+    <ClInclude Include="Enemy_BluePatrol.h" />
     <ClInclude Include="Enemy_BrownEye.h" />
     <ClInclude Include="Enemy_Cyclop.h" />
     <ClInclude Include="Enemy_FlyingWorm.h" />
@@ -90,6 +91,7 @@
     <ClInclude Include="Enemy_Jumper.h" />
     <ClInclude Include="Enemy_PowerUPShip.h" />
     <ClInclude Include="Enemy_TentacleShooter.h" />
+    <ClInclude Include="Enemy_Worm.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Enemy_GreenEye.h" />
     <ClInclude Include="Enemy_WormHole.h" />
@@ -123,6 +125,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy_Alien.cpp" />
     <ClCompile Include="Enemy_BlueMouth.cpp" />
+    <ClCompile Include="Enemy_BluePatrol.cpp" />
     <ClCompile Include="Enemy_BrownEye.cpp" />
     <ClCompile Include="Enemy_Cyclop.cpp" />
     <ClCompile Include="Enemy_FlyingWorm.cpp" />
@@ -130,6 +133,7 @@
     <ClCompile Include="Enemy_Jumper.cpp" />
     <ClCompile Include="Enemy_PowerUPShip.cpp" />
     <ClCompile Include="Enemy_TentacleShooter.cpp" />
+    <ClCompile Include="Enemy_Worm.cpp" />
     <ClCompile Include="Enemy_WormHole.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Enemy_GreenEye.cpp" />
