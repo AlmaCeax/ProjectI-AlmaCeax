@@ -18,6 +18,7 @@
 #include "Enemy_Alien.h"
 #include "Enemy_BluePatrol.h"
 #include "Enemy_Worm.h"
+#include "Enemy_WormBody.h"
 #include "Enemy_WormHole.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
@@ -226,7 +227,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				lives[i] = 2;
 				break;
 			case ENEMY_TYPES::WORMBODY:
-				enemies[i] = new Enemy_Worm(info.x, info.y, info.going_up);
+				enemies[i] = new Enemy_WormBody(info.x, info.y, info.going_up, info.tail);
 				lives[i] = 1;
 				break;
 			case ENEMY_TYPES::WORMHOLE:

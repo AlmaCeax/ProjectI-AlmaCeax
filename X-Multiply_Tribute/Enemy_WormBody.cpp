@@ -5,23 +5,19 @@
 #include "ModuleEnemies.h"
 
 
-Enemy_WormBody::Enemy_WormBody(int x, int y, bool _up) :Enemy(x, y)
+Enemy_WormBody::Enemy_WormBody(int x, int y, bool _up, bool tail) :Enemy(x, y)
 {
-	type = WORM;
+	type = WORMBODY;
 
 	up = _up;
 
 	if (up) {
 		flipY = true;
 	}
-	else
-	{
-
-	}
 
 	if (!tail)
 	{
-		anim.PushBack({ 59, 636, 16, 14 });
+		anim.PushBack({ 59, 636, 16, 16 });
 		anim.PushBack({ 76, 635, 16, 16 });
 		anim.PushBack({ 94, 635, 14, 16 });
 
@@ -30,13 +26,13 @@ Enemy_WormBody::Enemy_WormBody(int x, int y, bool _up) :Enemy(x, y)
 		hitanim.PushBack({ 583, 635, 16, 16 });
 	}
 	else {
-		anim.PushBack({ 59, 636, 16, 14 });
-		anim.PushBack({ 76, 635, 16, 16 });
-		anim.PushBack({ 94, 635, 14, 16 });
+		anim.PushBack({ 110, 636, 16, 16 });
+		anim.PushBack({ 63, 654, 16, 16 });
+		anim.PushBack({ 45, 654, 16, 16 });
 
-		hitanim.PushBack({ 548, 636, 16, 16 });
-		hitanim.PushBack({ 565, 635, 16, 16 });
-		hitanim.PushBack({ 583, 635, 16, 16 });
+		hitanim.PushBack({ 600, 636, 16, 16 });
+		hitanim.PushBack({ 654, 635, 16, 16 });
+		hitanim.PushBack({ 534, 654, 16, 16 });
 	}
 
 	anim.speed = 0.f;
@@ -54,4 +50,6 @@ void Enemy_WormBody::Move()
 {
 	if (up)position.y++;
 	else position.y--;
+
+	LOG("Position %f", position.y);
 }

@@ -158,7 +158,7 @@ void ModuleSceneStage1::updateCamera()
 
 	if (right) {
 		App->render->camera.x += speed * SCREEN_SIZE;
-		App->player->position.x += speed;
+		App->player->position.x += speed*SCREEN_SIZE;
 	}
 	if (left)App->render->camera.x -= speed * SCREEN_SIZE;
 	if (up) {

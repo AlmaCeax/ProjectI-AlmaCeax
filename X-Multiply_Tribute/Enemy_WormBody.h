@@ -13,7 +13,7 @@ private:
 	int shootTimer = 0;
 	bool up = false;
 public:
-	Enemy_WormBody(int x, int y, bool up);
+	Enemy_WormBody(int x, int y, bool up, bool tail);
 
 	void Move();
 };
