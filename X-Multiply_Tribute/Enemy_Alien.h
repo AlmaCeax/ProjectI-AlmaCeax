@@ -12,6 +12,7 @@ private:
 	Animation shoot;
 	Animation shootright;
 	Animation hitanim;
+	Animation anim;
 	int original_y;
 	int original_x;
 	int shootTimer = 0;

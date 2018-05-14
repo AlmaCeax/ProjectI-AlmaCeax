@@ -515,7 +515,7 @@ void ModuleSceneStage3::loadEnemies()
 {
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 869, 500);
-	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 850, 500, false, -1, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 850, 500, false, 0, -1, false);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2488, 450, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2688, 392, true);

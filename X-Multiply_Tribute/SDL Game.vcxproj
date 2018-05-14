@@ -14,7 +14,7 @@
     <ProjectGuid>{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}</ProjectGuid>
     <RootNamespace>SDLGame</RootNamespace>
     <ProjectName>X-Multiply_Tribute</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -92,6 +92,7 @@
     <ClInclude Include="Enemy_PowerUPShip.h" />
     <ClInclude Include="Enemy_TentacleShooter.h" />
     <ClInclude Include="Enemy_Worm.h" />
+    <ClInclude Include="Enemy_WormBody.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Enemy_GreenEye.h" />
     <ClInclude Include="Enemy_WormHole.h" />
@@ -134,6 +135,7 @@
     <ClCompile Include="Enemy_PowerUPShip.cpp" />
     <ClCompile Include="Enemy_TentacleShooter.cpp" />
     <ClCompile Include="Enemy_Worm.cpp" />
+    <ClCompile Include="Enemy_WormBody.cpp" />
     <ClCompile Include="Enemy_WormHole.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Enemy_GreenEye.cpp" />

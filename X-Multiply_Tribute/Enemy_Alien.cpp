@@ -16,6 +16,19 @@ Enemy_Alien::Enemy_Alien(int x, int y) :Enemy(x, y)
 
 	points = 5000;
 
+	hitanim.PushBack({ 264, 411, 57, 58 });
+	hitanim.PushBack({ 331, 411, 57, 58 });
+	hitanim.PushBack({ 264, 477, 57, 58 });
+	hitanim.PushBack({ 263, 269, 57, 58 });
+	hitanim.PushBack({ 332, 269, 57, 58 });
+	hitanim.PushBack({ 265, 335, 57, 58 });
+	hitanim.PushBack({ 340, 475, 53, 65 });
+	hitanim.PushBack({ 407, 409, 53, 64 });
+	hitanim.PushBack({ 332, 333, 53, 66 });
+	hitanim.PushBack({ 404, 267, 53, 64 });
+	hitanim.speed = 0.f;
+	hitanim.loop = false;
+
 	walk.PushBack({ 264, 411, 57, 58 });
 	walk.PushBack({ 331, 411, 57, 58 });
 	walk.PushBack({ 264, 477, 57, 58 });

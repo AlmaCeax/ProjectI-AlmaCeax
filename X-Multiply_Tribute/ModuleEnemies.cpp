@@ -145,7 +145,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up, int speed, int powerUPid, bool normal_spawn)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up, int speed, int powerUPid, bool normal_spawn, bool tail)
 {
 	bool ret = false;
 
@@ -160,6 +160,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up, int 
 			queue[i].speed = speed;
 			queue[i].powerUpid = powerUPid;
 			queue[i].normal_spawn = normal_spawn;
+			queue[i].tail = tail;
 			ret = true;
 			break;
 		}
@@ -223,6 +224,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			case ENEMY_TYPES::WORM:
 				enemies[i] = new Enemy_Worm(info.x, info.y,info.going_up);
 				lives[i] = 2;
+				break;
+			case ENEMY_TYPES::WORMBODY:
+				enemies[i] = new Enemy_Worm(info.x, info.y, info.going_up);
+				lives[i] = 1;
 				break;
 			case ENEMY_TYPES::WORMHOLE:
 				enemies[i] = new Enemy_WormHole(info.x, info.y);
@@ -379,6 +384,19 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				}
 				break;
 			case WORM:
+				lives[i]--;
+				if (lives[i] == 0) {
+					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					enemies[i]->OnCollision(c2);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
+					enemies[i]->Shine();
+				}
+				break;
+			case WORMBODY:
 				lives[i]--;
 				if (lives[i] == 0) {
 					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
