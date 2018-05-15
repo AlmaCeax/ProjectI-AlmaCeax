@@ -75,6 +75,7 @@ public:
 	Tentacle tentacle;
 	Tentacle tentacle2;
 	Tentacle_Piece tentacle_piece1;
+	Tentacle_Piece tentacle_piece2;
 	//Alma Ceax
 
 	Animation* current_animation = nullptr;
