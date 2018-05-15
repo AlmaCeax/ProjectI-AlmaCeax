@@ -13,6 +13,10 @@ Enemy_Worm::Enemy_Worm(int x, int y, bool _up) :Enemy(x, y)
 
 	originY = y;
 
+	for (int i = 0; i < 8; i++)
+	{
+		bodies[i] = nullptr;
+	}
 	anim.PushBack({ 23, 636, 16, 16 });
 	anim.PushBack({ 42, 635, 16, 16 });
 	anim.PushBack({ 26, 653, 16, 16 });
@@ -41,30 +45,47 @@ void Enemy_Worm::Move()
 {
 	if (indexchild < 8)
 	{
-		if (spawntime == 10)
+		if (spawntime == 8)
 		{
 			if (up) {
 				if (indexchild < 7) {
-					App->enemies->AddEnemy(WORMBODY, position.x, originY, true, 0, -1, true, false);
-					LOG("HOLA");
+					EnemyInfo info;
+					info.type = ENEMY_TYPES::WORMBODY;
+					info.x = position.x;
+					info.y = originY;
+					info.going_up = true;
+					info.tail = false;
+					bodies[indexchild] = App->enemies->SpawnEnemyRet(info);
 				}
 				else {
-					App->enemies->AddEnemy(WORMBODY, position.x, originY, true, 0, -1, true, true);
-					LOG("HOLA");
-
+					EnemyInfo info;
+					info.type = ENEMY_TYPES::WORMBODY;
+					info.x = position.x;
+					info.y = originY;
+					info.going_up = true;
+					info.tail = true;
+					bodies[indexchild] = App->enemies->SpawnEnemyRet(info);
 				}
 			}
 			else
 			{
 				if (indexchild < 7) {
-					App->enemies->AddEnemy(WORMBODY, position.x, originY, false, 0, -1, true, false);
-					LOG("HOLA");
-
+					EnemyInfo info;
+					info.type = ENEMY_TYPES::WORMBODY;
+					info.x = position.x;
+					info.y = originY;
+					info.going_up = false;
+					info.tail = false;
+					bodies[indexchild] = App->enemies->SpawnEnemyRet(info);
 				}
 				else {
-					App->enemies->AddEnemy(WORMBODY, position.x, originY, false, 0, -1, true, true);
-					LOG("HOLA");
-
+					EnemyInfo info;
+					info.type = ENEMY_TYPES::WORMBODY;
+					info.x = position.x;
+					info.y = originY;
+					info.going_up = false;
+					info.tail = true;
+					bodies[indexchild] = App->enemies->SpawnEnemyRet(info);
 				}
 			}
 			indexchild++;
@@ -78,5 +99,46 @@ void Enemy_Worm::Move()
 	}
 	else {
 		position.y--;
+	}
+}
+
+void Enemy_Worm::OnCollision(Collider * collider)
+{
+	OnDeath();
+}
+
+void Enemy_Worm::OnDeath()
+{
+	for (int i = 0; i < sizeof(bodies); i++)
+	{
+		if (bodies[i] != nullptr)
+		{
+			switch (i)
+			{
+			case 1:
+				bodies[i]->speed = { 0, -2 };
+				break;
+			case 2:
+				bodies[i]->speed = { 1, -1 };
+				break;
+			case 3:
+				bodies[i]->speed = { 2, 0 };
+				break;
+			case 4:
+				bodies[i]->speed = { 1, 1 };
+				break;
+			case 5:
+				bodies[i]->speed = { 0, 2 };
+				break;
+			case 6:
+				bodies[i]->speed = { -1, 1 };
+				break;
+			case 7:
+				bodies[i]->speed = { -2, 0 };
+				break;
+			default:
+				break;
+			}
+		}
 	}
 }

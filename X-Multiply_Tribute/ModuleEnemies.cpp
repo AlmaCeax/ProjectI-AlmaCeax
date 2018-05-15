@@ -425,3 +425,27 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		}
 	}
 }
+
+Enemy* ModuleEnemies::SpawnEnemyRet(const EnemyInfo& info)
+{
+	// find room for the new enemy
+	uint i = 0;
+	for (; enemies[i] != nullptr && i < MAX_ENEMIES; ++i);
+
+	if (i != MAX_ENEMIES)
+	{
+		switch (info.type)
+		{
+		case ENEMY_TYPES::WORM:
+			enemies[i] = new Enemy_Worm(info.x, info.y, info.going_up);
+			lives[i] = 2;
+			break;
+		case ENEMY_TYPES::WORMBODY:
+			enemies[i] = new Enemy_WormBody(info.x, info.y, info.going_up, info.tail);
+			lives[i] = 1;
+			break;
+		}
+	}
+
+	return enemies[i];
+}

@@ -34,6 +34,7 @@ public:
 	bool AddEnemy(ENEMY_TYPES type, int x, int y, bool going_up = false, int speed = 0, int powerUPid = -1, bool normal_spawn = true, bool tail = false);
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 	void SpawnEnemy(const EnemyInfo& info);
+	Enemy* SpawnEnemyRet(const EnemyInfo& info);
 
 private:
 

@@ -530,7 +530,6 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3809, 208, true,0, -1, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3957, 193, true,0, -1, true);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::WORM, 500, 450, false);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 572, 472, false, -1, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3074, 484, false, -1, false); 
@@ -557,6 +556,8 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1565, 503);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1819, 503);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2074, 503);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WORM, 500, 515, false);
 }
 
 void ModuleSceneStage3::loadAudio()

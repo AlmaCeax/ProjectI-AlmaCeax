@@ -10,7 +10,7 @@ Enemy_WormBody::Enemy_WormBody(int x, int y, bool _up, bool tail) :Enemy(x, y)
 	type = WORMBODY;
 
 	up = _up;
-
+	speed = {0,1};
 	if (up) {
 		flipY = true;
 	}
@@ -48,8 +48,8 @@ Enemy_WormBody::Enemy_WormBody(int x, int y, bool _up, bool tail) :Enemy(x, y)
 
 void Enemy_WormBody::Move()
 {
-	if (up)position.y++;
-	else position.y--;
+	if (up)position += speed;
+	else position-=speed;
 
 	LOG("Position %f", position.y);
 }

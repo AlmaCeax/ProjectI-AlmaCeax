@@ -12,13 +12,13 @@ Enemy_WormHole::Enemy_WormHole(int x, int y) :Enemy(x, y)
 {
 	type = WORMHOLE;
 
-	anim.PushBack({ 168, 488, 64, 40 });
-	anim.PushBack({ 168, 549, 64, 40 });
-	anim.PushBack({ 167, 608, 64, 40 });
+	anim.PushBack({ 168, 488, 64, 53 });
+	anim.PushBack({ 168, 550, 64, 53 });
+	anim.PushBack({ 168, 622, 64, 53 });
 
-	hitanim.PushBack({ 655, 488, 64, 40 });
-	hitanim.PushBack({ 655, 549, 64, 40 });
-	hitanim.PushBack({ 654, 608, 64, 40 });
+	hitanim.PushBack({ 655, 488, 64, 53 });
+	hitanim.PushBack({ 655, 549, 64, 53 });
+	hitanim.PushBack({ 655, 624, 64, 53 });
 
 	anim.speed = 0.05f;
 

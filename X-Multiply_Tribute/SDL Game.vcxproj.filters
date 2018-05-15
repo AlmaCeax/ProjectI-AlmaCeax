@@ -109,6 +109,7 @@
     <ClCompile Include="Enemy_BluePatrol.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy_WormBody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -255,6 +256,7 @@
     <ClInclude Include="Enemy_BluePatrol.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy_WormBody.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

@@ -14,7 +14,6 @@ private:
 	bool up = false;
 public:
 	Enemy_WormBody(int x, int y, bool up, bool tail);
-
 	void Move();
 };
 

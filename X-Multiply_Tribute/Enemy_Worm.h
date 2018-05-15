@@ -13,10 +13,12 @@ private:
 	int indexchild, spawntime, originY;
 	int shootTimer = 0;
 	bool up = false;
+	Enemy* bodies[8];
 public:
 	Enemy_Worm(int x, int y, bool up);
-
+	void OnDeath();
 	void Move();
+	void OnCollision(Collider * collider);
 };
 
 #endif
