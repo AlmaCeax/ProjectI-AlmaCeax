@@ -106,7 +106,6 @@ void ModuleUI::ClearUpdate() {
 	switch (current_step) {
 		case clear_step::fade: {
 			if (now >= total_time) {
-				score += 10000;
 				App->player->canMove = false;
 
 				clear_position = { (float)((App->render->camera.x + (SCREEN_WIDTH*SCREEN_SIZE / 2))/SCREEN_SIZE)-18, (float)(App->render->camera.y/SCREEN_SIZE)+50 };
@@ -169,6 +168,7 @@ void ModuleUI::ClearUpdate() {
 				memset(current_text1, 0, sizeof(current_text1));
 				memset(current_text2, 0, sizeof(current_text2));
 				current_checkpoint = 0;
+				AddScore(App->current_stage->score_bonus);
 
 				switch (App->current_stage->index) {
 					case 1: App->fade->FadeToBlack(App->current_stage, App->stage3, 0.0f); break;

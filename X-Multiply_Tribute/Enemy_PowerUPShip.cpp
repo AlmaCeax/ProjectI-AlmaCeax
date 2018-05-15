@@ -38,7 +38,7 @@ Enemy_PowerUPShip::Enemy_PowerUPShip(int x, int y, int powerUpid):Enemy(x,y)
 void Enemy_PowerUPShip::OnCollision(Collider * collider)
 {
 	if(pu != nullptr)pu->enabled = true;
-
+	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
 }
 
 void Enemy_PowerUPShip::Move()

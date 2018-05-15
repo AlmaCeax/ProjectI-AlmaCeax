@@ -30,6 +30,9 @@ struct Particle
 	bool isPlayerAttached = false;
 	Mix_Chunk* sfx = nullptr;
 	int id = 0;
+	int nTimes;
+	bool isMultiple;
+	int timebeforeanotherexplosion = 0;
 
 	Particle();
 	Particle(const Particle& p);
@@ -47,7 +50,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = {0,0}, Uint32 delay = 0);
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = { 0,0 }, Uint32 delay = 0, int Ntimes = 1, bool isMultiple = false);
 	void OnCollision(Collider* c1, Collider* c2);
 
 private:
@@ -68,6 +71,19 @@ public:
 	Particle enemyBossExplosion;
 	Particle playerBoost;
 	Particle cyclopshot;
+	Particle alienshot;
+	Particle browneyeshot1;
+	Particle browneyeshot2;
+	Particle browneyeshot3;
+	Particle browneyeshot4;
+	Particle browneyeshot5;
+	Particle browneyeshot6;
+	Particle browneyeshot7;
+	Particle browneyeshot8;
+	Particle multipleLittleExplosion;
+	Particle multipleBigExplosion;
+	Particle greenBall;
+	Particle yellowCircle;
 };
 
 #endif // __MODULEPARTICLES_H__

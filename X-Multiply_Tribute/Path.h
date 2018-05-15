@@ -19,6 +19,7 @@ public:
 	fPoint accumulated_speed = {0.0f, 0.0f};
 
 private:
+
 	uint current_frame = 0;
 	uint last_step = 0;
 

@@ -9,11 +9,11 @@ class Enemy_Cyclop :
 private:
 	Animation anim;
 	Animation hitanim;
-	bool readyToShoot;
+	bool readyToShoot, up;
 	int shootTimer = 0;
 
 public:
-	Enemy_Cyclop(int x, int y);
+	Enemy_Cyclop(int x, int y, bool _up);
 
 	void Move();
 };
