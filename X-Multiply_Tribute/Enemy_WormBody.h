@@ -12,8 +12,10 @@ private:
 	bool tail;
 	int shootTimer = 0;
 	bool up = false;
+	iPoint original_position;
 public:
 	Enemy_WormBody(int x, int y, bool up, bool tail);
+	bool splited = false;
 	void Move();
 };
 

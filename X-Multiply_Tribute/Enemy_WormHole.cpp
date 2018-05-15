@@ -17,15 +17,15 @@ Enemy_WormHole::Enemy_WormHole(int x, int y) :Enemy(x, y)
 	anim.PushBack({ 168, 622, 64, 53 });
 
 	hitanim.PushBack({ 655, 488, 64, 53 });
-	hitanim.PushBack({ 655, 549, 64, 53 });
-	hitanim.PushBack({ 655, 624, 64, 53 });
+	hitanim.PushBack({ 655, 550, 64, 53 });
+	hitanim.PushBack({ 655, 622, 64, 53 });
 
 	anim.speed = 0.05f;
 
 	animation = &anim;
 	hitAnimation = &hitanim;
 
-	collider = App->collision->AddCollider({ 0, 0, 64, 52 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 64, 53 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	points = 2000;
 }

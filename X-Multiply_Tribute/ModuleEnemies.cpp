@@ -232,6 +232,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				break;
 			case ENEMY_TYPES::WORMHOLE:
 				enemies[i] = new Enemy_WormHole(info.x, info.y);
+				lives[i] = 12;
 				break;
 		}
 	}
@@ -400,14 +401,12 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			case WORMBODY:
 				lives[i]--;
 				if (lives[i] == 0) {
-					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
-					enemies[i]->OnCollision(c2);
-					delete enemies[i];
-					enemies[i] = nullptr;
-				}
-				else {
-					Mix_PlayChannel(-1, hitEnemysfx, 0);
-					enemies[i]->Shine();
+					if (((Enemy_WormBody*)enemies[i])->splited) {
+						Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+						enemies[i]->OnCollision(c2);
+						delete enemies[i];
+						enemies[i] = nullptr;
+					}
 				}
 				break;
 			case WORMHOLE:
@@ -417,6 +416,10 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					enemies[i]->OnCollision(c2);
 					delete enemies[i];
 					enemies[i] = nullptr;
+				}
+				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
+					enemies[i]->Shine();
 				}
 				break;
 			default:
