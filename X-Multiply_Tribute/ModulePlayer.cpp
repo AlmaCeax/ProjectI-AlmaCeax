@@ -84,19 +84,19 @@ bool ModulePlayer::Start()
 
 	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
 
-	tentacle.base_position = { position.x, position.y - 50};
-	tentacle2.base_position = { position.x, position.y + 54};
+	//tentacle.base_position = { position.x, position.y - 50};
+	//tentacle2.base_position = { position.x, position.y + 54};
 	tentacle_piece1.position = { position.x, position.y};
 	tentacle_piece2.position = { position.x, position.y };
 
-	tentacle.collider = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
-	tentacle2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
+	//tentacle.collider = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
+	//tentacle2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
 	tentacle_piece1.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
 	tentacle_piece2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
 
 	if (!activePU[TENTACLES]) {
-		tentacle.collider->enable = false;
-		tentacle2.collider->enable = false;
+		//tentacle.collider->enable = false;
+		//tentacle2.collider->enable = false;
 		tentacle_piece1.collider->enable = false;
 		tentacle_piece2.collider->enable = false;
 	}
@@ -117,11 +117,11 @@ bool ModulePlayer::CleanUp() {
 	App->audio->UnloadSFX(deadsfx);
 	deadsfx = nullptr;
 
-	if(tentacle.collider)tentacle.collider->to_delete = true;
+	/*if(tentacle.collider)tentacle.collider->to_delete = true;
 	tentacle.collider = nullptr;
 
 	if (tentacle2.collider)tentacle2.collider->to_delete = true;
-	tentacle2.collider = nullptr;
+	tentacle2.collider = nullptr;*/
 
 	if (tentacle_piece1.collider)tentacle_piece1.collider->to_delete = true;
 	tentacle_piece1.collider = nullptr;
@@ -153,10 +153,10 @@ update_status ModulePlayer::Update()
 		if (startime == 35) {
 			App->particles->AddParticle(App->particles->playerBoost, position.x - 42, position.y, COLLIDER_NONE, { 3,0 });
 
-			tentacle2.position.x = position.x;
+			/*tentacle2.position.x = position.x;
 			tentacle2.position.y = position.y + 54;
 			tentacle.position.x = position.x;
-			tentacle.position.y = position.y - 50;
+			tentacle.position.y = position.y - 50;*/
 		}
 		lastY = position.y;
 		position.x += speed.x;
@@ -177,16 +177,16 @@ update_status ModulePlayer::Update()
 		else state = idl;
 
 		lastY = position.y;
-		tentacle.base_position = { position.x, position.y - 50 };
-		tentacle2.base_position = { position.x, position.y + 54 };
+		/*tentacle.base_position = { position.x, position.y - 50 };
+		tentacle2.base_position = { position.x, position.y + 54 };*/
 		tentacle_piece1.position = { position.x + 18,position.y - 6 };
-		tentacle_piece2.position = { position.x + 18,position.y + 8 };
+		tentacle_piece2.position = { position.x + 18,position.y + 10 };
 
-		tentacle.MoveTentacle(tentacle.rest, 1);
+		/*tentacle.MoveTentacle(tentacle.rest, 1);
 		tentacle2.MoveTentacle(tentacle2.rest, 2);
 
 		tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
-		tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
+		tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);*/
 		tentacle_piece1.collider->SetPos(tentacle_piece1.position.x, tentacle_piece1.position.y);
 		tentacle_piece2.collider->SetPos(tentacle_piece2.position.x, tentacle_piece2.position.y);
 
@@ -197,8 +197,8 @@ update_status ModulePlayer::Update()
 		{
 			current_animation = &idle;
 			position.x += speed.x;
-			tentacle.MoveTentacle(tentacle.right, 1);
-			tentacle2.MoveTentacle(tentacle2.right, 2);
+			/*tentacle.MoveTentacle(tentacle.right, 1);
+			tentacle2.MoveTentacle(tentacle2.right, 2);*/
 			
 
 			if (((position.x + 36) * SCREEN_SIZE) > (App->render->camera.x + SCREEN_WIDTH * SCREEN_SIZE)) position.x -= speed.x; //36 is player width
@@ -207,8 +207,8 @@ update_status ModulePlayer::Update()
 		{
 			current_animation = &idle;
 			position.x -= speed.x;
-			tentacle.MoveTentacle(tentacle.left, 1);
-			tentacle2.MoveTentacle(tentacle2.left, 2);
+			/*tentacle.MoveTentacle(tentacle.left, 1);
+			tentacle2.MoveTentacle(tentacle2.left, 2);*/
 
 			if ((position.x * SCREEN_SIZE) < App->render->camera.x) position.x += speed.x;
 		}
@@ -219,8 +219,8 @@ update_status ModulePlayer::Update()
 			else {
 				current_animation = &up;
 				position.y -= speed.x;
-				tentacle.MoveTentacle(tentacle.up, 1);
-				tentacle2.MoveTentacle(tentacle2.up, 2);
+				/*tentacle.MoveTentacle(tentacle.up, 1);
+				tentacle2.MoveTentacle(tentacle2.up, 2);*/
 			}
 			
 			if ((position.y * SCREEN_SIZE) < App->render->camera.y) position.y += speed.x;
@@ -232,8 +232,8 @@ update_status ModulePlayer::Update()
 			else {
 				current_animation = &up;
 				position.y -= speed.x;
-				tentacle.MoveTentacle(tentacle.up, 1);
-				tentacle2.MoveTentacle(tentacle2.up, 2);
+				/*tentacle.MoveTentacle(tentacle.up, 1);
+				tentacle2.MoveTentacle(tentacle2.up, 2);*/
 				gamepadActived = true;
 			}
 
@@ -246,8 +246,8 @@ update_status ModulePlayer::Update()
 			else {
 				current_animation = &down;
 				position.y += speed.x;
-				tentacle.MoveTentacle(tentacle.down, 1);
-				tentacle2.MoveTentacle(tentacle2.down, 2);
+				/*tentacle.MoveTentacle(tentacle.down, 1);
+				tentacle2.MoveTentacle(tentacle2.down, 2);*/
 				movedDown = true;
 			}
 			
@@ -260,8 +260,8 @@ update_status ModulePlayer::Update()
 			else {
 				current_animation = &down;
 				position.y += speed.x;
-				tentacle.MoveTentacle(tentacle.down, 1);
-				tentacle2.MoveTentacle(tentacle2.down, 2);
+				/*tentacle.MoveTentacle(tentacle.down, 1);
+				tentacle2.MoveTentacle(tentacle2.down, 2);*/
 				movedDown = true;
 				gamepadActived = true;
 			}
@@ -327,8 +327,8 @@ update_status ModulePlayer::Update()
 		if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN && !dead) Die();
 		if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN && !activePU[TENTACLES]) {
 			activePU[TENTACLES] = true;
-			App->player->tentacle.collider->enable = true;
-			App->player->tentacle2.collider->enable = true;
+			/*App->player->tentacle.collider->enable = true;
+			App->player->tentacle2.collider->enable = true;*/
 			App->player->tentacle_piece1.collider->enable = true;
 			App->player->tentacle_piece2.collider->enable = true;
 		}
@@ -348,11 +348,10 @@ update_status ModulePlayer::Update()
 	App->render->Blit(graphics, position.x, position.y, &r);
 	if (activePU[TENTACLES])
 	{
-		App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
-		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
-		App->render->Blit(graphics, tentacle_piece1.position.x, tentacle_piece1.position.y, &(tentacle_piece1.anim.GetCurrentFrame()));
-		App->render->Blit(graphics, tentacle_piece2.position.x, tentacle_piece2.position.y, &(tentacle_piece2.anim.GetCurrentFrame()));
-
+		/*App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
+		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));*/
+		tentacle_piece1.RenderTentacle(graphics, false);
+		tentacle_piece2.RenderTentacle(graphics, true);
 	}
 
 	if (cooldown < 25) {
@@ -727,12 +726,72 @@ Tentacle_Piece::Tentacle_Piece()
 
 	anim.loop = true;
 	anim.speed = 0.2f;
+
 }
 
 Tentacle_Piece::~Tentacle_Piece()
-{
-}
+{}
 
 void Tentacle_Piece::MoveTentacle_Piece(movement movement, int location_position)
 {
+}
+void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece)
+{
+	Tentacle_Piece piece2;
+	Tentacle_Piece piece3;
+	Tentacle_Piece piece4;
+	Tentacle_Piece piece5;
+	Tentacle_Piece piece6;
+	Tentacle head;
+
+	if (flipPiece)
+	{
+		angle = 15;
+		int originX = position.x - 2;
+		int originY = position.y - 11;
+		piece2.position.x = position.x/*(position.x*cosf(15))-(position.y*sinf(15))*(-1)*/;
+		piece2.position.y = position.y + 10/*(position.x*sinf(15))+(cosf(15)*position.y)*/;
+		piece3.position.x = position.x;
+		piece3.position.y = piece2.position.y + 10;
+		piece4.position.x = position.x;
+		piece4.position.y = piece3.position.y + 10;
+		piece5.position.x = position.x;
+		piece5.position.y = piece4.position.y + 10;
+		piece6.position.x = position.x;
+		piece6.position.y = piece5.position.y + 10;
+		head.position.x = position.x - 8;
+		head.position.y = piece6.position.y + 3;
+
+		App->render->BlitFlipped(graphics, position.x, position.y, &(anim.GetCurrentFrame()), false, true, (0, 15), { -2,-11 });
+		App->render->BlitFlipped(graphics, piece2.position.x, piece2.position.y, &(piece2.anim.GetCurrentFrame()), false, true, (0, 0), { -2,-22 });
+		App->render->BlitFlipped(graphics, piece3.position.x, piece3.position.y, &(piece3.anim.GetCurrentFrame()), false, true);
+		App->render->BlitFlipped(graphics, piece4.position.x, piece4.position.y, &(piece4.anim.GetCurrentFrame()), false, true);
+		App->render->BlitFlipped(graphics, piece5.position.x, piece5.position.y, &(piece5.anim.GetCurrentFrame()), false, true);
+		App->render->BlitFlipped(graphics, piece6.position.x, piece6.position.y, &(piece6.anim.GetCurrentFrame()), false, true);
+		App->render->Blit(graphics, head.position.x, head.position.y, &(head.anim.GetCurrentFrame()));
+	}
+	else
+	{
+
+		piece2.position.x = position.x/*(position.x*cosf(15)) - (position.y*sinf(15))*/;
+		piece2.position.y = position.y - 10/*(position.x*sinf(15)) + (cosf(15)*position.y)*/;
+		piece3.position.x = position.x;
+		piece3.position.y = piece2.position.y - 10;
+		piece4.position.x = position.x;
+		piece4.position.y = piece3.position.y - 10;
+		piece5.position.x = position.x;
+		piece5.position.y = piece4.position.y - 10;
+		piece6.position.x = position.x;
+		piece6.position.y = piece5.position.y - 10;
+		head.position.x =	position.x - 8;
+		head.position.y =	piece6.position.y - 3;
+
+		App->render->BlitFlipped(graphics, position.x, position.y, &(anim.GetCurrentFrame()), false, false, (0, -15), { 2,11 });
+		App->render->Blit(graphics, piece2.position.x, piece2.position.y, &(piece2.anim.GetCurrentFrame()));
+		App->render->Blit(graphics, piece3.position.x, piece3.position.y, &(piece3.anim.GetCurrentFrame()));
+		App->render->Blit(graphics, piece4.position.x, piece4.position.y, &(piece4.anim.GetCurrentFrame()));
+		App->render->Blit(graphics, piece5.position.x, piece5.position.y, &(piece5.anim.GetCurrentFrame()));
+		App->render->Blit(graphics, piece6.position.x, piece6.position.y, &(piece6.anim.GetCurrentFrame()));
+		App->render->Blit(graphics, head.position.x, head.position.y, &(head.anim.GetCurrentFrame()));
+	}
 }

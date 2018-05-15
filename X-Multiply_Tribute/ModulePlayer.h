@@ -36,12 +36,14 @@ public:
 	fPoint position;
 	float angle;
 	fPoint nextposition;
+	
 	int w, h = 0;
 	enum movement { up, down, right, left, rest };
 
 	Tentacle_Piece();
 	~Tentacle_Piece();
 	void MoveTentacle_Piece(movement movement, int location_position);
+	void RenderTentacle(SDL_Texture * graphics, bool flipPiece);
 };
 
 
