@@ -47,6 +47,10 @@ struct Collider
 		rect.h = h;
 	}
 
+	void SetType(COLLIDER_TYPE type)
+	{
+		this->type = type;
+	}
 	bool CheckCollision(const SDL_Rect& r) const;
 };
 

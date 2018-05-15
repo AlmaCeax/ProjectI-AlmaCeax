@@ -2,13 +2,13 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "Enemy_Worm.h"
+#include "Enemy_WormBody.h"
 #include "ModuleEnemies.h"
 
 
 Enemy_Worm::Enemy_Worm(int x, int y, bool _up) :Enemy(x, y)
 {
 	type = WORM;
-
 	up = _up;
 
 	originY = y;
@@ -105,6 +105,10 @@ void Enemy_Worm::Move()
 void Enemy_Worm::OnCollision(Collider * collider)
 {
 	OnDeath();
+	for each (Enemy_WormBody* e in bodies)
+	{
+		if(e != nullptr)e->splited = true;
+	}
 }
 
 void Enemy_Worm::Shine()
@@ -112,7 +116,7 @@ void Enemy_Worm::Shine()
 	hit = true;
 	for each (Enemy* e in bodies)
 	{
-		if(e)e->Shine();
+		if (e != nullptr)e->Shine();
 	}
 }
 

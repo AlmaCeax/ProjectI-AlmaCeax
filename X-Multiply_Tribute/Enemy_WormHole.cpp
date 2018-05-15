@@ -25,7 +25,7 @@ Enemy_WormHole::Enemy_WormHole(int x, int y) :Enemy(x, y)
 	animation = &anim;
 	hitAnimation = &hitanim;
 
-	collider = App->collision->AddCollider({ 0, 0, 64, 52 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 64, 53 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	points = 2000;
 }

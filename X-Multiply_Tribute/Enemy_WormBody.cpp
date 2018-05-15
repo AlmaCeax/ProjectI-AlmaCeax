@@ -50,6 +50,5 @@ void Enemy_WormBody::Move()
 {
 	if (up)position += speed;
 	else position-=speed;
-
-	LOG("Position %f", position.y);
 }
+

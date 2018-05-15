@@ -137,8 +137,8 @@ void ModuleSceneStage3::BackgroundEvents()
 
 	if (App->render->camera.x >= 5364)
 	{
-		App->render->Blit(textures[3], 5358, 179, &door.GetCurrentFrame());
-		App->render->Blit(textures[3], 5740, 178, &door.GetCurrentFrame());
+		App->render->Blit(textures[3], 5354, 179, &door.GetCurrentFrame());
+		App->render->Blit(textures[3], 5736, 178, &door.GetCurrentFrame());
 		if (collider) {
 			coll = { 4691,179,59,56 };
 			App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -214,7 +214,7 @@ update_status ModuleSceneStage3::Update()
 
 	App->render->Blit(textures[0], 10, 226, &rect[0], 0.65f);
 	App->render->Blit(textures[2], 5002, 95, &rect[2]);
-	App->render->Blit(textures[1], 0, 0, &rect[1]);
+	App->render->Blit(textures[1], 0, -1, &rect[1]);
 
 	BackgroundEvents();
 	UpdateCamera();
