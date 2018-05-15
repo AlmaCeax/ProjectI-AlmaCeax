@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include <math.h>
 
 struct SDL_Texture;
 struct Mix_Chunk;
@@ -28,6 +29,15 @@ public:
 	void MoveTentacle(movement movement, int location_position);
 };
 
+struct FireCircle {
+	Tentacle* my_tentacle;
+	fPoint position;
+	fPoint shot_vector;
+	void Move(float x, float y) {
+		position = { my_tentacle->position.x-1,my_tentacle->position.y-8};
+		shot_vector = { position.x - (x + 18), position.y -(y+7)};
+	}
+};
 
 class ModulePlayer : public Module
 {
@@ -47,7 +57,7 @@ public:
 
 	fPoint position;
 	enum state { top, bot, idl };
-	bool activePU[8];
+	bool activePU[9];
 	state state;
 	fPoint speed = {2, 0};
 	bool dead = false;
@@ -58,6 +68,9 @@ public:
 	Collider* collider;
 	Tentacle tentacle;
 	Tentacle tentacle2;
+	FireCircle circle_1;
+	FireCircle circle_2;
+	SDL_Rect firecircle;
 	//Alma Ceax
 
 	Animation* current_animation = nullptr;

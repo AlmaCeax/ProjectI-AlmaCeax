@@ -57,6 +57,8 @@ bool ModulePlayer::Init() {
 	death.loop = false;
 	death.speed = 0.3f;
 
+	firecircle = { 146,115,28,26 };
+
 	return true;
 }
 
@@ -80,6 +82,7 @@ bool ModulePlayer::Start()
 	SDL_Rect rect_tentaclecol = { tentacle.position.x,tentacle.position.y,19,10 };
 	SDL_Rect rect_tentaclecol2 = { tentacle2.position.x,tentacle2.position.y,19,10 };
 
+
 	collider = App->collision->AddCollider(rect_collider, COLLIDER_PLAYER, this);
 
 	tentacle.base_position = { position.x, position.y - 50};
@@ -87,6 +90,9 @@ bool ModulePlayer::Start()
 
 	tentacle.collider = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
 	tentacle2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
+
+	circle_1.my_tentacle = &tentacle;
+	circle_2.my_tentacle = &tentacle2;
 
 	if (!activePU[TENTACLES]) {
 		tentacle.collider->enable = false;
@@ -312,6 +318,9 @@ update_status ModulePlayer::Update()
 			App->player->tentacle.collider->enable = true;
 			App->player->tentacle2.collider->enable = true;
 		}
+		if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN && !activePU[FIRECIRCLE]) {
+			activePU[FIRECIRCLE] = true;
+		}
 
 		if (last_animation != current_animation) {
 			current_animation->Reset();
@@ -326,12 +335,20 @@ update_status ModulePlayer::Update()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	if(collider != nullptr) collider->SetPos(position.x, position.y);
 	App->render->Blit(graphics, position.x, position.y, &r);
+	if (activePU[FIRECIRCLE])
+	{
+		circle_1.Move(position.x, position.y);
+		circle_2.Move(position.x, position.y);
+		App->render->Blit(graphics, circle_1.position.x, circle_1.position.y, &firecircle);
+		App->render->Blit(graphics, circle_2.position.x, circle_2.position.y, &firecircle);
+	}
 	if (activePU[TENTACLES])
 	{
 		App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
 		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
 
 	}
+
 
 	if (cooldown < 25) {
 		cooldown++;
@@ -402,8 +419,8 @@ void ModulePlayer::BlitPlayer() {
 		}
 	}
 	if(activePU[TENTACLES]){
-	App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
-	App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
+		App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
+		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
 	}
 }
 
