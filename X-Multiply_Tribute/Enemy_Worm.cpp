@@ -107,6 +107,15 @@ void Enemy_Worm::OnCollision(Collider * collider)
 	OnDeath();
 }
 
+void Enemy_Worm::Shine()
+{
+	hit = true;
+	for each (Enemy* e in bodies)
+	{
+		if(e)e->Shine();
+	}
+}
+
 void Enemy_Worm::OnDeath()
 {
 	for (int i = 0; i < sizeof(bodies); i++)

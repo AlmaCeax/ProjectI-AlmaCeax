@@ -18,6 +18,7 @@ public:
 	Enemy_Worm(int x, int y, bool up);
 	void OnDeath();
 	void Move();
+	void Shine();
 	void OnCollision(Collider * collider);
 };
 
