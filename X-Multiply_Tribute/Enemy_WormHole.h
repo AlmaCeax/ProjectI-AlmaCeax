@@ -10,6 +10,7 @@ private:
 	Animation anim;
 	Animation hitanim;
 	bool up = false;
+	bool canSpawn = true;
 public:
 	Enemy_WormHole(int x, int y);
 

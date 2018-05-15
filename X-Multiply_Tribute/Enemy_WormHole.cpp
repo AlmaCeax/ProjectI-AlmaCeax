@@ -20,7 +20,7 @@ Enemy_WormHole::Enemy_WormHole(int x, int y) :Enemy(x, y)
 	hitanim.PushBack({ 655, 550, 64, 53 });
 	hitanim.PushBack({ 655, 622, 64, 53 });
 
-	anim.speed = 0.05f;
+	anim.speed = 0.01f;
 
 	animation = &anim;
 	hitAnimation = &hitanim;
@@ -32,5 +32,18 @@ Enemy_WormHole::Enemy_WormHole(int x, int y) :Enemy(x, y)
 
 void Enemy_WormHole::Move()
 {
-	
+	if (anim.GetCurrentFrameIndex() == 2 && canSpawn)
+	{
+		EnemyInfo info;
+		info.type = ENEMY_TYPES::WORM;
+		info.x = position.x+26;
+		info.y = position.y;
+		if(up)info.going_up = true;
+		else info.going_up = false;
+		App->enemies->SpawnEnemyRet(info);
+		canSpawn = false;
+	}if (anim.GetCurrentFrameIndex() == 1)
+	{
+		canSpawn = true;
+	}
 }

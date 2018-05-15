@@ -556,8 +556,6 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1565, 503);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1819, 503);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2074, 503);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::WORM, 500, 515, false);
 }
 
 void ModuleSceneStage3::loadAudio()
