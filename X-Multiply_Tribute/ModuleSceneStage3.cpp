@@ -58,8 +58,8 @@ bool ModuleSceneStage3::Init()
 {
 	score_bonus = 30000;
 	index = 3;
-	rect[0] = {0, 0, 2260, 208};
-	rect[1] = {0, 0, 5104, 561};
+	rect[0] = {0, 0, 2800, 208};
+	rect[1] = {0, 0, 5760, 561};
 	rect[2] = {0, 0, 775, 225};
 
 	door.PushBack({ 0, 0, 57, 57 });
@@ -105,7 +105,7 @@ void ModuleSceneStage3::UpdateCamera()
 
 void ModuleSceneStage3::BackgroundEvents()
 {
-	if (App->render->camera.x > 3150 && App->render->camera.x < 3874)
+	if (App->render->camera.x > 3806 && App->render->camera.x < 4530)
 	{
 		if (!up)
 		{
@@ -118,7 +118,7 @@ void ModuleSceneStage3::BackgroundEvents()
 		up = false;
 	}
 
-	if (App->render->camera.x > 2560 && App->render->camera.x < 4080)
+	if (App->render->camera.x > 3216 && App->render->camera.x < 4736)
 	{
 		if (bgalpha > 0)
 		{
@@ -132,13 +132,13 @@ void ModuleSceneStage3::BackgroundEvents()
 		}
 	}
 
-	if (App->render->camera.x == 4670)	Mix_PlayMusic(bossTrack, -1);
+	if (App->render->camera.x == 5326)	Mix_PlayMusic(bossTrack, -1);
 
 
-	if (App->render->camera.x >= 4708)
+	if (App->render->camera.x >= 5364)
 	{
-		App->render->Blit(textures[3], 4692, 179, &door.GetCurrentFrame());
-		App->render->Blit(textures[3], 5074, 178, &door.GetCurrentFrame());
+		App->render->Blit(textures[3], 5358, 179, &door.GetCurrentFrame());
+		App->render->Blit(textures[3], 5740, 178, &door.GetCurrentFrame());
 		if (collider) {
 			coll = { 4691,179,59,56 };
 			App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -147,7 +147,7 @@ void ModuleSceneStage3::BackgroundEvents()
 		
 	}
 
-	if (App->render->camera.x >= 4718)
+	if (App->render->camera.x >= 5374)
 	{
 		right = false;
 	}
@@ -212,8 +212,8 @@ update_status ModuleSceneStage3::Update()
 	App->render->setAlpha(textures[0], bgalpha);
 	App->render->setAlpha(textures[2], bgalpha);
 
-	App->render->Blit(textures[0], 0, 226, &rect[0], 0.65f);
-	App->render->Blit(textures[2], 4346, 95, &rect[2]);
+	App->render->Blit(textures[0], 10, 226, &rect[0], 0.65f);
+	App->render->Blit(textures[2], 5002, 95, &rect[2]);
 	App->render->Blit(textures[1], 0, 0, &rect[1]);
 
 	BackgroundEvents();
@@ -517,9 +517,9 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 869, 500);
 	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 850, 500, false, 0, -1, false);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2488, 450, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2688, 392, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2870, 450, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 3144, 450, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 3344, 392, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 3526, 450, false);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 572, 472, false,0, -1, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3074, 484, false,0, -1, false); 
