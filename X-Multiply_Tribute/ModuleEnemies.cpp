@@ -231,7 +231,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				lives[i] = 1;
 				break;
 			case ENEMY_TYPES::WORMHOLE:
-				enemies[i] = new Enemy_WormHole(info.x, info.y);
+				enemies[i] = new Enemy_WormHole(info.x, info.y, info.going_up);
 				lives[i] = 12;
 				break;
 		}

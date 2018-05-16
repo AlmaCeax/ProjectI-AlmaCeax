@@ -39,7 +39,7 @@ Enemy_WormBody::Enemy_WormBody(int x, int y, bool _up, bool tail) :Enemy(x, y)
 
 	animation = &anim;
 	hitAnimation = &hitanim;
-
+	state = VERTICAL;
 	collider = App->collision->AddCollider({ 0, 0, 16, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	points = 100;
@@ -48,7 +48,72 @@ Enemy_WormBody::Enemy_WormBody(int x, int y, bool _up, bool tail) :Enemy(x, y)
 
 void Enemy_WormBody::Move()
 {
-	if (up)position += speed;
-	else position-=speed;
+	if (up) {
+		switch (state)
+		{
+		case Enemy_WormBody::VERTICAL:
+			position.y++;
+			anim.setCurrentFrameIndex(0);
+			break;
+		case Enemy_WormBody::HORIZONTAL:
+			position.x--;
+			anim.setCurrentFrameIndex(1);
+			break;
+		case Enemy_WormBody::CURVE:
+			if (curvetimer == 4)
+			{
+				state = HORIZONTAL;
+			}
+			else curvetimer++;
+			anim.setCurrentFrameIndex(2);
+			position.x -= 1;
+			position.y += 1;
+			break;
+		case Enemy_WormBody::CIRCLE:
+			break;
+		default:
+			break;
+		}
+		if (state != HEADDEAD) {
+			if (position.y == 440)state = CURVE;
+		}
+		else {
+			position += speed;
+		}
+	}
+	else {
+		switch (state)
+		{
+		case Enemy_WormBody::VERTICAL:
+			position.y--;
+			anim.setCurrentFrameIndex(0);
+			break;
+		case Enemy_WormBody::HORIZONTAL:
+			position.x++;
+			anim.setCurrentFrameIndex(1);
+			break;
+		case Enemy_WormBody::CURVE:
+			if (curvetimer == 4)
+			{
+				state = HORIZONTAL;
+			}
+			else curvetimer++;
+			anim.setCurrentFrameIndex(2);
+			position.x += 1;
+			position.y -= 1;
+			break;
+		case Enemy_WormBody::CIRCLE:
+			break;
+		default:
+			break;
+		}
+		if (state != HEADDEAD) {
+			if (position.y == 460)state = CURVE;
+		}
+		else {
+			position += speed;
+		}
+	}
+	
 }
 

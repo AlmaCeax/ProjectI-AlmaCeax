@@ -15,9 +15,11 @@ private:
 	int radius = 15;
 	float angle = 0;
 	bool up = false;
-	Path path;
 	iPoint original_position;
 	Enemy* bodies[8];
+	enum state { VERTICAL, HORIZONTAL, CIRCLE, CURVE, NONE};
+	int curvetimer;
+	state state;
 public:
 	Enemy_Worm(int x, int y, bool up);
 	void OnDeath();

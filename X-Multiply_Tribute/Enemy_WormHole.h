@@ -12,7 +12,7 @@ private:
 	bool up = false;
 	bool canSpawn = true;
 public:
-	Enemy_WormHole(int x, int y);
+	Enemy_WormHole(int x, int y, bool up);
 
 	void Move();
 };

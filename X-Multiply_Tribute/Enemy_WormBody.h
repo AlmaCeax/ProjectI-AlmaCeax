@@ -13,10 +13,14 @@ private:
 	int shootTimer = 0;
 	bool up = false;
 	iPoint original_position;
+	int curvetimer = 0;
+
 public:
 	Enemy_WormBody(int x, int y, bool up, bool tail);
 	bool splited = false;
 	void Move();
+	enum state { VERTICAL, HORIZONTAL, CIRCLE, CURVE, NONE, HEADDEAD };
+	state state;
 };
 
 #endif

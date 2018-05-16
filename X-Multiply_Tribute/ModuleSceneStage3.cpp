@@ -549,13 +549,21 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4600, 180);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4638, 185);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4680, 180);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 286, 515);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 671, 505);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1054, 503);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1307, 503);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1565, 503);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1819, 503);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2074, 503);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 550, 515, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 671, 505, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1054, 503, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1307, 503, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1565, 503, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1819, 503, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2074, 503, false);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 550, 500, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 671, 354, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1054, 350, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1307, 350, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1565, 350, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1819, 350, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2074, 350, true);
 }
 
 void ModuleSceneStage3::loadAudio()

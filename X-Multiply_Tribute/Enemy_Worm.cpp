@@ -30,14 +30,16 @@ Enemy_Worm::Enemy_Worm(int x, int y, bool _up) :Enemy(x, y)
 	indexchild = 0;
 	animation = &anim;
 	hitAnimation = &hitanim;
+	original_position = { x, y };
 
 	collider = App->collision->AddCollider({ 0, 0, 16, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
-
+	state = VERTICAL;
 	points = 100;
 
 	if (up) {
 		flipY = true;
 	}
+	curvetimer = 0;
 }
 
 
@@ -45,13 +47,13 @@ void Enemy_Worm::Move()
 {
 	if (indexchild < 8)
 	{
-		if (spawntime == 8)
+		if (spawntime == 7)
 		{
 			if (up) {
 				if (indexchild < 7) {
 					EnemyInfo info;
 					info.type = ENEMY_TYPES::WORMBODY;
-					info.x = position.x;
+					info.x = original_position.x;
 					info.y = originY;
 					info.going_up = true;
 					info.tail = false;
@@ -60,7 +62,7 @@ void Enemy_Worm::Move()
 				else {
 					EnemyInfo info;
 					info.type = ENEMY_TYPES::WORMBODY;
-					info.x = position.x;
+					info.x = original_position.x;
 					info.y = originY;
 					info.going_up = true;
 					info.tail = true;
@@ -72,7 +74,7 @@ void Enemy_Worm::Move()
 				if (indexchild < 7) {
 					EnemyInfo info;
 					info.type = ENEMY_TYPES::WORMBODY;
-					info.x = position.x;
+					info.x = original_position.x;
 					info.y = originY;
 					info.going_up = false;
 					info.tail = false;
@@ -81,7 +83,7 @@ void Enemy_Worm::Move()
 				else {
 					EnemyInfo info;
 					info.type = ENEMY_TYPES::WORMBODY;
-					info.x = position.x;
+					info.x = original_position.x;
 					info.y = originY;
 					info.going_up = false;
 					info.tail = true;
@@ -95,10 +97,60 @@ void Enemy_Worm::Move()
 	}
 
 	if (up) {
-		position.y++;
+		switch (state)
+		{
+		case Enemy_Worm::VERTICAL:
+			position.y++;
+			anim.setCurrentFrameIndex(0);
+			break;
+		case Enemy_Worm::HORIZONTAL:
+			position.x--;
+			anim.setCurrentFrameIndex(1);
+			break;
+		case Enemy_Worm::CURVE:
+			if (curvetimer == 4)
+			{
+				state = HORIZONTAL;
+			}
+			else curvetimer++;
+			anim.setCurrentFrameIndex(2);
+			position.x -= 1;
+			position.y += 1;
+			break;
+		case Enemy_Worm::CIRCLE:
+			break;
+		default:
+			break;
+		}
+		if (position.y == 440)state = CURVE;
 	}
 	else {
-		position.y--;
+		switch (state)
+		{
+		case Enemy_Worm::VERTICAL:
+			position.y--;
+			anim.setCurrentFrameIndex(0);
+			break;
+		case Enemy_Worm::HORIZONTAL:
+			position.x++;
+			anim.setCurrentFrameIndex(1);
+			break;
+		case Enemy_Worm::CURVE:
+			if (curvetimer == 4)
+			{
+				state = HORIZONTAL;
+			}
+			else curvetimer++;
+			anim.setCurrentFrameIndex(2);
+			position.x += 1;
+			position.y -= 1;
+			break;
+		case Enemy_Worm::CIRCLE:
+			break;
+		default:
+			break;
+		}
+		if (position.y == 460)state = CURVE;
 	}
 }
 
@@ -107,7 +159,10 @@ void Enemy_Worm::OnCollision(Collider * collider)
 	OnDeath();
 	for each (Enemy_WormBody* e in bodies)
 	{
-		if(e != nullptr)e->splited = true;
+		if (e != nullptr) {
+			e->splited = true;
+			e->state = Enemy_WormBody::HEADDEAD;
+		}
 	}
 }
 
