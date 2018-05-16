@@ -92,7 +92,9 @@ bool ModulePlayer::Start()
 	tentacle2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
 
 	circle_1.my_tentacle = &tentacle;
+	circle_1.Prepare();
 	circle_2.my_tentacle = &tentacle2;
+	circle_2.Prepare();
 
 	if (!activePU[TENTACLES]) {
 		tentacle.collider->enable = false;
@@ -276,8 +278,18 @@ update_status ModulePlayer::Update()
 		
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->controller_A_button == KEY_STATE::KEY_DOWN)
 		{
-			App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
-			App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+			if (activePU[FIRECIRCLE]) {
+				App->particles->AddParticle(App->particles->blueCircle, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT, { circle_1.shot_vector.x, circle_1.shot_vector.y});
+				App->particles->AddParticle(App->particles->blueCircle, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT, { circle_1.shot_vector2.x, circle_1.shot_vector2.y});
+
+				App->particles->AddParticle(App->particles->blueCircle, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT, { circle_2.shot_vector.x, circle_2.shot_vector.y});
+				App->particles->AddParticle(App->particles->blueCircle, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT, { circle_2.shot_vector2.x, circle_2.shot_vector2.y});
+			}
+			else
+			{
+				App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
+				App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+			}
 			if (activePU[TENTACLES])
 			{
 				App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
@@ -297,8 +309,18 @@ update_status ModulePlayer::Update()
 			}
 			if (cooldown >= 25)
 			{
-				App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
-				App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+				if (activePU[FIRECIRCLE]) {
+         			App->particles->AddParticle(App->particles->blueCircle, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT, { circle_1.shot_vector.x, circle_1.shot_vector.y});
+					App->particles->AddParticle(App->particles->blueCircle, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT, { circle_1.shot_vector2.x, circle_1.shot_vector2.y});
+
+					App->particles->AddParticle(App->particles->blueCircle, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT, { circle_2.shot_vector.x, circle_2.shot_vector.y});
+					App->particles->AddParticle(App->particles->blueCircle, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT, { circle_2.shot_vector2.x, circle_2.shot_vector2.y});
+				}
+				else
+				{
+					App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
+					App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+				}
 				if (activePU[TENTACLES])
 				{
 					App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
@@ -341,6 +363,11 @@ update_status ModulePlayer::Update()
 		circle_2.Move(position.x, position.y);
 		App->render->Blit(graphics, circle_1.position.x, circle_1.position.y, &firecircle);
 		App->render->Blit(graphics, circle_2.position.x, circle_2.position.y, &firecircle);
+
+		for (int i = 0; i < 5; i++) {
+			App->render->Blit(graphics, circle_1.chunks[i].position.x, circle_1.chunks[i].position.y, &circle_1.chunks[i].srcRect);
+			App->render->Blit(graphics, circle_2.chunks[i].position.x, circle_2.chunks[i].position.y, &circle_2.chunks[i].srcRect);
+		}
 	}
 	if (activePU[TENTACLES])
 	{

@@ -29,13 +29,80 @@ public:
 	void MoveTentacle(movement movement, int location_position);
 };
 
+struct FireChunk {
+	fPoint position;
+	SDL_Rect srcRect;
+	int parent_id;
+	int current_time;
+	int timer;
+
+	void Move(fPoint pos) {
+		if (current_time == 0) {
+			position = pos;
+			current_time = timer;
+		}
+		else current_time--;
+	}
+};
 struct FireCircle {
 	Tentacle* my_tentacle;
 	fPoint position;
-	fPoint shot_vector;
+	fPoint shot_vector, shot_vector2;
+	FireChunk chunks[5];
+
+	void Prepare() {
+		chunks[0].timer = 1;
+		chunks[1].timer = 3;
+		chunks[2].timer = 5;
+		chunks[3].timer = 7;
+		chunks[4].timer = 9;
+
+		chunks[0].srcRect = { 65,113,14,14 };
+		chunks[1].srcRect = {65,113,14,14};
+		chunks[2].srcRect = {50,115,14,14 };
+		chunks[3].srcRect = {35,116,14,14 };
+		chunks[4].srcRect = {20,117,14,14 };
+
+		chunks[0].current_time = 0;
+		chunks[1].current_time = 0;
+		chunks[2].current_time = 0;
+		chunks[3].current_time = 0;
+		chunks[4].current_time = 0;
+
+		chunks[0].parent_id = -1;
+		chunks[1].parent_id = 0;
+		chunks[2].parent_id = 1;
+		chunks[3].parent_id = 2;
+		chunks[4].parent_id = 3;
+	}
 	void Move(float x, float y) {
 		position = { my_tentacle->position.x-1,my_tentacle->position.y-8};
-		shot_vector = { position.x - (x + 18), position.y -(y+7)};
+		fPoint temp = { my_tentacle->position.x - (x), my_tentacle->position.y - (y)};
+		float magnitude = sqrt((pow(temp.x, 2)) + (pow(temp.y, 2)));
+		shot_vector = { temp.x / magnitude, temp.y / magnitude };
+
+		temp = { my_tentacle->position.x - 4 - (x), my_tentacle->position.y - 4 - (y) };
+		magnitude = sqrt((pow(temp.x, 2)) + (pow(temp.y, 2)));
+		shot_vector2 = { temp.x / magnitude, temp.y / magnitude };
+
+		if (shot_vector.x < 0) {
+			shot_vector.x *= 8;
+			shot_vector.y *= 15;
+			shot_vector2.x *= 8;
+			shot_vector2.y *= 15;
+		}
+		else {
+			shot_vector.x *= 10;
+			shot_vector.y *= 15;
+			shot_vector2.x *= 10;
+			shot_vector2.y *= 15;
+		}
+
+
+		for (int i = 0; i < 5; i++) {
+			if (i != 0) chunks[i].Move(chunks[chunks[i].parent_id].position);
+			else chunks[i].Move(position);
+		}
 	}
 };
 

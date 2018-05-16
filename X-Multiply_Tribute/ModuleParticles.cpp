@@ -219,6 +219,19 @@ ModuleParticles::ModuleParticles()
 	yellowCircle.anim.loop = false;
 	yellowCircle.life = 3000;
 	yellowCircle.speed = { 0,0 };
+
+	blueCircle.anim.PushBack({ 5,149,16,16 });
+	blueCircle.anim.PushBack({ 23,148,16,16 });
+	blueCircle.anim.PushBack({ 44,147,16,16 });
+	blueCircle.anim.PushBack({ 66,145,16,16 });
+	blueCircle.anim.PushBack({ 88,14,16,16 });
+	blueCircle.anim.PushBack({ 106,144,16,16 });
+	blueCircle.anim.PushBack({ 123,144,16,16 });
+	blueCircle.anim.PushBack({ 140,144,16,16 });
+	blueCircle.anim.speed = 0.1f;
+	blueCircle.anim.loop = false;
+	blueCircle.life = 3000;
+	blueCircle.speed = { 0,0 };
 }
 
 ModuleParticles::~ModuleParticles()
