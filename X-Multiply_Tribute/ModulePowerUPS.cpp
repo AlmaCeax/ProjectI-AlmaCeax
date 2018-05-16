@@ -50,6 +50,13 @@ ModulePowerUPS::ModulePowerUPS()
 	tentacles.type = TENTACLES;
 	tentacles.enabled = false;
 
+	firecircle.anim.PushBack({37,57,18,15});
+	firecircle.anim.PushBack({ 165,57,18,15 });
+	firecircle.anim.loop = true;
+	firecircle.anim.speed = 0.1f;
+	firecircle.type = FIRECIRCLE;
+	firecircle.enabled = false;
+
 }
 
 ModulePowerUPS::~ModulePowerUPS()
@@ -69,6 +76,7 @@ bool ModulePowerUPS::Start()
 	bomb.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-021.wav");
 	tentacles.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-021.wav");
 	life.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
+	firecircle.sfx = bomb.sfx;
 
 	if (!graphics)return false;
 	
@@ -195,6 +203,8 @@ void PowerUP::Effect()
 		App->player->activePU[BOMB] = true;
 		break;
 	case SHADOW:
+		App->player->activePU[FIRECIRCLE];
+		Mix_PlayChannel(-1,App->powerups->firecircle.sfx, 0);
 		break;
 	}
 }

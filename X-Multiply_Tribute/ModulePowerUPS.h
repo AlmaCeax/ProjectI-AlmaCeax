@@ -17,7 +17,8 @@ enum pu_type
 	SPEED_BOOST,
 	SPEED_DOWN,
 	LIFE,
-	TENTACLES
+	TENTACLES,
+	FIRECIRCLE
 };
 
 struct PowerUP 
@@ -63,7 +64,7 @@ public:
 	PowerUP speedDown;
 	PowerUP bomb;
 	PowerUP tentacles;
-	PowerUP tentacle;
+	PowerUP firecircle;
 };
 
 #endif
