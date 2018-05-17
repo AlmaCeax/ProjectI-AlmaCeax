@@ -47,7 +47,7 @@ void Enemy_Cyclop::Move()
 		if (readyToShoot) {
 			if (up)
 			{
-				for (int i = 0; i < numshots; i++)App->particles->AddParticle(App->particles->cyclopshot, position.x+30, position.y+20, COLLIDER_ENEMY_SHOT, { (float)(+(rand() % 2 + 1)), 0.f });
+				for (int i = 0; i < numshots; i++)App->particles->AddParticle(App->particles->cyclopshot, position.x+30, position.y+20, COLLIDER_ENEMY_SHOT, { (float)(+(rand() % 2 + 1)), -1.f });
 			}
 			else {
 				for (int i = 0; i < numshots; i++)App->particles->AddParticle(App->particles->cyclopshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { (float)(-(rand() % 2 + 1)), (float)(-(rand() % 3 + 1)) });

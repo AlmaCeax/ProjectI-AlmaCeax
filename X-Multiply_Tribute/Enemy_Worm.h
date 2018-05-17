@@ -26,6 +26,7 @@ private:
 	bool imonright;
 	State state;
 	State laststate;
+	bool isfirstcircle = true;
 public:
 	Enemy_Worm(int x, int y, bool up);
 	void OnDeath();

@@ -64,7 +64,7 @@ void Enemy_WormHole::Move()
 		canSpawn = true;
 	}
 
-	if (timetoshoot == 50)
+	if (timetoshoot == 70)
 	{
 		anim.speed = 0.1f;
 	}
