@@ -152,55 +152,55 @@ void ModuleSceneStage3::BackgroundEvents()
 		right = false;
 	}
 
-	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4250) {
+	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4906) {
 		EnemyInfo info;
 		info.type = ENEMY_TYPES::JUMPER;
-		info.x = 4099;
+		info.x = 4755;
 		info.y = 96;
 		info.going_up = true;
 		info.normal_spawn = true;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4200;
+		info.x = 4856;
 		info.y = -100;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4250;
+		info.x = 4906;
 		info.y = -200;
 		App->enemies->SpawnEnemy(info);
 
 		info.normal_spawn = false;
 		info.y = 0;
-		info.x = 4000;
+		info.x = 4656;
 		App->enemies->SpawnEnemy(info);
 		info.y = -150;
-		info.x = 4000;
+		info.x = 4656;
 		App->enemies->SpawnEnemy(info);
 	}
 
-	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4100) {
+	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4756) {
 		EnemyInfo info;
 		info.type = ENEMY_TYPES::BLUEFLYER;
-		info.x = 4050;
+		info.x = 4706;
 		info.y = 90;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4025;
+		info.x = 4681;
 		info.y = 50;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4100;
+		info.x = 4756;
 		info.y = 20;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4000;
+		info.x = 4656;
 		info.y = -10;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4060;
+		info.x = 4716;
 		info.y = -10;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4120;
+		info.x = 4776;
 		info.y = -50;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4080;
+		info.x = 4736;
 		info.y = -80;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4150;
+		info.x = 4806;
 		info.y = -110;
 		App->enemies->SpawnEnemy(info);
 	}
@@ -260,9 +260,9 @@ bool ModuleSceneStage3::loadMap()
 	textures[3] = App->textures->Load("Assets/Sprites/Stages/Stage3/Door.png");
 
 	checkpoints[0] = { 0, 336 };
-	checkpoints[1] = { 1555, 336 };
-	checkpoints[2] = { 3100, 336 };
-	checkpoints[3] = { 4348, 95 };
+	checkpoints[1] = { 2211, 336 };
+	checkpoints[2] = { 3756, 336 };
+	checkpoints[3] = { 5004, 95 };
 	checkpoints[4] = { -1, -1 };
 	//656
 	//top
@@ -337,8 +337,6 @@ bool ModuleSceneStage3::loadMap()
 	//Eye
 	coll = { 3679,374,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-
-
 
 
 	//bottom
@@ -496,34 +494,29 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 3344, 392, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 3526, 450, false);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 572, 472, false,0, -1, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3074, 484, false,0, -1, false); 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3464, 450, true,0, -1, true); 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3486, 438, true,0, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3559, 435, true,0, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3654, 421, true,0, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3809, 208, true,0, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3957, 193, true,0, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 1228, 472, false, 0, -1, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3730, 484, false, 0, -1, false); 
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4120, 450, true, 0, -1, true); 
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4142, 438, true, 0, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4215, 435, true, 0, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4310, 421, true, 0, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4465, 208, true, 0, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4613, 193, true, 0, -1, true);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5029, 268);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5067, 222);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5085, 224);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5085, 200);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5203, 224);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5245, 200);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5256, 180);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5294, 185);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5336, 180);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 572, 472, false, -1, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3074, 484, false, -1, false); 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3464, 450, true, -1, true); 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3486, 438, true, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3559, 435, true, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3654, 421, true, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3809, 208, true, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3957, 193, true, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORM, 500, 515, false);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4373, 268);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4411, 222);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4429, 224);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4429, 200);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4547, 224);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4589, 200);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4600, 180);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4638, 185);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4680, 180);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4680, 321, false, 0, 6);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 550, 515, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 671, 505, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1054, 503, false);
@@ -539,6 +532,7 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1565, 350, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1819, 350, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2074, 350, true);
+
 }
 
 void ModuleSceneStage3::loadAudio()
