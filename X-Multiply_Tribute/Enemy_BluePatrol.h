@@ -12,6 +12,7 @@ private:
 	int original_y;
 	int original_x;
 	int shootTimer = 0;
+	int cont = 2;
 
 public:
 	Enemy_BluePatrol(int x, int y);

@@ -48,7 +48,10 @@ void Enemy_BluePatrol::Move()
 		}
 		
 	}else if (shootTimer < 100 && flipX) {
-		position.x += 2;
+		if (cont > 0) {
+			position.x += 2;
+		}
+		
 	}
 
 	if (shootTimer == 160 || shootTimer == 80 || shootTimer == 0) {
@@ -59,6 +62,7 @@ void Enemy_BluePatrol::Move()
 			}
 			else if (App->player->position.x > position.x) {
 				flipX = true;
+				cont--;
 			}
 		}
 		else {
