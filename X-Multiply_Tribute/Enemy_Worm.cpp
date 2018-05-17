@@ -130,7 +130,10 @@ void Enemy_Worm::Move()
 			position.x = circleCenter.x - cosf(angle) * radius;
 			break;
 		case Enemy_WormBody::CIRCLE:
-			left = rand() % 2 + 0;
+			if (isfirstcircle) {
+				left = rand() % 2 + 0;
+				isfirstcircle = false;
+			}
 			position.y++;
 			if (left == 1)state = CURVEL;
 			else state = CURVER;
@@ -187,7 +190,10 @@ void Enemy_Worm::Move()
 			position.x = circleCenter.x + cosf(angle) * radius;
 			break;
 		case Enemy_WormBody::CIRCLE:
-			left = rand() % 2 + 0;
+			if (isfirstcircle) {
+				left = rand() % 2 + 0;
+				isfirstcircle = false;
+			}
 			position.y++;
 			if (left == 1)state = CURVEL;
 			else state = CURVER;
