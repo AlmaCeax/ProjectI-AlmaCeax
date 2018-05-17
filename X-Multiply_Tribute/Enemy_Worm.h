@@ -12,14 +12,20 @@ private:
 	Animation hitanim;
 	int indexchild, spawntime, originY;
 	int shootTimer = 0;
-	int radius = 15;
+	int radius = 40;
 	float angle = 0;
 	bool up = false;
 	iPoint original_position;
+	iPoint lastposition;
+	iPoint circleCenter;
+	int left = 0;
+	bool startedcircle = false;
 	Enemy* bodies[8];
-	enum state { VERTICAL, HORIZONTAL, CIRCLE, CURVE, NONE};
+	enum State {VERTICAL, HORIZONTAL, CIRCLE, CURVEL, CURVER, NONE};
 	int curvetimer;
-	state state;
+	bool imonright;
+	State state;
+	State laststate;
 public:
 	Enemy_Worm(int x, int y, bool up);
 	void OnDeath();

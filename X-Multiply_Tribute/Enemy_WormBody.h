@@ -19,7 +19,13 @@ public:
 	Enemy_WormBody(int x, int y, bool up, bool tail);
 	bool splited = false;
 	void Move();
-	enum state { VERTICAL, HORIZONTAL, CIRCLE, CURVE, NONE, HEADDEAD };
+	iPoint lastposition;
+	iPoint circleCenter;
+	int left = 0;
+	int radius = 40;
+	bool startedcircle = false;
+	float angle = 0;
+	enum state { VERTICAL, HORIZONTAL, CIRCLE, CURVEL, CURVER, NONE, HEADDEAD };
 	state state;
 };
 
