@@ -234,6 +234,7 @@ bool ModuleSceneStage3::CleanUp()
 	App->collision->Disable();
 	App->powerups->Disable();
 	App->particles->Disable();
+	App->enemies->Disable();
 
 	for (int i = 0; i < 3; ++i)
 	{
@@ -518,14 +519,14 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4680, 321, false, 0, 6);
 
 	//top
-	/*EnemyInfo infoWormhole;
+	EnemyInfo infoWormhole;
 	infoWormhole.type = ENEMY_TYPES::WORMHOLE;
 	infoWormhole.x = 167;
 	infoWormhole.y = 344;
 	infoWormhole.going_up = true;
 	App->enemies->SpawnEnemy(infoWormhole);
 	infoWormhole.x = 295;
-	App->enemies->SpawnEnemy(infoWormhole);*/
+	App->enemies->SpawnEnemy(infoWormhole);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 551, 344, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 807, 344, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1191, 344, true);
@@ -536,10 +537,11 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2215, 344, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2471, 344, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2855, 344, true);
+
 	//bottom
-	/*infoWormhole.y = 500;
+	infoWormhole.y = 500;
 	infoWormhole.going_up = false;
-	App->enemies->SpawnEnemy(infoWormhole);*/
+	App->enemies->SpawnEnemy(infoWormhole);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 550, 500, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 806, 500, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1190, 500, false);
