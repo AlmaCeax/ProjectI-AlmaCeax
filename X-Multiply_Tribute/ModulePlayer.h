@@ -57,11 +57,11 @@ struct FireCircle {
 		chunks[3].timer = 7;
 		chunks[4].timer = 9;
 
-		chunks[0].srcRect = { 65,113,14,14 };
-		chunks[1].srcRect = {65,113,14,14};
-		chunks[2].srcRect = {50,115,14,14 };
-		chunks[3].srcRect = {35,116,14,14 };
-		chunks[4].srcRect = {20,117,14,14 };
+		chunks[0].srcRect = { 106,113,28,26 };
+		chunks[1].srcRect = { 106,113,28,26 };//113,119
+		chunks[2].srcRect = { 71,115,28,26 };//78,121
+		chunks[3].srcRect = { 36,115,28,26 };//43,121
+		chunks[4].srcRect = { 1,116,28,26 }; //8,122
 
 		chunks[0].current_time = 0;
 		chunks[1].current_time = 0;
@@ -76,6 +76,7 @@ struct FireCircle {
 		chunks[4].parent_id = 3;
 	}
 	void Move(float x, float y) {
+		fPoint lastPos = position;
 		position = { my_tentacle->position.x-1,my_tentacle->position.y-8};
 		fPoint temp = { my_tentacle->position.x - (x), my_tentacle->position.y - (y)};
 		float magnitude = sqrt((pow(temp.x, 2)) + (pow(temp.y, 2)));
@@ -100,8 +101,12 @@ struct FireCircle {
 
 
 		for (int i = 0; i < 5; i++) {
-			if (i != 0) chunks[i].Move(chunks[chunks[i].parent_id].position);
-			else chunks[i].Move(position);
+			if (fabs(position.x-lastPos.x) < 1) chunks[i].position = position;
+			else if (fabs(position.y - lastPos.y) < 1) chunks[i].position = position;
+			else {
+				if (i != 0) chunks[i].Move(chunks[chunks[i].parent_id].position);
+				else chunks[i].Move(position);
+			}
 		}
 	}
 };

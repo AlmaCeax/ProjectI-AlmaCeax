@@ -57,7 +57,7 @@ bool ModulePlayer::Init() {
 	death.loop = false;
 	death.speed = 0.3f;
 
-	firecircle = { 146,115,28,26 };
+	firecircle = { 150,113,28,26 };
 
 	return true;
 }
@@ -289,15 +289,16 @@ update_status ModulePlayer::Update()
 			{
 				App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 				App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
-			}
-			if (activePU[TENTACLES])
-			{
-				App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
-				App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT);
 
-				App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
-				App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
-			}
+				if (activePU[TENTACLES])
+				{
+					App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
+					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT);
+
+					App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
+					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
+				}
+			}		
 			cooldown = 0;
 		}
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_REPEAT || App->input->controller_A_button == KEY_STATE::KEY_REPEAT)
@@ -320,15 +321,16 @@ update_status ModulePlayer::Update()
 				{
 					App->particles->AddParticle(App->particles->baseShotExp, position.x + 30, position.y + 1);
 					App->particles->AddParticle(App->particles->baseShot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
-				}
-				if (activePU[TENTACLES])
-				{
-					App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
-					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT);
 
-					App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
-					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
-				}
+					if (activePU[TENTACLES])
+					{
+						App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
+						App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT);
+
+						App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
+						App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
+					}
+				}			
 				cooldown = 0;
 			}
 		}
@@ -339,9 +341,6 @@ update_status ModulePlayer::Update()
 			activePU[TENTACLES] = true;
 			App->player->tentacle.collider->enable = true;
 			App->player->tentacle2.collider->enable = true;
-		}
-		if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN && !activePU[FIRECIRCLE]) {
-			activePU[FIRECIRCLE] = true;
 		}
 
 		if (last_animation != current_animation) {
@@ -361,13 +360,14 @@ update_status ModulePlayer::Update()
 	{
 		circle_1.Move(position.x, position.y);
 		circle_2.Move(position.x, position.y);
-		App->render->Blit(graphics, circle_1.position.x, circle_1.position.y, &firecircle);
-		App->render->Blit(graphics, circle_2.position.x, circle_2.position.y, &firecircle);
 
 		for (int i = 0; i < 5; i++) {
 			App->render->Blit(graphics, circle_1.chunks[i].position.x, circle_1.chunks[i].position.y, &circle_1.chunks[i].srcRect);
 			App->render->Blit(graphics, circle_2.chunks[i].position.x, circle_2.chunks[i].position.y, &circle_2.chunks[i].srcRect);
 		}
+
+		App->render->Blit(graphics, circle_1.position.x, circle_1.position.y, &firecircle);
+		App->render->Blit(graphics, circle_2.position.x, circle_2.position.y, &firecircle);
 	}
 	if (activePU[TENTACLES])
 	{
