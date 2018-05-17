@@ -462,19 +462,19 @@ bool ModuleSceneStage3::loadMap()
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//top
-	coll = { 5002,95,758,16 };
+	coll = { 5007,95,758,16 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//bottom
-	coll = { 5002,303,758,16 };
+	coll = { 5007,303,758,16 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//end
-	coll = { 5347,111,59,68 };
+	coll = { 5352,111,59,68 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 5347,235,59,68 };
+	coll = { 5352,235,59,68 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 5731,111,29,192 };
+	coll = { 5736,111,29,192 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 
@@ -487,8 +487,8 @@ bool ModuleSceneStage3::loadMap()
 void ModuleSceneStage3::loadEnemies()
 {
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 869, 500);
-	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 850, 500, false, 0, -1, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 1020, 500);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 1000, 500, false, 0, -1, false);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 3144, 450, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 3344, 392, true);
@@ -517,21 +517,37 @@ void ModuleSceneStage3::loadEnemies()
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4680, 321, false, 0, 6);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 550, 515, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 671, 505, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1054, 503, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1307, 503, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1565, 503, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1819, 503, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2074, 503, false);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 550, 500, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 671, 354, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1054, 350, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1307, 350, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1565, 350, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1819, 350, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2074, 350, true);
+	//top
+	EnemyInfo infoWormhole;
+	infoWormhole.type = ENEMY_TYPES::WORMHOLE;
+	infoWormhole.x = 167;
+	infoWormhole.y = 344;
+	infoWormhole.going_up = true;
+	App->enemies->SpawnEnemy(infoWormhole);
+	infoWormhole.x = 295;
+	App->enemies->SpawnEnemy(infoWormhole);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 551, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 807, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1191, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1447, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1575, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1831, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1959, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2215, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2471, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2855, 344, true);
+	//bottom
+	infoWormhole.y = 500;
+	infoWormhole.going_up = false;
+	App->enemies->SpawnEnemy(infoWormhole);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 550, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 806, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1190, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1446, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1702, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1958, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2470, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2726, 500, false);
 
 }
 

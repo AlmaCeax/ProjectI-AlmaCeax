@@ -36,22 +36,18 @@ Enemy_BluePatrol::Enemy_BluePatrol(int x, int y) :Enemy(x, y)
 
 	hitAnimation = &hitanim;
 
-	collider = App->collision->AddCollider({ 0, 0, 57, 58 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 27, 29 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_BluePatrol::Move()
 {
 
-	if (shootTimer > 100) {
-
-	}
-	else if (!flipX) {
-		if (shootTimer % 2 == 0) {
+	if (shootTimer < 100 && !flipX) {
+		if (shootTimer % 3 == 0) {
 			position.x -= 1;
 		}
 		
-	}
-	else{
+	}else if (shootTimer < 100 && flipX) {
 		position.x += 2;
 	}
 
