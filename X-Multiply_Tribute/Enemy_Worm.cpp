@@ -4,6 +4,7 @@
 #include "Enemy_Worm.h"
 #include "Enemy_WormBody.h"
 #include "ModuleEnemies.h"
+#include <stdlib.h> 
 
 
 Enemy_Worm::Enemy_Worm(int x, int y, bool _up) :Enemy(x, y)
@@ -12,6 +13,7 @@ Enemy_Worm::Enemy_Worm(int x, int y, bool _up) :Enemy(x, y)
 	up = _up;
 
 	originY = y;
+
 
 	for (int i = 0; i < 8; i++)
 	{
@@ -30,14 +32,16 @@ Enemy_Worm::Enemy_Worm(int x, int y, bool _up) :Enemy(x, y)
 	indexchild = 0;
 	animation = &anim;
 	hitAnimation = &hitanim;
+	original_position = { x, y };
 
 	collider = App->collision->AddCollider({ 0, 0, 16, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
-
+	state = VERTICAL;
 	points = 100;
 
 	if (up) {
 		flipY = true;
 	}
+	curvetimer = 0;
 }
 
 
@@ -45,13 +49,13 @@ void Enemy_Worm::Move()
 {
 	if (indexchild < 8)
 	{
-		if (spawntime == 8)
+		if (spawntime == 7)
 		{
 			if (up) {
 				if (indexchild < 7) {
 					EnemyInfo info;
 					info.type = ENEMY_TYPES::WORMBODY;
-					info.x = position.x;
+					info.x = original_position.x;
 					info.y = originY;
 					info.going_up = true;
 					info.tail = false;
@@ -60,7 +64,7 @@ void Enemy_Worm::Move()
 				else {
 					EnemyInfo info;
 					info.type = ENEMY_TYPES::WORMBODY;
-					info.x = position.x;
+					info.x = original_position.x;
 					info.y = originY;
 					info.going_up = true;
 					info.tail = true;
@@ -72,7 +76,7 @@ void Enemy_Worm::Move()
 				if (indexchild < 7) {
 					EnemyInfo info;
 					info.type = ENEMY_TYPES::WORMBODY;
-					info.x = position.x;
+					info.x = original_position.x;
 					info.y = originY;
 					info.going_up = false;
 					info.tail = false;
@@ -81,7 +85,7 @@ void Enemy_Worm::Move()
 				else {
 					EnemyInfo info;
 					info.type = ENEMY_TYPES::WORMBODY;
-					info.x = position.x;
+					info.x = original_position.x;
 					info.y = originY;
 					info.going_up = false;
 					info.tail = true;
@@ -95,10 +99,118 @@ void Enemy_Worm::Move()
 	}
 
 	if (up) {
-		position.y++;
+		switch (state)
+		{
+		case Enemy_WormBody::VERTICAL:
+			position.y++;
+			anim.setCurrentFrameIndex(0);
+			break;
+		case Enemy_WormBody::HORIZONTAL:
+			position.x++;
+			anim.setCurrentFrameIndex(1);
+			break;
+		case Enemy_WormBody::CURVER:
+			angle += 0.03f;
+			if (!startedcircle) {
+				iPoint c = { position.x - radius , position.y };
+				circleCenter = c;
+				startedcircle = true;
+			}
+			position.y = circleCenter.y + sinf(angle) * radius;
+			position.x = circleCenter.x + cosf(angle) * radius;
+			break;
+		case::Enemy_WormBody::CURVEL:
+			angle += 0.03f;
+			if (!startedcircle) {
+				iPoint c = { position.x + radius , position.y };
+				circleCenter = c;
+				startedcircle = true;
+			}
+			position.y = circleCenter.y + sinf(angle) * radius;
+			position.x = circleCenter.x - cosf(angle) * radius;
+			break;
+		case Enemy_WormBody::CIRCLE:
+			left = rand() % 2 + 0;
+			position.y++;
+			if (left == 1)state = CURVEL;
+			else state = CURVER;
+			break;
+		default:
+			break;
+		}
+
+
+		if (lastposition.y != 0)
+		{
+			if (lastposition.y > position.y && lastposition.x < position.x)anim.setCurrentFrameIndex(2);
+			else if (lastposition.y > position.y)anim.setCurrentFrameIndex(0);
+			else if (lastposition.x < position.x)anim.setCurrentFrameIndex(1);
+		}
+		lastposition = position;
+
+		if (position.y == 420)state = CIRCLE;
+
+		for each (Enemy_WormBody* eb in bodies)
+		{
+			if (eb)eb->left = left;
+		}
 	}
 	else {
-		position.y--;
+		switch (state)
+		{
+		case Enemy_WormBody::VERTICAL:
+			position.y--;
+			anim.setCurrentFrameIndex(0);
+			break;
+		case Enemy_WormBody::HORIZONTAL:
+			position.x++;
+			anim.setCurrentFrameIndex(1);
+			break;
+		case Enemy_WormBody::CURVER:
+			angle += 0.03f;
+			if (!startedcircle) {
+				iPoint c = { position.x + radius , position.y };
+				circleCenter = c;
+				startedcircle = true;
+			}
+			position.y = circleCenter.y - sinf(angle) * radius;
+			position.x = circleCenter.x - cosf(angle) * radius;
+			break;
+		case::Enemy_WormBody::CURVEL:
+			angle += 0.03f;
+			if (!startedcircle) {
+				iPoint c = { position.x - radius , position.y };
+				circleCenter = c;
+				startedcircle = true;
+			}
+			position.y = circleCenter.y - sinf(angle) * radius;
+			position.x = circleCenter.x + cosf(angle) * radius;
+			break;
+		case Enemy_WormBody::CIRCLE:
+			left = rand() % 2 + 0;
+			position.y++;
+			if (left == 1)state = CURVEL;
+			else state = CURVER;
+			break;
+		default:
+			break;
+		}
+
+
+		if (lastposition.y != 0)
+		{
+			if (lastposition.y > position.y && lastposition.x < position.x)anim.setCurrentFrameIndex(2);
+			else if (lastposition.y > position.y)anim.setCurrentFrameIndex(0);
+			else if (lastposition.x < position.x)anim.setCurrentFrameIndex(1);
+		}
+		lastposition = position;
+
+		if (position.y == 460)state = CIRCLE;
+
+		for each (Enemy_WormBody* eb in bodies)
+		{
+			if (eb)eb->left = left;
+		}
 	}
 }
 
@@ -107,7 +219,10 @@ void Enemy_Worm::OnCollision(Collider * collider)
 	OnDeath();
 	for each (Enemy_WormBody* e in bodies)
 	{
-		if(e != nullptr)e->splited = true;
+		if (e != nullptr) {
+			e->splited = true;
+			e->state = Enemy_WormBody::HEADDEAD;
+		}
 	}
 }
 
