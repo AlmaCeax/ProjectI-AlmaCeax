@@ -17,12 +17,18 @@ Enemy_WormHole::Enemy_WormHole(int x, int y, bool up) :Enemy(x, y)
 	anim.PushBack({ 168, 488, 64, 53 });
 	anim.PushBack({ 168, 550, 64, 53 });
 	anim.PushBack({ 168, 622, 64, 53 });
+	anim.PushBack({ 168, 550, 64, 53 });
+	anim.PushBack({ 168, 488, 64, 53 });
 
 	hitanim.PushBack({ 655, 488, 64, 53 });
 	hitanim.PushBack({ 655, 550, 64, 53 });
 	hitanim.PushBack({ 655, 622, 64, 53 });
+	hitanim.PushBack({ 655, 550, 64, 53 });
+	hitanim.PushBack({ 655, 488, 64, 53 });
 
-	anim.speed = 0.01f;
+	anim.loop = false;
+
+	anim.speed = 0.0f;
 
 	animation = &anim;
 	hitAnimation = &hitanim;
@@ -57,4 +63,10 @@ void Enemy_WormHole::Move()
 	{
 		canSpawn = true;
 	}
+
+	if (timetoshoot == 50)
+	{
+		anim.speed = 0.1f;
+	}
+	else timetoshoot++;
 }

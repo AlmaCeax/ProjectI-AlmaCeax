@@ -11,6 +11,7 @@ private:
 	Animation hitanim;
 	bool up = false;
 	bool canSpawn = true;
+	int timetoshoot = 0;
 public:
 	Enemy_WormHole(int x, int y, bool up);
 
