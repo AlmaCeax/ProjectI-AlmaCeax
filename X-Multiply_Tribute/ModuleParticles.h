@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include "p2Point.h"
 #include "ModuleCollision.h"
+#include "Enemy.h"
 
 #define MAX_ACTIVE_PARTICLES 50
 
@@ -41,6 +42,7 @@ struct Particle
 	Particle(const Particle& p);
 	~Particle();
 	bool Update();
+	Enemy* closerTarget(iPoint _position);
 };
 
 class ModuleParticles : public Module

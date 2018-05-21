@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
+#include "ModuleEnemies.h"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>  
 #include "SDL/include/SDL_timer.h"
@@ -241,7 +242,7 @@ ModuleParticles::ModuleParticles()
 	missile.anim.loop = false;
 	missile.life = 3000;
 	missile.speed = { 0,0 };
-	missile.id = 10;
+	missile.id = 11;
 	missile.preparation = true;
 }
 
@@ -425,7 +426,7 @@ bool Particle::Update()
 			timebeforeanotherexplosion = 0;
 		}
 		break;
-	case 10:
+	case 11:
 		if (preparation)
 		{
 			speed.x = -1;
@@ -435,7 +436,10 @@ bool Particle::Update()
 			position.y = App->player->position.y+offsety;
 			offsetx += speed.x;
 			offsety += speed.y;
-			if (preparationtimer == 15)preparation = false;
+			if (preparationtimer == 15) {
+				preparation = false;
+
+			}
 			else preparationtimer++;
 		}
 		else {
@@ -470,4 +474,24 @@ bool Particle::Update()
 		
 
 	return ret;
+}
+
+Enemy* Particle::closerTarget(iPoint _position)
+{
+	int aux = 0;
+	int closer = 0;
+	Enemy* closerEnemy = nullptr;
+	for (int i = 0; i < sizeof(App->enemies->enemies); i++)
+	{
+		if (App->enemies->enemies[i] != nullptr)
+		{
+			aux = _position.DistanceTo(App->enemies->enemies[i]->position);
+			if (aux < closer) {
+				closer = aux;
+				closerEnemy = App->enemies->enemies[i];
+			}
+		}
+	}
+
+	return closerEnemy;
 }
