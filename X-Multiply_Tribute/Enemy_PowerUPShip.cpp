@@ -31,6 +31,7 @@ Enemy_PowerUPShip::Enemy_PowerUPShip(int x, int y, int powerUpid):Enemy(x,y)
 	case 4: pu = App->powerups->AddPowerUp(App->powerups->speedDown, position.x+2, position.y + 16, COLLIDER_POWER_UP); break;
 	case 5: pu = App->powerups->AddPowerUp(App->powerups->life, position.x+2, position.y + 16, COLLIDER_POWER_UP); break;
 	case 6: pu = App->powerups->AddPowerUp(App->powerups->firecircle, position.x + 2, position.y + 16, COLLIDER_POWER_UP); break;
+	case 7: pu = App->powerups->AddPowerUp(App->powerups->missile, position.x + 2, position.y + 16, COLLIDER_POWER_UP); break;
 	}
 
 	points = 1000;

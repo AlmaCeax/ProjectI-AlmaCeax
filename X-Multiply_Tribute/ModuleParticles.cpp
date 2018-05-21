@@ -232,6 +232,17 @@ ModuleParticles::ModuleParticles()
 	blueCircle.anim.loop = false;
 	blueCircle.life = 3000;
 	blueCircle.speed = { 0,0 };
+
+	missile.anim.PushBack({ 6,73,27,9 });
+	missile.anim.PushBack({ 37,73,27,9 });
+	missile.anim.PushBack({ 65,72,27,9 });
+	missile.anim.PushBack({ 104,72,27,9 });
+	missile.anim.speed = 0.08f;
+	missile.anim.loop = false;
+	missile.life = 3000;
+	missile.speed = { 0,0 };
+	missile.id = 10;
+	missile.preparation = true;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -304,7 +315,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay, int nTimes, bool isMultiple)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay, int nTimes, bool isMultiple, bool _up, iPoint offset)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -314,6 +325,9 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			p->born = SDL_GetTicks() + delay;
 			p->position.x = x;
 			p->position.y = y;
+			p->missileUp = _up;
+			p->offsetx = offset.x;
+			p->offsety = offset.y;
 			if (!speed.IsZero()) p->speed = speed;
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
@@ -352,7 +366,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple)
+	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple), missileUp(p.missileUp)
 {}
 
 Particle::~Particle()
@@ -411,6 +425,29 @@ bool Particle::Update()
 			timebeforeanotherexplosion = 0;
 		}
 		break;
+	case 10:
+		if (preparation)
+		{
+			speed.x = -1;
+			if (missileUp)speed.y = -1;
+			else speed.y = +1;
+			position.x = App->player->position.x+offsetx;
+			position.y = App->player->position.y+offsety;
+			offsetx += speed.x;
+			offsety += speed.y;
+			if (preparationtimer == 15)preparation = false;
+			else preparationtimer++;
+		}
+		else {
+			anim.frames[0] = anim.frames[2];
+			anim.frames[1] = anim.frames[3];
+			anim.speed = 0.1f;
+			anim.loop = true;
+			speed = { 3, 0 };
+			position.x += speed.x;
+			position.y += speed.y;
+		}
+		break;
 	default:
 		position.x += speed.x;
 		position.y += speed.y; break;
@@ -423,7 +460,7 @@ bool Particle::Update()
 		else if (App->player->state == App->player->top) offsety = -1;
 		else if (App->player->state == App->player->bot) offsety = 2;
 		position.y = App->player->position.y + offsety;
-		position.x = App->player->position.x + offsetx;
+		position.x = (App->player->position.x +30) + offsetx;
 	}
 
 	if (collider != nullptr) {

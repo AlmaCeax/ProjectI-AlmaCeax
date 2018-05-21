@@ -60,6 +60,7 @@ private:
 
 public:
 	PowerUP life;
+	PowerUP missile;
 	PowerUP speedBoost;
 	PowerUP speedDown;
 	PowerUP bomb;
