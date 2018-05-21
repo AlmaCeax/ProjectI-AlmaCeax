@@ -28,6 +28,7 @@ struct Particle
 	int offsety = 0;
 	bool fx_played = false;
 	bool isPlayerAttached = false;
+	bool flipX, flipY;
 	Mix_Chunk* sfx = nullptr;
 	int id = 0;
 	int nTimes;
@@ -50,7 +51,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = { 0,0 }, Uint32 delay = 0, int Ntimes = 1, bool isMultiple = false);
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = { 0,0 }, Uint32 delay = 0, int Ntimes = 1, bool isMultiple = false, bool flipX = false, bool flipY = false);
 	void OnCollision(Collider* c1, Collider* c2);
 
 private:
@@ -85,6 +86,17 @@ public:
 	Particle greenBall;
 	Particle yellowCircle;
 	Particle blueCircle;
+	Particle redBall;
+
+	Particle hosturball;
+	Particle hosturballmid;
+	Particle hosturballmiddeath;
+	Particle hosturballdeath;
+	Particle hostursmallshot;
+	Particle hostursmallverticalshot;
+	Particle hosturlongshot;
+	Particle hosturbigshot;
+	Particle hosturbiglargeshot;
 };
 
 #endif // __MODULEPARTICLES_H__

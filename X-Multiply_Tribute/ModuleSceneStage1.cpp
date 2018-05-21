@@ -9,6 +9,7 @@
 #include "ModuleCollision.h"
 #include "ModulePowerUPS.h"
 #include "SDL_mixer/include/SDL_mixer.h"
+#include "SDL/include/SDL_timer.h"
 #include "ModuleSceneStage1.h"
 #include "ModuleSceneStage3.h"
 
@@ -98,6 +99,7 @@ update_status ModuleSceneStage1::Update()
 	checkCameraEvents();
 	updateCamera();
 	CheckpointsUpdate();
+	BossUpdate();
 
 	App->render->Blit(textures[0], 0, 0, &textrect[0], 0.5f);
 	App->render->Blit(textures[1], 0, 0, &textrect[1]);
@@ -128,6 +130,8 @@ bool ModuleSceneStage1::CleanUp()
 
 	App->audio->UnloadMusic(music);
 	music = nullptr;
+	App->audio->UnloadMusic(bossTrack);
+	bossTrack = nullptr;
 	App->audio->UnloadSFX(shipSpawn);
 	shipSpawn = nullptr;
 
@@ -147,7 +151,11 @@ void ModuleSceneStage1::checkCameraEvents()
 
 	if (App->render->camera.x >= (4960 - SCREEN_WIDTH) * SCREEN_SIZE && !stopped) {
 		stopped = true;
-		App->ui->StageCleared();
+		start_time = SDL_GetTicks();
+		total_time = (Uint32)(4.0f * 1000.0f);
+		Mix_PlayMusic(bossTrack, false);
+
+		current_phase = boss_phases::boss_spawn;
 	}
 }
 
@@ -493,6 +501,7 @@ void ModuleSceneStage1::loadEnemies()
 void ModuleSceneStage1::loadAudio()
 {
 	music = App->audio->LoadMusic("Assets/Audio/Music/02_Into_the_Human_Body_Stage_1.ogg");
+	bossTrack = App->audio->LoadMusic("Assets/Audio/Music/03_Boss_Theme.ogg");
 	shipSpawn = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-026.wav");
 }
 
@@ -560,4 +569,41 @@ void ModuleSceneStage1::injection()
 void ModuleSceneStage1::OnFade() {
 	ModuleStage::OnFade();
 	if (App->ui->is_continue) App->ui->PlayerReady();
+}
+
+void ModuleSceneStage1::BossUpdate() {
+	Uint32 now = SDL_GetTicks() - start_time;
+	switch (current_phase) {
+	case boss_phases::boss_spawn: {
+		if (ball_timer == 0) {
+			App->particles->AddParticle(App->particles->redBall, 4897, 457, COLLIDER_ENEMY_DESTRUCTIBLE_SHOT, { 0.5,-5 });
+			App->particles->AddParticle(App->particles->redBall, 4897, 457, COLLIDER_ENEMY_DESTRUCTIBLE_SHOT, { -0.5,-5 });
+			App->particles->AddParticle(App->particles->redBall, 4897, 457, COLLIDER_ENEMY_DESTRUCTIBLE_SHOT, { 1,-5 });
+			App->particles->AddParticle(App->particles->redBall, 4897, 457, COLLIDER_ENEMY_DESTRUCTIBLE_SHOT, { -1,-5 });
+			App->particles->AddParticle(App->particles->redBall, 4897, 457, COLLIDER_ENEMY_DESTRUCTIBLE_SHOT, { 1,-2 });
+			App->particles->AddParticle(App->particles->redBall, 4897, 457, COLLIDER_ENEMY_DESTRUCTIBLE_SHOT, { -1,-2 });
+			ball_timer = 20;
+		}
+		else {
+			ball_timer--;
+		}
+		if (now >= total_time) {
+			//spawnboss
+			EnemyInfo info;
+			info.type = HOSTUR;
+			info.x = 4793;
+			info.y = 480;
+			boss = App->enemies->SpawnEnemyRet(info);
+			total_time = (Uint32)(91.0f * 1000.0f);
+			current_phase = boss_phases::boss_fight;
+		}
+	}break;
+	case boss_phases::boss_fight: 
+		if (now >= total_time) {
+			current_phase = none;
+			App->enemies->Kill(boss);
+			App->ui->StageCleared();
+		}
+		break;
+	}
 }

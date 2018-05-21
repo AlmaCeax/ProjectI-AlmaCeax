@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleUI.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
@@ -232,6 +233,67 @@ ModuleParticles::ModuleParticles()
 	blueCircle.anim.loop = false;
 	blueCircle.life = 3000;
 	blueCircle.speed = { 0,0 };
+
+	redBall.anim.PushBack({ 14,460,18,14 });
+	redBall.anim.speed = 0.1f;
+	redBall.anim.loop = false;
+	redBall.life = 3000;
+	redBall.speed = { 0,0 };
+	redBall.id = 10;
+
+	hosturballmid.anim.PushBack({ 14,490,18,18 });
+	hosturballmid.anim.PushBack({ 37,490,18,18 });
+	hosturballmid.anim.PushBack({ 61,490,18,18 });
+	hosturballmid.anim.PushBack({ 85,490,18,18 });
+	hosturballmid.life = 3000;
+	hosturballmid.anim.speed = 0.1f;
+	hosturballmid.anim.loop = true;
+	hosturballmid.id = 11;
+
+	hosturball.anim.PushBack({ 14,490,18,18 });
+	hosturball.anim.PushBack({ 37,490,18,18 });
+	hosturball.anim.PushBack({ 61,490,18,18 });
+	hosturball.anim.PushBack({ 85,490,18,18 });
+	hosturball.life = 3000;
+	hosturball.anim.speed = 0.1f;
+	hosturball.anim.loop = true;
+	hosturball.id = 12;
+
+	hosturballmiddeath.anim.PushBack({14,523,18,18});
+	hosturballmiddeath.anim.PushBack({35,523,18,18});
+	hosturballmiddeath.anim.PushBack({54,525,18,18});
+	hosturballmiddeath.anim.PushBack({77,524,20,20});
+	hosturballmiddeath.anim.PushBack({102,523,22,22});
+	hosturballmiddeath.anim.PushBack({130,522,24,24});
+	hosturballmiddeath.life = 3000;
+	hosturballmiddeath.id = 13;
+
+	hosturballdeath.anim.PushBack({ 14,523,18,18 });
+	hosturballdeath.anim.PushBack({ 35,523,18,18 });
+	hosturballdeath.anim.PushBack({ 54,525,18,18 });
+	hosturballdeath.anim.PushBack({ 77,524,20,20 });
+	hosturballdeath.anim.PushBack({ 102,523,22,22 });
+	hosturballdeath.anim.PushBack({ 130,522,24,24 });
+	hosturballdeath.life = 3000;
+	hosturballdeath.id = 14;
+
+	hostursmallshot.anim.PushBack({ 97,565,11,7 });
+	hostursmallshot.life = 3000;
+	hostursmallshot.anim.loop = true;
+	hostursmallverticalshot.anim.PushBack({ 87,563,7,11 });
+	hostursmallverticalshot.life = 3000;
+	hostursmallverticalshot.anim.loop = true;
+	hosturlongshot.anim.PushBack({ 166,563,12,12 });
+	hosturlongshot.life = 3000;
+	hosturlongshot.anim.loop = true;
+
+	hosturbigshot.anim.PushBack({ 50,561,10,11 });
+	hosturbigshot.life = 3000;
+	hosturbigshot.anim.loop = true;
+	hosturbiglargeshot.anim.PushBack({ 49,574,12,11 });
+	hosturbiglargeshot.life = 3000;
+	hosturbiglargeshot.anim.loop = true;
+
 }
 
 ModuleParticles::~ModuleParticles()
@@ -245,6 +307,10 @@ bool ModuleParticles::Start()
 
 	baseShotExp.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-083.wav");
 	playerBoost.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
+	hosturball.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-029.wav");
+	hosturballmid.sfx = hosturball.sfx;
+	hosturballdeath.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-028.wav");
+	hosturballmiddeath.sfx = hosturballdeath.sfx;
 
 	return true;
 }
@@ -261,6 +327,13 @@ bool ModuleParticles::CleanUp()
 
 	App->audio->UnloadSFX(playerBoost.sfx);
 	playerBoost.sfx = nullptr;
+
+	App->audio->UnloadSFX(hosturball.sfx);
+	hosturball.sfx = nullptr;
+	hosturballmid.sfx = nullptr;
+	App->audio->UnloadSFX(hosturballdeath.sfx);
+	hosturballdeath.sfx = nullptr;
+	hosturballmiddeath.sfx = nullptr;
 
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -293,7 +366,7 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+			App->render->BlitFlipped(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()),p->flipX, p->flipY);
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
@@ -304,7 +377,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay, int nTimes, bool isMultiple)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay, int nTimes, bool isMultiple, bool flipX, bool flipY)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -314,6 +387,8 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			p->born = SDL_GetTicks() + delay;
 			p->position.x = x;
 			p->position.y = y;
+			p->flipX = flipX;
+			p->flipY = flipY;
 			if (!speed.IsZero()) p->speed = speed;
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
@@ -333,6 +408,9 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			switch (active[i]->id) {
 			case 1: AddParticle(baseShotColExp, active[i]->position.x, active[i]->position.y); break;
 			case 2: AddParticle(bombExplosion, active[i]->position.x, active[i]->position.y); break;
+			case 10: if (c2->type == COLLIDER_PLAYER_SHOT) App->ui->AddScore(100); break;
+			case 11: App->particles->AddParticle(App->particles->hosturballmiddeath, active[i]->position.x, active[i]->position.y); break;
+			case 12: App->particles->AddParticle(App->particles->hosturballdeath, active[i]->position.x, active[i]->position.y); break;
 			}
 			delete active[i];
 			active[i] = nullptr;
@@ -352,7 +430,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple)
+	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple), flipX(p.flipX), flipY(p.flipY)
 {}
 
 Particle::~Particle()
@@ -409,6 +487,53 @@ bool Particle::Update()
 		{
 			App->particles->AddParticle(App->particles->enemyBossExplosion, position.x + rand() % 150 + (-75), position.y + rand() % 150 + (-75));
 			timebeforeanotherexplosion = 0;
+		}
+		break;
+	case 10:
+		position.x += speed.x;
+		position.y += speed.y;
+		speed.y += 0.1f;
+		break;
+	case 11:
+		position.x += speed.x;
+		position.y += speed.y;
+		if (position.x < 4640) {
+			App->particles->AddParticle(App->particles->hosturballmiddeath, position.x, position.y);
+			ret =  false;
+		}
+		break;
+	case 12:
+		position.x += speed.x;
+		position.y += speed.y;
+		if (position.x < 4726) {
+			App->particles->AddParticle(App->particles->hosturballdeath, position.x, position.y);
+			ret = false;
+		}
+		break;
+	case 13:
+		if (anim.Finished()) {
+			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 1,-2 },0,1,false,false,false);
+			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -1,-2 }, 0, 1, false, true, false);
+			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 1,2 }, 0, 1, false, false, true);
+			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -1,2 }, 0, 1, false, true, true);
+			App->particles->AddParticle(App->particles->hosturbiglargeshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 2, -1 }, 0, 1, false, false, false);
+			App->particles->AddParticle(App->particles->hosturbiglargeshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 2, 1 }, 0, 1, false, false, true);
+			App->particles->AddParticle(App->particles->hosturbiglargeshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2, -1 }, 0, 1, false, true, false);
+			App->particles->AddParticle(App->particles->hosturbiglargeshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2, 1 }, 0, 1, false, true, true);
+			ret = false;
+		}
+		break;
+	case 14:
+		if (anim.Finished()) {
+			App->particles->AddParticle(App->particles->hostursmallverticalshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 0, 2 }, 0, 1, false, false, false);
+			App->particles->AddParticle(App->particles->hostursmallshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 2, 0 }, 0, 1, false, false, false);
+			App->particles->AddParticle(App->particles->hostursmallverticalshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 0, -2 }, 0, 1, false, false, true);
+			App->particles->AddParticle(App->particles->hostursmallshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2, 0 }, 0, 1, false, true, false);
+			App->particles->AddParticle(App->particles->hosturlongshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 2, -2 }, 0, 1, false, false, false);
+			App->particles->AddParticle(App->particles->hosturlongshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 2, 2 }, 0, 1, false, false, true);
+			App->particles->AddParticle(App->particles->hosturlongshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2, 2 }, 0, 1, false, true, true);
+			App->particles->AddParticle(App->particles->hosturlongshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2,-2 }, 0, 1, false, true, false);
+			ret = false;
 		}
 		break;
 	default:

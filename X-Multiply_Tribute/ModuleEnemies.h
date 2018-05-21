@@ -35,6 +35,7 @@ public:
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 	void SpawnEnemy(const EnemyInfo& info);
 	Enemy* SpawnEnemyRet(const EnemyInfo& info);
+	void Kill(Enemy* e);
 
 private:
 

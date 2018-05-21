@@ -12,6 +12,7 @@ public:
 	int index, score_bonus;
 	bool right,up,down,left,stopped;
 	_Mix_Music* music;
+	_Mix_Music* bossTrack;
 	void OnFade(){ if (App->player->dead) App->ui->PlayerDeath(); }
 	iPoint checkpoints[MAX_CHECKPOINTS];
 

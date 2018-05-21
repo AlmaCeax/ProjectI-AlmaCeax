@@ -5,11 +5,13 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
+#include "ModuleUI.h"
 #include "Enemy_HellBall.h"
 #include "Enemy_FlyingWorm.h"
 #include "Enemy_GreenEye.h"
 #include "Enemy_BrownEye.h"
 #include "Enemy_Jumper.h"
+#include "Enemy_Hostur.h"
 #include "Enemy_TentacleShooter.h"
 #include "Enemy_BlueMouth.h"
 #include "Enemy_BlueFlyer.h"
@@ -234,6 +236,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				enemies[i] = new Enemy_WormHole(info.x, info.y, info.going_up);
 				lives[i] = 12;
 				break;
+			case ENEMY_TYPES::HOSTUR:
+				enemies[i] = new Enemy_Hostur(info.x, info.y);
+				lives[i] = 160;
+				break;
 		}
 	}
 }
@@ -247,6 +253,27 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				((Enemy_Jumper*)enemies[i])->SetDownAnim();
 				break;
 			}
+		}
+
+		if (enemies[i] != nullptr && enemies[i]->type == HOSTUR) {
+			for (int j = 0; j < 5; ++j) {
+				if (((Enemy_Hostur*)enemies[i])->colliders[j] == c1) {
+					lives[i]--;
+					if (lives[i] == 0) {
+						Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+						enemies[i]->OnCollision(c2);
+						delete enemies[i];
+						enemies[i] = nullptr;
+						App->ui->StageCleared();
+						return;
+					}
+					else {
+						Mix_PlayChannel(-1, hitEnemysfx, 0);
+						enemies[i]->Shine();
+						return;
+					}
+				}
+			}	
 		}
 
 		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
@@ -447,8 +474,30 @@ Enemy* ModuleEnemies::SpawnEnemyRet(const EnemyInfo& info)
 			enemies[i] = new Enemy_WormBody(info.x, info.y, info.going_up, info.tail);
 			lives[i] = 1;
 			break;
+		case ENEMY_TYPES::HOSTUR:
+			enemies[i] = new Enemy_Hostur(info.x, info.y);
+			lives[i] = 160;
+			break;
 		}
 	}
 
 	return enemies[i];
+}
+
+void ModuleEnemies::Kill(Enemy* e) {
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (enemies[i] == e) {
+			switch (enemies[i]->type) {
+			case HOSTUR:
+				Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+				enemies[i]->OnCollision(nullptr);
+				delete enemies[i];
+				enemies[i] = nullptr;
+				App->ui->StageCleared();
+				return;
+				break;
+			}
+		}
+	}
 }
