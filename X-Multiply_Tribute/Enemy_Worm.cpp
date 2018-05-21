@@ -14,18 +14,18 @@ Enemy_Worm::Enemy_Worm(int x, int y, bool _up) :Enemy(x, y)
 
 	originY = y;
 
-
+	center = { 8, 8 };
 	for (int i = 0; i < 8; i++)
 	{
 		bodies[i] = nullptr;
 	}
 	anim.PushBack({ 23, 636, 16, 16 });
-	anim.PushBack({ 42, 635, 16, 16 });
 	anim.PushBack({ 26, 653, 16, 16 });
+	anim.PushBack({ 42, 635, 16, 16 });
 
 	hitanim.PushBack({ 512, 636, 16, 16 });
-	hitanim.PushBack({ 531, 635, 16, 16 });
 	hitanim.PushBack({ 515, 653, 16, 16 });
+	hitanim.PushBack({ 531, 635, 16, 16 });
 
 	anim.speed = 0.f;
 	spawntime = 0;
@@ -118,6 +118,7 @@ void Enemy_Worm::Move()
 			}
 			position.y = circleCenter.y + sinf(angle) * radius;
 			position.x = circleCenter.x + cosf(angle) * radius;
+			rangle += 1.7f;
 			break;
 		case::Enemy_WormBody::CURVEL:
 			angle += 0.03f;
@@ -128,6 +129,7 @@ void Enemy_Worm::Move()
 			}
 			position.y = circleCenter.y + sinf(angle) * radius;
 			position.x = circleCenter.x - cosf(angle) * radius;
+			rangle -= 1.7f;
 			break;
 		case Enemy_WormBody::CIRCLE:
 			if (isfirstcircle) {
@@ -142,15 +144,9 @@ void Enemy_Worm::Move()
 			break;
 		}
 
-
-		if (lastposition.y != 0)
-		{
-			if (lastposition.y > position.y && lastposition.x < position.x)anim.setCurrentFrameIndex(2);
-			else if (lastposition.y > position.y)anim.setCurrentFrameIndex(0);
-			else if (lastposition.x < position.x)anim.setCurrentFrameIndex(1);
-		}
-		lastposition = position;
-
+		lastposition.x = (float)position.x;
+		lastposition.y = (float)position.y;
+		
 		if (position.y == 420)state = CIRCLE;
 
 		for each (Enemy_WormBody* eb in bodies)
@@ -178,6 +174,7 @@ void Enemy_Worm::Move()
 			}
 			position.y = circleCenter.y - sinf(angle) * radius;
 			position.x = circleCenter.x - cosf(angle) * radius;
+			rangle +=1.7f;
 			break;
 		case::Enemy_WormBody::CURVEL:
 			angle += 0.03f;
@@ -188,6 +185,7 @@ void Enemy_Worm::Move()
 			}
 			position.y = circleCenter.y - sinf(angle) * radius;
 			position.x = circleCenter.x + cosf(angle) * radius;
+			rangle -= 1.7f;
 			break;
 		case Enemy_WormBody::CIRCLE:
 			if (isfirstcircle) {
@@ -202,14 +200,8 @@ void Enemy_Worm::Move()
 			break;
 		}
 
-
-		if (lastposition.y != 0)
-		{
-			if (lastposition.y > position.y && lastposition.x < position.x)anim.setCurrentFrameIndex(2);
-			else if (lastposition.y > position.y)anim.setCurrentFrameIndex(0);
-			else if (lastposition.x < position.x)anim.setCurrentFrameIndex(1);
-		}
-		lastposition = position;
+		lastposition.x = (float)position.x;
+		lastposition.y = (float)position.y;
 
 		if (position.y == 460)state = CIRCLE;
 

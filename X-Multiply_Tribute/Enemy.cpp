@@ -27,7 +27,7 @@ void Enemy::Draw(SDL_Texture* sprites)
 		collider->SetPos(position.x, position.y);
 
 	if (animation != nullptr) {
-		if(!hit)App->render->BlitFlipped(sprites, position.x, position.y, &(animation->GetCurrentFrame()), flipX, flipY);
+		if(!hit)App->render->BlitFlipped(sprites, position.x, position.y, &(animation->GetCurrentFrame()), flipX, flipY, rangle, center);
 		else {
 			hitAnimation->setCurrentFrameIndex(animation->GetCurrentFrameIndex()-1);
 			App->render->BlitFlipped(sprites, position.x, position.y, &(hitAnimation->GetCurrentFrame()), flipX, flipY);

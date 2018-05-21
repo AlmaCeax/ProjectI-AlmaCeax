@@ -16,6 +16,7 @@ Enemy_WormBody::Enemy_WormBody(int x, int y, bool _up, bool tail) :Enemy(x, y)
 	if (up) {
 		flipY = true;
 	}
+	center = { 8, 8 };
 
 	if (!tail)
 	{
@@ -70,6 +71,7 @@ void Enemy_WormBody::Move()
 			}
 			position.y = circleCenter.y + sinf(angle) * radius;
 			position.x = circleCenter.x + cosf(angle) * radius;
+			rangle += 1.7f;
 			break;
 		case::Enemy_WormBody::CURVEL:
 			angle += 0.03f;
@@ -80,6 +82,7 @@ void Enemy_WormBody::Move()
 			}
 			position.y = circleCenter.y + sinf(angle) * radius;
 			position.x = circleCenter.x - cosf(angle) * radius;
+			rangle -= 1.7f;
 			break;
 		case Enemy_WormBody::CIRCLE:
 			position.y++;
@@ -89,15 +92,6 @@ void Enemy_WormBody::Move()
 		default:
 			break;
 		}
-
-
-		if (lastposition.y != 0)
-		{
-			if (lastposition.y > position.y && lastposition.x < position.x)anim.setCurrentFrameIndex(2);
-			else if (lastposition.y > position.y)anim.setCurrentFrameIndex(0);
-			else if (lastposition.x < position.x)anim.setCurrentFrameIndex(1);
-		}
-		lastposition = position;
 
 		if (state != HEADDEAD) {
 			if (position.y == 420)state = CIRCLE;
@@ -126,6 +120,7 @@ void Enemy_WormBody::Move()
 			}
 			position.y = circleCenter.y - sinf(angle) * radius;
 			position.x = circleCenter.x - cosf(angle) * radius;
+			rangle += 1.7f;
 			break;
 		case::Enemy_WormBody::CURVEL:
 			angle += 0.03f;
@@ -136,6 +131,7 @@ void Enemy_WormBody::Move()
 			}
 			position.y = circleCenter.y - sinf(angle) * radius;
 			position.x = circleCenter.x + cosf(angle) * radius;
+			rangle -= 1.7f;
 			break;
 		case Enemy_WormBody::CIRCLE:
 			position.y++;
@@ -145,14 +141,6 @@ void Enemy_WormBody::Move()
 		default:
 			break;
 		}
-		if (lastposition.y != 0)
-		{
-			if (lastposition.y > position.y && lastposition.x < position.x)anim.setCurrentFrameIndex(2);
-			else if (lastposition.y > position.y)anim.setCurrentFrameIndex(0);
-			else if (lastposition.x < position.x)anim.setCurrentFrameIndex(1);
-
-		}
-		lastposition = position;
 		if (state != HEADDEAD) {
 			if (position.y == 460)state = CIRCLE;
 		}
