@@ -35,7 +35,7 @@ Enemy_Jumper::Enemy_Jumper(int x, int y, bool back, bool normal_spawn): Enemy(x,
 
 Enemy_Jumper::~Enemy_Jumper()
 {
-
+	ground_collider->to_delete = true;
 }
 
 void Enemy_Jumper::SetDownAnim()

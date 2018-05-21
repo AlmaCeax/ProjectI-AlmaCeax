@@ -110,6 +110,7 @@
       <Filter>Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Enemy_WormBody.cpp" />
+    <ClCompile Include="Enemy_Hostur.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -257,6 +258,7 @@
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Enemy_WormBody.h" />
+    <ClInclude Include="Enemy_Hostur.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

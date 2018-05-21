@@ -36,9 +36,9 @@ public:
 	void SpawnEnemy(const EnemyInfo& info);
 	Enemy* SpawnEnemyRet(const EnemyInfo& info);
 	Enemy* enemies[MAX_ENEMIES];
+	void Kill(Enemy* e);
 
 private:
-
 	EnemyInfo queue[MAX_ENEMIES];
 	SDL_Texture* sprites;
 	int lives[MAX_ENEMIES];

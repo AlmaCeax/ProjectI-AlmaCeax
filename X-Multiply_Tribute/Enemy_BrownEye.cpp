@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
+#include "ModuleEnemies.h"
 #include "ModulePlayer.h"
 #include "Enemy_BrownEye.h"
 #include "ModuleEnemies.h"
@@ -66,7 +67,7 @@ Enemy_BrownEye::Enemy_BrownEye(int x, int y) :Enemy(x, y)
 
 	hitAnimation = &hitanim;
 
-	collider = App->collision->AddCollider({ 0, 0, 57, 58 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 57, 58 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->enemies);
 }
 
 void Enemy_BrownEye::Move()

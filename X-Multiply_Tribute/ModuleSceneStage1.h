@@ -7,6 +7,7 @@
 
 #define NUM_LAYERS 5
 
+struct Enemy;
 
 class ModuleSceneStage1 :
 	public ModuleStage
@@ -34,6 +35,18 @@ private:
 	void loadEnemies();
 	void loadAudio();
 	void injection();
+	void BossUpdate();
+
+	Enemy* boss;
+	Uint32 start_time = 0;
+	Uint32 total_time = 0;
+	int ball_timer = 0;
+
+	enum boss_phases {
+		none,
+		boss_spawn,
+		boss_fight
+	} current_phase = boss_phases::none;
 
 public:
 	bool Init();
