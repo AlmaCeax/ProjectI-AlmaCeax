@@ -101,15 +101,15 @@ void Enemy_Worm::Move()
 	if (up) {
 		switch (state)
 		{
-		case Enemy_WormBody::VERTICAL:
+		case Enemy_Worm::VERTICAL:
 			position.y++;
 			anim.setCurrentFrameIndex(0);
 			break;
-		case Enemy_WormBody::HORIZONTAL:
+		case Enemy_Worm::HORIZONTAL:
 			position.x++;
 			anim.setCurrentFrameIndex(1);
 			break;
-		case Enemy_WormBody::CURVER:
+		case Enemy_Worm::CURVER:
 			angle += 0.03f;
 			if (!startedcircle) {
 				iPoint c = { position.x - radius , position.y };
@@ -120,7 +120,7 @@ void Enemy_Worm::Move()
 			position.x = circleCenter.x + cosf(angle) * radius;
 			rangle += 1.7f;
 			break;
-		case::Enemy_WormBody::CURVEL:
+		case::Enemy_Worm::CURVEL:
 			angle += 0.03f;
 			if (!startedcircle) {
 				iPoint c = { position.x + radius , position.y };
@@ -131,7 +131,7 @@ void Enemy_Worm::Move()
 			position.x = circleCenter.x - cosf(angle) * radius;
 			rangle -= 1.7f;
 			break;
-		case Enemy_WormBody::CIRCLE:
+		case Enemy_Worm::CIRCLE:
 			if (isfirstcircle) {
 				left = rand() % 2 + 0;
 				isfirstcircle = false;
@@ -144,9 +144,6 @@ void Enemy_Worm::Move()
 			break;
 		}
 
-		lastposition.x = (float)position.x;
-		lastposition.y = (float)position.y;
-		
 		if (position.y == 420)state = CIRCLE;
 
 		for each (Enemy_WormBody* eb in bodies)
@@ -157,15 +154,15 @@ void Enemy_Worm::Move()
 	else {
 		switch (state)
 		{
-		case Enemy_WormBody::VERTICAL:
+		case Enemy_Worm::VERTICAL:
 			position.y--;
 			anim.setCurrentFrameIndex(0);
 			break;
-		case Enemy_WormBody::HORIZONTAL:
+		case Enemy_Worm::HORIZONTAL:
 			position.x++;
 			anim.setCurrentFrameIndex(1);
 			break;
-		case Enemy_WormBody::CURVER:
+		case Enemy_Worm::CURVER:
 			angle += 0.03f;
 			if (!startedcircle) {
 				iPoint c = { position.x + radius , position.y };
@@ -176,7 +173,7 @@ void Enemy_Worm::Move()
 			position.x = circleCenter.x - cosf(angle) * radius;
 			rangle +=1.7f;
 			break;
-		case::Enemy_WormBody::CURVEL:
+		case::Enemy_Worm::CURVEL:
 			angle += 0.03f;
 			if (!startedcircle) {
 				iPoint c = { position.x - radius , position.y };
@@ -187,7 +184,7 @@ void Enemy_Worm::Move()
 			position.x = circleCenter.x + cosf(angle) * radius;
 			rangle -= 1.7f;
 			break;
-		case Enemy_WormBody::CIRCLE:
+		case Enemy_Worm::CIRCLE:
 			if (isfirstcircle) {
 				left = rand() % 2 + 0;
 				isfirstcircle = false;
@@ -215,12 +212,10 @@ void Enemy_Worm::Move()
 void Enemy_Worm::OnCollision(Collider * collider)
 {
 	OnDeath();
-	for each (Enemy_WormBody* e in bodies)
+ 	for each (Enemy_WormBody* eb in bodies)
 	{
-		if (e != nullptr) {
-			e->splited = true;
-			e->state = Enemy_WormBody::HEADDEAD;
-		}
+		if(eb)eb->splited = true;
+		if(eb)eb->state = Enemy_WormBody::HEADDEAD;
 	}
 }
 
