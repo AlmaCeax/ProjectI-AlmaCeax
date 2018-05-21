@@ -507,6 +507,13 @@ bool Particle::Update()
 		}
 		break;
 	case 11:
+		position.x += speed.x;
+		position.y += speed.y;
+		if (position.x < 4640) {
+			App->particles->AddParticle(App->particles->hosturballmiddeath, position.x, position.y);
+			ret = false;
+		}
+		break;
 	case 10:
 		position.x += speed.x;
 		position.y += speed.y;
@@ -564,7 +571,7 @@ bool Particle::Update()
 			offsety += speed.y;
 			if (preparationtimer == 15) {
 				preparation = false;
-
+				target = closerTarget(position);
 			}
 			else preparationtimer++;
 		}
@@ -574,8 +581,8 @@ bool Particle::Update()
 			anim.speed = 0.1f;
 			anim.loop = true;
 			speed = { 3, 0 };
-			position.x += speed.x;
-			position.y += speed.y;
+			if(target)position = target->position;
+			else position.x += speed.x;
 		}
 		break;
 	default:
@@ -602,13 +609,15 @@ bool Particle::Update()
 Enemy* Particle::closerTarget(iPoint _position)
 {
 	int aux = 0;
-	int closer = 0;
+	iPoint auxpos = { 0,0 };
+	int closer = 1000;
 	Enemy* closerEnemy = nullptr;
-	for (int i = 0; i < sizeof(App->enemies->enemies); i++)
+	for (int i = 0; i < 99; i++)
 	{
 		if (App->enemies->enemies[i] != nullptr)
 		{
-			aux = _position.DistanceTo(App->enemies->enemies[i]->position);
+			auxpos = App->enemies->enemies[i]->position;
+			aux = _position.DistanceTo(auxpos);
 			if (aux < closer) {
 				closer = aux;
 				closerEnemy = App->enemies->enemies[i];

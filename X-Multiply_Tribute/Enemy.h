@@ -22,7 +22,7 @@ public:
 	Animation * animation = nullptr;
 	Animation * hitAnimation = nullptr;
 	bool hit = false;
-	iPoint position;
+	iPoint position = {0,0};
 	iPoint speed = {0, 0};
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 public:

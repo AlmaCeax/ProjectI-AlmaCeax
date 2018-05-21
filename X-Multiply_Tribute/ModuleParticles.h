@@ -44,6 +44,7 @@ struct Particle
 	~Particle();
 	bool Update();
 	Enemy* closerTarget(iPoint _position);
+	Enemy* target;
 };
 
 class ModuleParticles : public Module
