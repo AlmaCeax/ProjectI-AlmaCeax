@@ -16,7 +16,7 @@ private:
 	float angle = 0;
 	bool up = false;
 	iPoint original_position;
-	iPoint lastposition;
+	fPoint lastposition;
 	iPoint circleCenter;
 	int left = 0;
 	bool startedcircle = false;

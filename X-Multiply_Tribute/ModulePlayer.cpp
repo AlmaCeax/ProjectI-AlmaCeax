@@ -308,6 +308,14 @@ update_status ModulePlayer::Update()
 				App->particles->AddParticle(App->particles->bombshot, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
 				cooldownBombs = 0;
 			}
+			if (activePU[MISSILE] == true && cooldownMissiles >= 60)
+			{
+				App->particles->AddParticle(App->particles->missile, position.x + 25, position.y, COLLIDER_PLAYER_SHOT, { 0, 0 }, 0, 1, false, false, false, true, {-2, -4});
+				App->particles->AddParticle(App->particles->missile, position.x , position.y, COLLIDER_PLAYER_SHOT, { 0, 0 }, 0, 1, false, true, false, false, {0, +7});
+				App->particles->AddParticle(App->particles->missile, position.x + 25, position.y, COLLIDER_PLAYER_SHOT, { 0, 0 }, 0, 1, false, false, false, false, {0, 2 });
+				App->particles->AddParticle(App->particles->missile, position.x , position.y, COLLIDER_PLAYER_SHOT, { 0, 0 }, 0, 1, false, false, false, false, { -2, +12 });
+				cooldownMissiles = 0;
+			}
 			if (cooldown >= 25)
 			{
 				if (activePU[FIRECIRCLE]) {
@@ -383,6 +391,10 @@ update_status ModulePlayer::Update()
 
 	if (cooldownBombs < 40) {
 		cooldownBombs++;
+	}
+
+	if (cooldownMissiles < 60) {
+		cooldownMissiles++;
 	}
 
 	return UPDATE_CONTINUE;

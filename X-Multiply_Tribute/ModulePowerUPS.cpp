@@ -57,6 +57,13 @@ ModulePowerUPS::ModulePowerUPS()
 	firecircle.type = FIRECIRCLE;
 	firecircle.enabled = false;
 
+	missile.anim.PushBack({ 69,57,18,15 });
+	missile.anim.PushBack({ 197,57,18,15 });
+	missile.anim.loop = true;
+	missile.anim.speed = 0.1f;
+	missile.type = MISSILE;
+	missile.enabled = false;
+
 }
 
 ModulePowerUPS::~ModulePowerUPS()
@@ -77,6 +84,7 @@ bool ModulePowerUPS::Start()
 	tentacles.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-021.wav");
 	life.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
 	firecircle.sfx = bomb.sfx;
+	missile.sfx = bomb.sfx;
 
 	if (!graphics)return false;
 	
@@ -205,6 +213,11 @@ void PowerUP::Effect()
 	case SHADOW:
 		App->player->activePU[FIRECIRCLE];
 		Mix_PlayChannel(-1,App->powerups->firecircle.sfx, 0);
+		break;
+	case MISSILE:
+		if (!App->player->activePU[TENTACLES])App->player->activePU[TENTACLES] = true;
+		App->player->activePU[MISSILE] = true;
+		Mix_PlayChannel(-1, App->powerups->missile.sfx, 0);
 		break;
 	}
 }

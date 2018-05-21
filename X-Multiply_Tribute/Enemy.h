@@ -16,6 +16,8 @@ protected:
 	uint points = 0;
 	uint numExplosions = 1;
 	bool flipX, flipY;
+	float rangle;
+	SDL_Point center;
 public:
 	Animation * animation = nullptr;
 	Animation * hitAnimation = nullptr;

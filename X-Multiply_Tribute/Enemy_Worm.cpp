@@ -14,18 +14,18 @@ Enemy_Worm::Enemy_Worm(int x, int y, bool _up) :Enemy(x, y)
 
 	originY = y;
 
-
+	center = { 8, 8 };
 	for (int i = 0; i < 8; i++)
 	{
 		bodies[i] = nullptr;
 	}
 	anim.PushBack({ 23, 636, 16, 16 });
-	anim.PushBack({ 42, 635, 16, 16 });
 	anim.PushBack({ 26, 653, 16, 16 });
+	anim.PushBack({ 42, 635, 16, 16 });
 
 	hitanim.PushBack({ 512, 636, 16, 16 });
-	hitanim.PushBack({ 531, 635, 16, 16 });
 	hitanim.PushBack({ 515, 653, 16, 16 });
+	hitanim.PushBack({ 531, 635, 16, 16 });
 
 	anim.speed = 0.f;
 	spawntime = 0;
@@ -101,15 +101,15 @@ void Enemy_Worm::Move()
 	if (up) {
 		switch (state)
 		{
-		case Enemy_WormBody::VERTICAL:
+		case Enemy_Worm::VERTICAL:
 			position.y++;
 			anim.setCurrentFrameIndex(0);
 			break;
-		case Enemy_WormBody::HORIZONTAL:
+		case Enemy_Worm::HORIZONTAL:
 			position.x++;
 			anim.setCurrentFrameIndex(1);
 			break;
-		case Enemy_WormBody::CURVER:
+		case Enemy_Worm::CURVER:
 			angle += 0.03f;
 			if (!startedcircle) {
 				iPoint c = { position.x - radius , position.y };
@@ -118,8 +118,9 @@ void Enemy_Worm::Move()
 			}
 			position.y = circleCenter.y + sinf(angle) * radius;
 			position.x = circleCenter.x + cosf(angle) * radius;
+			rangle += 1.7f;
 			break;
-		case::Enemy_WormBody::CURVEL:
+		case::Enemy_Worm::CURVEL:
 			angle += 0.03f;
 			if (!startedcircle) {
 				iPoint c = { position.x + radius , position.y };
@@ -128,8 +129,9 @@ void Enemy_Worm::Move()
 			}
 			position.y = circleCenter.y + sinf(angle) * radius;
 			position.x = circleCenter.x - cosf(angle) * radius;
+			rangle -= 1.7f;
 			break;
-		case Enemy_WormBody::CIRCLE:
+		case Enemy_Worm::CIRCLE:
 			if (isfirstcircle) {
 				left = rand() % 2 + 0;
 				isfirstcircle = false;
@@ -141,15 +143,6 @@ void Enemy_Worm::Move()
 		default:
 			break;
 		}
-
-
-		if (lastposition.y != 0)
-		{
-			if (lastposition.y > position.y && lastposition.x < position.x)anim.setCurrentFrameIndex(2);
-			else if (lastposition.y > position.y)anim.setCurrentFrameIndex(0);
-			else if (lastposition.x < position.x)anim.setCurrentFrameIndex(1);
-		}
-		lastposition = position;
 
 		if (position.y == 420)state = CIRCLE;
 
@@ -161,15 +154,15 @@ void Enemy_Worm::Move()
 	else {
 		switch (state)
 		{
-		case Enemy_WormBody::VERTICAL:
+		case Enemy_Worm::VERTICAL:
 			position.y--;
 			anim.setCurrentFrameIndex(0);
 			break;
-		case Enemy_WormBody::HORIZONTAL:
+		case Enemy_Worm::HORIZONTAL:
 			position.x++;
 			anim.setCurrentFrameIndex(1);
 			break;
-		case Enemy_WormBody::CURVER:
+		case Enemy_Worm::CURVER:
 			angle += 0.03f;
 			if (!startedcircle) {
 				iPoint c = { position.x + radius , position.y };
@@ -178,8 +171,9 @@ void Enemy_Worm::Move()
 			}
 			position.y = circleCenter.y - sinf(angle) * radius;
 			position.x = circleCenter.x - cosf(angle) * radius;
+			rangle +=1.7f;
 			break;
-		case::Enemy_WormBody::CURVEL:
+		case::Enemy_Worm::CURVEL:
 			angle += 0.03f;
 			if (!startedcircle) {
 				iPoint c = { position.x - radius , position.y };
@@ -188,8 +182,9 @@ void Enemy_Worm::Move()
 			}
 			position.y = circleCenter.y - sinf(angle) * radius;
 			position.x = circleCenter.x + cosf(angle) * radius;
+			rangle -= 1.7f;
 			break;
-		case Enemy_WormBody::CIRCLE:
+		case Enemy_Worm::CIRCLE:
 			if (isfirstcircle) {
 				left = rand() % 2 + 0;
 				isfirstcircle = false;
@@ -202,14 +197,8 @@ void Enemy_Worm::Move()
 			break;
 		}
 
-
-		if (lastposition.y != 0)
-		{
-			if (lastposition.y > position.y && lastposition.x < position.x)anim.setCurrentFrameIndex(2);
-			else if (lastposition.y > position.y)anim.setCurrentFrameIndex(0);
-			else if (lastposition.x < position.x)anim.setCurrentFrameIndex(1);
-		}
-		lastposition = position;
+		lastposition.x = (float)position.x;
+		lastposition.y = (float)position.y;
 
 		if (position.y == 460)state = CIRCLE;
 
@@ -223,12 +212,10 @@ void Enemy_Worm::Move()
 void Enemy_Worm::OnCollision(Collider * collider)
 {
 	OnDeath();
-	for each (Enemy_WormBody* e in bodies)
+ 	for each (Enemy_WormBody* eb in bodies)
 	{
-		if (e != nullptr) {
-			e->splited = true;
-			e->state = Enemy_WormBody::HEADDEAD;
-		}
+		if(eb)eb->splited = true;
+		if(eb)eb->state = Enemy_WormBody::HEADDEAD;
 	}
 }
 

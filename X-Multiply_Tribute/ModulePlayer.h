@@ -161,6 +161,7 @@ private:
 	Animation ejecting;
 	int cooldown = 0;
 	int cooldownBombs = 0;
+	int cooldownMissiles = 0;
 	float lastY;
 	uint startime;
 	bool movedDown = false;

@@ -34,6 +34,9 @@ struct Particle
 	int nTimes;
 	bool isMultiple;
 	int timebeforeanotherexplosion = 0;
+	bool preparation = true;
+	int preparationtimer = 0;
+	bool missileUp = false;
 
 	Particle();
 	Particle(const Particle& p);
@@ -51,7 +54,8 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = { 0,0 }, Uint32 delay = 0, int Ntimes = 1, bool isMultiple = false, bool flipX = false, bool flipY = false);
+
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = { 0,0 }, Uint32 delay = 0, int Ntimes = 1, bool isMultiple = false, bool flipX = false, bool flipY = false, bool _up = false, iPoint offset = { 0, 0 });
 	void OnCollision(Collider* c1, Collider* c2);
 
 private:
@@ -87,7 +91,6 @@ public:
 	Particle yellowCircle;
 	Particle blueCircle;
 	Particle redBall;
-
 	Particle hosturball;
 	Particle hosturballmid;
 	Particle hosturballmiddeath;
@@ -97,6 +100,7 @@ public:
 	Particle hosturlongshot;
 	Particle hosturbigshot;
 	Particle hosturbiglargeshot;
+	Particle missile;
 };
 
 #endif // __MODULEPARTICLES_H__

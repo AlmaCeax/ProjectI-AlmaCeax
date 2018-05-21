@@ -294,6 +294,18 @@ ModuleParticles::ModuleParticles()
 	hosturbiglargeshot.life = 3000;
 	hosturbiglargeshot.anim.loop = true;
 
+
+	missile.anim.PushBack({ 6,73,27,9 });
+	missile.anim.PushBack({ 37,73,27,9 });
+	missile.anim.PushBack({ 65,72,27,9 });
+	missile.anim.PushBack({ 104,72,27,9 });
+	missile.anim.speed = 0.08f;
+	missile.anim.loop = false;
+	missile.life = 3000;
+	missile.speed = { 0,0 };
+	missile.id = 15;
+	missile.preparation = true;
+
 }
 
 ModuleParticles::~ModuleParticles()
@@ -377,7 +389,8 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay, int nTimes, bool isMultiple, bool flipX, bool flipY)
+
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay, int nTimes, bool isMultiple, bool flipX, bool flipY, bool _up, iPoint offset)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -389,6 +402,9 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			p->position.y = y;
 			p->flipX = flipX;
 			p->flipY = flipY;
+			p->missileUp = _up;
+			p->offsetx = offset.x;
+			p->offsety = offset.y;
 			if (!speed.IsZero()) p->speed = speed;
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
@@ -430,7 +446,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple), flipX(p.flipX), flipY(p.flipY)
+	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple), flipX(p.flipX), flipY(p.flipY), missileUp(p.missileUp)
 {}
 
 Particle::~Particle()
@@ -458,19 +474,19 @@ bool Particle::Update()
 	case 1:
 		position.x += speed.x;
 		position.y += speed.y; break;
-	case 2: 
+	case 2:
 		position.x += speed.x;
 		position.y += speed.y;
 		if (speed.x > 1.55f)speed.x -= 0.1f;
 		if (speed.y < 2.0f)speed.y += 0.1f;
 		break;
-	case 3: 
-		position.x = App->player->position.x-42;
+	case 3:
+		position.x = App->player->position.x - 42;
 		position.y = App->player->position.y;
 		break;
 	case 7:
 		position.x += speed.x;
-		position.y += speed.y;	
+		position.y += speed.y;
 		speed.y += 0.1f;
 		break;
 	case 8:
@@ -499,7 +515,7 @@ bool Particle::Update()
 		position.y += speed.y;
 		if (position.x < 4640) {
 			App->particles->AddParticle(App->particles->hosturballmiddeath, position.x, position.y);
-			ret =  false;
+			ret = false;
 		}
 		break;
 	case 12:
@@ -512,7 +528,7 @@ bool Particle::Update()
 		break;
 	case 13:
 		if (anim.Finished()) {
-			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 1,-2 },0,1,false,false,false);
+			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 1,-2 }, 0, 1, false, false, false);
 			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -1,-2 }, 0, 1, false, true, false);
 			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 1,2 }, 0, 1, false, false, true);
 			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -1,2 }, 0, 1, false, true, true);
@@ -534,28 +550,48 @@ bool Particle::Update()
 			App->particles->AddParticle(App->particles->hosturlongshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2, 2 }, 0, 1, false, true, true);
 			App->particles->AddParticle(App->particles->hosturlongshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2,-2 }, 0, 1, false, true, false);
 			ret = false;
+			break;
+	case 15:
+		if (preparation)
+		{
+			speed.x = -1;
+			if (missileUp)speed.y = -1;
+			else speed.y = +1;
+			position.x = App->player->position.x + offsetx;
+			position.y = App->player->position.y + offsety;
+			offsetx += speed.x;
+			offsety += speed.y;
+			if (preparationtimer == 15)preparation = false;
+			else preparationtimer++;
+		}
+		else {
+			anim.frames[0] = anim.frames[2];
+			anim.frames[1] = anim.frames[3];
+			anim.speed = 0.1f;
+			anim.loop = true;
+			speed = { 3, 0 };
+			position.x += speed.x;
+			position.y += speed.y;
 		}
 		break;
 	default:
 		position.x += speed.x;
 		position.y += speed.y; break;
+		}
 	}
-
-
 	if (isPlayerAttached) {
 
 		if (App->player->state == App->player->idl)	offsety = 1;
 		else if (App->player->state == App->player->top) offsety = -1;
 		else if (App->player->state == App->player->bot) offsety = 2;
 		position.y = App->player->position.y + offsety;
-		position.x = App->player->position.x + offsetx;
+		position.x = (App->player->position.x + 30) + offsetx;
 	}
 
 	if (collider != nullptr) {
 		collider->SetPos(position.x, position.y);
 		collider->SetShape(anim.GetCurrentFrame().w, anim.GetCurrentFrame().h);
 	}
-		
-
 	return ret;
+
 }
