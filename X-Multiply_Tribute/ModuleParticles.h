@@ -38,6 +38,8 @@ struct Particle
 	bool preparation = true;
 	int preparationtimer = 0;
 	bool missileUp = false;
+	SDL_Point center = {0,0};
+	float rangle;
 
 	Particle();
 	Particle(const Particle& p);

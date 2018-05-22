@@ -15,7 +15,8 @@ Enemy_Alien::Enemy_Alien(int x, int y) :Enemy(x, y)
 	original_x = x;
 
 	points = 5000;
-
+	w = 57;
+	h = 58;
 	walk.PushBack({ 263, 269, 57, 58 });
 	walk.PushBack({ 332, 269, 57, 58 });
 	walk.PushBack({ 265, 335, 57, 58 });

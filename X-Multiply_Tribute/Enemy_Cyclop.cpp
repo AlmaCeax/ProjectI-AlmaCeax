@@ -9,6 +9,8 @@ Enemy_Cyclop::Enemy_Cyclop(int x, int y, bool _up): Enemy(x,y)
 {
 	numExplosions = 4;
 	type = TENTACLESHOOTER;
+	w = 42;
+	h = 57;
 	up = _up;
 	if (_up)
 	{

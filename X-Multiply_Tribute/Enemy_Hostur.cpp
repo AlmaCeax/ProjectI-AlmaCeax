@@ -13,6 +13,8 @@ Enemy_Hostur::Enemy_Hostur(int x, int y):Enemy(x,y)
 	spawning = true;
 	fire_rate = 90;
 	type = HOSTUR;
+	w = 167;
+	h = 184;
 
 	idle.PushBack({ 23, 791, 167, 184 });
 

@@ -14,6 +14,9 @@ Enemy_WormHole::Enemy_WormHole(int x, int y, bool up) :Enemy(x, y)
 	this->up = up;
 	if (up)flipY = true;
 
+	w = 64;
+	h = 53;
+
 	anim.PushBack({ 168, 488, 64, 53 });
 	anim.PushBack({ 168, 550, 64, 53 });
 	anim.PushBack({ 168, 622, 64, 53 });

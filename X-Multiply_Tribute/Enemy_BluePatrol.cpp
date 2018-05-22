@@ -14,6 +14,8 @@ Enemy_BluePatrol::Enemy_BluePatrol(int x, int y) :Enemy(x, y)
 	original_y = y;
 	original_x = x;
 
+	w = 27;
+	h = 29;
 	points = 900;
 
 	walk.PushBack({ 23, 692, 27, 29 });

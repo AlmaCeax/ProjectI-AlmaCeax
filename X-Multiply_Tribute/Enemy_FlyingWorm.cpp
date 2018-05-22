@@ -14,6 +14,8 @@ Enemy_FlyingWorm::Enemy_FlyingWorm(int x, int y):Enemy(x,y)
 	original_y = y;
 	original_x = x;
 
+	w = 34;
+	h = 30;
 	points = 400;
 
 	fly.PushBack({ 40, 75, 34, 30 });

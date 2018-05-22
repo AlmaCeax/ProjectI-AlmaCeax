@@ -17,6 +17,9 @@ Enemy_BrownEye::Enemy_BrownEye(int x, int y) :Enemy(x, y)
 
 	points = 5000;
 
+	w = 64;
+	h = 60;
+
 	left.PushBack({ 24, 183, 64, 60 });
 	left.PushBack({ 99, 183, 64, 60 });
 	left.PushBack({ 177, 183, 64, 61 });

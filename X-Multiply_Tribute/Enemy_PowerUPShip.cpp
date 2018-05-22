@@ -14,6 +14,8 @@ Enemy_PowerUPShip::Enemy_PowerUPShip(int x, int y, int powerUpid):Enemy(x,y)
 	type = POWERUPSHIP;
 	original_y = y;
 	original_x = x;
+	w = 28;
+	h = 20;
 
 	anim.PushBack({ 399, 102, 28, 20 });
 	anim.PushBack({ 431, 102, 31, 20 });

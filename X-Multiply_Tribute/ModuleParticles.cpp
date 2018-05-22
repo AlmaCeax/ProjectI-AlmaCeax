@@ -306,6 +306,7 @@ ModuleParticles::ModuleParticles()
 	missile.speed = { 0,0 };
 	missile.id = 15;
 	missile.preparation = true;
+	missile.center = { 27, 4 };
 
 }
 
@@ -379,7 +380,7 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			App->render->BlitFlipped(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()),p->flipX, p->flipY);
+			App->render->BlitFlipped(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()),p->flipX, p->flipY, p->rangle, p->center);
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
@@ -580,8 +581,17 @@ bool Particle::Update()
 			anim.frames[1] = anim.frames[3];
 			anim.speed = 0.1f;
 			anim.loop = true;
-			speed = { 3, 0 };
-			if(target)position = target->position;
+			speed = { 4, 0 };
+			if (target != nullptr) {
+				float distance = position.DistanceTo({ target->position.x+((target->w)/2), target->position.y + ((target->h) / 2) });
+				fPoint direction = { (target->position.x + ((target->w) / 2)) / distance - position.x / distance, (target->position.y + ((target->h) / 2)) / distance - position.y / distance };
+				position.x += direction.x * 4;
+				position.y += direction.y * 4;
+				float dot = (position.x * target->position.x) + (position.y * target->position.y);
+				float det = (position.x * target->position.y) - (position.y * target->position.x);
+				rangle = atan2(det, dot);
+				LOG("%f", rangle);
+			}
 			else position.x += speed.x;
 		}
 		break;

@@ -27,7 +27,8 @@ Enemy_BlueMouth::Enemy_BlueMouth(int x, int y, bool _up) :Enemy(x, y)
 		hitanim.PushBack({ 582, 10, 54, 42 });
 		hitanim.PushBack({ 644, 10, 54, 42 });
 	}*/
-
+	w = 48;
+	h = 35;
 	anim.speed = 0.03f;
 
 	animation = &anim;

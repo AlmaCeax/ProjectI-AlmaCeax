@@ -19,6 +19,7 @@ protected:
 	float rangle;
 	SDL_Point center;
 public:
+	int w, h;
 	Animation * animation = nullptr;
 	Animation * hitAnimation = nullptr;
 	bool hit = false;

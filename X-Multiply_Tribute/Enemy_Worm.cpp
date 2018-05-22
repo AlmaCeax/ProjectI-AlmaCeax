@@ -12,6 +12,8 @@ Enemy_Worm::Enemy_Worm(int x, int y, bool _up) :Enemy(x, y)
 	type = WORM;
 	up = _up;
 
+	w = 16;
+	h = 16;
 	originY = y;
 
 	center = { 8, 8 };
