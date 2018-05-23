@@ -39,7 +39,7 @@ struct Particle
 	int preparationtimer = 0;
 	bool missileUp = false;
 	SDL_Point center = {0,0};
-	float rangle;
+	float rangle = 0;
 
 	Particle();
 	Particle(const Particle& p);

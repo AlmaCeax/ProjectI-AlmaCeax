@@ -589,8 +589,7 @@ bool Particle::Update()
 				position.y += direction.y * 4;
 				float dot = (position.x * target->position.x) + (position.y * target->position.y);
 				float det = (position.x * target->position.y) - (position.y * target->position.x);
-				rangle = atan2(det, dot);
-				LOG("%f", rangle);
+				rangle += (SDL_atan2(det, dot));
 			}
 			else position.x += speed.x;
 		}
