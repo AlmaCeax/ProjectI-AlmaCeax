@@ -106,8 +106,11 @@ public:
 	Particle hosturbigshot;
 	Particle hosturbiglargeshot;
 	Particle missile;
-	Particle wall1;
-	Particle wall2;
+	Particle wallshot;
+	Particle wallshot2;
+	Particle walltentshot;
+	Particle walltentshot2;
+	Particle walltentshot3;
 };
 
 #endif // __MODULEPARTICLES_H__

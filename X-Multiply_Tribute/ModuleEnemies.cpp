@@ -23,6 +23,7 @@
 #include "Enemy_WormBody.h"
 #include "Enemy_WormHole.h"
 #include "Enemy_Wall.h"
+#include "ModuleStage.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
 
@@ -461,6 +462,8 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					enemies[i]->OnCollision(c2);
 					delete enemies[i];
 					enemies[i] = nullptr;
+					App->current_stage->right = true;
+					App->current_stage->wallboss = true;
 				}
 				else {
 					Mix_PlayChannel(-1, hitEnemysfx, 0);

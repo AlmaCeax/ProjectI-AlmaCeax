@@ -41,6 +41,7 @@ private:
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
 	int ball_timer = 0;
+	int wallboss_timer = 0;
 
 	enum boss_phases {
 		none,

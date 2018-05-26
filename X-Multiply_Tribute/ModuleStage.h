@@ -10,7 +10,7 @@ class ModuleStage: public Module
 {
 public:
 	int index, score_bonus;
-	bool right,up,down,left,stopped;
+	bool right,up,down,left,stopped,wallboss;
 	_Mix_Music* music;
 	_Mix_Music* bossTrack;
 	void OnFade(){ if (App->player->dead) App->ui->PlayerDeath(); }

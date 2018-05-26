@@ -146,6 +146,43 @@ ModuleParticles::ModuleParticles()
 	alienshot.speed = { 0,0 };
 	alienshot.anim.loop = true;
 
+	wallshot.anim.PushBack({ 330,283,29,32 });
+	wallshot.anim.PushBack({ 329,247,29,32 });
+	wallshot.anim.PushBack({ 377,313,56,32 });
+	wallshot.anim.PushBack({ 372,247,62,32 });
+	wallshot.anim.speed = 0.05f;
+	wallshot.life = 400;
+	wallshot.speed = { 0,0 };
+	wallshot.anim.loop = false;
+
+	wallshot2.anim.PushBack({ 374,280,56,8 });
+	wallshot2.anim.PushBack({ 375,299,56,8 });
+	wallshot2.anim.speed = 0.05f;
+	wallshot2.life = 3000;
+	wallshot2.speed = { 0,0 };
+	wallshot2.anim.loop = true;
+
+	walltentshot.anim.PushBack({ 329,374,18,18 });
+	walltentshot.anim.PushBack({ 367,374,18,18 });
+	walltentshot.anim.speed = 0.05f;
+	walltentshot.life = 3000;
+	walltentshot.speed = { 0,0 };
+	walltentshot.anim.loop = true;
+
+	walltentshot2.anim.PushBack({ 361,396,23,12 });
+	walltentshot2.anim.PushBack({ 325,396,23,12 });
+	walltentshot2.anim.speed = 0.05f;
+	walltentshot2.life = 3000;
+	walltentshot2.speed = { 0,0 };
+	walltentshot2.anim.loop = true;
+
+	walltentshot3.anim.PushBack({ 366,413,18,18 });
+	walltentshot3.anim.PushBack({ 328,416,18,18 });
+	walltentshot3.anim.speed = 0.05f;
+	walltentshot3.life = 3000;
+	walltentshot3.speed = { 0,0 };
+	walltentshot3.anim.loop = true;
+
 	browneyeshot1.anim.PushBack({ 651,40,11,8 });
 	browneyeshot1.anim.PushBack({ 652,64,18,11 });
 	browneyeshot1.anim.speed = 0.1f;
@@ -307,13 +344,6 @@ ModuleParticles::ModuleParticles()
 	missile.id = 15;
 	missile.preparation = true;
 	missile.center = { 27, 4 };
-
-	wall1.anim.PushBack({ 720,75,18,11 });
-	wall1.anim.PushBack({ 598,151,21,15 });
-	wall1.anim.speed = 0.1f;
-	wall1.life = 3000;
-	wall1.speed = { 0,0 };
-	wall1.anim.loop = true;
 
 }
 

@@ -157,6 +157,19 @@ void ModuleSceneStage1::checkCameraEvents()
 
 		current_phase = boss_phases::boss_spawn;
 	}
+
+	
+	
+	if (App->render->camera.x == 1700 * SCREEN_SIZE)
+	{
+		right = false;
+		wallboss_timer++;
+		if (wallboss_timer == 2000 || wallboss) {
+			right = true;
+			wallboss = false;
+		}
+	}
+	
 }
 
 void ModuleSceneStage1::updateCamera()
@@ -399,8 +412,6 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 540, 60, true);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 530, 150);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::WALL, 550, 25);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 615, 80);

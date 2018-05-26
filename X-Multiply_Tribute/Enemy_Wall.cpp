@@ -56,7 +56,7 @@ Enemy_Wall::Enemy_Wall(int x, int y) :Enemy(x, y)
 	hitAnimation = &hitanim1;
 
 
-	collider = App->collision->AddCollider({ 138, 13, 128, 145 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 128, 145 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->enemies);
 	collider3 = App->collision->AddCollider({ 0, 0, 160, 30 }, COLLIDER_TYPE::COLLIDER_WALL, App->enemies);
 	collider4 = App->collision->AddCollider({ 0, 0, 160, 30 }, COLLIDER_TYPE::COLLIDER_WALL, App->enemies);
 }
@@ -65,7 +65,7 @@ void Enemy_Wall::Move()
 {
 	
 	shootTimer++;
-	if (shootTimer < 75 && shootTimer % 2 == 0) {
+	if (shootTimer < 100 && shootTimer % 2 == 0) {
 		rangle3--;
 		rangle4++;
 	}
@@ -73,15 +73,25 @@ void Enemy_Wall::Move()
 		rangle3++;
 		rangle4--;
 	}
-	if (shootTimer == 150) {
+	if (shootTimer == 200) {
 
 		animation = &anim2;
-		App->particles->AddParticle(App->particles->wall1, position.x + 40, position.y + 20, COLLIDER_ENEMY_SHOT, { -1, 0 });
+		App->particles->AddParticle(App->particles->wallshot, position.x + 118, position.y + 70, COLLIDER_ENEMY_SHOT, { -1, 0 });
+
+		App->particles->AddParticle(App->particles->walltentshot, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, -1 });
+		App->particles->AddParticle(App->particles->walltentshot2, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, 0 });
+		App->particles->AddParticle(App->particles->walltentshot3, position.x, position.y, COLLIDER_ENEMY_SHOT, { -1, 1 });
 		
 		shootTimer = 0;
 	}
-	if (shootTimer == 5) {
+	if (shootTimer == 20) {
 		animation = &anim1;
+		App->particles->AddParticle(App->particles->wallshot2, position.x + 104, position.y + 82, COLLIDER_ENEMY_SHOT, { -1, 0 });
+	}
+	if (shootTimer == 100) {
+		App->particles->AddParticle(App->particles->walltentshot, position.x, position.y + 104, COLLIDER_ENEMY_SHOT, { -1, -1 });
+		App->particles->AddParticle(App->particles->walltentshot2, position.x, position.y + 104, COLLIDER_ENEMY_SHOT, { -1, 0 });
+		App->particles->AddParticle(App->particles->walltentshot3, position.x, position.y + 104, COLLIDER_ENEMY_SHOT, { -1, 1 });
 	}
 
 	
