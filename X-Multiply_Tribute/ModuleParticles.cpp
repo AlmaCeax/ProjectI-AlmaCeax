@@ -308,6 +308,13 @@ ModuleParticles::ModuleParticles()
 	missile.preparation = true;
 	missile.center = { 27, 4 };
 
+	wall1.anim.PushBack({ 720,75,18,11 });
+	wall1.anim.PushBack({ 598,151,21,15 });
+	wall1.anim.speed = 0.1f;
+	wall1.life = 3000;
+	wall1.speed = { 0,0 };
+	wall1.anim.loop = true;
+
 }
 
 ModuleParticles::~ModuleParticles()

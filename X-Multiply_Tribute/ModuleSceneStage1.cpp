@@ -400,6 +400,8 @@ void ModuleSceneStage1::loadEnemies()
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 530, 150);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::WALL, 550, 25);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 615, 80);
 
@@ -440,6 +442,8 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 1290, 150);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::ALIEN, 1600, 156);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::WALL, 1865, 25);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2270, 175);
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2305, 175);
