@@ -114,6 +114,12 @@
     <ClCompile Include="Enemy_Wall.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy_Snake.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_SnakeBody.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -263,6 +269,12 @@
     <ClInclude Include="Enemy_WormBody.h" />
     <ClInclude Include="Enemy_Hostur.h" />
     <ClInclude Include="Enemy_Wall.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Snake.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_SnakeBody.h">
       <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>

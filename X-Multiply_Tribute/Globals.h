@@ -38,7 +38,9 @@ enum ENEMY_TYPES
 	WORMBODY,
 	WORMHOLE,
 	HOSTUR,
-	WALL
+	WALL,
+	SNAKE,
+	SNAKEBODY
 };
 
 // Useful typedefs ---------

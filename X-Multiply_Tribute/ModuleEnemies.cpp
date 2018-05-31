@@ -23,6 +23,8 @@
 #include "Enemy_WormBody.h"
 #include "Enemy_WormHole.h"
 #include "Enemy_Wall.h"
+#include "Enemy_Snake.h"
+#include "Enemy_SnakeBody.h"
 #include "ModuleStage.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
@@ -245,6 +247,13 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			case ENEMY_TYPES::HOSTUR:
 				enemies[i] = new Enemy_Hostur(info.x, info.y);
 				lives[i] = 160;
+				break;
+			case ENEMY_TYPES::SNAKE:
+				enemies[i] = new Enemy_Snake(info.x, info.y, info.powerUpid);
+				lives[i] = 80;
+				break;
+			case ENEMY_TYPES::SNAKEBODY:
+				enemies[i] = new Enemy_SnakeBody(info.x, info.y, info.powerUpid);
 				break;
 		}
 	}
@@ -470,6 +479,19 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					enemies[i]->Shine();
 				}
 				break;
+			case SNAKE:
+				lives[i]--;
+				if (lives[i] == 0) {
+					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					enemies[i]->OnCollision(c2);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
+					enemies[i]->Shine();
+				}
+				break;
 			default:
 				break;
 			}
@@ -498,6 +520,10 @@ Enemy* ModuleEnemies::SpawnEnemyRet(const EnemyInfo& info)
 		case ENEMY_TYPES::HOSTUR:
 			enemies[i] = new Enemy_Hostur(info.x, info.y);
 			lives[i] = 160;
+			break;
+		case ENEMY_TYPES::SNAKEBODY:
+			enemies[i] = new Enemy_SnakeBody(info.x, info.y, info.powerUpid);
+			lives[i] = 1;
 			break;
 		}
 	}

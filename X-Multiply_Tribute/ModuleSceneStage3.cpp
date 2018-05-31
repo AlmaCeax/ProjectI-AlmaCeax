@@ -506,6 +506,8 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4465, 208, true, 0, -1, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4613, 193, true, 0, -1, true);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::SNAKE, 400, 450, false, 0, 0);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5029, 268);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5067, 222);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5085, 224);
