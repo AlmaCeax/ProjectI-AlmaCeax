@@ -7,7 +7,7 @@
 #include <stdlib.h> 
 
 
-Enemy_SnakeBody::Enemy_SnakeBody(int x, int y, int id) :Enemy(x, y)
+Enemy_SnakeBody::Enemy_SnakeBody(int x, int y, int id): Enemy(x, y)
 {
 	type = SNAKEBODY;
 
@@ -19,14 +19,6 @@ Enemy_SnakeBody::Enemy_SnakeBody(int x, int y, int id) :Enemy(x, y)
 
 		anim.PushBack({ 179, 1835, 32, 32 });
 		hitanim.PushBack({ 482, 1835, 32, 32 });
-
-		EnemyInfo info;
-		info.type = ENEMY_TYPES::SNAKEBODY;
-		info.x = position.x;
-		info.y = position.y;
-		info.powerUpid = id++;
-		Enemy* e = App->enemies->SpawnEnemyRet(info);
-		nextPart = (Enemy_SnakeBody*)e;
 	}
 	else {
 		center = { 24, 15 };
@@ -34,7 +26,6 @@ Enemy_SnakeBody::Enemy_SnakeBody(int x, int y, int id) :Enemy(x, y)
 		hitanim.PushBack({ 479, 1652, 48, 29 });
 	}
 
-	anim.speed = 0.f;
 	animation = &anim;
 	hitAnimation = &hitanim;
 
@@ -45,10 +36,22 @@ Enemy_SnakeBody::Enemy_SnakeBody(int x, int y, int id) :Enemy(x, y)
 
 void Enemy_SnakeBody::Move()
 {
-	if (startTime == 16)
+
+	if (startTime < 80 && startTime % 4 == 0) {
+		EnemyInfo info;
+		info.type = ENEMY_TYPES::SNAKEBODY;
+		info.x = position.x;
+		info.y = position.y;
+		info.powerUpid = startTime;
+		Enemy* e = App->enemies->SpawnEnemyRet(info);
+		nextPart = (Enemy_SnakeBody*)e;
+	}
+	
+	if (startTime > 16)
 	{
 		position.x--;
 	}
+	startTime++;
 }
 
 void Enemy_SnakeBody::Shine()

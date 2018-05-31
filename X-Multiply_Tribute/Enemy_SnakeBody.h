@@ -16,7 +16,7 @@ public:
 	void Move();
 	void OnDeath();
 	void Shine();
-	Enemy_SnakeBody* nextPart;
+	Enemy_SnakeBody* nextPart = nullptr;
 	bool death = false;
 };
 

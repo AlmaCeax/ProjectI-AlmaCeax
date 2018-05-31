@@ -20,9 +20,10 @@ private:
 	iPoint circleCenter;
 	int left = 0;
 	bool startedcircle = false;
-	Enemy_SnakeBody* nextPart;
+	Enemy_SnakeBody* nextPart = nullptr;
 	enum State { START, CIRCLE, END, NONE };
 	State state;
+	bool createdBody = false;
 public:
 	Enemy_Snake(int x, int y, int id);
 	void OnDeath();

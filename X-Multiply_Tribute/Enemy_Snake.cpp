@@ -20,7 +20,6 @@ Enemy_Snake::Enemy_Snake(int x, int y, int id) :Enemy(x, y)
 
 	hitanim.PushBack({ 343, 1652, 44, 32 });
 
-	anim.speed = 0.f;
 	animation = &anim;
 	hitAnimation = &hitanim;
 	original_position = { x, y };
@@ -29,19 +28,25 @@ Enemy_Snake::Enemy_Snake(int x, int y, int id) :Enemy(x, y)
 	state = START;
 	points = 100;
 
-	EnemyInfo info;
-	info.type = ENEMY_TYPES::SNAKEBODY;
-	info.x = position.x+12;
-	info.y = position.y;
-	info.powerUpid = 1;
-	Enemy* e = App->enemies->SpawnEnemyRet(info);
-	nextPart = (Enemy_SnakeBody*)e;
+	
 }
 
 
 void Enemy_Snake::Move()
 {
-	position.x--;
+	if (!createdBody) {
+		createdBody = true;
+		EnemyInfo info;
+		info.type = ENEMY_TYPES::SNAKEBODY;
+		info.x = position.x + 12;
+		info.y = position.y;
+		info.powerUpid = 1;
+		Enemy* e = App->enemies->SpawnEnemyRet(info);
+		nextPart = (Enemy_SnakeBody*)e;
+		
+	}
+	
+	position.x -=1;
 }
 
 void Enemy_Snake::OnCollision(Collider * collider)
