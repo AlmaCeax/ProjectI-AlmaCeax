@@ -307,14 +307,6 @@ bool ModuleSceneStage1::loadMap()
 	coll = { 2548,188,90,24 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
-	//volcano
-	coll = { 2638,200,224,12 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2694,182,154,18 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2721,168,40,14 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-
 
 	//diagonal
 	coll = { 2920,0,80,30 };
@@ -338,16 +330,6 @@ bool ModuleSceneStage1::loadMap()
 	coll = { 3808,256,1152,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	coll = { 3552,468,1408,12 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-
-	//volcano
-	coll = { 3730,268,224,30 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 3730,298,224,12 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 3744,310,154,18 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 3840,328,40,14 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//heart
@@ -464,6 +446,11 @@ void ModuleSceneStage1::loadEnemies()
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 2500, 120, false, 0, 4);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2726, 164, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2751, 189, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2795, 181, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2807, 191, true);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3110, 60, true);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 3200, 130, false, 0, 7);
@@ -497,6 +484,13 @@ void ModuleSceneStage1::loadEnemies()
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3670, 245, true);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 3740, 286, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 3752, 296, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 3796, 294, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 3821, 319, false);
+	
+	
+
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 3800, 350, false, 0, 1);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 259, false, 5);
@@ -510,12 +504,6 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 340);
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4477, 340);
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 410);
-
-	//App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 491, 112,true);
-	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2726, 164,true);
-	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2751, 189,true);
-	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2795, 181,true);
-	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2807, 191,true);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 2322, 22);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 2372, 22);

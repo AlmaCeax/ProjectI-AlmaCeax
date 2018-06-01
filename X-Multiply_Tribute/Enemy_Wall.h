@@ -23,6 +23,8 @@ private:
 	SDL_Point center4;
 	Collider* collider3 = nullptr;
 	Collider* collider4 = nullptr;
+	int coll3;
+	int coll4;
 	
 
 public:

@@ -219,6 +219,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				break;
 			case ENEMY_TYPES::BLUEMOUTH:
 				enemies[i] = new Enemy_BlueMouth(info.x, info.y,info.going_up);
+				lives[i] = 3;
 				break;
 			case ENEMY_TYPES::BLUEFLYER:
 				enemies[i] = new Enemy_BlueFlyer(info.x, info.y);
@@ -412,6 +413,10 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					enemies[i]->OnCollision(c2);
 					delete enemies[i];
 					enemies[i] = nullptr;
+				}
+				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
+					enemies[i]->Shine();
 				}
 				break;
 			case BLUEPATROL:
