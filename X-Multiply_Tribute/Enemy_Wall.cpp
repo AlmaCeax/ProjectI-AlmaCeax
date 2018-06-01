@@ -55,10 +55,12 @@ Enemy_Wall::Enemy_Wall(int x, int y) :Enemy(x, y)
 	animation = &anim1;
 	hitAnimation = &hitanim1;
 
+	coll3 = position.y;
+	coll4 = position.y;
 
-	collider = App->collision->AddCollider({ 0, 0, 128, 145 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->enemies);
-	collider3 = App->collision->AddCollider({ 0, 0, 160, 30 }, COLLIDER_TYPE::COLLIDER_WALL, App->enemies);
-	collider4 = App->collision->AddCollider({ 0, 0, 160, 30 }, COLLIDER_TYPE::COLLIDER_WALL, App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 128, 50 }, COLLIDER_TYPE::COLLIDER_ENEMY, App->enemies);
+	collider3 = App->collision->AddCollider({ 0, 0, 160, 50 }, COLLIDER_TYPE::COLLIDER_WALL, App->enemies);
+	collider4 = App->collision->AddCollider({ 0, 0, 160, 50 }, COLLIDER_TYPE::COLLIDER_WALL, App->enemies);
 }
 
 void Enemy_Wall::Move()
@@ -68,10 +70,14 @@ void Enemy_Wall::Move()
 	if (shootTimer < 100 && shootTimer % 2 == 0) {
 		rangle3--;
 		rangle4++;
+		coll3+=2;
+		coll4-=2;
 	}
 	else if (shootTimer % 2 == 0) {
 		rangle3++;
 		rangle4--;
+		coll3-=2;
+		coll4+=2;
 	}
 	if (shootTimer == 200) {
 
@@ -98,11 +104,11 @@ void Enemy_Wall::Move()
 }
 void Enemy_Wall::Draw(SDL_Texture* sprites) {
 	if (collider != nullptr)
-		collider->SetPos(position.x+ 138, position.y + 13);
+		collider->SetPos(position.x+ 138, position.y + 63);
 	if (collider3 != nullptr)
-		collider3->SetPos(position.x, position.y);
+		collider3->SetPos(position.x, coll3);
 	if (collider4 != nullptr)
-		collider4->SetPos(position.x, position.y + 120);
+		collider4->SetPos(position.x, coll4 + 120);
 
 	if (animation != nullptr) {
 		if (!hit)App->render->BlitFlipped(sprites, position.x + 138, position.y + 13, &(animation->GetCurrentFrame()), flipX, flipY, rangle, center);

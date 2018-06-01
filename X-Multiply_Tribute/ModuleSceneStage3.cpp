@@ -488,6 +488,16 @@ bool ModuleSceneStage3::loadMap()
 void ModuleSceneStage3::loadEnemies()
 {
 
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 820, 430, false, 0, 7);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1300, 470, false, 0, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 2750, 470, false, 0, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4100, 470, false, 0, 4);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4250, 400, false, 0, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4350, 350, false, 0, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4680, 321, false, 0, 6);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4880, 250, false, 0, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 5000, 220, false, 0, 3);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 1020, 500);
 	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 1000, 500, false, 0, -1, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 2103, 500);
@@ -506,7 +516,7 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4465, 208, true, 0, -1, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4613, 193, true, 0, -1, true);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::SNAKE, 600, 450);
+	//App->enemies->AddEnemy(ENEMY_TYPES::SNAKE, 600, 450);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5029, 268);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5067, 222);
@@ -518,7 +528,6 @@ void ModuleSceneStage3::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5294, 185);
 	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5336, 180);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4680, 321, false, 0, 6);
 
 	//top
 	EnemyInfo infoWormhole;
