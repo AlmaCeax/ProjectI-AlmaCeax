@@ -14,6 +14,13 @@ Enemy_Snake::Enemy_Snake(int x, int y, int id) :Enemy(x, y)
 	w = 44;
 	h = 32;
 
+	for (int i = 0; i < 20; i++)
+	{
+		childs[i] = nullptr;
+	}
+	original_position = { x, y };
+
+	circleCenter = { x, y };
 	center = { 22, 12 };
 	
 	anim.PushBack({ 40, 1652, 44, 32 });
@@ -22,41 +29,71 @@ Enemy_Snake::Enemy_Snake(int x, int y, int id) :Enemy(x, y)
 
 	animation = &anim;
 	hitAnimation = &hitanim;
-	original_position = { x, y };
 
 	collider = App->collision->AddCollider({ 0, 0, 42, 32 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 	state = START;
 	points = 100;
 
-	
 }
 
 
 void Enemy_Snake::Move()
 {
-	if (!createdBody) {
-		createdBody = true;
-		EnemyInfo info;
-		info.type = ENEMY_TYPES::SNAKEBODY;
-		info.x = position.x + 12;
-		info.y = position.y;
-		info.powerUpid = 1;
-		Enemy* e = App->enemies->SpawnEnemyRet(info);
-		nextPart = (Enemy_SnakeBody*)e;
-		
+	if (indexchild < 10)
+	{
+		/*if (spawntime == 16)
+		{
+			EnemyInfo info;
+			info.type = ENEMY_TYPES::SNAKEBODY;
+			info.x = original_position.x;
+			info.y = original_position.y;
+			info.powerUpid = indexchild;
+			Enemy* e = App->enemies->SpawnEnemyRet(info);
+			childs[indexchild] = (Enemy_SnakeBody*)e;
+			spawntime = 0;
+			indexchild++;
+		}
+		else {
+			spawntime++;
+		}*/
 	}
-	
-	position.x -=1;
+	angle += 0.02f;
+	switch (state)
+	{
+	case Enemy_Snake::START:
+		position.y = original_position.y + sinf(angle) * radius;
+		position.x-=1;
+		//if (position.x == original_position.x - 100)
+		//{
+		//	state = CIRCLE;
+		//	circleCenter = { position.x + radius, position.y };
+		//}
+		break;
+	case Enemy_Snake::CIRCLE:
+		position.y = original_position.y + sinf(angle) * radius;
+		position.x = original_position.x + cosf(angle) * radius;
+		//rangle -= 1.2f;
+		break;
+	case Enemy_Snake::END:
+		break;
+	case Enemy_Snake::NONE:
+		break;
+	default:
+		break;
+	}
 }
 
 void Enemy_Snake::OnCollision(Collider * collider)
 {
-	OnDeath();
+	/*OnDeath();*/
 }
 
 void Enemy_Snake::Shine()
 {
-	nextPart->Shine();
+	/*for each (Enemy_SnakeBody* sb in childs)
+	{
+		sb->Shine();
+	}*/
 }
 
 void Enemy_Snake::OnDeath()

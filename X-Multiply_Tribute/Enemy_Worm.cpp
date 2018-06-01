@@ -232,7 +232,7 @@ void Enemy_Worm::Shine()
 
 void Enemy_Worm::OnDeath()
 {
-	for (int i = 0; i < sizeof(bodies); i++)
+	for (int i = 0; i < 8; i++)
 	{
 		if (bodies[i] != nullptr)
 		{

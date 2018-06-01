@@ -14,7 +14,10 @@ Enemy_SnakeBody::Enemy_SnakeBody(int x, int y, int id): Enemy(x, y)
 	w = 32;
 	h = 32;
 
-	if (id < 20) {
+	circleCenter = { x, y };
+	original_position = { x, y };
+
+	if (id < 9) {
 		center = { 16, 16 };
 
 		anim.PushBack({ 179, 1835, 32, 32 });
@@ -36,27 +39,35 @@ Enemy_SnakeBody::Enemy_SnakeBody(int x, int y, int id): Enemy(x, y)
 
 void Enemy_SnakeBody::Move()
 {
-
-	if (startTime < 80 && startTime % 4 == 0) {
-		EnemyInfo info;
-		info.type = ENEMY_TYPES::SNAKEBODY;
-		info.x = position.x;
-		info.y = position.y;
-		info.powerUpid = startTime;
-		Enemy* e = App->enemies->SpawnEnemyRet(info);
-		nextPart = (Enemy_SnakeBody*)e;
-	}
-	
-	if (startTime > 16)
+	angle += 0.015f;
+	switch (state)
 	{
+	case Enemy_SnakeBody::START:
+		position.y = original_position.y + sinf(angle) * radius;
 		position.x--;
+		if (position.x == original_position.x - 100)
+		{
+			state = CIRCLE;
+			circleCenter = { position.x + radius, position.y };
+		}
+		break;
+	case Enemy_SnakeBody::CIRCLE:
+		position.y = original_position.y + 2*sinf(angle) * radius;
+		position.x = original_position.x + 2*cosf(angle) * radius;
+		//rangle -= 1.2f;
+		break;
+	case Enemy_SnakeBody::END:
+		break;
+	case Enemy_SnakeBody::NONE:
+		break;
+	default:
+		break;
 	}
-	startTime++;
 }
 
 void Enemy_SnakeBody::Shine()
 {
-	if(nextPart != nullptr)nextPart->Shine();
+
 }
 
 void Enemy_SnakeBody::OnDeath()

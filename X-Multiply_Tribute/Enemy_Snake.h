@@ -13,14 +13,16 @@ private:
 	Animation hitanim;
 	int idChildren;
 	int shootTimer = 0;
-	int radius = 40;
+	int radius = 70;
 	float angle = 0;
 	iPoint original_position;
 	fPoint lastposition;
 	iPoint circleCenter;
 	int left = 0;
+	int indexchild = 0;
+	int spawntime = 0;
 	bool startedcircle = false;
-	Enemy_SnakeBody* nextPart = nullptr;
+	Enemy_SnakeBody* childs[20];
 	enum State { START, CIRCLE, END, NONE };
 	State state;
 	bool createdBody = false;
