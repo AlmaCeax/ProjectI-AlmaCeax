@@ -444,7 +444,7 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2400, 175);
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2485, 175);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 2500, 120, false, 0, 4);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 2500, 120, false, 0, 3);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2726, 164, true);
 	App->enemies->AddEnemy(ENEMY_TYPES::BLUEMOUTH, 2751, 189, true);
