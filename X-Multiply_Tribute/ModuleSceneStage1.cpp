@@ -416,11 +416,10 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 600, 60);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 615, 80);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 700, 140, false, 0, 3);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 80);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 720, 120);
-
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 750, 140, false,0, 3);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 500, 140, false, 0, 7);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 770, 90, false);
 	App->enemies->AddEnemy(ENEMY_TYPES::HELLBALL, 785, 90, false);
@@ -440,10 +439,12 @@ void ModuleSceneStage1::loadEnemies()
 
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 900, 175);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1100, 100, false,0, 2);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1130, 120, false,0, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1090, 120, false,0, 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1130, 90, false, 0, 7);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::ALIEN, 1100, 156);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1250, 130, false, 0, 1);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1160, 50);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 1200, 60);
@@ -461,9 +462,13 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2400, 175);
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 2485, 175);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 2500, 120, false, 0, 4);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3110, 60, true);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 3200, 130, false, 0, 7);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3500, 185, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3670, 245, true);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 170);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3240, 210);
@@ -489,6 +494,11 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 230);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 270);
 	App->enemies->AddEnemy(ENEMY_TYPES::FLYINGWORM, 3620, 310);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::TENTACLESHOOTER, 3670, 245, true);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 3800, 350, false, 0, 1);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 259, false, 5);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 280, false, 5);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 394, true, 5);
