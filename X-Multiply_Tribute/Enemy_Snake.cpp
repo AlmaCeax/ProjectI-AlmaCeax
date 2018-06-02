@@ -57,21 +57,23 @@ void Enemy_Snake::Move()
 			spawntime++;
 		}*/
 	}
-	angle += 0.02f;
+	angle += 0.01f;
 	switch (state)
 	{
 	case Enemy_Snake::START:
 		position.y = original_position.y + sinf(angle) * radius;
 		position.x-=1;
-		//if (position.x == original_position.x - 100)
-		//{
-		//	state = CIRCLE;
-		//	circleCenter = { position.x + radius, position.y };
-		//}
+		if (position.x == original_position.x - 100)
+		{
+			state = CIRCLE;
+			circleCenter = { position.x + radius, position.y };
+		}
 		break;
 	case Enemy_Snake::CIRCLE:
-		position.y = original_position.y + sinf(angle) * radius;
-		position.x = original_position.x + cosf(angle) * radius;
+		position.y = circleCenter.y + sinf(angle) * radius;
+		position.x = circleCenter.x - cosf(angle) * radius;
+		circleCenter.x += 1;
+		//circleCenter.y += 1;
 		//rangle -= 1.2f;
 		break;
 	case Enemy_Snake::END:

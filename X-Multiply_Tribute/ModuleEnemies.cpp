@@ -277,6 +277,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					lives[i]--;
 					if (lives[i] == 0) {
 						Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+						App->particles->AddParticle(App->particles->multipleBigExplosion, enemies[i]->position.x, enemies[i]->position.y + (enemies[i]->h / 2), COLLIDER_TYPE::COLLIDER_NONE, { 0, 0 }, 0, 4, true);
 						enemies[i]->OnCollision(c2);
 						delete enemies[i];
 						enemies[i] = nullptr;
@@ -543,6 +544,7 @@ void ModuleEnemies::Kill(Enemy* e) {
 			switch (enemies[i]->type) {
 			case HOSTUR:
 				Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+				App->particles->AddParticle(App->particles->multipleLittleExplosion, enemies[i]->position.x + (enemies[i]->w / 2), enemies[i]->position.y+(enemies[i]->h/2), COLLIDER_TYPE::COLLIDER_NONE, { 0, 0 }, 0, 4, true);
 				enemies[i]->OnCollision(nullptr);
 				delete enemies[i];
 				enemies[i] = nullptr;

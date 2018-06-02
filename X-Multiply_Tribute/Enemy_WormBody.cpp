@@ -146,6 +146,7 @@ void Enemy_WormBody::Move()
 		}
 		else {
 			position += speed;
+			rangle -= 3.f;
 		}
 	}
 	

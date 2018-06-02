@@ -188,7 +188,7 @@ void PowerUP::Effect()
 		if (!App->player->activePU[TENTACLES])Tentacles();
 		else {
 			App->player->activePU[LASER] = true;
-			App->player->activePU[SHADOW] = false;
+			App->player->activePU[FIRECIRCLE] = false;
 			App->player->activePU[MISSILE] = false;
 		}
 		break;		
@@ -203,6 +203,7 @@ void PowerUP::Effect()
 		break;		
 	case SPEED_DOWN: App->player->speed.x -= 0.3f;
 		App->player->speed.y -= 0.3f;
+		App->particles->AddParticle(App->particles->playerBoost, App->player->position.x -42, App->player->position.y, COLLIDER_NONE);
 		break;		
 	case BOMB: 
 		Mix_PlayChannel(-1, App->powerups->bomb.sfx, 0);
@@ -211,7 +212,7 @@ void PowerUP::Effect()
 	case SHADOW:
 		if (!App->player->activePU[TENTACLES])Tentacles();
 		else {
-			App->player->activePU[SHADOW] = true;
+			App->player->activePU[FIRECIRCLE] = true;
 			App->player->activePU[MISSILE] = false;
 			App->player->activePU[LASER] = false;
 		}
@@ -219,11 +220,9 @@ void PowerUP::Effect()
 		break;
 	case MISSILE:
 		if (!App->player->activePU[TENTACLES])Tentacles();
-		else {
 			App->player->activePU[MISSILE] = true;
 			App->player->activePU[LASER] = false;
-			App->player->activePU[SHADOW] = false;
-		}
+			App->player->activePU[FIRECIRCLE] = false;
 		Mix_PlayChannel(-1, App->powerups->missile.sfx, 0);
 		break;
 	}

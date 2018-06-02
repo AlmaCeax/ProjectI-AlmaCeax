@@ -248,7 +248,7 @@ ModuleParticles::ModuleParticles()
 	multipleLittleExplosion.life = 500;
 	multipleLittleExplosion.id = 8;
 
-	multipleBigExplosion.life = 1500;
+	multipleBigExplosion.life = 3000;
 	multipleBigExplosion.id = 9;
 
 	yellowCircle.anim.PushBack({ 14,321,16,15 });
@@ -538,9 +538,9 @@ bool Particle::Update()
 		break;
 	case 9:
 		timebeforeanotherexplosion++;
-		if (timebeforeanotherexplosion == 5)
+		if (timebeforeanotherexplosion == 2)
 		{
-			App->particles->AddParticle(App->particles->enemyBossExplosion, position.x + rand() % 150 + (-75), position.y + rand() % 150 + (-75));
+			App->particles->AddParticle(App->particles->enemyBossExplosion, position.x + rand() % 400 + (-200), position.y + rand() % 200 + (-100));
 			timebeforeanotherexplosion = 0;
 		}
 		break;
@@ -624,9 +624,8 @@ bool Particle::Update()
 				fPoint direction = { (target->position.x + ((target->w) / 2)) / distance - position.x / distance, (target->position.y + ((target->h) / 2)) / distance - position.y / distance };
 				position.x += direction.x * 4;
 				position.y += direction.y * 4;
-				float dot = (position.x * target->position.x) + (position.y * target->position.y);
-				float det = (position.x * target->position.y) - (position.y * target->position.x);
-				rangle += (SDL_atan2(det, dot));
+				if(position.y > target->position.y)rangle -= App->particles->AbsoluteRotation(position, target->position);
+				else rangle += App->particles->AbsoluteRotation(position, target->position);
 			}
 			else position.x += speed.x;
 		}
@@ -672,4 +671,32 @@ Enemy* Particle::closerTarget(iPoint _position)
 	}
 
 	return closerEnemy;
+}
+
+
+float ModuleParticles::AbsoluteRotation(iPoint originPos, iPoint targetPos)
+{
+	float rotation = 0;
+	//Fist quadrant
+	if (targetPos.x > originPos.x && targetPos.y > originPos.y)
+	{
+		rotation =  atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
+	}
+	//Second quadrant
+	else if (targetPos.x < originPos.x && targetPos.y > originPos.y)
+	{
+		rotation = M_PI + atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
+	}
+	//Third quadrant
+	else if (targetPos.x < originPos.x && targetPos.y < originPos.y)
+	{
+		rotation = M_PI + atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
+	}
+	//Fourth quadrant
+	else if (targetPos.x > originPos.x && targetPos.y < originPos.y)
+	{
+		rotation = M_PI + atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
+	}
+
+	return rotation;
 }

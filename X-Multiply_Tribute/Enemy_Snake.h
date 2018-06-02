@@ -1,5 +1,6 @@
 #ifndef __SNAKE_H__
 #define __SNAKE_H__
+#define NUMCHUNKS 20
 
 #include "Enemy.h"
 #include "Enemy_SnakeBody.h"
@@ -13,7 +14,7 @@ private:
 	Animation hitanim;
 	int idChildren;
 	int shootTimer = 0;
-	int radius = 70;
+	int radius = 40;
 	float angle = 0;
 	iPoint original_position;
 	fPoint lastposition;
@@ -22,7 +23,7 @@ private:
 	int indexchild = 0;
 	int spawntime = 0;
 	bool startedcircle = false;
-	Enemy_SnakeBody* childs[20];
+	Enemy_SnakeBody* childs[NUMCHUNKS];
 	enum State { START, CIRCLE, END, NONE };
 	State state;
 	bool createdBody = false;
