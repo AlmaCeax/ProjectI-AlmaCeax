@@ -356,6 +356,28 @@ ModuleParticles::ModuleParticles()
 	missileexplosion.life = 200;
 	missileexplosion.speed = { 0,0 };
 
+	laserstart.anim.PushBack({ 213, 504, 24, 7 });
+	laserstart.anim.speed = 0.5f;
+	laserstart.anim.loop = false;
+	laserstart.life = 20;
+	laserstart.speed = { 0,0 };
+
+	laser.anim.PushBack({ 213, 520, 63, 7 });
+	laser.anim.speed = 0.3f;
+	laser.anim.loop = false;
+	laser.life = 1000;
+	laser.id = 16;
+	laser.speed = { 10,0 };
+
+	laserexplosion.anim.PushBack({ 301, 519, 8, 10 });
+	laserexplosion.anim.speed = 0.5f;
+	laserexplosion.anim.loop = false;
+	laserexplosion.life = 20;
+	laserexplosion.id = 16;
+	laserexplosion.speed = { 0,0 };
+
+	
+
 }
 
 ModuleParticles::~ModuleParticles()
@@ -478,6 +500,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			case 11: App->particles->AddParticle(App->particles->hosturballmiddeath, active[i]->position.x, active[i]->position.y); break;
 			case 12: App->particles->AddParticle(App->particles->hosturballdeath, active[i]->position.x, active[i]->position.y); break;
 			case 15: App->particles->AddParticle(App->particles->missileexplosion, active[i]->position.x, active[i]->position.y); break;
+			case 16: App->particles->AddParticle(App->particles->laserexplosion, active[i]->position.x + 63, active[i]->position.y); break;
 			}
 			delete active[i];
 			active[i] = nullptr;
@@ -645,6 +668,10 @@ bool Particle::Update()
  				life = 0;
 			}
 		}
+		break;
+	case 16:
+		position.x += speed.x;
+		position.y += speed.y; break;
 		break;
 	default:
 		position.x += speed.x;
