@@ -42,7 +42,7 @@ public:
 	SDL_Rect screen;
 	uint score = 0;
 
-	int top_5_scores[5] = { 200000,100000,5000,1337,0 };
+	int top_5_scores[5] = { 500000, 250000,100000,1337,0 };
 	/*char name_1[10] = "cere";
 	char name_2[10] = "marc";
 	char name_3[10] = "alejandro";
@@ -79,8 +79,8 @@ private:
 	int player_lives = 2;
 
 	char score_text[9] = "00000000";
-	uint top_score = 200000;
-	char top_score_text[9] = "00200000";
+	uint top_score = 500000;
+	char top_score_text[9] = "00500000";
 
 
 
