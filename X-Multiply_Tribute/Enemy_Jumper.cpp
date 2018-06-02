@@ -12,7 +12,7 @@ Enemy_Jumper::Enemy_Jumper(int x, int y, bool back, bool normal_spawn): Enemy(x,
 	type = JUMPER;
 
 	points = 400;
-	w = 40;
+	w = 35;
 	h = 24;
 	air.PushBack({276,179,23,24});
 
