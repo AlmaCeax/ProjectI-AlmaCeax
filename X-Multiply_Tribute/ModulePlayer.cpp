@@ -328,7 +328,17 @@ update_status ModulePlayer::Update()
 			}
 			if (cooldown >= 25)
 			{
-				if (activePU[SHADOW]) {
+				if (activePU[LASER]) {
+					App->particles->AddParticle(App->particles->laserstart, tentacle.position.x + 5, tentacle.position.y, COLLIDER_PLAYER_SHOT);
+					App->particles->AddParticle(App->particles->laser, tentacle.position.x + 5, tentacle.position.y, COLLIDER_PLAYER_SHOT);
+
+					App->particles->AddParticle(App->particles->laserstart, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+					App->particles->AddParticle(App->particles->laser, position.x + 25, position.y + 5, COLLIDER_PLAYER_SHOT);
+
+					App->particles->AddParticle(App->particles->laserstart, tentacle2.position.x + 5, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
+					App->particles->AddParticle(App->particles->laser, tentacle2.position.x + 5, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
+				}
+				else if (activePU[SHADOW]) {
          			App->particles->AddParticle(App->particles->blueCircle, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT, { circle_1.shot_vector.x, circle_1.shot_vector.y});
 					App->particles->AddParticle(App->particles->blueCircle, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT, { circle_1.shot_vector2.x, circle_1.shot_vector2.y});
 
