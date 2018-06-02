@@ -344,6 +344,17 @@ ModuleParticles::ModuleParticles()
 	missile.id = 15;
 	missile.preparation = true;
 	missile.center = { 27, 4 };
+	
+	missileexplosion.anim.PushBack({ 100,240,32,32 });
+	missileexplosion.anim.PushBack({ 130,240,32,32 });
+	missileexplosion.anim.PushBack({ 164,240,32,32 });
+	missileexplosion.anim.PushBack({ 198,240,32,32 });
+	missileexplosion.anim.PushBack({ 232,240,32,32 });
+	missileexplosion.anim.PushBack({ 265,240,32,32 });
+	missileexplosion.anim.speed = 0.5f;
+	missileexplosion.anim.loop = false;
+	missileexplosion.life = 200;
+	missileexplosion.speed = { 0,0 };
 
 }
 
@@ -466,6 +477,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			case 10: if (c2->type == COLLIDER_PLAYER_SHOT) App->ui->AddScore(100); break;
 			case 11: App->particles->AddParticle(App->particles->hosturballmiddeath, active[i]->position.x, active[i]->position.y); break;
 			case 12: App->particles->AddParticle(App->particles->hosturballdeath, active[i]->position.x, active[i]->position.y); break;
+			case 15: App->particles->AddParticle(App->particles->missileexplosion, active[i]->position.x, active[i]->position.y); break;
 			}
 			delete active[i];
 			active[i] = nullptr;
@@ -620,14 +632,18 @@ bool Particle::Update()
 			anim.loop = true;
 			speed = { 4, 0 };
 			if (target != nullptr) {
+				hastargeted = true;
 				float distance = position.DistanceTo({ target->position.x+((target->w)/2), target->position.y + ((target->h) / 2) });
 				fPoint direction = { (target->position.x + ((target->w) / 2)) / distance - position.x / distance, (target->position.y + ((target->h) / 2)) / distance - position.y / distance };
 				position.x += direction.x * 4;
 				position.y += direction.y * 4;
-				if(position.y > target->position.y)rangle -= App->particles->AbsoluteRotation(position, target->position);
-				else rangle += App->particles->AbsoluteRotation(position, target->position);
+				rangle += App->particles->AbsoluteRotation(position, target->position);
+				if (target->isdead)target = nullptr;
 			}
-			else position.x += speed.x;
+			else if(!hastargeted) position.x += speed.x;
+			else {
+ 				life = 0;
+			}
 		}
 		break;
 	default:
@@ -685,17 +701,21 @@ float ModuleParticles::AbsoluteRotation(iPoint originPos, iPoint targetPos)
 	//Second quadrant
 	else if (targetPos.x < originPos.x && targetPos.y > originPos.y)
 	{
-		rotation = M_PI + atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
+		rotation = M_PI + (atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x)));
 	}
 	//Third quadrant
 	else if (targetPos.x < originPos.x && targetPos.y < originPos.y)
 	{
-		rotation = M_PI + atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
+		rotation = M_PI + (atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x)));
 	}
 	//Fourth quadrant
 	else if (targetPos.x > originPos.x && targetPos.y < originPos.y)
 	{
-		rotation = M_PI + atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
+		rotation = atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
+	}
+	else if (targetPos.y == originPos.y)
+	{
+		rotation = 0;
 	}
 
 	return rotation;

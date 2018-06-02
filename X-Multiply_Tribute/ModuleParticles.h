@@ -22,6 +22,7 @@ struct Particle
 	uint fx = 0;
 	iPoint position;
 	fPoint speed;
+	bool hastargeted = false;
 	int w, h = 0;
 	Uint32 born = 0;
 	Uint32 life = 0;
@@ -112,6 +113,7 @@ public:
 	Particle walltentshot;
 	Particle walltentshot2;
 	Particle walltentshot3;
+	Particle missileexplosion;
 };
 
 #endif // __MODULEPARTICLES_H__

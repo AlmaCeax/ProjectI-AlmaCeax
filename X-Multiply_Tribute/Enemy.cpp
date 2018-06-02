@@ -47,6 +47,7 @@ void Enemy::OnCollision(Collider* collider)
 		}
 	}
 	App->ui->AddScore(points);
+	isdead = true;
 }
 void Enemy::Shine()
 {

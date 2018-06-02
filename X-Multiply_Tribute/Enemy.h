@@ -25,6 +25,7 @@ public:
 	bool hit = false;
 	iPoint position = {0,0};
 	iPoint speed = {0, 0};
+	bool isdead = false;
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 public:
 	Enemy(int x, int y);
