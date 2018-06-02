@@ -188,7 +188,7 @@ void PowerUP::Effect()
 		if (!App->player->activePU[TENTACLES])Tentacles();
 		else {
 			App->player->activePU[LASER] = true;
-			App->player->activePU[FIRECIRCLE] = false;
+			App->player->activePU[SHADOW] = false;
 			App->player->activePU[MISSILE] = false;
 		}
 		break;		
@@ -212,7 +212,7 @@ void PowerUP::Effect()
 	case SHADOW:
 		if (!App->player->activePU[TENTACLES])Tentacles();
 		else {
-			App->player->activePU[FIRECIRCLE] = true;
+			App->player->activePU[SHADOW] = true;
 			App->player->activePU[MISSILE] = false;
 			App->player->activePU[LASER] = false;
 		}
@@ -222,7 +222,7 @@ void PowerUP::Effect()
 		if (!App->player->activePU[TENTACLES])Tentacles();
 			App->player->activePU[MISSILE] = true;
 			App->player->activePU[LASER] = false;
-			App->player->activePU[FIRECIRCLE] = false;
+			App->player->activePU[SHADOW] = false;
 		Mix_PlayChannel(-1, App->powerups->missile.sfx, 0);
 		break;
 	}
