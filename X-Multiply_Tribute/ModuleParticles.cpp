@@ -500,11 +500,13 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			case 11: App->particles->AddParticle(App->particles->hosturballmiddeath, active[i]->position.x, active[i]->position.y); break;
 			case 12: App->particles->AddParticle(App->particles->hosturballdeath, active[i]->position.x, active[i]->position.y); break;
 			case 15: App->particles->AddParticle(App->particles->missileexplosion, active[i]->position.x, active[i]->position.y); break;
-			case 16: App->particles->AddParticle(App->particles->laserexplosion, active[i]->position.x + 63, active[i]->position.y); break;
+			case 16: if (c2->type == COLLIDER_WALL) App->particles->AddParticle(App->particles->laserexplosion, active[i]->position.x + 63, active[i]->position.y); break;
 			}
-			delete active[i];
-			active[i] = nullptr;
-			break;
+
+			if (active[i]->id != 16 || c2->type != COLLIDER_ENEMY) {
+				delete active[i];
+				active[i] = nullptr;
+			}
 		}
 	}
 }
