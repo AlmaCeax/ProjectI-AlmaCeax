@@ -111,6 +111,7 @@
     <ClInclude Include="ModuleSceneStage3.h" />
     <ClInclude Include="ModuleSceneStart.h" />
     <ClInclude Include="ModuleStage.h" />
+    <ClInclude Include="ModuleTopScore.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="MemLeaks.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="ModuleSceneStage3.cpp" />
     <ClCompile Include="ModuleSceneStart.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
+    <ClCompile Include="ModuleTopScore.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>
