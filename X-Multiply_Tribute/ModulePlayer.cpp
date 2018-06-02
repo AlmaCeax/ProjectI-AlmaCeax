@@ -278,7 +278,7 @@ update_status ModulePlayer::Update()
 		
 		if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->controller_A_button == KEY_STATE::KEY_DOWN)
 		{
-			if (activePU[FIRECIRCLE]) {
+			if (activePU[SHADOW]) {
 				App->particles->AddParticle(App->particles->blueCircle, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT, { circle_1.shot_vector.x, circle_1.shot_vector.y});
 				App->particles->AddParticle(App->particles->blueCircle, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT, { circle_1.shot_vector2.x, circle_1.shot_vector2.y});
 
@@ -318,7 +318,7 @@ update_status ModulePlayer::Update()
 			}
 			if (cooldown >= 25)
 			{
-				if (activePU[FIRECIRCLE]) {
+				if (activePU[SHADOW]) {
          			App->particles->AddParticle(App->particles->blueCircle, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT, { circle_1.shot_vector.x, circle_1.shot_vector.y});
 					App->particles->AddParticle(App->particles->blueCircle, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT, { circle_1.shot_vector2.x, circle_1.shot_vector2.y});
 
@@ -364,7 +364,7 @@ update_status ModulePlayer::Update()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	if(collider != nullptr) collider->SetPos(position.x, position.y);
 	App->render->Blit(graphics, position.x, position.y, &r);
-	if (activePU[FIRECIRCLE])
+	if (activePU[SHADOW])
 	{
 		circle_1.Move(position.x, position.y);
 		circle_2.Move(position.x, position.y);

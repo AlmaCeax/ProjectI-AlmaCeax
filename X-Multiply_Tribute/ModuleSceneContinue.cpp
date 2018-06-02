@@ -132,8 +132,6 @@ void ModuleSceneContinue::NumberSwap() {
 }
 bool ModuleSceneContinue::Start()
 {
-	App->ui->ui_visible = false;
-
 	App->render->ResetCamera();
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_2.png");
 	music = App->audio->LoadMusic("Assets/Audio/Music/16_Continue.ogg");

@@ -5,6 +5,8 @@
 #include "p2Point.h"
 
 struct _Mix_Music;
+struct SDL_Texture;
+struct Mix_Chunk;
 
 
 class ModuleUI :
@@ -38,6 +40,22 @@ public:
 	bool is_continue = false;
 	int coins = 0;
 	SDL_Rect screen;
+	uint score = 0;
+
+	int top_5_scores[5] = { 500000, 250000,100000,1337,0 };
+	/*char name_1[10] = "cere";
+	char name_2[10] = "marc";
+	char name_3[10] = "alejandro";
+	char name_4[10] = "axel";
+	char name_5[10] = "";*/
+	char names[5][10] = { "cere","marc","alejandro","axel","" };
+
+	int score_font = -1;
+	int blue_font = -1;
+	int pink_font = -1;
+
+	bool game_over = false;
+
 	enum clear_step
 	{
 		none,
@@ -47,27 +65,24 @@ public:
 	} current_step = clear_step::none;
 
 private:
-	SDL_Texture* graphics;
+
 	SDL_Rect ui_rect;
 	SDL_Rect life;
 	_Mix_Music* clear_song;
 	_Mix_Music* ready_song;
 	_Mix_Music* over_song;
 	Mix_Chunk* coin_sfx;
+	SDL_Texture* graphics;
 
 	void ClearUpdate();
 	void ReadyUpdate();
 	int player_lives = 2;
-	uint score = 0;
+
 	char score_text[9] = "00000000";
-	uint top_score = 15000;
-	char top_score_text[9] = "00015000";
+	uint top_score = 500000;
+	char top_score_text[9] = "00500000";
 
-	int score_font = -1;
-	int blue_font = -1;
-	int pink_font = -1;
 
-	bool game_over = false;
 
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
