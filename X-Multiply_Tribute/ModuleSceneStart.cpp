@@ -29,6 +29,7 @@ update_status ModuleSceneStart::Update()
 			App->render->Blit(graphics, 0, 0, &background);
 			App->render->Blit(graphics, 0, 0, &title);
 			App->render->Blit(graphics, 116, 200, &company);
+			App->render->Blit(graphics, 45, 80, &logo);
 		} break;
 		case start_steps::show_coins: {
 			alpha+=10;
@@ -105,6 +106,7 @@ ModuleSceneStart::ModuleSceneStart()
 	title = {0,13,384,51};
 	background = {61,240,384,256};
 	company = {354,71,152,38};
+	logo = { 18,78,304,94 };
 }
 
 ModuleSceneStart::~ModuleSceneStart()

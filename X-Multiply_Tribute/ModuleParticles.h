@@ -115,6 +115,9 @@ public:
 	Particle walltentshot3;
 	Particle missileexplosion;
 	Particle zarikasubeam;
+	Particle laserstart;
+	Particle laser;
+	Particle laserexplosion;
 };
 
 #endif // __MODULEPARTICLES_H__

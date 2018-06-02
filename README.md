@@ -55,8 +55,8 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 - A: Move to left
 - D: Move to right
 - SPACEBAR: Shoot
-- 5: Insert Coin
-- 1: Start Player 1
+- 5: Insert Coin / Insert Letter Score
+- 1: Start Game / Finish Name Score
 - ESC: Quit game
 
 - F1: Show colliders
@@ -74,14 +74,14 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 ### Gamepad Xbox
 - Right stick: Move 
 - A button: Shoot 
-- Y button: Insert Coin
-- Start button: Start Game
+- Y button: Insert Coin / Insert Letter Score
+- Start button: Start Game / Finish Name Score
 
 ### Gamepad PS4
 - Right stick: Move 
 - X button: Shoot
-- Triangle button: Insert Coin
-- Options button: Start Game
+- Triangle button: Insert Coin / Insert Letter Score
+- Options button: Start Game / Finish Name Score
 
 ***
 
