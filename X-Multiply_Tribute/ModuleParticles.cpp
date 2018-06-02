@@ -503,7 +503,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			case 16: if (c2->type == COLLIDER_WALL) App->particles->AddParticle(App->particles->laserexplosion, active[i]->position.x + 63, active[i]->position.y); break;
 			}
 
-			if (active[i]->id != 16 || c2->type != COLLIDER_ENEMY) {
+			if (active[i]->id != 16 || c2->type == COLLIDER_WALL) {
 				delete active[i];
 				active[i] = nullptr;
 			}
