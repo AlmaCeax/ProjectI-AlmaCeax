@@ -43,6 +43,7 @@ void Enemy_PowerUPShip::OnCollision(Collider * collider)
 {
 	if(pu != nullptr)pu->enabled = true;
 	App->particles->AddParticle(App->particles->enemyExplosion, position.x, position.y);
+	isdead = true;
 }
 
 void Enemy_PowerUPShip::Move()

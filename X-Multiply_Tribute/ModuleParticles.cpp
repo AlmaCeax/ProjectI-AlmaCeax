@@ -637,7 +637,7 @@ bool Particle::Update()
 				fPoint direction = { (target->position.x + ((target->w) / 2)) / distance - position.x / distance, (target->position.y + ((target->h) / 2)) / distance - position.y / distance };
 				position.x += direction.x * 4;
 				position.y += direction.y * 4;
-				rangle += App->particles->AbsoluteRotation(position, target->position);
+				if(!target->type == WALL || !target->type == HOSTUR)rangle += App->particles->AbsoluteRotation(position, target->position);
 				if (target->isdead)target = nullptr;
 			}
 			else if(!hastargeted) position.x += speed.x;
