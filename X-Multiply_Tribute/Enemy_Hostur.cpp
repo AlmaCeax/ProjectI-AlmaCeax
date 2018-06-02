@@ -60,7 +60,7 @@ void Enemy_Hostur::Move() {
 		if (position.y == 278) {
 			spawning = false;
 
-			rect_1 = { position.x + 49,position.y + 96,118,88 };
+			rect_1 = { position.x + 49,position.y + 85,118,110 };
 			rect_2 = { position.x + 3,position.y + 44,164,41 };
 			rect_3 = { position.x + 24,position.y + 29,143,15 };
 			rect_4 = { position.x + 55,position.y + 13,32,14 };

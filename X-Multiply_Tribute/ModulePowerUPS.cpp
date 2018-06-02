@@ -50,12 +50,12 @@ ModulePowerUPS::ModulePowerUPS()
 	laser.type = LASER;
 	laser.enabled = false;
 
-	firecircle.anim.PushBack({37,57,18,15});
-	firecircle.anim.PushBack({ 165,57,18,15 });
-	firecircle.anim.loop = true;
-	firecircle.anim.speed = 0.1f;
-	firecircle.type = FIRECIRCLE;
-	firecircle.enabled = false;
+	shadow.anim.PushBack({37,57,18,15});
+	shadow.anim.PushBack({ 165,57,18,15 });
+	shadow.anim.loop = true;
+	shadow.anim.speed = 0.1f;
+	shadow.type = SHADOW;
+	shadow.enabled = false;
 
 	missile.anim.PushBack({ 69,57,18,15 });
 	missile.anim.PushBack({ 197,57,18,15 });
@@ -83,7 +83,7 @@ bool ModulePowerUPS::Start()
 	bomb.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-021.wav");
 	laser.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-021.wav");
 	life.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
-	firecircle.sfx = bomb.sfx;
+	shadow.sfx = bomb.sfx;
 	missile.sfx = bomb.sfx;
 
 	if (!graphics)return false;
@@ -215,7 +215,7 @@ void PowerUP::Effect()
 			App->player->activePU[MISSILE] = false;
 			App->player->activePU[LASER] = false;
 		}
-		Mix_PlayChannel(-1,App->powerups->firecircle.sfx, 0);
+		Mix_PlayChannel(-1,App->powerups->shadow.sfx, 0);
 		break;
 	case MISSILE:
 		if (!App->player->activePU[TENTACLES])Tentacles();
