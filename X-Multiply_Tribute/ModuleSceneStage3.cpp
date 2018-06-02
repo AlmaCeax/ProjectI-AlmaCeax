@@ -61,6 +61,7 @@ bool ModuleSceneStage3::Init()
 	rect[0] = {0, 0, 2800, 208};
 	rect[1] = {0, 0, 5760, 561};
 	rect[2] = {0, 0, 775, 225};
+	rect[3] = {0, 0, 322, 195};
 
 	door.PushBack({ 0, 0, 57, 57 });
 	door.PushBack({ 61, 0, 57, 57 });
@@ -150,6 +151,38 @@ void ModuleSceneStage3::BackgroundEvents()
 	if (App->render->camera.x >= 5374)
 	{
 		right = false;
+		if (!bossspawned)
+		{
+			EnemyInfo infozarikasu1;
+			infozarikasu1.type = ENEMY_TYPES::ZARIKASU;
+			infozarikasu1.x = 5740;
+			infozarikasu1.y = 317;
+			infozarikasu1.powerUpid = 1;
+			boss[0] = App->enemies->SpawnEnemyRet(infozarikasu1);
+
+			EnemyInfo infozarikasu2;
+			infozarikasu2.type = ENEMY_TYPES::ZARIKASU;
+			infozarikasu2.x = 5337;
+			infozarikasu2.y = 317;
+			infozarikasu2.powerUpid = 2;
+			boss[1] = App->enemies->SpawnEnemyRet(infozarikasu2);
+
+			EnemyInfo infozarikasu3;
+			infozarikasu3.type = ENEMY_TYPES::ZARIKASU;
+			infozarikasu3.x = 5740;
+			infozarikasu3.y = 40;
+			infozarikasu3.powerUpid = 3;
+			boss[2] = App->enemies->SpawnEnemyRet(infozarikasu3);
+
+			EnemyInfo infozarikasu4;
+			infozarikasu4.type = ENEMY_TYPES::ZARIKASU;
+			infozarikasu4.x = 5337;
+			infozarikasu4.y = 40;
+			infozarikasu4.powerUpid = 4;
+			boss[3] = App->enemies->SpawnEnemyRet(infozarikasu4);
+
+			bossspawned = true;
+		}
 	}
 
 	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4906) {
@@ -214,7 +247,8 @@ update_status ModuleSceneStage3::Update()
 
 	App->render->Blit(textures[0], 10, 226, &rect[0], 0.65f);
 	App->render->Blit(textures[2], 5002, 95, &rect[2]);
-	App->render->Blit(textures[1], 0, -1, &rect[1]);
+	App->render->Blit(textures[1], 0, 0, &rect[1]);
+	if(bossdead)App->render->Blit(textures[4], 5412, 112, &rect[3]);
 
 	BackgroundEvents();
 	UpdateCamera();
@@ -259,6 +293,7 @@ bool ModuleSceneStage3::loadMap()
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage3/Layerbg03.png");
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage3/BackgroundFinalbg03.png");
 	textures[3] = App->textures->Load("Assets/Sprites/Stages/Stage3/Door.png");
+	textures[4] = App->textures->Load("Assets/Sprites/Stages/Stage3/ZarikasuDead.png");
 
 	checkpoints[0] = { 0, 336 };
 	checkpoints[1] = { 2211, 336 };

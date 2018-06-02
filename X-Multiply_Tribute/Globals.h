@@ -40,7 +40,8 @@ enum ENEMY_TYPES
 	HOSTUR,
 	WALL,
 	SNAKE,
-	SNAKEBODY
+	SNAKEBODY,
+	ZARIKASU
 };
 
 // Useful typedefs ---------

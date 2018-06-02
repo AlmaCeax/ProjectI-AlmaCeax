@@ -127,6 +127,7 @@
     <ClCompile Include="Enemy_Hostur.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy_Zarikasu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -291,6 +292,7 @@
     <ClInclude Include="Enemy_Hostur.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy_Zarikasu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

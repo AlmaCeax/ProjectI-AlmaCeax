@@ -97,6 +97,7 @@
     <ClInclude Include="Enemy_Wall.h" />
     <ClInclude Include="Enemy_Worm.h" />
     <ClInclude Include="Enemy_WormBody.h" />
+    <ClInclude Include="Enemy_Zarikasu.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Enemy_GreenEye.h" />
     <ClInclude Include="Enemy_WormHole.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Enemy_Worm.cpp" />
     <ClCompile Include="Enemy_WormBody.cpp" />
     <ClCompile Include="Enemy_WormHole.cpp" />
+    <ClCompile Include="Enemy_Zarikasu.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Enemy_GreenEye.cpp" />
     <ClCompile Include="Main.cpp" />
