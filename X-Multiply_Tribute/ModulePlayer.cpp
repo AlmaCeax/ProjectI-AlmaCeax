@@ -918,7 +918,7 @@ void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece, floa
 		
 		App->render->Blit(graphics, head.position.x, head.position.y, &(head.anim.GetCurrentFrame()));
 	}
-	head.collider->SetPos((int)head.position.x, (int)head.position.y);
+	//head.collider->SetPos((int)head.position.x, (int)head.position.y);
 	/*piece2.collider->SetPos(piece2.position.x, piece2.position.y);
 	//collider->SetPos(position.x, position.y);
 	piece3.collider->SetPos(piece3.position.x, piece3.position.y);
