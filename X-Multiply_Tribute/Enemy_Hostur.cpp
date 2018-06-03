@@ -50,7 +50,7 @@ Enemy_Hostur::~Enemy_Hostur()
 {
 	App->textures->Unload(bckg_texture);
 	for (int i = 0; i < 5; i++) {
-		colliders[i]->to_delete = true;
+		if(colliders[i] != nullptr) colliders[i]->to_delete = true;
 	}
 }
 
