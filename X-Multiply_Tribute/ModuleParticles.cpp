@@ -263,7 +263,7 @@ ModuleParticles::ModuleParticles()
 	blueCircle.anim.PushBack({ 23,148,16,16 });
 	blueCircle.anim.PushBack({ 44,147,16,16 });
 	blueCircle.anim.PushBack({ 66,145,16,16 });
-	blueCircle.anim.PushBack({ 88,14,16,16 });
+	blueCircle.anim.PushBack({ 88,144,16,16 });
 	blueCircle.anim.PushBack({ 106,144,16,16 });
 	blueCircle.anim.PushBack({ 123,144,16,16 });
 	blueCircle.anim.PushBack({ 140,144,16,16 });
