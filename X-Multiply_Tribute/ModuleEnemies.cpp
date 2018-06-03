@@ -5,11 +5,13 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
+#include "ModuleUI.h"
 #include "Enemy_HellBall.h"
 #include "Enemy_FlyingWorm.h"
 #include "Enemy_GreenEye.h"
 #include "Enemy_BrownEye.h"
 #include "Enemy_Jumper.h"
+#include "Enemy_Hostur.h"
 #include "Enemy_TentacleShooter.h"
 #include "Enemy_BlueMouth.h"
 #include "Enemy_BlueFlyer.h"
@@ -20,6 +22,12 @@
 #include "Enemy_Worm.h"
 #include "Enemy_WormBody.h"
 #include "Enemy_WormHole.h"
+#include "Enemy_Wall.h"
+#include "Enemy_Snake.h"
+#include "Enemy_SnakeBody.h"
+#include "Enemy_Zarikasu.h"
+#include "ModuleStage.h"
+#include "ModuleSceneStage3.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
 
@@ -100,8 +108,13 @@ update_status ModuleEnemies::PostUpdate()
 	{
 		if(enemies[i] != nullptr)
 		{
-			if(enemies[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - (SPAWN_MARGIN*2))
+			if(enemies[i]->position.x * SCREEN_SIZE < (App->render->camera.x - enemies[i]->w))
 			{
+				LOG("DeSpawning enemy at %d", enemies[i]->position.x * SCREEN_SIZE);
+				delete enemies[i];
+				enemies[i] = nullptr;
+			}
+			else if (enemies[i]->position.y * SCREEN_SIZE > ((App->render->camera.y + SCREEN_HEIGHT) + enemies[i]->h)) {
 				LOG("DeSpawning enemy at %d", enemies[i]->position.x * SCREEN_SIZE);
 				delete enemies[i];
 				enemies[i] = nullptr;
@@ -213,6 +226,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				break;
 			case ENEMY_TYPES::BLUEMOUTH:
 				enemies[i] = new Enemy_BlueMouth(info.x, info.y,info.going_up);
+				lives[i] = 3;
 				break;
 			case ENEMY_TYPES::BLUEFLYER:
 				enemies[i] = new Enemy_BlueFlyer(info.x, info.y);
@@ -231,7 +245,23 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 				lives[i] = 1;
 				break;
 			case ENEMY_TYPES::WORMHOLE:
-				enemies[i] = new Enemy_WormHole(info.x, info.y);
+				enemies[i] = new Enemy_WormHole(info.x, info.y, info.going_up);
+				lives[i] = 12;
+				break;
+			case ENEMY_TYPES::WALL:
+				enemies[i] = new Enemy_Wall(info.x, info.y);
+				lives[i] = 18;
+				break;
+			case ENEMY_TYPES::HOSTUR:
+				enemies[i] = new Enemy_Hostur(info.x, info.y);
+				lives[i] = 160;
+				break;
+			case ENEMY_TYPES::SNAKE:
+				enemies[i] = new Enemy_Snake(info.x, info.y, info.powerUpid);
+				lives[i] = 80;
+				break;
+			case ENEMY_TYPES::SNAKEBODY:
+				enemies[i] = new Enemy_SnakeBody(info.x, info.y, info.powerUpid);
 				break;
 		}
 	}
@@ -246,6 +276,28 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				((Enemy_Jumper*)enemies[i])->SetDownAnim();
 				break;
 			}
+		}
+
+		if (enemies[i] != nullptr && enemies[i]->type == HOSTUR) {
+			for (int j = 0; j < 5; ++j) {
+				if (((Enemy_Hostur*)enemies[i])->colliders[j] == c1) {
+					lives[i]--;
+					if (lives[i] == 0) {
+						Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+						App->particles->AddParticle(App->particles->multipleBigExplosion, enemies[i]->position.x, enemies[i]->position.y + (enemies[i]->h / 2), COLLIDER_TYPE::COLLIDER_NONE, { 0, 0 }, 0, 4, true);
+						enemies[i]->OnCollision(c2);
+						delete enemies[i];
+						enemies[i] = nullptr;
+						App->ui->StageCleared();
+						return;
+					}
+					else {
+						Mix_PlayChannel(-1, hitEnemysfx, 0);
+						enemies[i]->Shine();
+						return;
+					}
+				}
+			}	
 		}
 
 		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
@@ -370,6 +422,10 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}
+				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
+					enemies[i]->Shine();
+				}
 				break;
 			case BLUEPATROL:
 				lives[i]--;
@@ -400,6 +456,17 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			case WORMBODY:
 				lives[i]--;
 				if (lives[i] == 0) {
+					if (((Enemy_WormBody*)enemies[i])->splited == true) {
+						Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+						enemies[i]->OnCollision(c2);
+						delete enemies[i];
+						enemies[i] = nullptr;
+					}
+				}
+				break;
+			case WORMHOLE:
+				lives[i]--;
+				if (lives[i] == 0) {
 					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
 					enemies[i]->OnCollision(c2);
 					delete enemies[i];
@@ -410,13 +477,46 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					enemies[i]->Shine();
 				}
 				break;
-			case WORMHOLE:
+			case WALL:
 				lives[i]--;
 				if (lives[i] == 0) {
 					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
 					enemies[i]->OnCollision(c2);
 					delete enemies[i];
 					enemies[i] = nullptr;
+					App->current_stage->right = true;
+					App->current_stage->wallboss = true;
+				}
+				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
+					enemies[i]->Shine();
+				}
+				break;
+			case SNAKE:
+				lives[i]--;
+				if (lives[i] == 0) {
+					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					enemies[i]->OnCollision(c2);
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
+					enemies[i]->Shine();
+				}
+				break;
+			case ZARIKASU:
+				lives[i]--;
+				if (lives[i] == 0) {
+					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+					enemies[i]->OnCollision(c2);
+					App->stage3->bossdeads++;
+					delete enemies[i];
+					enemies[i] = nullptr;
+				}
+				else {
+					Mix_PlayChannel(-1, hitEnemysfx, 0);
+					enemies[i]->Shine();
 				}
 				break;
 			default:
@@ -444,8 +544,39 @@ Enemy* ModuleEnemies::SpawnEnemyRet(const EnemyInfo& info)
 			enemies[i] = new Enemy_WormBody(info.x, info.y, info.going_up, info.tail);
 			lives[i] = 1;
 			break;
+		case ENEMY_TYPES::HOSTUR:
+			enemies[i] = new Enemy_Hostur(info.x, info.y);
+			lives[i] = 160;
+			break;
+		case ENEMY_TYPES::SNAKEBODY:
+			enemies[i] = new Enemy_SnakeBody(info.x, info.y, info.powerUpid);
+			lives[i] = 1;
+			break;
+		case ENEMY_TYPES::ZARIKASU:
+			enemies[i] = new Enemy_Zarikasu(info.x, info.y, info.powerUpid);
+			lives[i] = 20;
+			break;
 		}
 	}
 
 	return enemies[i];
+}
+
+void ModuleEnemies::Kill(Enemy* e) {
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (enemies[i] == e) {
+			switch (enemies[i]->type) {
+			case HOSTUR:
+				Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+				App->particles->AddParticle(App->particles->multipleLittleExplosion, enemies[i]->position.x + (enemies[i]->w / 2), enemies[i]->position.y+(enemies[i]->h/2), COLLIDER_TYPE::COLLIDER_NONE, { 0, 0 }, 0, 4, true);
+				enemies[i]->OnCollision(nullptr);
+				delete enemies[i];
+				enemies[i] = nullptr;
+				App->ui->StageCleared();
+				return;
+				break;
+			}
+		}
+	}
 }

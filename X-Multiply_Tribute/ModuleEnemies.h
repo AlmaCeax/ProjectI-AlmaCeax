@@ -35,11 +35,11 @@ public:
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 	void SpawnEnemy(const EnemyInfo& info);
 	Enemy* SpawnEnemyRet(const EnemyInfo& info);
+	Enemy* enemies[MAX_ENEMIES];
+	void Kill(Enemy* e);
 
 private:
-
 	EnemyInfo queue[MAX_ENEMIES];
-	Enemy* enemies[MAX_ENEMIES];
 	SDL_Texture* sprites;
 	int lives[MAX_ENEMIES];
 

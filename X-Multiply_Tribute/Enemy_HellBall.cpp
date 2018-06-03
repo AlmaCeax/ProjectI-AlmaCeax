@@ -6,6 +6,8 @@
 
 Enemy_HellBall::Enemy_HellBall(int x, int y, bool _going_up):Enemy(x,y)
 {
+	w = 24;
+	h = 27;
 	type = HELLBALL;
 	open_mouth.PushBack({ 241, 8, 24, 27 });
 	open_mouth.PushBack({ 271, 8, 24, 27 });

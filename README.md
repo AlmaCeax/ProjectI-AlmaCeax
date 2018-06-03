@@ -55,8 +55,8 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 - A: Move to left
 - D: Move to right
 - SPACEBAR: Shoot
-- 5: Insert Coin
-- 1: Start Player 1
+- 5: Insert Coin / Insert Letter Score
+- 1: Start Game / Finish Name Score
 - ESC: Quit game
 
 - F1: Show colliders
@@ -74,14 +74,14 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 ### Gamepad Xbox
 - Right stick: Move 
 - A button: Shoot 
-- Y button: Insert Coin
-- Start button: Start Game
+- Y button: Insert Coin / Insert Letter Score
+- Start button: Start Game / Finish Name Score
 
 ### Gamepad PS4
 - Right stick: Move 
 - X button: Shoot
-- Triangle button: Insert Coin
-- Options button: Start Game
+- Triangle button: Insert Coin / Insert Letter Score
+- Options button: Start Game / Finish Name Score
 
 ***
 
@@ -115,4 +115,45 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 - 3 types of enemies
 - 2 types of powerups / weapons
 - Tentacles
+
+## V_0.6 Level 3 and Gamepad
+- Level 3
+- UI continue screen and insert coin screen
+- Enemies hit effect 
+- Fullscreen   
+- Gamepad   
+
+## V_0.7 Enemies and Checkpoints
+- Checkpoints      
+- Level 3 Enemies
+	- Blue patrol                   
+	- Worm    
+	- Wormhole  
+	- Cyclop     
+	- Blue Flyer 
+- Level 1 Enemies
+	- Jumper     
+	- Green eye   
+	- Alien      
+	- Brown eye   
+	- Blue eye   
+	
+
+## V_0.8 Powerups
+- Laser 
+- Missile  
+- Shadow   
+- Complete level 1 power ups          
+
+## V_0.9 (27/05/2018) Bosses
+- Killer lashes     
+- Hostur      
+- Big Daddy Worm 
+- Zarikasu   
+
+## V_1.0 (1/06/2018) Polish
+- UI high scores screen and intro animation 
+- Background colour     
+- Tentacles
+	- Ropes           
 

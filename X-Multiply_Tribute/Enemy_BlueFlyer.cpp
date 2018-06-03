@@ -11,6 +11,8 @@ Enemy_BlueFlyer::Enemy_BlueFlyer(int x, int y):Enemy(x,y)
 	type = BLUEFLYER;
 	points = 1000;
 
+	w = 29;
+	h = 30;
 	idle.PushBack({ 284,106,29,30 });
 	hitanim.PushBack({ 884, 182, 29, 30 });
 

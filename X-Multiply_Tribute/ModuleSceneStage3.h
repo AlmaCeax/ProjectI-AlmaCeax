@@ -2,6 +2,7 @@
 #define __ModuleSceneStage3_H__
 
 #include "ModuleStage.h"
+#include "Enemy.h"
 
 struct SDL_Rect;
 
@@ -9,18 +10,21 @@ class ModuleSceneStage3 :
 	public ModuleStage
 {
 private:
-	SDL_Texture * textures[4];
+	SDL_Texture * textures[5];
 	_Mix_Music* secondTrack = nullptr;
-	_Mix_Music* bossTrack = nullptr;
+	Enemy* boss[4];
 
 	int x = 0;
 	int y = 0;
 	int timer;
 	int bgalpha = 255;
 	bool collider = true;
-	SDL_Rect rect[3];
+	SDL_Rect rect[4];
 	SDL_Rect coll;
 	Animation door;
+	bool end = false;
+
+	bool bossspawned = false;
 
 	void UpdateCamera();
 	void BackgroundEvents();
@@ -29,6 +33,8 @@ private:
 	void loadAudio();
 
 public:
+	bool bossdead = false;
+	int bossdeads = 0;
 	update_status Update();
 	bool CleanUp();
 	bool Start();

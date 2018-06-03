@@ -17,7 +17,7 @@ enum pu_type
 	SPEED_BOOST,
 	SPEED_DOWN,
 	LIFE,
-	TENTACLES
+	TENTACLES,
 };
 
 struct PowerUP 
@@ -34,6 +34,7 @@ struct PowerUP
 	PowerUP(const PowerUP& pu);
 	~PowerUP();
 	void Effect();
+	void Tentacles();
 	bool Update();
 	bool isEnabled() { return enabled; }
 	void setEnabled(bool _enable) { enabled = _enable; }
@@ -52,6 +53,7 @@ public:
 
 	void OnCollision(Collider* c1, Collider* c2);
 	PowerUP* AddPowerUp(const PowerUP& powerup, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE);
+	
 
 private:
 	SDL_Texture * graphics = nullptr;
@@ -59,10 +61,12 @@ private:
 
 public:
 	PowerUP life;
+	PowerUP missile;
 	PowerUP speedBoost;
 	PowerUP speedDown;
 	PowerUP bomb;
-	PowerUP tentacles;
+	PowerUP laser;
+	PowerUP shadow;
 	PowerUP tentacle;
 };
 

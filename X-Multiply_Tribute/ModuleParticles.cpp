@@ -4,9 +4,11 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleUI.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
+#include "ModuleEnemies.h"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>  
 #include "SDL/include/SDL_timer.h"
@@ -15,7 +17,7 @@
 
 ModuleParticles::ModuleParticles()
 {
-	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	for (int i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
 
 	// BaseShot particle
@@ -144,6 +146,43 @@ ModuleParticles::ModuleParticles()
 	alienshot.speed = { 0,0 };
 	alienshot.anim.loop = true;
 
+	wallshot.anim.PushBack({ 330,283,29,32 });
+	wallshot.anim.PushBack({ 329,247,29,32 });
+	wallshot.anim.PushBack({ 377,313,56,32 });
+	wallshot.anim.PushBack({ 372,247,62,32 });
+	wallshot.anim.speed = 0.05f;
+	wallshot.life = 400;
+	wallshot.speed = { 0,0 };
+	wallshot.anim.loop = false;
+
+	wallshot2.anim.PushBack({ 374,280,56,8 });
+	wallshot2.anim.PushBack({ 375,299,56,8 });
+	wallshot2.anim.speed = 0.05f;
+	wallshot2.life = 3000;
+	wallshot2.speed = { 0,0 };
+	wallshot2.anim.loop = true;
+
+	walltentshot.anim.PushBack({ 329,374,18,18 });
+	walltentshot.anim.PushBack({ 367,374,18,18 });
+	walltentshot.anim.speed = 0.05f;
+	walltentshot.life = 3000;
+	walltentshot.speed = { 0,0 };
+	walltentshot.anim.loop = true;
+
+	walltentshot2.anim.PushBack({ 361,396,23,12 });
+	walltentshot2.anim.PushBack({ 325,396,23,12 });
+	walltentshot2.anim.speed = 0.05f;
+	walltentshot2.life = 3000;
+	walltentshot2.speed = { 0,0 };
+	walltentshot2.anim.loop = true;
+
+	walltentshot3.anim.PushBack({ 366,413,18,18 });
+	walltentshot3.anim.PushBack({ 328,416,18,18 });
+	walltentshot3.anim.speed = 0.05f;
+	walltentshot3.life = 3000;
+	walltentshot3.speed = { 0,0 };
+	walltentshot3.anim.loop = true;
+
 	browneyeshot1.anim.PushBack({ 651,40,11,8 });
 	browneyeshot1.anim.PushBack({ 652,64,18,11 });
 	browneyeshot1.anim.speed = 0.1f;
@@ -209,7 +248,7 @@ ModuleParticles::ModuleParticles()
 	multipleLittleExplosion.life = 500;
 	multipleLittleExplosion.id = 8;
 
-	multipleBigExplosion.life = 1500;
+	multipleBigExplosion.life = 3000;
 	multipleBigExplosion.id = 9;
 
 	yellowCircle.anim.PushBack({ 14,321,16,15 });
@@ -219,6 +258,139 @@ ModuleParticles::ModuleParticles()
 	yellowCircle.anim.loop = false;
 	yellowCircle.life = 3000;
 	yellowCircle.speed = { 0,0 };
+
+	blueCircle.anim.PushBack({ 5,149,16,16 });
+	blueCircle.anim.PushBack({ 23,148,16,16 });
+	blueCircle.anim.PushBack({ 44,147,16,16 });
+	blueCircle.anim.PushBack({ 66,145,16,16 });
+	blueCircle.anim.PushBack({ 88,14,16,16 });
+	blueCircle.anim.PushBack({ 106,144,16,16 });
+	blueCircle.anim.PushBack({ 123,144,16,16 });
+	blueCircle.anim.PushBack({ 140,144,16,16 });
+	blueCircle.anim.speed = 0.1f;
+	blueCircle.anim.loop = false;
+	blueCircle.life = 3000;
+	blueCircle.speed = { 0,0 };
+
+	redBall.anim.PushBack({ 14,460,18,14 });
+	redBall.anim.speed = 0.1f;
+	redBall.anim.loop = false;
+	redBall.life = 3000;
+	redBall.speed = { 0,0 };
+	redBall.id = 10;
+
+	hosturballmid.anim.PushBack({ 14,490,18,18 });
+	hosturballmid.anim.PushBack({ 37,490,18,18 });
+	hosturballmid.anim.PushBack({ 61,490,18,18 });
+	hosturballmid.anim.PushBack({ 85,490,18,18 });
+	hosturballmid.life = 3000;
+	hosturballmid.anim.speed = 0.1f;
+	hosturballmid.anim.loop = true;
+	hosturballmid.id = 11;
+
+	hosturball.anim.PushBack({ 14,490,18,18 });
+	hosturball.anim.PushBack({ 37,490,18,18 });
+	hosturball.anim.PushBack({ 61,490,18,18 });
+	hosturball.anim.PushBack({ 85,490,18,18 });
+	hosturball.life = 3000;
+	hosturball.anim.speed = 0.1f;
+	hosturball.anim.loop = true;
+	hosturball.id = 12;
+
+	hosturballmiddeath.anim.PushBack({14,523,18,18});
+	hosturballmiddeath.anim.PushBack({35,523,18,18});
+	hosturballmiddeath.anim.PushBack({54,525,18,18});
+	hosturballmiddeath.anim.PushBack({77,524,20,20});
+	hosturballmiddeath.anim.PushBack({102,523,22,22});
+	hosturballmiddeath.anim.PushBack({130,522,24,24});
+	hosturballmiddeath.life = 3000;
+	hosturballmiddeath.id = 13;
+
+	hosturballdeath.anim.PushBack({ 14,523,18,18 });
+	hosturballdeath.anim.PushBack({ 35,523,18,18 });
+	hosturballdeath.anim.PushBack({ 54,525,18,18 });
+	hosturballdeath.anim.PushBack({ 77,524,20,20 });
+	hosturballdeath.anim.PushBack({ 102,523,22,22 });
+	hosturballdeath.anim.PushBack({ 130,522,24,24 });
+	hosturballdeath.life = 3000;
+	hosturballdeath.id = 14;
+
+	hostursmallshot.anim.PushBack({ 97,565,11,7 });
+	hostursmallshot.life = 3000;
+	hostursmallshot.anim.loop = true;
+	hostursmallverticalshot.anim.PushBack({ 87,563,7,11 });
+	hostursmallverticalshot.life = 3000;
+	hostursmallverticalshot.anim.loop = true;
+	hosturlongshot.anim.PushBack({ 166,563,12,12 });
+	hosturlongshot.life = 3000;
+	hosturlongshot.anim.loop = true;
+
+	hosturbigshot.anim.PushBack({ 50,561,10,11 });
+	hosturbigshot.life = 3000;
+	hosturbigshot.anim.loop = true;
+	hosturbiglargeshot.anim.PushBack({ 49,574,12,11 });
+	hosturbiglargeshot.life = 3000;
+	hosturbiglargeshot.anim.loop = true;
+
+
+	missile.anim.PushBack({ 6,73,27,9 });
+	missile.anim.PushBack({ 37,73,27,9 });
+	missile.anim.PushBack({ 65,72,27,9 });
+	missile.anim.PushBack({ 104,72,27,9 });
+	missile.anim.speed = 0.08f;
+	missile.anim.loop = false;
+	missile.life = 3000;
+	missile.speed = { 0,0 };
+	missile.id = 15;
+	missile.preparation = true;
+	missile.center = { 27, 4 };
+	
+	missileexplosion.anim.PushBack({ 100,240,32,32 });
+	missileexplosion.anim.PushBack({ 130,240,32,32 });
+	missileexplosion.anim.PushBack({ 164,240,32,32 });
+	missileexplosion.anim.PushBack({ 198,240,32,32 });
+	missileexplosion.anim.PushBack({ 232,240,32,32 });
+	missileexplosion.anim.PushBack({ 265,240,32,32 });
+	missileexplosion.anim.speed = 0.5f;
+	missileexplosion.anim.loop = false;
+	missileexplosion.life = 200;
+	missileexplosion.speed = { 0,0 };
+
+	laserstart.anim.PushBack({ 213, 504, 24, 7 });
+	laserstart.anim.speed = 0.5f;
+	laserstart.anim.loop = false;
+	laserstart.life = 20;
+	laserstart.speed = { 0,0 };
+
+	laser.anim.PushBack({ 213, 520, 63, 7 });
+	laser.anim.speed = 0.3f;
+	laser.anim.loop = false;
+	laser.life = 1000;
+	laser.id = 16;
+	laser.speed = { 10,0 };
+
+	laserexplosion.anim.PushBack({ 301, 519, 8, 10 });
+	laserexplosion.anim.speed = 0.5f;
+	laserexplosion.anim.loop = false;
+	laserexplosion.life = 20;
+	laserexplosion.id = 16;
+	laserexplosion.speed = { 0,0 };
+
+	zarikasubeam.anim.PushBack({ 5, 644, 13, 8 });
+	zarikasubeam.anim.speed = 0.f;
+	zarikasubeam.anim.loop = false;
+	zarikasubeam.life = 500000;
+	zarikasubeam.id = 17;
+	zarikasubeam.speed = { 0,0 };
+	zarikasubeam.preparation = true;
+	
+	zarikasubeampart.anim.PushBack({ 5, 658, 13, 8 });
+	zarikasubeampart.anim.speed = 0.f;
+	zarikasubeampart.anim.loop = false;
+	zarikasubeampart.life = 500000;
+	zarikasubeampart.id = 18;
+	zarikasubeampart.speed = { 0,0 };
+
 }
 
 ModuleParticles::~ModuleParticles()
@@ -232,6 +404,10 @@ bool ModuleParticles::Start()
 
 	baseShotExp.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-083.wav");
 	playerBoost.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-023.wav");
+	hosturball.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-029.wav");
+	hosturballmid.sfx = hosturball.sfx;
+	hosturballdeath.sfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-028.wav");
+	hosturballmiddeath.sfx = hosturballdeath.sfx;
 
 	return true;
 }
@@ -248,6 +424,13 @@ bool ModuleParticles::CleanUp()
 
 	App->audio->UnloadSFX(playerBoost.sfx);
 	playerBoost.sfx = nullptr;
+
+	App->audio->UnloadSFX(hosturball.sfx);
+	hosturball.sfx = nullptr;
+	hosturballmid.sfx = nullptr;
+	App->audio->UnloadSFX(hosturballdeath.sfx);
+	hosturballdeath.sfx = nullptr;
+	hosturballmiddeath.sfx = nullptr;
 
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -266,7 +449,7 @@ bool ModuleParticles::CleanUp()
 // Update: draw background
 update_status ModuleParticles::Update()
 {
-	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	for (int i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		Particle* p = active[i];
 
@@ -280,7 +463,7 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+			App->render->BlitFlipped(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()),p->flipX, p->flipY, p->rangle, p->center);
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
@@ -291,7 +474,8 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay, int nTimes, bool isMultiple)
+
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay, int nTimes, bool isMultiple, bool flipX, bool flipY, bool _up, iPoint offset)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -301,10 +485,38 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			p->born = SDL_GetTicks() + delay;
 			p->position.x = x;
 			p->position.y = y;
+			p->flipX = flipX;
+			p->flipY = flipY;
+			p->missileUp = _up;
+			p->offsetx = offset.x;
+			p->offsety = offset.y;
+			p->origin_position = { x, y };
 			if (!speed.IsZero()) p->speed = speed;
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			active[i] = p;
+			break;
+		}
+	}
+}
+
+Particle* ModuleParticles::AddParticleRet(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, bool flipX, bool flipY, fPoint speed)
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		if (active[i] == nullptr)
+		{
+			Particle* p = new Particle(particle);
+			p->born = SDL_GetTicks();
+			p->position.x = x;
+			p->position.y = y;
+			p->flipX = flipX;
+			p->flipY = flipY;
+			p->speed = speed;
+			if (collider_type != COLLIDER_NONE)
+				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+			active[i] = p;
+			return p;
 			break;
 		}
 	}
@@ -320,10 +532,42 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			switch (active[i]->id) {
 			case 1: AddParticle(baseShotColExp, active[i]->position.x, active[i]->position.y); break;
 			case 2: AddParticle(bombExplosion, active[i]->position.x, active[i]->position.y); break;
+			case 10: if (c2->type == COLLIDER_PLAYER_SHOT) App->ui->AddScore(100); break;
+			case 11: App->particles->AddParticle(App->particles->hosturballmiddeath, active[i]->position.x, active[i]->position.y); break;
+			case 12: App->particles->AddParticle(App->particles->hosturballdeath, active[i]->position.x, active[i]->position.y); break;
+			case 15: App->particles->AddParticle(App->particles->missileexplosion, active[i]->position.x, active[i]->position.y); break;
+			case 16: if (c2->type == COLLIDER_WALL) App->particles->AddParticle(App->particles->laserexplosion, active[i]->position.x + 63, active[i]->position.y); break;
+			case 17:
+				if (c2->type == COLLIDER_WALL) {
+					if (active[i]->speed == upright) {
+						if (active[i]->position.x < 5730)active[i]->speed = downright;
+						else active[i]->speed = upleft;
+					}
+					else if (active[i]->speed == upleft)
+					{
+						if (active[i]->position.x > 5410)active[i]->speed = downleft;
+						else active[i]->speed = upright;
+					}
+					else if (active[i]->speed == downright)
+					{
+						if (active[i]->position.x < 5730)active[i]->speed = upright;
+						else active[i]->speed = downleft;
+					}
+					else if (active[i]->speed == downleft)
+					{
+						if (active[i]->position.x > 5410)active[i]->speed = upleft;
+						else active[i]->speed = downright;
+					}
+				}
+				break;
+			case 18: 
+				break;
 			}
-			delete active[i];
-			active[i] = nullptr;
-			break;
+
+			if (active[i]->id != 16 || c2->type == COLLIDER_WALL) {
+				delete active[i];
+				active[i] = nullptr;
+			}
 		}
 	}
 }
@@ -339,7 +583,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple)
+	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple), flipX(p.flipX), flipY(p.flipY), missileUp(p.missileUp), origin_position(p.origin_position)
 {}
 
 Particle::~Particle()
@@ -367,19 +611,19 @@ bool Particle::Update()
 	case 1:
 		position.x += speed.x;
 		position.y += speed.y; break;
-	case 2: 
+	case 2:
 		position.x += speed.x;
 		position.y += speed.y;
 		if (speed.x > 1.55f)speed.x -= 0.1f;
 		if (speed.y < 2.0f)speed.y += 0.1f;
 		break;
-	case 3: 
-		position.x = App->player->position.x-42;
+	case 3:
+		position.x = App->player->position.x - 42;
 		position.y = App->player->position.y;
 		break;
 	case 7:
 		position.x += speed.x;
-		position.y += speed.y;	
+		position.y += speed.y;
 		speed.y += 0.1f;
 		break;
 	case 8:
@@ -392,32 +636,235 @@ bool Particle::Update()
 		break;
 	case 9:
 		timebeforeanotherexplosion++;
-		if (timebeforeanotherexplosion == 5)
+		if (timebeforeanotherexplosion == 2)
 		{
-			App->particles->AddParticle(App->particles->enemyBossExplosion, position.x + rand() % 150 + (-75), position.y + rand() % 150 + (-75));
+			App->particles->AddParticle(App->particles->enemyBossExplosion, position.x + rand() % 400 + (-200), position.y + rand() % 200 + (-100));
 			timebeforeanotherexplosion = 0;
+		}
+		break;
+	case 11:
+		position.x += speed.x;
+		position.y += speed.y;
+		if (position.x < 4640) {
+			App->particles->AddParticle(App->particles->hosturballmiddeath, position.x, position.y);
+			ret = false;
+		}
+		break;
+	case 10:
+		position.x += speed.x;
+		position.y += speed.y;
+		speed.y += 0.1f;
+		break;
+		position.x += speed.x;
+		position.y += speed.y;
+		if (position.x < 4640) {
+			App->particles->AddParticle(App->particles->hosturballmiddeath, position.x, position.y);
+			ret = false;
+		}
+		break;
+	case 12:
+		position.x += speed.x;
+		position.y += speed.y;
+		if (position.x < 4726) {
+			App->particles->AddParticle(App->particles->hosturballdeath, position.x, position.y);
+			ret = false;
+		}
+		break;
+	case 13:
+		if (anim.Finished()) {
+			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 1,-2 }, 0, 1, false, false, false);
+			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -1,-2 }, 0, 1, false, true, false);
+			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 1,2 }, 0, 1, false, false, true);
+			App->particles->AddParticle(App->particles->hosturbigshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -1,2 }, 0, 1, false, true, true);
+			App->particles->AddParticle(App->particles->hosturbiglargeshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 2, -1 }, 0, 1, false, false, false);
+			App->particles->AddParticle(App->particles->hosturbiglargeshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 2, 1 }, 0, 1, false, false, true);
+			App->particles->AddParticle(App->particles->hosturbiglargeshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2, -1 }, 0, 1, false, true, false);
+			App->particles->AddParticle(App->particles->hosturbiglargeshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2, 1 }, 0, 1, false, true, true);
+			ret = false;
+		}
+		break;
+	case 14:
+		if (anim.Finished()) {
+			App->particles->AddParticle(App->particles->hostursmallverticalshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 0, 2 }, 0, 1, false, false, false);
+			App->particles->AddParticle(App->particles->hostursmallshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 2, 0 }, 0, 1, false, false, false);
+			App->particles->AddParticle(App->particles->hostursmallverticalshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 0, -2 }, 0, 1, false, false, true);
+			App->particles->AddParticle(App->particles->hostursmallshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2, 0 }, 0, 1, false, true, false);
+			App->particles->AddParticle(App->particles->hosturlongshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 2, -2 }, 0, 1, false, false, false);
+			App->particles->AddParticle(App->particles->hosturlongshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { 2, 2 }, 0, 1, false, false, true);
+			App->particles->AddParticle(App->particles->hosturlongshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2, 2 }, 0, 1, false, true, true);
+			App->particles->AddParticle(App->particles->hosturlongshot, position.x + 12, position.y + 10, COLLIDER_ENEMY_SHOT_WALL, { -2,-2 }, 0, 1, false, true, false);
+			ret = false;
+			break;
+	case 15:
+		if (preparation)
+		{
+			speed.x = -1;
+			if (missileUp)speed.y = -1;
+			else speed.y = +1;
+			position.x = App->player->position.x + offsetx;
+			position.y = App->player->position.y + offsety;
+			offsetx += speed.x;
+			offsety += speed.y;
+			if (preparationtimer == 15) {
+				preparation = false;
+				target = closerTarget(position);
+			}
+			else preparationtimer++;
+		}
+		else {
+			anim.frames[0] = anim.frames[2];
+			anim.frames[1] = anim.frames[3];
+			anim.speed = 0.1f;
+			anim.loop = true;
+			speed = { 4, 0 };
+			if (target != nullptr) {
+				hastargeted = true;
+				float distance = position.DistanceTo({ target->position.x+((target->w)/2), target->position.y + ((target->h) / 2) });
+				fPoint direction = { (target->position.x + ((target->w) / 2)) / distance - position.x / distance, (target->position.y + ((target->h) / 2)) / distance - position.y / distance };
+				position.x += direction.x * 4;
+				position.y += direction.y * 4;
+				if(target->type != WALL || target->type != HOSTUR)rangle += App->particles->AbsoluteRotation(position, target->position);
+				if (target->isdead)target = nullptr;
+			}
+			else if(!hastargeted) position.x += speed.x;
+			else {
+ 				life = 0;
+			}
+		}
+		break;
+	case 16:
+		position.x += speed.x;
+		position.y += speed.y; break;
+	case 17:
+		if (preparation)
+		{
+			if (indexchild < 20)
+			{
+				if (preparationtimer == 6)
+				{
+					subparticles[indexchild] = App->particles->AddParticleRet(App->particles->zarikasubeampart, origin_position.x, origin_position.y, COLLIDER_ENEMY_SHOT, flipX, flipY, speed);
+					preparationtimer = 0;
+					indexchild++;
+				}
+				else preparationtimer++;
+			}
+			else preparation = false;
+		}
+		position.x += speed.x;
+		position.y += speed.y;
+		if (position.x < 5408) {
+			speed.x = 1;
+			flipX = !flipX;
+		}
+		if (position.y < 112) {
+			speed.y = 1;
+			flipY = !flipY;
+		}
+
+		if (position.y > 302) {
+			speed.y = -1;
+			flipY = !flipY;
+		}
+
+		if (position.x > 5734) {
+			speed.x = -1;
+			flipX = !flipX;
+		}
+		break;
+	case 18:
+		position.x += speed.x;
+		position.y += speed.y; 
+		if (position.x < 5408) {
+			speed.x = 1;
+			flipX = !flipX;
+		}
+		if (position.y < 112) {
+			speed.y = 1;
+			flipY = !flipY;
+		}
+
+		if (position.y > 302) {
+			speed.y = -1;
+			flipY = !flipY;
+		}
+
+		if (position.x > 5734) {
+			speed.x = -1;
+			flipX = !flipX;
 		}
 		break;
 	default:
 		position.x += speed.x;
-		position.y += speed.y; break;
+		position.y += speed.y; 
+		break;
+		}
 	}
-
-
 	if (isPlayerAttached) {
 
 		if (App->player->state == App->player->idl)	offsety = 1;
 		else if (App->player->state == App->player->top) offsety = -1;
 		else if (App->player->state == App->player->bot) offsety = 2;
 		position.y = App->player->position.y + offsety;
-		position.x = App->player->position.x + offsetx;
+		position.x = (App->player->position.x + 30) + offsetx;
 	}
 
 	if (collider != nullptr) {
 		collider->SetPos(position.x, position.y);
 		collider->SetShape(anim.GetCurrentFrame().w, anim.GetCurrentFrame().h);
 	}
-		
-
 	return ret;
+}
+
+Enemy* Particle::closerTarget(iPoint _position)
+{
+	int aux = 0;
+	iPoint auxpos = { 0,0 };
+	int closer = 1000;
+	Enemy* closerEnemy = nullptr;
+	for (int i = 0; i < 99; i++)
+	{
+		if (App->enemies->enemies[i] != nullptr)
+		{
+			auxpos = App->enemies->enemies[i]->position;
+			aux = _position.DistanceTo(auxpos);
+			if (aux < closer) {
+				closer = aux;
+				closerEnemy = App->enemies->enemies[i];
+			}
+		}
+	}
+
+	return closerEnemy;
+}
+
+
+float ModuleParticles::AbsoluteRotation(iPoint originPos, iPoint targetPos)
+{
+	float rotation = 0;
+	//Fist quadrant
+	if (targetPos.x > originPos.x && targetPos.y > originPos.y)
+	{
+		rotation =  atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
+	}
+	//Second quadrant
+	else if (targetPos.x < originPos.x && targetPos.y > originPos.y)
+	{
+		rotation = M_PI + (atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x)));
+	}
+	//Third quadrant
+	else if (targetPos.x < originPos.x && targetPos.y < originPos.y)
+	{
+		rotation = M_PI + (atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x)));
+	}
+	//Fourth quadrant
+	else if (targetPos.x > originPos.x && targetPos.y < originPos.y)
+	{
+		rotation = atan((double)(targetPos.y - originPos.y) / (double)(targetPos.x - originPos.x));
+	}
+	else if (targetPos.y == originPos.y)
+	{
+		rotation = 0;
+	}
+
+	return rotation;
 }

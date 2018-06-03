@@ -8,6 +8,7 @@
 #include "ModulePlayer.h"
 #include "ModuleSceneStage3.h"
 #include "ModuleCollision.h"
+#include "ModuleTopScore.h"
 #include "ModuleAudio.h"
 #include "ModuleSceneContinue.h"
 #include "ModuleSceneStage1.h"
@@ -32,8 +33,8 @@ ModuleUI::~ModuleUI()
 bool ModuleUI::Init()
 {
  	score_font = App->fonts->Load("Assets/Sprites/UI/score_font.png", "0123456789$.-=^^()^^^!^^^?abcdefghijklmnopqrstuvwxyz", 2);
-	blue_font = App->fonts->Load("Assets/Sprites/UI/blue_font.png", "0123456789$.-= ºººººººººººabcdefghijklmnopqrstuvwxyz", 2);
-	pink_font = App->fonts->Load("Assets/Sprites/UI/pink_font.png", "0123456789$.-= ºººººººººººabcdefghijklmnopqrstuvwxyz", 2);
+	blue_font = App->fonts->Load("Assets/Sprites/UI/blue_font.png", "0123456789'. ºººººººººººººabcdefghijklmnopqrstuvwxyz", 2);
+	pink_font = App->fonts->Load("Assets/Sprites/UI/pink_font.png", "0123456789'. ºººººººººººººabcdefghijklmnopqrstuvwxyz", 2);
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_1.png");
 
 	clear_song = App->audio->LoadMusic("Assets/Audio/Music/04_Stage_Clear.ogg");
@@ -75,7 +76,7 @@ update_status ModuleUI::Update()
 	if (game_over) {
 		Uint32 now = SDL_GetTicks() - start_time;
 		if (now >= total_time) {
-			App->fade->FadeToBlack(App->current_stage, App->scene_continue);
+			App->fade->FadeToBlack(App->current_stage, App->top_score);
 		}
 	}
 	

@@ -29,6 +29,7 @@ private:
 	SDL_Rect title;
 	SDL_Rect background;
 	SDL_Rect company;
+	SDL_Rect logo;
 	_Mix_Music* music = nullptr;
 	start_steps current_step = start_steps::logo_movement;
 

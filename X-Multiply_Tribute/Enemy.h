@@ -16,12 +16,16 @@ protected:
 	uint points = 0;
 	uint numExplosions = 1;
 	bool flipX, flipY;
+	float rangle;
+	SDL_Point center;
 public:
+	int w, h;
 	Animation * animation = nullptr;
 	Animation * hitAnimation = nullptr;
 	bool hit = false;
-	iPoint position;
+	iPoint position = {0,0};
 	iPoint speed = {0, 0};
+	bool isdead = false;
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 public:
 	Enemy(int x, int y);

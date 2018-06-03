@@ -36,7 +36,12 @@ enum ENEMY_TYPES
 	BLUEPATROL,
 	WORM,
 	WORMBODY,
-	WORMHOLE
+	WORMHOLE,
+	HOSTUR,
+	WALL,
+	SNAKE,
+	SNAKEBODY,
+	ZARIKASU
 };
 
 // Useful typedefs ---------

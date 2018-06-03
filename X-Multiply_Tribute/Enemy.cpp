@@ -27,13 +27,14 @@ void Enemy::Draw(SDL_Texture* sprites)
 		collider->SetPos(position.x, position.y);
 
 	if (animation != nullptr) {
-		if(!hit)App->render->BlitFlipped(sprites, position.x, position.y, &(animation->GetCurrentFrame()), flipX, flipY);
+		if(!hit)App->render->BlitFlipped(sprites, position.x, position.y, &(animation->GetCurrentFrame()), flipX, flipY, rangle, center);
 		else {
 			hitAnimation->setCurrentFrameIndex(animation->GetCurrentFrameIndex()-1);
 			App->render->BlitFlipped(sprites, position.x, position.y, &(hitAnimation->GetCurrentFrame()), flipX, flipY);
 			hit = false;
 		}
 	}
+	
 }
 
 void Enemy::OnCollision(Collider* collider)
@@ -46,6 +47,7 @@ void Enemy::OnCollision(Collider* collider)
 		}
 	}
 	App->ui->AddScore(points);
+	isdead = true;
 }
 void Enemy::Shine()
 {

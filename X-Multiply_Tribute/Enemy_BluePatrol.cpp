@@ -14,6 +14,8 @@ Enemy_BluePatrol::Enemy_BluePatrol(int x, int y) :Enemy(x, y)
 	original_y = y;
 	original_x = x;
 
+	w = 27;
+	h = 29;
 	points = 900;
 
 	walk.PushBack({ 23, 692, 27, 29 });
@@ -36,23 +38,22 @@ Enemy_BluePatrol::Enemy_BluePatrol(int x, int y) :Enemy(x, y)
 
 	hitAnimation = &hitanim;
 
-	collider = App->collision->AddCollider({ 0, 0, 57, 58 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 27, 29 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_BluePatrol::Move()
 {
 
-	if (shootTimer > 100) {
-
-	}
-	else if (!flipX) {
-		if (shootTimer % 2 == 0) {
+	if (shootTimer < 100 && !flipX) {
+		if (shootTimer % 3 == 0) {
 			position.x -= 1;
 		}
 		
-	}
-	else{
-		position.x += 2;
+	}else if (shootTimer < 100 && flipX) {
+		if (cont > 0) {
+			position.x += 2;
+		}
+		
 	}
 
 	if (shootTimer == 160 || shootTimer == 80 || shootTimer == 0) {
@@ -63,6 +64,7 @@ void Enemy_BluePatrol::Move()
 			}
 			else if (App->player->position.x > position.x) {
 				flipX = true;
+				cont--;
 			}
 		}
 		else {

@@ -8,6 +8,8 @@
 Enemy_TentacleShooter::Enemy_TentacleShooter(int x, int y, bool _up):Enemy(x,y)
 {
 	type = TENTACLESHOOTER;
+	w = 54;
+	h = 42;
 	if (_up) {
 		up = _up;
 		anim.PushBack({ 37, 419, 54, 42 });

@@ -6,8 +6,9 @@
 #include "Globals.h"
 #include "p2Point.h"
 #include "ModuleCollision.h"
+#include "Enemy.h"
 
-#define MAX_ACTIVE_PARTICLES 50
+#define MAX_ACTIVE_PARTICLES 200
 
 struct SDL_Texture;
 struct Collider;
@@ -20,7 +21,9 @@ struct Particle
 	Animation anim;
 	uint fx = 0;
 	iPoint position;
+	iPoint origin_position;
 	fPoint speed;
+	bool hastargeted = false;
 	int w, h = 0;
 	Uint32 born = 0;
 	Uint32 life = 0;
@@ -28,16 +31,27 @@ struct Particle
 	int offsety = 0;
 	bool fx_played = false;
 	bool isPlayerAttached = false;
+	bool flipX, flipY;
 	Mix_Chunk* sfx = nullptr;
 	int id = 0;
 	int nTimes;
 	bool isMultiple;
 	int timebeforeanotherexplosion = 0;
+	bool preparation = true;
+	int preparationtimer = 0;
+	bool missileUp = false;
+	SDL_Point center = {0,0};
+	float rangle = 0;
+	Particle* subparticles[20];
+	int indexchild = 0;
+
 
 	Particle();
 	Particle(const Particle& p);
 	~Particle();
 	bool Update();
+	Enemy* closerTarget(iPoint _position);
+	Enemy* target;
 };
 
 class ModuleParticles : public Module
@@ -50,14 +64,22 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = { 0,0 }, Uint32 delay = 0, int Ntimes = 1, bool isMultiple = false);
+
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = { 0,0 }, Uint32 delay = 0, int Ntimes = 1, bool isMultiple = false, bool flipX = false, bool flipY = false, bool _up = false, iPoint offset = { 0, 0 });
+	Particle* AddParticleRet(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, bool flipX = false, bool flipY = false, fPoint speed = { 0 , 0 });
 	void OnCollision(Collider* c1, Collider* c2);
+	float AbsoluteRotation(iPoint originPos, iPoint targetPos);
 
 private:
 
 	SDL_Texture * graphics = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
 	uint last_particle = 0;
+	fPoint upright = { 1, -1 };
+	fPoint upleft = { -1, -1 };
+	fPoint downright = { 1, 1 };
+	fPoint downleft = { -1, 1 };
+
 
 public:
 	Particle baseShot;
@@ -84,6 +106,29 @@ public:
 	Particle multipleBigExplosion;
 	Particle greenBall;
 	Particle yellowCircle;
+	Particle blueCircle;
+	Particle redBall;
+	Particle hosturball;
+	Particle hosturballmid;
+	Particle hosturballmiddeath;
+	Particle hosturballdeath;
+	Particle hostursmallshot;
+	Particle hostursmallverticalshot;
+	Particle hosturlongshot;
+	Particle hosturbigshot;
+	Particle hosturbiglargeshot;
+	Particle missile;
+	Particle wallshot;
+	Particle wallshot2;
+	Particle walltentshot;
+	Particle walltentshot2;
+	Particle walltentshot3;
+	Particle missileexplosion;
+	Particle zarikasubeam;
+	Particle zarikasubeampart;
+	Particle laserstart;
+	Particle laser;
+	Particle laserexplosion;
 };
 
 #endif // __MODULEPARTICLES_H__

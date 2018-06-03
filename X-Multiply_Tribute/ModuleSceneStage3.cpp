@@ -58,9 +58,10 @@ bool ModuleSceneStage3::Init()
 {
 	score_bonus = 30000;
 	index = 3;
-	rect[0] = {0, 0, 2260, 208};
-	rect[1] = {0, 0, 5104, 561};
+	rect[0] = {0, 0, 2800, 208};
+	rect[1] = {0, 0, 5760, 561};
 	rect[2] = {0, 0, 775, 225};
+	rect[3] = {0, 0, 322, 195};
 
 	door.PushBack({ 0, 0, 57, 57 });
 	door.PushBack({ 61, 0, 57, 57 });
@@ -105,7 +106,7 @@ void ModuleSceneStage3::UpdateCamera()
 
 void ModuleSceneStage3::BackgroundEvents()
 {
-	if (App->render->camera.x > 3150 && App->render->camera.x < 3874)
+	if (App->render->camera.x > 3806 && App->render->camera.x < 4530)
 	{
 		if (!up)
 		{
@@ -118,7 +119,7 @@ void ModuleSceneStage3::BackgroundEvents()
 		up = false;
 	}
 
-	if (App->render->camera.x > 2560 && App->render->camera.x < 4080)
+	if (App->render->camera.x > 3216 && App->render->camera.x < 4736)
 	{
 		if (bgalpha > 0)
 		{
@@ -132,13 +133,13 @@ void ModuleSceneStage3::BackgroundEvents()
 		}
 	}
 
-	if (App->render->camera.x == 4670)	Mix_PlayMusic(bossTrack, -1);
+	if (App->render->camera.x == 5326)	Mix_PlayMusic(bossTrack, -1);
 
 
-	if (App->render->camera.x >= 4708)
+	if (App->render->camera.x >= 5364)
 	{
-		App->render->Blit(textures[3], 4692, 179, &door.GetCurrentFrame());
-		App->render->Blit(textures[3], 5074, 178, &door.GetCurrentFrame());
+		App->render->Blit(textures[3], 5354, 179, &door.GetCurrentFrame());
+		App->render->Blit(textures[3], 5736, 178, &door.GetCurrentFrame());
 		if (collider) {
 			coll = { 4691,179,59,56 };
 			App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
@@ -147,60 +148,92 @@ void ModuleSceneStage3::BackgroundEvents()
 		
 	}
 
-	if (App->render->camera.x >= 4718)
+	if (App->render->camera.x >= 5374)
 	{
 		right = false;
+		if (!bossspawned)
+		{
+			EnemyInfo infozarikasu1;
+			infozarikasu1.type = ENEMY_TYPES::ZARIKASU;
+			infozarikasu1.x = 5735;
+			infozarikasu1.y = 317;
+			infozarikasu1.powerUpid = 1;
+			boss[0] = App->enemies->SpawnEnemyRet(infozarikasu1);
+
+			EnemyInfo infozarikasu2;
+			infozarikasu2.type = ENEMY_TYPES::ZARIKASU;
+			infozarikasu2.x = 5337;
+			infozarikasu2.y = 317;
+			infozarikasu2.powerUpid = 2;
+			boss[1] = App->enemies->SpawnEnemyRet(infozarikasu2);
+
+			EnemyInfo infozarikasu3;
+			infozarikasu3.type = ENEMY_TYPES::ZARIKASU;
+			infozarikasu3.x = 5735;
+			infozarikasu3.y = 40;
+			infozarikasu3.powerUpid = 3;
+			boss[2] = App->enemies->SpawnEnemyRet(infozarikasu3);
+
+			EnemyInfo infozarikasu4;
+			infozarikasu4.type = ENEMY_TYPES::ZARIKASU;
+			infozarikasu4.x = 5337;
+			infozarikasu4.y = 40;
+			infozarikasu4.powerUpid = 4;
+			boss[3] = App->enemies->SpawnEnemyRet(infozarikasu4);
+
+			bossspawned = true;
+		}
 	}
 
-	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4250) {
+	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4906) {
 		EnemyInfo info;
 		info.type = ENEMY_TYPES::JUMPER;
-		info.x = 4099;
+		info.x = 4755;
 		info.y = 96;
 		info.going_up = true;
 		info.normal_spawn = true;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4200;
+		info.x = 4856;
 		info.y = -100;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4250;
+		info.x = 4906;
 		info.y = -200;
 		App->enemies->SpawnEnemy(info);
 
 		info.normal_spawn = false;
 		info.y = 0;
-		info.x = 4000;
+		info.x = 4656;
 		App->enemies->SpawnEnemy(info);
 		info.y = -150;
-		info.x = 4000;
+		info.x = 4656;
 		App->enemies->SpawnEnemy(info);
 	}
 
-	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4100) {
+	if (App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) == 4756) {
 		EnemyInfo info;
 		info.type = ENEMY_TYPES::BLUEFLYER;
-		info.x = 4050;
+		info.x = 4706;
 		info.y = 90;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4025;
+		info.x = 4681;
 		info.y = 50;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4100;
+		info.x = 4756;
 		info.y = 20;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4000;
+		info.x = 4656;
 		info.y = -10;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4060;
+		info.x = 4716;
 		info.y = -10;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4120;
+		info.x = 4776;
 		info.y = -50;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4080;
+		info.x = 4736;
 		info.y = -80;
 		App->enemies->SpawnEnemy(info);
-		info.x = 4150;
+		info.x = 4806;
 		info.y = -110;
 		App->enemies->SpawnEnemy(info);
 	}
@@ -212,9 +245,10 @@ update_status ModuleSceneStage3::Update()
 	App->render->setAlpha(textures[0], bgalpha);
 	App->render->setAlpha(textures[2], bgalpha);
 
-	App->render->Blit(textures[0], 0, 226, &rect[0], 0.65f);
-	App->render->Blit(textures[2], 4346, 95, &rect[2]);
+	App->render->Blit(textures[0], 10, 226, &rect[0], 0.65f);
+	App->render->Blit(textures[2], 5002, 95, &rect[2]);
 	App->render->Blit(textures[1], 0, 0, &rect[1]);
+	if(bossdead)App->render->Blit(textures[4], 5412, 112, &rect[3]);
 
 	BackgroundEvents();
 	UpdateCamera();
@@ -223,6 +257,16 @@ update_status ModuleSceneStage3::Update()
 	if (App->input->keyboard[SDL_SCANCODE_F7] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(this, App->stage1, 0.0f);
 		App->ui->current_checkpoint = 0;
+	}
+
+	if(!end)
+	{
+		if (bossdeads == 4)
+		{
+			App->particles->AddParticle(App->particles->multipleBigExplosion, 5560, 210, COLLIDER_TYPE::COLLIDER_NONE, { 0, 0 }, 0, 4, true);
+			App->ui->StageCleared();
+			end = true;
+		}
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -234,6 +278,7 @@ bool ModuleSceneStage3::CleanUp()
 	App->collision->Disable();
 	App->powerups->Disable();
 	App->particles->Disable();
+	App->enemies->Disable();
 
 	for (int i = 0; i < 3; ++i)
 	{
@@ -258,212 +303,186 @@ bool ModuleSceneStage3::loadMap()
 	textures[1] = App->textures->Load("Assets/Sprites/Stages/Stage3/Layerbg03.png");
 	textures[2] = App->textures->Load("Assets/Sprites/Stages/Stage3/BackgroundFinalbg03.png");
 	textures[3] = App->textures->Load("Assets/Sprites/Stages/Stage3/Door.png");
+	textures[4] = App->textures->Load("Assets/Sprites/Stages/Stage3/ZarikasuDead.png");
 
 	checkpoints[0] = { 0, 336 };
-	checkpoints[1] = { 1555, 336 };
-	checkpoints[2] = { 3100, 336 };
-	checkpoints[3] = { 4348, 95 };
+	checkpoints[1] = { 2211, 336 };
+	checkpoints[2] = { 3756, 336 };
+	checkpoints[3] = { 5004, 95 };
 	checkpoints[4] = { -1, -1 };
-
+	//656
 	//top
-	coll = { 0,336,3176,38 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 140,374,95,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 268,374,95,11 };
+	coll = { 0,336,3832,38 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
-	coll = { 395,374,100,6 };
+	coll = { 403,374,100,6 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 404,380,74,8 };
+	coll = { 412,380,74,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 411,388,61,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Eye
-	coll = { 505,374,28,7 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 652,374,95,11 };
+	coll = { 419,388,61,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
-	coll = { 854,374,28,7 };
+	coll = { 641,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 991,374,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
-	coll = { 906,374,100,6 };
+	coll = { 1043,374,100,6 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 915,380,74,8 };
+	coll = { 1052,380,74,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 922,388,61,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 1035,374,95,11 };
+	coll = { 1059,388,61,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
-	coll = { 1238,374,28,7 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 1290,374,95,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 1418,374,95,11 };
+	coll = { 1375,374,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
-	coll = { 1545,374,100,6 };
+	coll = { 1683,374,100,6 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 1554,380,74,8 };
+	coll = { 1692,380,74,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 1561,388,61,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 1674,374,95,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 1801,374,95,11 };
+	coll = { 1699,388,61,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
-	coll = { 2004,374,28,7 };
+	coll = { 2143,374,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
-	coll = { 2132,374,28,7 };
+	coll = { 2399,374,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 2185,374,95,11 };
+	//Volcano
+	coll = { 2579,374,100,6 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2588,380,74,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2595,388,61,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
-	coll = { 2387,374,28,7 };
+	coll = { 2783,374,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
-	coll = { 2515,374,28,7 };
+	coll = { 3039,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 3167,374,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Ciclop
-	coll = { 2572,374,180,9 };
+	coll = { 3228,374,180,9 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2614,383,135,18 };
+	coll = { 3270,383,135,18 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2637,401,50,27 };
+	coll = { 3293,401,50,27 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2653,428,50,8 };
+	coll = { 3309,428,50,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2663,436,52,12 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Eye
-	coll = { 2899,374,28,7 };
+	coll = { 3319,436,52,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
-	coll = { 3027,374,28,7 };
+	coll = { 3551,374,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-
-
+	//Eye
+	coll = { 3679,374,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 
 	//bottom
-	coll = { 0,524,3176,38 };
+	coll = { 0,524,3832,38 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
-	coll = { 140,518,100,6 };
+	coll = { 147,518,100,6 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 147,510,74,8 };
+	coll = { 154,510,74,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 156,499,61,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 269,513,95,11 };
+	coll = { 163,499,61,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
-	coll = { 396,518,100,6 };
+	coll = { 403,518,100,6 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 403,510,74,8 };
+	coll = { 410,510,74,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 412,499,61,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Volcano
-	coll = { 524,518,100,6 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 531,510,74,8 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 540,499,61,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 653,513,95,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Eye
-	coll = { 760,517,28,7 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Eye
-	coll = { 982,517,28,7 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 1036,513,95,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Eye
-	coll = { 1238,517,28,7 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 1291,513,95,11 };
+	coll = { 421,499,61,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
-	coll = { 1418,518,100,6 };
+	coll = { 659,518,100,6 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 1425,510,74,8 };
+	coll = { 666,510,74,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 1434,499,61,11 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 1547,513,95,11 };
+	coll = { 675,499,61,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
-	coll = { 1749,517,28,7 };
-	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 1802,513,95,11 };
+	coll = { 897,517,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
-	coll = { 1910,517,28,7 };
+	coll = { 1119,517,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	//Crater
-	coll = { 2058,513,95,11 };
+	//Eye
+	coll = { 1375,517,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Volcano
-	coll = { 2185,518,100,6 };
+	coll = { 1555,518,100,6 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2192,510,74,8 };
+	coll = { 1562,510,74,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2201,499,61,11 };
+	coll = { 1571,499,61,11 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
-	coll = { 2293,517,28,7 };
+	coll = { 1887,517,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 2049,517,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Volcano
+	coll = { 2195,518,100,6 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2202,510,74,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2211,499,61,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 2305,517,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 2561,517,28,7 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Volcano
+	coll = { 2836,518,100,6 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2843,510,74,8 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	coll = { 2852,499,61,11 };
+	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
+	//Eye
+	coll = { 2945,517,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Ciclop
-	coll = { 2468,516,180,8 };
+	coll = { 3124,516,180,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2470,496,135,20 };
+	coll = { 3126,496,135,20 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2521,469,50,27 };
+	coll = { 3177,469,50,27 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2521,461,50,8 };
+	coll = { 3177,461,50,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2506,449,52,12 };
+	coll = { 3162,449,52,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Eye
-	coll = { 2771,517,28,7 };
+	coll = { 3427,517,28,7 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//Ciclop
-	coll = { 2852,516,180,8 };
+	coll = { 3508,516,180,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2854,496,135,20 };
+	coll = { 3510,496,135,20 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2900,469,50,27 };
+	coll = { 3556,469,50,27 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2900,461,50,8 };
+	coll = { 3556,461,50,8 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 2890,449,52,12 };
+	coll = { 3546,449,52,12 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//diagonal top
 	int y = 273;
-	int x = 3182;
+	int x = 3838;
 	for (int i = 0; i < 4 ; i++)
 	{
 		coll = { x,y,128,61 };
@@ -471,13 +490,13 @@ bool ModuleSceneStage3::loadMap()
 		y -= 32;
 		x += 128;
 	}
-	coll = { 3693,103,128,61 };
+	coll = { 4349,103,128,61 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	//diagonal bottom
-	coll = { 3451,526,75,36 };
+	coll = { 4107,526,75,36 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 	y = 490;
-	x = 3525;
+	x = 4181;
 	for (int i = 0; i < 5; i++)
 	{
 		coll = { x,y,128,71 };
@@ -485,23 +504,23 @@ bool ModuleSceneStage3::loadMap()
 		y -= 30;
 		x += 128;
 	}
-	coll = { 4076,309,121,61 };
+	coll = { 4732,309,121,61 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//top
-	coll = { 4346,95,758,16 };
+	coll = { 5007,95,758,16 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//bottom
-	coll = { 4346,303,758,16 };
+	coll = { 5007,303,758,16 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 	//end
-	coll = { 4691,111,59,68 };
+	coll = { 5352,111,59,68 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 4691,235,59,68 };
+	coll = { 5352,235,59,68 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
-	coll = { 5075,111,29,192 };
+	coll = { 5736,111,29,192 };
 	App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 
 
@@ -514,50 +533,80 @@ bool ModuleSceneStage3::loadMap()
 void ModuleSceneStage3::loadEnemies()
 {
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 869, 500);
-	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 850, 500, false, 0, -1, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 820, 430, false, 0, 7);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 1300, 470, false, 0, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 2750, 470, false, 0, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4100, 470, false, 0, 4);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4250, 400, false, 0, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4350, 350, false, 0, 1);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4680, 321, false, 0, 6);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 4880, 250, false, 0, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERUPSHIP, 5000, 220, false, 0, 3);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2488, 450, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2688, 392, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 2870, 450, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 1020, 500);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 1000, 500, false, 0, -1, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 2103, 500);
+	App->enemies->AddEnemy(ENEMY_TYPES::BLUEPATROL, 2615, 500);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 572, 472, false,0, -1, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3074, 484, false,0, -1, false); 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3464, 450, true,0, -1, true); 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3486, 438, true,0, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3559, 435, true,0, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3654, 421, true,0, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3809, 208, true,0, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3957, 193, true,0, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 3144, 450, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 3344, 392, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::CYCLOP, 3526, 450, false);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 1228, 472, false, 0, -1, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3730, 484, false, 0, -1, false); 
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4120, 450, true, 0, -1, true); 
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4142, 438, true, 0, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4215, 435, true, 0, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4310, 421, true, 0, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4465, 208, true, 0, -1, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4613, 193, true, 0, -1, true);
+
+	//App->enemies->AddEnemy(ENEMY_TYPES::SNAKE, 600, 450);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5029, 268);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5067, 222);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5085, 224);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5085, 200);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5203, 224);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5245, 200);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5256, 180);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5294, 185);
+	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 5336, 180);
 
 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 572, 472, false, -1, false);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3074, 484, false, -1, false); 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3464, 450, true, -1, true); 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3486, 438, true, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3559, 435, true, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3654, 421, true, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3809, 208, true, -1, true);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 3957, 193, true, -1, true);
+	//top
+	EnemyInfo infoWormhole;
+	infoWormhole.type = ENEMY_TYPES::WORMHOLE;
+	infoWormhole.x = 167;
+	infoWormhole.y = 344;
+	infoWormhole.going_up = true;
+	App->enemies->SpawnEnemy(infoWormhole);
+	infoWormhole.x = 295;
+	App->enemies->SpawnEnemy(infoWormhole);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 551, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 807, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1191, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1447, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1575, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1831, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1959, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2215, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2471, 344, true);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2855, 344, true);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4373, 268);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4411, 222);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4429, 224);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4429, 200);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4547, 224);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4589, 200);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4600, 180);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4638, 185);
-	App->enemies->AddEnemy(ENEMY_TYPES::JUMPER, 4680, 180);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 286, 515);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 671, 505);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1054, 503);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1307, 503);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1565, 503);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1819, 503);
-	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2074, 503);
+	//bottom
+	infoWormhole.y = 500;
+	infoWormhole.going_up = false;
+	App->enemies->SpawnEnemy(infoWormhole);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 550, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 806, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1190, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1446, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1702, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 1958, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2470, 500, false);
+	App->enemies->AddEnemy(ENEMY_TYPES::WORMHOLE, 2726, 500, false);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::WORM, 500, 515, false);
 }
 
 void ModuleSceneStage3::loadAudio()

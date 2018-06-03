@@ -13,6 +13,8 @@ Enemy_GreenEye::Enemy_GreenEye(int x, int y,bool going_up, int _speed) :Enemy(x,
 	speed = _speed;
 	points = 200;
 
+	w = 46;
+	h = 35;
 	greeneye.PushBack({ 155, 69, 46, 35 });
 	greeneye.PushBack({ 221, 70, 42, 34 });
 	greeneye.PushBack({ 188, 117, 47, 36 });

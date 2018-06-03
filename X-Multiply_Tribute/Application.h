@@ -4,7 +4,7 @@
 #include "Globals.h"
 
 
-#define NUM_MODULES 18
+#define NUM_MODULES 19
 
 class ModuleWindow;
 class ModuleInput;
@@ -14,6 +14,7 @@ class ModuleAudio;
 class ModuleSceneStart;
 class ModuleSceneStage1;
 class ModuleSceneStage2;
+class ModuleTopScore;
 class ModulePlayer;
 class ModuleFadeToBlack;
 class ModuleParticles;
@@ -51,6 +52,7 @@ public:
 	ModuleUI* ui = nullptr;
 	ModuleSceneStage3* stage3 = nullptr;
 	ModuleSceneContinue* scene_continue = nullptr;
+	ModuleTopScore* top_score = nullptr;
 
 	ModuleStage* current_stage = nullptr;
 

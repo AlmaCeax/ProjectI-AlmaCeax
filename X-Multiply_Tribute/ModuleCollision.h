@@ -1,7 +1,7 @@
 #ifndef __ModuleCollision_H__
 #define __ModuleCollision_H__
 
-#define MAX_COLLIDERS 200
+#define MAX_COLLIDERS 400
 
 #include "Module.h"
 
@@ -17,6 +17,7 @@ enum COLLIDER_TYPE
 	COLLIDER_GROUND,
 	COLLIDER_ENEMY_GROUND,
 	COLLIDER_ENEMY_DESTRUCTIBLE_SHOT,
+	COLLIDER_ENEMY_SHOT_WALL,
 	COLLIDER_MAX,
 
 };
@@ -47,6 +48,10 @@ struct Collider
 		rect.h = h;
 	}
 
+	void SetType(COLLIDER_TYPE type)
+	{
+		this->type = type;
+	}
 	bool CheckCollision(const SDL_Rect& r) const;
 };
 

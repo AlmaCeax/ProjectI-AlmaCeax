@@ -88,11 +88,16 @@
     <ClInclude Include="Enemy_Cyclop.h" />
     <ClInclude Include="Enemy_FlyingWorm.h" />
     <ClInclude Include="Enemy_HellBall.h" />
+    <ClInclude Include="Enemy_Hostur.h" />
     <ClInclude Include="Enemy_Jumper.h" />
     <ClInclude Include="Enemy_PowerUPShip.h" />
+    <ClInclude Include="Enemy_Snake.h" />
+    <ClInclude Include="Enemy_SnakeBody.h" />
     <ClInclude Include="Enemy_TentacleShooter.h" />
+    <ClInclude Include="Enemy_Wall.h" />
     <ClInclude Include="Enemy_Worm.h" />
     <ClInclude Include="Enemy_WormBody.h" />
+    <ClInclude Include="Enemy_Zarikasu.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Enemy_GreenEye.h" />
     <ClInclude Include="Enemy_WormHole.h" />
@@ -107,6 +112,7 @@
     <ClInclude Include="ModuleSceneStage3.h" />
     <ClInclude Include="ModuleSceneStart.h" />
     <ClInclude Include="ModuleStage.h" />
+    <ClInclude Include="ModuleTopScore.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="MemLeaks.h" />
@@ -131,12 +137,17 @@
     <ClCompile Include="Enemy_Cyclop.cpp" />
     <ClCompile Include="Enemy_FlyingWorm.cpp" />
     <ClCompile Include="Enemy_HellBall.cpp" />
+    <ClCompile Include="Enemy_Hostur.cpp" />
     <ClCompile Include="Enemy_Jumper.cpp" />
     <ClCompile Include="Enemy_PowerUPShip.cpp" />
+    <ClCompile Include="Enemy_Snake.cpp" />
+    <ClCompile Include="Enemy_SnakeBody.cpp" />
     <ClCompile Include="Enemy_TentacleShooter.cpp" />
+    <ClCompile Include="Enemy_Wall.cpp" />
     <ClCompile Include="Enemy_Worm.cpp" />
     <ClCompile Include="Enemy_WormBody.cpp" />
     <ClCompile Include="Enemy_WormHole.cpp" />
+    <ClCompile Include="Enemy_Zarikasu.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Enemy_GreenEye.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -156,6 +167,7 @@
     <ClCompile Include="ModuleSceneStage3.cpp" />
     <ClCompile Include="ModuleSceneStart.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
+    <ClCompile Include="ModuleTopScore.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>
