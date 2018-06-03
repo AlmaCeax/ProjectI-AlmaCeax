@@ -91,6 +91,7 @@ bool ModuleTopScore::Start()
 
 update_status ModuleTopScore::Update()
 {
+	if (timer > 0) timer--;
 	App->render->Blit(bckg, 0, 0, nullptr);
 	App->render->Blit(title, 45, 6, &title_rect);
 
@@ -220,16 +221,36 @@ void ModuleTopScore::SaveScore() {
 
 void ModuleTopScore::NameInput() {
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN || (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE)) {
-		current_char++;
-		if (current_char == 39) current_char = 0;
-		player_input[char_spot] = possible_inputs[current_char];
-		Mix_PlayChannel(-1, letter_swap, 0);
+		if (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) < -CONTROLLER_DEAD_ZONE && timer == 0) {
+			timer = 15;
+			current_char++;
+			if (current_char == 39) current_char = 0;
+			player_input[char_spot] = possible_inputs[current_char];
+			Mix_PlayChannel(-1, letter_swap, 0);
+		}
+		else
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_DOWN) {
+			current_char++;
+			if (current_char == 39) current_char = 0;
+			player_input[char_spot] = possible_inputs[current_char];
+			Mix_PlayChannel(-1, letter_swap, 0);
+		}	
 	}
 	else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN || (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE)) {
-		current_char--;
-		if (current_char == -1) current_char = 38;
-		player_input[char_spot] = possible_inputs[current_char];
-		Mix_PlayChannel(-1, letter_swap, 0);
+		if (SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTY) > CONTROLLER_DEAD_ZONE && timer == 0) {
+			timer = 15;
+			current_char--;
+			if (current_char == -1) current_char = 38;
+			player_input[char_spot] = possible_inputs[current_char];
+			Mix_PlayChannel(-1, letter_swap, 0);
+		}
+		else if (App->input->keyboard[SDL_SCANCODE_S] == KEY_DOWN)
+		{
+			current_char--;
+			if (current_char == -1) current_char = 38;
+			player_input[char_spot] = possible_inputs[current_char];
+			Mix_PlayChannel(-1, letter_swap, 0);
+		}
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_5] == KEY_DOWN || App->input->controller_Y_button == KEY_STATE::KEY_DOWN) {
