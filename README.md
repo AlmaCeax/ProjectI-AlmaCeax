@@ -33,7 +33,7 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 
 
 
-## Gameplay video of the original title
+## Gameplay X-Multiply Tribute
 <iframe width="640" height="360" src="https://www.youtube.com/embed/GcoOZxjrLdk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ***
