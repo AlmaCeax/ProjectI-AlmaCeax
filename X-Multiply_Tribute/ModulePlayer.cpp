@@ -894,32 +894,31 @@ void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece, floa
 
 	if (angle < 22.3)
 	{
-		angle2 += 4;
+		angle2 += 5;
 	}
 	else if (angle > 22.2 && angle < 23.6)
 	{
 		if (angle2 > 20) {
-			angle2 -= 3;
+			angle2 -= 4;
 		}else
 		if (angle2 < 30) {
-			angle2 += 3;
+			angle2 += 4;
 		}
 
 	}
 	else if (angle > 23.6 && angle < 24.3)
 	{
 		if (angle2 < -20) {
-			angle2 += 3;
+			angle2 += 4;
 		}else
 		if (angle2 > -30) {
-			angle2 -= 3;
+			angle2 -= 4;
 		}
 
 	}
 	else if (angle > 24.3)
 	{
-		angle2 -= 4;
-
+		angle2 -= 5;
 	}
 
 	if (angle2 > 85) {

@@ -39,6 +39,7 @@ public:
 	fPoint nextposition;
 
 	int w, h = 0;
+	float maxRotation;
 	enum movement { up, down, right, left, rest };
 
 	Tentacle_Piece2();
@@ -65,6 +66,7 @@ public:
 	
 	int w, h = 0;
 	float ex = 3, ey = 8;
+	float maxRotation;
 	bool moveUp = true, moveDown = true;
 	enum movement { up, down, right, left, rest };
 
