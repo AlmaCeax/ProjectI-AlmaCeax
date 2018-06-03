@@ -809,8 +809,15 @@ bool Particle::Update()
 	}
 
 	if (collider != nullptr) {
-		collider->SetPos(position.x, position.y);
-		collider->SetShape(anim.GetCurrentFrame().w, anim.GetCurrentFrame().h);
+		if (id == 16) {
+			collider->SetPos(position.x + 40, position.y);
+			collider->SetShape(anim.GetCurrentFrame().w - 40, anim.GetCurrentFrame().h);
+		}
+		else {
+			collider->SetPos(position.x, position.y);
+			collider->SetShape(anim.GetCurrentFrame().w, anim.GetCurrentFrame().h);
+		}
+		
 	}
 	return ret;
 }
