@@ -29,23 +29,50 @@ public:
 	void MoveTentacle(movement movement, int location_position);
 };
 
+class Tentacle_Piece2
+{
+public:
+	Collider * collider = nullptr;
+	Animation anim;
+	fPoint position;
+	float angle = 20;
+	fPoint nextposition;
+
+	int w, h = 0;
+	enum movement { up, down, right, left, rest };
+
+	Tentacle_Piece2();
+	~Tentacle_Piece2();
+	void MoveTentacle_Piece(movement movement, int location_position);
+	void RenderTentacle(SDL_Texture * graphics, bool flipPiece, float angle);
+};
+
 class Tentacle_Piece
 {
 public:
 	Collider * collider = nullptr;
 	Animation anim;
 	fPoint position;
-	float angle;
+	float angle = 20;
 	fPoint nextposition;
+
+	Tentacle_Piece2* piece2;
+	Tentacle_Piece2* piece3;
+	Tentacle_Piece2* piece4;
+	Tentacle_Piece2* piece5;
+	Tentacle_Piece2* piece6;
+	Tentacle* head;
 	
 	int w, h = 0;
 	enum movement { up, down, right, left, rest };
 
 	Tentacle_Piece();
 	~Tentacle_Piece();
+	void TentStart();
 	void MoveTentacle_Piece(movement movement, int location_position);
 	void RenderTentacle(SDL_Texture * graphics, bool flipPiece, float angle);
 };
+
 
 struct FireChunk {
 	fPoint position;
@@ -154,7 +181,7 @@ public:
 	bool canMove = false;
 	bool injecting = true;
 	bool startBoost = false;
-	float angle;
+	float angle = 23;
 	void BlitPlayer();
 	Collider* collider;
 	Tentacle tentacle;
