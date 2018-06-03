@@ -73,7 +73,6 @@ Enemy_Wall::~Enemy_Wall()
 
 void Enemy_Wall::Move()
 {
-	
 	shootTimer++;
 	if (shootTimer < 100 && shootTimer % 2 == 0) {
 		rangle3--;

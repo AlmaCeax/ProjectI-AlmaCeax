@@ -9,6 +9,7 @@
 #include "ModuleCollision.h"
 #include "ModulePowerUPS.h"
 #include "SDL_mixer\include\SDL_mixer.h"
+#include "SDL/include/SDL_timer.h"
 #include "ModuleSceneStage1.h"
 #include "ModuleSceneStage3.h"
 
@@ -100,7 +101,6 @@ void ModuleSceneStage3::UpdateCamera()
 			App->player->position.y += 1;
 			timer = 0;
 		}
-
 	}
 }
 
@@ -113,7 +113,6 @@ void ModuleSceneStage3::BackgroundEvents()
 			up = true;
 			Mix_PlayMusic(secondTrack, -1);
 		}
-
 	}
 	else if (up) {
 		up = false;
@@ -181,6 +180,9 @@ void ModuleSceneStage3::BackgroundEvents()
 			boss[3] = App->enemies->SpawnEnemyRet(infozarikasu4);
 
 			right = false;
+			bossfight = true;
+			start_time = SDL_GetTicks();
+			total_time = (Uint32)(91.0f * 1000.0f);
 			bossdead = false;
 		}
 	}
@@ -259,6 +261,15 @@ update_status ModuleSceneStage3::Update()
 		App->ui->current_checkpoint = 0;
 	}
 
+	if (bossfight) {
+		Uint32 now = SDL_GetTicks() - start_time;
+		if (now >= total_time) {
+			bossfight = false;
+			for (int i = 0; i < 4; i++) {
+				App->enemies->Kill(boss[i]);
+			}
+		}
+	}
 	if(!end)
 	{
 		if (bossdeads == 4)
