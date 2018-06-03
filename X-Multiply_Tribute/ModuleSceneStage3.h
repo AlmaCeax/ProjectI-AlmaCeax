@@ -24,7 +24,10 @@ private:
 	Animation door;
 	bool end = false;
 
+	bool bossfight = false;
 	bool bossspawned = false;
+	Uint32 start_time = 0;
+	Uint32 total_time = 0;
 
 	void UpdateCamera();
 	void BackgroundEvents();
