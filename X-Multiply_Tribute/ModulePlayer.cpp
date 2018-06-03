@@ -191,6 +191,7 @@ update_status ModulePlayer::Update()
 			startBoost = false;
 			canMove = true;
 			movedDown = false;
+			gamepadActived = false;
 		}
 	}
 	if (canMove) {
