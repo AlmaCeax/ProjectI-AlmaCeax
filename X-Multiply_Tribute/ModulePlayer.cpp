@@ -543,6 +543,13 @@ void ModulePlayer::BlitPlayer() {
 	if(App->player->IsEnabled()) App->render->Blit(graphics, position.x, position.y, &current_animation->GetCurrentFrame());
 
 	if (!canMove && activePU[TENTACLES]) {
+		if (angle <= 23.6) {
+			angle += 0.01;
+		}
+		else
+		{
+			angle -= 0.01;
+		}
 		tentacle_piece1.position = { position.x + 18,position.y - 6 };
 		tentacle_piece2.position = { position.x + 18,position.y + 10 };
 	}
