@@ -53,7 +53,7 @@ public:
 	Collider * collider = nullptr;
 	Animation anim;
 	fPoint position;
-	float angle2 = 20;
+	float angle2 = 23.6;
 	fPoint nextposition;
 
 	Tentacle_Piece2* piece2;
@@ -183,7 +183,7 @@ public:
 	bool canMove = false;
 	bool injecting = true;
 	bool startBoost = false;
-	float angle = 23;
+	float angle = 23.6;
 	void BlitPlayer();
 	Collider* collider;
 	Tentacle tentacle;
