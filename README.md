@@ -33,10 +33,10 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 
 
 
-## Gameplay X-Multiply Tribute
+## Gameplay AlmaCeax X-Multiply Tribute
 <iframe width="640" height="360" src="https://www.youtube.com/embed/GcoOZxjrLdk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-Download our latest release [HERE](https://github.com/AlmaCeax/ProjectI-AlmaCeax/releases/tag/1.0)
+### Download our latest release [HERE](https://github.com/AlmaCeax/ProjectI-AlmaCeax/releases/tag/1.0)
 
 ***
 

@@ -53,7 +53,7 @@ public:
 	Collider * collider = nullptr;
 	Animation anim;
 	fPoint position;
-	float angle2 = 23.6;
+	float angle2 = 0;
 	fPoint nextposition;
 
 	Tentacle_Piece2* piece2;
@@ -175,6 +175,8 @@ public:
 	Mix_Chunk* deadsfx = nullptr;
 
 	fPoint position;
+	fPoint lastposition;
+
 	enum state { top, bot, idl };
 	bool activePU[9];
 	state state;
