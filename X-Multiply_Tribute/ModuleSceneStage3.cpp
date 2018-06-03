@@ -304,6 +304,9 @@ bool ModuleSceneStage3::CleanUp()
 	music = nullptr;
 	secondTrack = nullptr;
 	bossTrack = nullptr;
+	bossdeads = 0;
+	bossdead = false;
+	end = false;
 
 	return true;
 }
