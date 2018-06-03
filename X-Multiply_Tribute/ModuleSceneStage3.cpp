@@ -150,8 +150,7 @@ void ModuleSceneStage3::BackgroundEvents()
 
 	if (App->render->camera.x >= 5374)
 	{
-		right = false;
-		if (!bossspawned)
+		if (right)
 		{
 			EnemyInfo infozarikasu1;
 			infozarikasu1.type = ENEMY_TYPES::ZARIKASU;
@@ -181,7 +180,8 @@ void ModuleSceneStage3::BackgroundEvents()
 			infozarikasu4.powerUpid = 4;
 			boss[3] = App->enemies->SpawnEnemyRet(infozarikasu4);
 
-			bossspawned = true;
+			right = false;
+			bossdead = false;
 		}
 	}
 
