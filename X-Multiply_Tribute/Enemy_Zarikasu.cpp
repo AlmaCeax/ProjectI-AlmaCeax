@@ -5,13 +5,15 @@
 #include "ModuleEnemies.h"
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
+#include "ModuleSceneStage3.h"
 #include <stdlib.h> 
 
 
 
 Enemy_Zarikasu::Enemy_Zarikasu(int x, int y, int id): Enemy(x, y)
 {
-	type = SNAKEBODY;
+	type = ZARIKASU;
+	numExplosions = 5;
 
 	myid = id;
 	w = 64;
@@ -72,11 +74,12 @@ void Enemy_Zarikasu::Move()
 	case 1:
 		if (position.y == 247) {
 			preparation = false;
+			App->stage3->bossdead = true;
 			anim.setCurrentFrameIndex(1);
 		}
 		if (shootTimer == 70) {
 			shooting = true;
-			App->particles->AddParticle(App->particles->zarikasubeam, position.x-w+20, position.y+28, COLLIDER_ENEMY_SHOT, { -1, -1 }, 0, 1, false, false, false);
+			App->particles->AddParticle(App->particles->zarikasubeam, position.x+20, position.y+28, COLLIDER_ENEMY_SHOT, { -1, -1 }, 0, 1, false, false, false);
 		}/*AddParticle.. */break;
 	case 2:
 		if (position.y == 247) {
@@ -86,7 +89,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 70) {
 			shooting = true;
-			App->particles->AddParticle(App->particles->zarikasubeam, position.x+w-20, position.y+28, COLLIDER_ENEMY_SHOT, { 1, -1 }, 0, 1, false, true, false);
+			App->particles->AddParticle(App->particles->zarikasubeam, position.x+w-40, position.y+28, COLLIDER_ENEMY_SHOT, { 1, -1 }, 0, 1, false, true, false);
 		}
 		break;
 	case 3:
@@ -96,7 +99,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 240) {
 			shooting = true;
-			App->particles->AddParticle(App->particles->zarikasubeam, position.x - w + 20, position.y + 28, COLLIDER_ENEMY_SHOT, { -1, 1 }, 0, 1, false, false, true);
+			App->particles->AddParticle(App->particles->zarikasubeam, position.x+ 20, position.y + 28, COLLIDER_ENEMY_SHOT, { -1, 1 }, 0, 1, false, false, true);
 		}
 		break;
 	case 4:

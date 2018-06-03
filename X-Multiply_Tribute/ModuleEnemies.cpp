@@ -27,6 +27,7 @@
 #include "Enemy_SnakeBody.h"
 #include "Enemy_Zarikasu.h"
 #include "ModuleStage.h"
+#include "ModuleSceneStage3.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #include "Enemy.h"
 
@@ -509,6 +510,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				if (lives[i] == 0) {
 					Mix_PlayChannel(-1, nemonaDeadsfx, 0);
 					enemies[i]->OnCollision(c2);
+					App->stage3->bossdeads++;
 					delete enemies[i];
 					enemies[i] = nullptr;
 				}

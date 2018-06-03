@@ -259,6 +259,16 @@ update_status ModuleSceneStage3::Update()
 		App->ui->current_checkpoint = 0;
 	}
 
+	if(!end)
+	{
+		if (bossdeads == 4)
+		{
+			App->particles->AddParticle(App->particles->multipleBigExplosion, 5560, 210, COLLIDER_TYPE::COLLIDER_NONE, { 0, 0 }, 0, 4, true);
+			App->ui->StageCleared();
+			end = true;
+		}
+	}
+
 	return update_status::UPDATE_CONTINUE;
 }
 

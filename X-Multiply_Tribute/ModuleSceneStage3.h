@@ -22,7 +22,8 @@ private:
 	SDL_Rect rect[4];
 	SDL_Rect coll;
 	Animation door;
-	bool bossdead = false;
+	bool end = false;
+
 	bool bossspawned = false;
 
 	void UpdateCamera();
@@ -32,6 +33,8 @@ private:
 	void loadAudio();
 
 public:
+	bool bossdead = false;
+	int bossdeads = 0;
 	update_status Update();
 	bool CleanUp();
 	bool Start();
