@@ -343,6 +343,7 @@ void ModuleUI::StageCleared() {
 	Mix_PlayMusic(clear_song, false);
 	if(App->player->collider != nullptr) App->player->collider->to_delete = true;
 	App->stage1->right = false;
+	App->player->canBlit = false;
 	total_time = (Uint32)(4.0f * 1000.0f);
 	start_time = SDL_GetTicks();
 	current_step = clear_step::fade;

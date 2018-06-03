@@ -72,6 +72,7 @@ bool ModulePlayer::Start()
 	canMove = false;
 	startBoost = false;
 	current_animation = &idle;
+	canBlit = true;
 
 	LOG("Loading player textures");
 	graphics = App->textures->Load("Assets/Sprites/MainCharacter/spr_maincharacter.png"); // arcade version
@@ -185,6 +186,12 @@ update_status ModulePlayer::Update()
 		startime--;
 		current_animation = &idle;
 		state = idl;
+		tentacle_piece1.position = { position.x + 18,position.y - 6 };
+		tentacle_piece2.position = { position.x + 18,position.y + 10 };
+		angle += 0.1;
+		if (angle >= 25.27) {
+			angle = 25.27;
+		}
 
 		if (startime == 0)
 		{
@@ -499,7 +506,7 @@ update_status ModulePlayer::Update()
 		App->render->Blit(graphics, circle_1.position.x, circle_1.position.y, &firecircle);
 		App->render->Blit(graphics, circle_2.position.x, circle_2.position.y, &firecircle);
 	}
-	if (activePU[TENTACLES])
+	if (activePU[TENTACLES] && canBlit)
 	{
 		/*App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
 		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));*/
@@ -553,11 +560,9 @@ void ModulePlayer::BlitPlayer() {
 		tentacle_piece1.position = { position.x + 18,position.y - 6 };
 		tentacle_piece2.position = { position.x + 18,position.y + 10 };
 	}
-	if(activePU[TENTACLES]){
-
+	if (activePU[TENTACLES] && !canBlit){
 		tentacle_piece1.RenderTentacle(graphics, false, angle);
 		tentacle_piece2.RenderTentacle(graphics, true, angle);
-
 	}
 }
 

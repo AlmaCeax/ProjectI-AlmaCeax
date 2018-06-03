@@ -173,6 +173,7 @@ public:
 	update_status PreUpdate();
 	update_status Update();
 	void ResetPU();
+	bool canBlit = true;
 
 	Mix_Chunk* deadsfx = nullptr;
 
