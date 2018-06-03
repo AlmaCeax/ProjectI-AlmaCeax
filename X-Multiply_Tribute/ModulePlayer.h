@@ -53,7 +53,7 @@ public:
 	Collider * collider = nullptr;
 	Animation anim;
 	fPoint position;
-	float angle = 20;
+	float angle2 = 20;
 	fPoint nextposition;
 
 	Tentacle_Piece2* piece2;
@@ -64,6 +64,8 @@ public:
 	Tentacle* head;
 	
 	int w, h = 0;
+	float ex = 3, ey = 10;
+	bool moveUp = true, moveDown = true;
 	enum movement { up, down, right, left, rest };
 
 	Tentacle_Piece();
