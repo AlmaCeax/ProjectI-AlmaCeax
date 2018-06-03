@@ -865,12 +865,12 @@ void Tentacle_Piece::TentStart()
 	SDL_Rect rect_tentaclecol5 = { piece5->position.x,piece5->position.y,4,10 };
 	SDL_Rect rect_tentaclecol6 = { piece6->position.x,piece6->position.y,4,10 };
 
-	collider = App->collision->AddCollider(rect_tentaclecol1, COLLIDER_PLAYER_SHOT);
-	piece2->collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
-	piece3->collider = App->collision->AddCollider(rect_tentaclecol3, COLLIDER_PLAYER_SHOT);
-	piece4->collider = App->collision->AddCollider(rect_tentaclecol4, COLLIDER_PLAYER_SHOT);
-	piece5->collider = App->collision->AddCollider(rect_tentaclecol5, COLLIDER_PLAYER_SHOT);
-	piece6->collider = App->collision->AddCollider(rect_tentaclecol6, COLLIDER_PLAYER_SHOT);
+	collider = App->collision->AddCollider(rect_tentaclecol1, COLLIDER_TENTACLE_PIECE);
+	piece2->collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_TENTACLE_PIECE);
+	piece3->collider = App->collision->AddCollider(rect_tentaclecol3, COLLIDER_TENTACLE_PIECE);
+	piece4->collider = App->collision->AddCollider(rect_tentaclecol4, COLLIDER_TENTACLE_PIECE);
+	piece5->collider = App->collision->AddCollider(rect_tentaclecol5, COLLIDER_TENTACLE_PIECE);
+	piece6->collider = App->collision->AddCollider(rect_tentaclecol6, COLLIDER_TENTACLE_PIECE);
 	head->collider = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
 }
 
