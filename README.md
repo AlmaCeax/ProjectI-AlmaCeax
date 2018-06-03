@@ -36,13 +36,14 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 ## Gameplay X-Multiply Tribute
 <iframe width="640" height="360" src="https://www.youtube.com/embed/GcoOZxjrLdk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+Download our latest release [HERE](https://github.com/AlmaCeax/ProjectI-AlmaCeax/releases/tag/1.0)
+
 ***
 
 # How to play the game
 Pilot a ship shooting enemies, dodging bullets and taking powerups until you reach the end of stage 1.
 
 The highest score is saved in the "Top" section of the lower bar. But, if you use the debug functions of God Mode or Extra Life, we have a block against cheats that will not save the score.
-
 
 ## Installation
 Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
