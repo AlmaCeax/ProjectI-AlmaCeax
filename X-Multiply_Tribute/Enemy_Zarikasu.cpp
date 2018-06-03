@@ -17,6 +17,7 @@ Enemy_Zarikasu::Enemy_Zarikasu(int x, int y, int id): Enemy(x, y)
 	w = 64;
 	h = 60;
 
+	center = { w / 2, h / 2 };
 	switch (id)
 	{
 	case 1: speed = { -1, -1 };  break;
@@ -75,6 +76,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 70) {
 			shooting = true;
+			App->particles->AddParticle(App->particles->zarikasubeam, position.x-w+20, position.y+28, COLLIDER_ENEMY_SHOT, { -1, -1 }, 0, 1, false, false, false);
 		}/*AddParticle.. */break;
 	case 2:
 		if (position.y == 247) {
@@ -84,6 +86,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 70) {
 			shooting = true;
+			App->particles->AddParticle(App->particles->zarikasubeam, position.x+w-20, position.y+28, COLLIDER_ENEMY_SHOT, { 1, -1 }, 0, 1, false, true, false);
 		}
 		break;
 	case 3:
@@ -93,6 +96,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 240) {
 			shooting = true;
+			App->particles->AddParticle(App->particles->zarikasubeam, position.x - w + 20, position.y + 28, COLLIDER_ENEMY_SHOT, { -1, 1 }, 0, 1, false, false, true);
 		}
 		break;
 	case 4:
@@ -102,6 +106,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 180){
 			shooting = true;
+			App->particles->AddParticle(App->particles->zarikasubeam, position.x + w - 20, position.y + 28, COLLIDER_ENEMY_SHOT, { 1, 1 }, 0, 1, false, true, true);
 		}
 		break;
 	default:

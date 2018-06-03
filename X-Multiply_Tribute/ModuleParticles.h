@@ -21,6 +21,7 @@ struct Particle
 	Animation anim;
 	uint fx = 0;
 	iPoint position;
+	iPoint origin_position;
 	fPoint speed;
 	bool hastargeted = false;
 	int w, h = 0;
@@ -41,6 +42,9 @@ struct Particle
 	bool missileUp = false;
 	SDL_Point center = {0,0};
 	float rangle = 0;
+	Particle* subparticles[10];
+	int indexchild = 0;
+
 
 	Particle();
 	Particle(const Particle& p);
@@ -62,6 +66,7 @@ public:
 
 
 	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = { 0,0 }, Uint32 delay = 0, int Ntimes = 1, bool isMultiple = false, bool flipX = false, bool flipY = false, bool _up = false, iPoint offset = { 0, 0 });
+	Particle* AddParticleRet(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, bool flipX = false, bool flipY = false, fPoint speed = { 0 , 0 });
 	void OnCollision(Collider* c1, Collider* c2);
 	float AbsoluteRotation(iPoint originPos, iPoint targetPos);
 
@@ -70,6 +75,11 @@ private:
 	SDL_Texture * graphics = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
 	uint last_particle = 0;
+	fPoint upright = { 1, -1 };
+	fPoint upleft = { -1, -1 };
+	fPoint downright = { 1, 1 };
+	fPoint downleft = { -1, 1 };
+
 
 public:
 	Particle baseShot;
@@ -115,6 +125,7 @@ public:
 	Particle walltentshot3;
 	Particle missileexplosion;
 	Particle zarikasubeam;
+	Particle zarikasubeampart;
 	Particle laserstart;
 	Particle laser;
 	Particle laserexplosion;

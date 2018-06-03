@@ -376,6 +376,21 @@ ModuleParticles::ModuleParticles()
 	laserexplosion.id = 16;
 	laserexplosion.speed = { 0,0 };
 
+	zarikasubeam.anim.PushBack({ 5, 639, 21, 16 });
+	zarikasubeam.anim.speed = 0.f;
+	zarikasubeam.anim.loop = false;
+	zarikasubeam.life = 500000;
+	zarikasubeam.id = 17;
+	zarikasubeam.speed = { 0,0 };
+	zarikasubeam.preparation = true;
+	
+	zarikasubeampart.anim.PushBack({ 5, 658, 21, 16 });
+	zarikasubeampart.anim.speed = 0.f;
+	zarikasubeampart.anim.loop = false;
+	zarikasubeampart.life = 500000;
+	zarikasubeampart.id = 18;
+	zarikasubeampart.speed = { 0,0 };
+
 }
 
 ModuleParticles::~ModuleParticles()
@@ -475,10 +490,33 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			p->missileUp = _up;
 			p->offsetx = offset.x;
 			p->offsety = offset.y;
+			p->origin_position = { x, y };
 			if (!speed.IsZero()) p->speed = speed;
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			active[i] = p;
+			break;
+		}
+	}
+}
+
+Particle* ModuleParticles::AddParticleRet(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, bool flipX, bool flipY, fPoint speed)
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		if (active[i] == nullptr)
+		{
+			Particle* p = new Particle(particle);
+			p->born = SDL_GetTicks();
+			p->position.x = x;
+			p->position.y = y;
+			p->flipX = flipX;
+			p->flipY = flipY;
+			p->speed = speed;
+			if (collider_type != COLLIDER_NONE)
+				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+			active[i] = p;
+			return p;
 			break;
 		}
 	}
@@ -499,6 +537,31 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			case 12: App->particles->AddParticle(App->particles->hosturballdeath, active[i]->position.x, active[i]->position.y); break;
 			case 15: App->particles->AddParticle(App->particles->missileexplosion, active[i]->position.x, active[i]->position.y); break;
 			case 16: if (c2->type == COLLIDER_WALL) App->particles->AddParticle(App->particles->laserexplosion, active[i]->position.x + 63, active[i]->position.y); break;
+			case 17:
+				if (c2->type == COLLIDER_WALL) {
+					if (active[i]->speed == upright) {
+						if (active[i]->position.x < 5730)active[i]->speed = downright;
+						else active[i]->speed = upleft;
+					}
+					else if (active[i]->speed == upleft)
+					{
+						if (active[i]->position.x > 5410)active[i]->speed = downleft;
+						else active[i]->speed = upright;
+					}
+					else if (active[i]->speed == downright)
+					{
+						if (active[i]->position.x < 5730)active[i]->speed = upright;
+						else active[i]->speed = downleft;
+					}
+					else if (active[i]->speed == downleft)
+					{
+						if (active[i]->position.x > 5410)active[i]->speed = upleft;
+						else active[i]->speed = downright;
+					}
+				}
+				break;
+			case 18: 
+				break;
 			}
 
 			if (active[i]->id != 16 || c2->type == COLLIDER_WALL) {
@@ -520,7 +583,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple), flipX(p.flipX), flipY(p.flipY), missileUp(p.missileUp)
+	fx(p.fx), born(p.born), life(p.life), isPlayerAttached(p.isPlayerAttached), offsetx(p.offsetx), offsety(p.offsety), sfx(p.sfx), id(p.id), nTimes(p.nTimes), isMultiple(p.isMultiple), flipX(p.flipX), flipY(p.flipY), missileUp(p.missileUp), origin_position(p.origin_position)
 {}
 
 Particle::~Particle()
@@ -672,10 +735,70 @@ bool Particle::Update()
 	case 16:
 		position.x += speed.x;
 		position.y += speed.y; break;
+	case 17:
+		if (preparation)
+		{
+			if (indexchild < 10)
+			{
+				if (preparationtimer == 14)
+				{
+					subparticles[indexchild] = App->particles->AddParticleRet(App->particles->zarikasubeampart, origin_position.x, origin_position.y, COLLIDER_ENEMY_SHOT, flipX, flipY, speed);
+					preparationtimer = 0;
+					indexchild++;
+				}
+				else preparationtimer++;
+			}
+			else preparation = false;
+		}
+		position.x += speed.x;
+		position.y += speed.y;
+
+		if (position.x < 5408) {
+			speed.x = 1;
+			flipX = !flipX;
+		}
+		if (position.y < 112) {
+			speed.y = 1;
+			flipY = !flipY;
+		}
+
+		if (position.y > 302) {
+			speed.y = -1;
+			flipY = !flipY;
+		}
+
+		if (position.x > 5734) {
+			speed.x = -1;
+			flipX = !flipX;
+		}
+		break;
+	case 18:
+		position.x += speed.x;
+		position.y += speed.y; 
+
+		if (position.x < 5408) {
+			speed.x = 1;
+			flipX = !flipX;
+		}
+		if (position.y < 112) {
+			speed.y = 1;
+			flipY = !flipY;
+		}
+
+		if (position.y > 302) {
+			speed.y = -1;
+			flipY = !flipY;
+		}
+
+		if (position.x > 5734) {
+			speed.x = -1;
+			flipX = !flipX;
+		}
 		break;
 	default:
 		position.x += speed.x;
-		position.y += speed.y; break;
+		position.y += speed.y; 
+		break;
 		}
 	}
 	if (isPlayerAttached) {
