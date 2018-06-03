@@ -65,9 +65,14 @@ Enemy_Wall::Enemy_Wall(int x, int y) :Enemy(x, y)
 	collider4 = App->collision->AddCollider({ 0, 0, 160, 50 }, COLLIDER_TYPE::COLLIDER_WALL, App->enemies);
 }
 
+Enemy_Wall::~Enemy_Wall()
+{
+	collider3->to_delete = true;
+	collider4->to_delete = true;
+}
+
 void Enemy_Wall::Move()
 {
-	
 	shootTimer++;
 	if (shootTimer < 100 && shootTimer % 2 == 0) {
 		rangle3--;
@@ -120,6 +125,7 @@ void Enemy_Wall::Draw(SDL_Texture* sprites) {
 			hit = false;
 		}
 	}
+	
 	if (&anim3 != nullptr) {
 		if (!hit)App->render->BlitFlipped(sprites, position.x, position.y, &((&anim3)->GetCurrentFrame()), flipX, flipY, rangle3, center3);
 		else {

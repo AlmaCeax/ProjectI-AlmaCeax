@@ -97,6 +97,7 @@ bool ModuleSceneStart::Start()
 	App->ui->ui_visible = false;
 	App->ui->current_checkpoint = 0;
 	graphics = App->textures->Load("Assets/Sprites/UI/UI_2.png");
+	App->stage1->first_time = true;
 
 	return true;
 }

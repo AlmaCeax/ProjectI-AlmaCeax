@@ -48,6 +48,8 @@ bool ModuleSceneStage1::Init()
 
 	score_bonus = 10000;
 	index = 1;
+	first_time = true;
+
 	return true;
 }
 
@@ -68,7 +70,6 @@ bool ModuleSceneStage1::Start() {
 	stopped = false;
 
 	unhooked = false;
-	first_time = true;
 	startAnimationHook.setCurrentFrameIndex(0);
 
 
@@ -88,6 +89,7 @@ bool ModuleSceneStage1::Start() {
 	
 
 	App->render->ResetCamera();
+	if (!first_time) App->ui->PlayerReady();;
 
 
 	return true;
@@ -500,6 +502,55 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4212, 259, false, 3);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4212, 427, true, 3);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 259, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 280, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 394, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 427, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4222, 259, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4222, 427, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 259, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 280, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 394, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 427, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4232, 259, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4232, 427, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 259, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 280, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 394, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 427, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4242, 259, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4242, 427, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 279, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 300, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 414, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 447, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4212, 279, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4212, 447, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 279, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 300, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 414, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 447, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4222, 279, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4222, 447, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 279, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 300, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 414, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 447, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4232, 279, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4232, 447, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 279, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 300, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 414, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 447, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4242, 279, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4242, 447, true, 3);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 275);
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 340);
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4477, 340);
@@ -537,6 +588,7 @@ void ModuleSceneStage1::injection()
 				if (startAnimation.isDone())
 				{
 					injectionposition.y--;
+					if (injectionposition.y <= -100) first_time = false;
 				}
 				else {
 					textrect[2] = startAnimation.GetCurrentFrame();
@@ -578,11 +630,6 @@ void ModuleSceneStage1::injection()
 			}
 		}
 	}
-}
-
-void ModuleSceneStage1::OnFade() {
-	ModuleStage::OnFade();
-	if (App->ui->is_continue) App->ui->PlayerReady();
 }
 
 void ModuleSceneStage1::BossUpdate() {

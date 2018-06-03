@@ -44,6 +44,7 @@ struct Particle
 	float rangle = 0;
 	Particle* subparticles[20];
 	int indexchild = 0;
+	int bounce = 1;
 
 
 	Particle();
@@ -67,6 +68,7 @@ public:
 
 	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = { 0,0 }, Uint32 delay = 0, int Ntimes = 1, bool isMultiple = false, bool flipX = false, bool flipY = false, bool _up = false, iPoint offset = { 0, 0 });
 	Particle* AddParticleRet(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, bool flipX = false, bool flipY = false, fPoint speed = { 0 , 0 });
+	Particle* AddParticleRetEx(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, fPoint speed = { 0,0 }, Uint32 delay = 0, int Ntimes = 1, bool isMultiple = false, bool flipX = false, bool flipY = false, bool _up = false, iPoint offset = { 0, 0 });
 	void OnCollision(Collider* c1, Collider* c2);
 	float AbsoluteRotation(iPoint originPos, iPoint targetPos);
 

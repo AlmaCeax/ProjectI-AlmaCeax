@@ -173,7 +173,7 @@ void ModuleUI::ClearUpdate() {
 
 				switch (App->current_stage->index) {
 					case 1: App->fade->FadeToBlack(App->current_stage, App->stage3, 0.0f); break;
-					case 3: App->fade->FadeToBlack(App->current_stage, App->start, 0.0f); break;
+					case 3: App->fade->FadeToBlack(App->current_stage, App->stage1, 0.0f); break;
 				}		
 				current_step = clear_step::none;
 			}
@@ -237,7 +237,7 @@ void ModuleUI::ContinueTextBlit()
 
 void ModuleUI::PlayerDeath() {
 	player_lives--;
-	PlayerReady();
+	//PlayerReady();
 }
 
 void ModuleUI::Reset() {
@@ -271,6 +271,7 @@ void ModuleUI::Reset() {
 }
 
 void ModuleUI::DeathFade() {
+	App->stage1->first_time = false;
 	if (player_lives > 0) App->fade->FadeToBlack(App->current_stage, App->current_stage);
 	else if(!game_over) {
 		Mix_PlayMusic(over_song,false);

@@ -69,6 +69,16 @@ void Enemy_Zarikasu::Move()
 	if (preparation) {
 		position += speed;
 	}
+
+	if(shot!=nullptr)
+	{
+		if (shot->bounce >= 20)
+		{
+			shot = nullptr;
+			shootTimer = 0;
+		}
+	}
+
 	switch (myid)
 	{
 	case 1:
@@ -79,7 +89,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 70) {
 			shooting = true;
-			App->particles->AddParticle(App->particles->zarikasubeam, position.x+20, position.y+28, COLLIDER_ENEMY_SHOT, { -1, -1 }, 0, 1, false, false, false);
+			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x+20, position.y+28, COLLIDER_ENEMY_SHOT, { -2, -2 }, 0, 1, false, false, false);
 		}/*AddParticle.. */break;
 	case 2:
 		if (position.y == 247) {
@@ -89,7 +99,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 70) {
 			shooting = true;
-			App->particles->AddParticle(App->particles->zarikasubeam, position.x+w-40, position.y+28, COLLIDER_ENEMY_SHOT, { 1, -1 }, 0, 1, false, true, false);
+			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x+w-40, position.y+28, COLLIDER_ENEMY_SHOT, { 2, -2 }, 0, 1, false, true, false);
 		}
 		break;
 	case 3:
@@ -99,7 +109,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 240) {
 			shooting = true;
-			App->particles->AddParticle(App->particles->zarikasubeam, position.x+ 20, position.y + 28, COLLIDER_ENEMY_SHOT, { -1, 1 }, 0, 1, false, false, true);
+			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x+ 20, position.y + 28, COLLIDER_ENEMY_SHOT, { -2, 2 }, 0, 1, false, false, true);
 		}
 		break;
 	case 4:
@@ -109,7 +119,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 180){
 			shooting = true;
-			App->particles->AddParticle(App->particles->zarikasubeam, position.x + w - 20, position.y + 28, COLLIDER_ENEMY_SHOT, { 1, 1 }, 0, 1, false, true, true);
+			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x + w - 20, position.y + 28, COLLIDER_ENEMY_SHOT, { 2, 2 }, 0, 1, false, true, true);
 		}
 		break;
 	default:
@@ -117,7 +127,14 @@ void Enemy_Zarikasu::Move()
 	}
 	if (shooting)
 	{
-		anim.setCurrentFrameIndex(3);
+		if (shot != nullptr)
+		{
+			if (shot->preparation)
+			{
+				anim.setCurrentFrameIndex(3);
+			}
+			else anim.setCurrentFrameIndex(1);
+		}
 	}
 	shootTimer++;
 }

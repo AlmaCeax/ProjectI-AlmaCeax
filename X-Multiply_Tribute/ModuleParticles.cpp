@@ -470,6 +470,15 @@ update_status ModuleParticles::Update()
 				if(p->id != 3)Mix_PlayChannel(p->id, p->sfx, 0);
 			}
 		}
+
+		if (active[i] != nullptr)
+		{
+			if (active[i]->bounce >= 20)
+			{
+				delete p;
+				active[i] = nullptr;
+			}
+		}
 	}
 	return UPDATE_CONTINUE;
 }
@@ -513,6 +522,32 @@ Particle* ModuleParticles::AddParticleRet(const Particle& particle, int x, int y
 			p->flipX = flipX;
 			p->flipY = flipY;
 			p->speed = speed;
+			if (collider_type != COLLIDER_NONE)
+				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+			active[i] = p;
+			return p;
+			break;
+		}
+	}
+}
+
+Particle* ModuleParticles::AddParticleRetEx(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, fPoint speed, Uint32 delay, int nTimes, bool isMultiple, bool flipX, bool flipY, bool _up, iPoint offset)
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		if (active[i] == nullptr)
+		{
+			Particle* p = new Particle(particle);
+			p->born = SDL_GetTicks() + delay;
+			p->position.x = x;
+			p->position.y = y;
+			p->flipX = flipX;
+			p->flipY = flipY;
+			p->missileUp = _up;
+			p->offsetx = offset.x;
+			p->offsety = offset.y;
+			p->origin_position = { x, y };
+			if (!speed.IsZero()) p->speed = speed;
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			active[i] = p;
@@ -740,7 +775,7 @@ bool Particle::Update()
 		{
 			if (indexchild < 20)
 			{
-				if (preparationtimer == 6)
+				if (preparationtimer == 2)
 				{
 					subparticles[indexchild] = App->particles->AddParticleRet(App->particles->zarikasubeampart, origin_position.x, origin_position.y, COLLIDER_ENEMY_SHOT, flipX, flipY, speed);
 					preparationtimer = 0;
@@ -753,44 +788,52 @@ bool Particle::Update()
 		position.x += speed.x;
 		position.y += speed.y;
 		if (position.x < 5408) {
-			speed.x = 1;
+			speed.x = 2;
 			flipX = !flipX;
+			bounce++;
 		}
 		if (position.y < 112) {
-			speed.y = 1;
+			speed.y = 2;
 			flipY = !flipY;
+			bounce++;
 		}
 
 		if (position.y > 302) {
-			speed.y = -1;
+			speed.y = -2;
 			flipY = !flipY;
+			bounce++;
 		}
 
 		if (position.x > 5734) {
-			speed.x = -1;
+			speed.x = -2;
 			flipX = !flipX;
+			bounce++;
 		}
 		break;
 	case 18:
 		position.x += speed.x;
 		position.y += speed.y; 
 		if (position.x < 5408) {
-			speed.x = 1;
+			speed.x = 2;
 			flipX = !flipX;
+			bounce++;
 		}
 		if (position.y < 112) {
-			speed.y = 1;
+			speed.y = 2;
 			flipY = !flipY;
+			bounce++;
 		}
 
 		if (position.y > 302) {
-			speed.y = -1;
+			speed.y = -2;
 			flipY = !flipY;
+			bounce++;
 		}
 
 		if (position.x > 5734) {
-			speed.x = -1;
+			speed.x = -2;
 			flipX = !flipX;
+			bounce++;
 		}
 		break;
 	default:
