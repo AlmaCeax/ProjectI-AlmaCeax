@@ -6,6 +6,7 @@ AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video
 
 
 # Our Team
+<img src="https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/team.jpg" class="img-responsive" alt="AlmaCeax Screenshot"> </div>
 ![AlmaCeax Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/team.jpg)
 
 ## Management: Marc Guillén Saltó
