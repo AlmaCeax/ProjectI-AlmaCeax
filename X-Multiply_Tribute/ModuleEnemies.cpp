@@ -454,7 +454,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				}
 				break;
 			case WORMBODY:
-				lives[i]--;
+				if (((Enemy_WormBody*)enemies[i])->splited == true)lives[i]--;
 				if (lives[i] == 0) {
 					if (((Enemy_WormBody*)enemies[i])->splited == true) {
 						Mix_PlayChannel(-1, nemonaDeadsfx, 0);
