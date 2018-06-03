@@ -326,11 +326,9 @@ update_status ModulePlayer::Update()
 
 				if (activePU[TENTACLES])
 				{
-					App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
-					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT);
+					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle_piece1.head->position.x, tentacle_piece1.head->position.y, COLLIDER_PLAYER_SHOT);
 
-					App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
-					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
+					App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle_piece2.head->position.x, tentacle_piece2.head->position.y, COLLIDER_PLAYER_SHOT);
 				}
 			}		
 			cooldown = 0;
@@ -376,11 +374,9 @@ update_status ModulePlayer::Update()
 
 					if (activePU[TENTACLES])
 					{
-						App->particles->AddParticle(App->particles->baseShotExp, tentacle.position.x + 30, tentacle.position.y + 1);
-						App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle.position.x, tentacle.position.y, COLLIDER_PLAYER_SHOT);
+  						App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle_piece1.head->position.x, tentacle_piece1.head->position.y, COLLIDER_PLAYER_SHOT);
 
-						App->particles->AddParticle(App->particles->baseShotExp, tentacle2.position.x + 30, tentacle2.position.y + 1);
-						App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle2.position.x, tentacle2.position.y, COLLIDER_PLAYER_SHOT);
+						App->particles->AddParticle(App->particles->tentacleBaseShot, tentacle_piece2.head->position.x, tentacle_piece2.head->position.y, COLLIDER_PLAYER_SHOT);
 					}
 				}			
 				cooldown = 0;
@@ -466,53 +462,13 @@ void ModulePlayer::BlitPlayer() {
 	if(App->player->IsEnabled()) App->render->Blit(graphics, position.x, position.y, &current_animation->GetCurrentFrame());
 
 	if (!canMove && activePU[TENTACLES]) {
-		fPoint clear_position = { position.x,position.y - 50 };
-		fPoint origin_position = { tentacle.position.x, tentacle.position.y };
-		float distance = origin_position.DistanceTo(clear_position);
-		fPoint direction;
-		if (distance <= 0.01f && distance >= -0.01f) tentacle.position = clear_position;
-		else
-		{
-			direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
-
-			tentacle.position.x += direction.x * 2;
-			tentacle.position.y += direction.y;
-
-			tentacle.collider->SetPos(tentacle.position.x, tentacle.position.y);
-			tentacle2.collider->SetPos(tentacle2.position.x, tentacle2.position.y);
-
-			if (origin_position.DistanceTo(tentacle.position) >= distance)
-			{
-				tentacle.position = clear_position;
-			}
-		}
-
-		clear_position = { position.x,position.y + 54 };
-		origin_position = { tentacle2.position.x, tentacle2.position.y };
-		distance = origin_position.DistanceTo(clear_position);
-
-		if (distance <= 0.01f && distance >= -0.01f) tentacle2.position = clear_position;
-		else {
-			direction = { clear_position.x / distance - origin_position.x / distance, clear_position.y / distance - origin_position.y / distance };
-
-			tentacle2.position.x += direction.x * 2;
-			tentacle2.position.y += direction.y;
-
-			if (origin_position.DistanceTo(tentacle2.position) >= distance)
-			{
-				tentacle2.position = clear_position;
-			}
-		}
+		tentacle_piece1.position = { position.x + 18,position.y - 6 };
+		tentacle_piece2.position = { position.x + 18,position.y + 10 };
 	}
 	if(activePU[TENTACLES]){
 
-	App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
-	App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
-	App->render->Blit(graphics, tentacle_piece1.position.x, tentacle_piece1.position.y, &(tentacle_piece1.anim.GetCurrentFrame()));
-	App->render->Blit(graphics, tentacle_piece2.position.x, tentacle_piece2.position.y, &(tentacle_piece2.anim.GetCurrentFrame()));
-
-		App->render->Blit(graphics, tentacle.position.x, tentacle.position.y, &(tentacle.anim.GetCurrentFrame()));
-		App->render->Blit(graphics, tentacle2.position.x, tentacle2.position.y, &(tentacle2.anim.GetCurrentFrame()));
+		tentacle_piece1.RenderTentacle(graphics, false, angle);
+		tentacle_piece2.RenderTentacle(graphics, true, angle);
 
 	}
 }
@@ -889,7 +845,6 @@ void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece, floa
 	}
 	else
 	{
-
 		App->render->BlitFlipped(graphics, position.x, position.y, &(anim.GetCurrentFrame()), false, false, (0, angle), { 2,5 });
 		
 		piece2->position.x = position.x - cosf(angle)*hipotenusa;
