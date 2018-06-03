@@ -141,7 +141,7 @@ void ModuleSceneStage3::BackgroundEvents()
 		App->render->Blit(textures[3], 5354, 179, &door.GetCurrentFrame());
 		App->render->Blit(textures[3], 5736, 178, &door.GetCurrentFrame());
 		if (collider) {
-			coll = { 4691,179,59,56 };
+			coll = { 5355,179,59,56 };
 			App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 			collider = false;
 		}

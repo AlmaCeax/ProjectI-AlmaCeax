@@ -79,8 +79,8 @@ bool ModulePlayer::Start()
 	deadsfx = App->audio->LoadFx("Assets/Audio/SFX/xmultipl-018.wav");
 
 	SDL_Rect rect_collider = { position.x,position.y,36,14 };
-	SDL_Rect rect_tentaclecol = { tentacle.position.x,tentacle.position.y,19,10 };
-	SDL_Rect rect_tentaclecol2 = { tentacle2.position.x,tentacle2.position.y,19,10 };
+	SDL_Rect rect_tentaclecol = { tentacle_piece1.head->position.x,tentacle_piece1.head->position.y,19,10 };
+	SDL_Rect rect_tentaclecol2 = { tentacle_piece2.head->position.x,tentacle_piece2.head->position.y,19,10 };
 	/*SDL_Rect rect_tentacle_piece1 = { tentacle_piece1.position.x,tentacle_piece1.position.y,6,6 };
 	SDL_Rect rect_tentacle_piece2 = { tentacle_piece2.position.x,tentacle_piece2.position.y,6,6 };*/
 
@@ -99,9 +99,9 @@ bool ModulePlayer::Start()
 	/*tentacle_piece1.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
 	tentacle_piece2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);*/
 
-	circle_1.my_tentacle = &tentacle;
+	circle_1.my_tentacle = tentacle_piece1.head;
 	circle_1.Prepare();
-	circle_2.my_tentacle = &tentacle2;
+	circle_2.my_tentacle = tentacle_piece2.head;
 	circle_2.Prepare();
 
 	if (!activePU[TENTACLES]) {
