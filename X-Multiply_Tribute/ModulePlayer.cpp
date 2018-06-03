@@ -893,7 +893,7 @@ void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece, floa
 				angle -= 0.5;
 			}
 		}
-			App->render->BlitFlipped(graphics, position.x, position.y, &(anim.GetCurrentFrame()), false, true, (0, -angle), { 2,5 });
+		App->render->BlitFlipped(graphics, position.x, position.y, &(anim.GetCurrentFrame()), false, true, (0, -angle), { 2,5 });
 
 				piece2->position.x = position.x - cosf(angle)*hipotenusa;
 				piece2->position.y = position.y - sinf(angle)*hipotenusa;
@@ -918,7 +918,7 @@ void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece, floa
 				piece6->position.x = piece5->position.x - cosf(angle)*hipotenusa;
 				piece6->position.y = piece5->position.y - sinf(angle)*hipotenusa;
 
-		App->render->BlitFlipped(graphics, piece6->position.x, piece6->position.y, &(piece6->anim.GetCurrentFrame()), false, true, (0, angle+25), { 2,5 });
+		App->render->BlitFlipped(graphics, piece6->position.x, piece6->position.y, &(piece6->anim.GetCurrentFrame()), false, true, (0, -angle-25), { 2,5 });
 		
 		head->position.x = (piece6->position.x);
 		head->position.y = piece6->position.y;
