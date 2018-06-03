@@ -146,13 +146,13 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 - Shadow   
 - Complete level 1 power ups          
 
-## V_0.9 (27/05/2018) Bosses
+## V_0.9 Bosses
 - Killer lashes     
 - Hostur      
 - Big Daddy Worm 
 - Zarikasu   
 
-## V_1.0 (1/06/2018) Polish
+## V_1.0 Polish
 - UI high scores screen and intro animation 
 - Background colour     
 - Tentacles
