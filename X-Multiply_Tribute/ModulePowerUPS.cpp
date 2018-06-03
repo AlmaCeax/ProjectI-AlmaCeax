@@ -237,8 +237,20 @@ void PowerUP::Effect()
 void PowerUP::Tentacles() 
 {
 	App->player->activePU[TENTACLES] = true;
-	App->player->tentacle.collider->enable = true;
-	App->player->tentacle2.collider->enable = true;
+	App->player->tentacle_piece1.collider->enable = true;
+	App->player->tentacle_piece2.collider->enable = true;
+	App->player->tentacle_piece1.head->collider->enable = true;
+	App->player->tentacle_piece2.head->collider->enable = true;
+	App->player->tentacle_piece1.piece2->collider->enable = true;
+	App->player->tentacle_piece2.piece2->collider->enable = true;
+	App->player->tentacle_piece1.piece3->collider->enable = true;
+	App->player->tentacle_piece2.piece3->collider->enable = true;
+	App->player->tentacle_piece1.piece4->collider->enable = true;
+	App->player->tentacle_piece2.piece4->collider->enable = true;
+	App->player->tentacle_piece1.piece5->collider->enable = true;
+	App->player->tentacle_piece2.piece5->collider->enable = true;
+	App->player->tentacle_piece1.piece6->collider->enable = true;
+	App->player->tentacle_piece2.piece6->collider->enable = true;
 	Mix_PlayChannel(-1, App->powerups->tentacle.sfx, 0);
 }
 

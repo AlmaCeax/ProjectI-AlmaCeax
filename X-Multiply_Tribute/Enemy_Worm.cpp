@@ -262,6 +262,7 @@ void Enemy_Worm::OnDeath()
 			default:
 				break;
 			}
+			((Enemy_WormBody*)bodies[i])->state = Enemy_WormBody::HEADDEAD;
 		}
 	}
 }

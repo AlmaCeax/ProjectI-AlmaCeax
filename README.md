@@ -1,33 +1,33 @@
 ﻿# Project I: AlmaCeax
 AlmaCeax team is doing a tribute to the game "X-Multiply". It is an arcade video game Shoot 'em Up horizontal developed by Irem, a Japanese study of video games, in 1989. Taking clear elements of R-Type, X-Multiply is based on levels of "horror" or gore to recreate a setting of terror, as if we were facing horrendous monsters and rotten things that come out of the walls. With the help of the two tentacles that the ship has when you take the Power Up we will have to go through the seven levels of play and defeat each of the final bosses that each level has.
 
-![X-Multiply Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/portada.jpg)
+![X-Multiply Screenshot](https://raw.githubusercontent.com/AlmaCeax/ProjectI-AlmaCeax/master/Wiki/0.Home/portada.jpg)
 
 
 
 # Our Team
-![AlmaCeax Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/team.jpg)
+![AlmaCeax Screenshot](https://raw.githubusercontent.com/AlmaCeax/ProjectI-AlmaCeax/master/Wiki/0.Home/team.jpg)
 
 ## Management: Marc Guillén Saltó
-![Marc Guillén Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/marc.jpg)
+![Marc Guillén Screenshot](https://raw.githubusercontent.com/AlmaCeax/ProjectI-AlmaCeax/master/Wiki/0.Home/marc.jpg)
 
 [Github account](https://github.com/Marcgs96)
 
 
 ## Art/Design: Alejandro París 
-![Alejandro París Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/alejandro.jpg)
+![Alejandro París Screenshot](https://raw.githubusercontent.com/AlmaCeax/ProjectI-AlmaCeax/master/Wiki/0.Home/alejandro.jpg)
 
 [Github account](https://github.com/AlejandroParis)
 
 
 ## Code: Axel Alavedra Cabello
-![Axel Alavedra Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/axel.jpg)
+![Axel Alavedra Screenshot](https://raw.githubusercontent.com/AlmaCeax/ProjectI-AlmaCeax/master/Wiki/0.Home/axel.jpg)
 
 [Github account](https://github.com/AxelAlavedra)
 
 
 ## QA: Cere Venteo
-![Cere Venteo Screenshot](https://github.com/AlmaCeax/ProjectI-AlmaCeax/blob/master/Wiki/0.Home/cere.jpg)
+![Cere Venteo Screenshot](https://raw.githubusercontent.com/AlmaCeax/ProjectI-AlmaCeax/master/Wiki/0.Home/cere.jpg)
 
 [Github account](https://github.com/CereVenteo)
 
@@ -146,13 +146,13 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 - Shadow   
 - Complete level 1 power ups          
 
-## V_0.9 (27/05/2018) Bosses
+## V_0.9 Bosses
 - Killer lashes     
 - Hostur      
 - Big Daddy Worm 
 - Zarikasu   
 
-## V_1.0 (1/06/2018) Polish
+## V_1.0 Polish
 - UI high scores screen and intro animation 
 - Background colour     
 - Tentacles
