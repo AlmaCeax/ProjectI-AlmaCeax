@@ -29,6 +29,7 @@ private:
 
 public:
 	Enemy_Wall(int x, int y);
+	~Enemy_Wall();
 
 	void Move();
 	void Draw(SDL_Texture* sprites);

@@ -9,6 +9,7 @@
 #include "ModuleCollision.h"
 #include "ModulePowerUPS.h"
 #include "SDL_mixer\include\SDL_mixer.h"
+#include "SDL/include/SDL_timer.h"
 #include "ModuleSceneStage1.h"
 #include "ModuleSceneStage3.h"
 
@@ -100,7 +101,6 @@ void ModuleSceneStage3::UpdateCamera()
 			App->player->position.y += 1;
 			timer = 0;
 		}
-
 	}
 }
 
@@ -113,7 +113,6 @@ void ModuleSceneStage3::BackgroundEvents()
 			up = true;
 			Mix_PlayMusic(secondTrack, -1);
 		}
-
 	}
 	else if (up) {
 		up = false;
@@ -141,7 +140,7 @@ void ModuleSceneStage3::BackgroundEvents()
 		App->render->Blit(textures[3], 5354, 179, &door.GetCurrentFrame());
 		App->render->Blit(textures[3], 5736, 178, &door.GetCurrentFrame());
 		if (collider) {
-			coll = { 4691,179,59,56 };
+			coll = { 5355,179,59,56 };
 			App->collision->AddCollider(coll, COLLIDER_WALL, nullptr);
 			collider = false;
 		}
@@ -181,6 +180,9 @@ void ModuleSceneStage3::BackgroundEvents()
 			boss[3] = App->enemies->SpawnEnemyRet(infozarikasu4);
 
 			right = false;
+			bossfight = true;
+			start_time = SDL_GetTicks();
+			total_time = (Uint32)(91.0f * 1000.0f);
 			bossdead = false;
 			bossdeads = 0;
 		}
@@ -260,6 +262,15 @@ update_status ModuleSceneStage3::Update()
 		App->ui->current_checkpoint = 0;
 	}
 
+	if (bossfight) {
+		Uint32 now = SDL_GetTicks() - start_time;
+		if (now >= total_time) {
+			bossfight = false;
+			for (int i = 0; i < 4; i++) {
+				App->enemies->Kill(boss[i]);
+			}
+		}
+	}
 	if(!end)
 	{
 		if (bossdeads == 4)

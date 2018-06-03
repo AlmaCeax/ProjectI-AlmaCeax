@@ -576,6 +576,13 @@ void ModuleEnemies::Kill(Enemy* e) {
 				App->ui->StageCleared();
 				return;
 				break;
+			case ZARIKASU:
+				Mix_PlayChannel(-1, nemonaDeadsfx, 0);
+				enemies[i]->OnCollision(nullptr);
+				App->stage3->bossdeads++;
+				delete enemies[i];
+				enemies[i] = nullptr;
+				break;
 			}
 		}
 	}
