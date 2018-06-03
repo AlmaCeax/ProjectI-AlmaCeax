@@ -48,6 +48,8 @@ bool ModuleSceneStage1::Init()
 
 	score_bonus = 10000;
 	index = 1;
+	first_time = true;
+
 	return true;
 }
 
@@ -68,7 +70,6 @@ bool ModuleSceneStage1::Start() {
 	stopped = false;
 
 	unhooked = false;
-	first_time = true;
 	startAnimationHook.setCurrentFrameIndex(0);
 
 
@@ -88,6 +89,7 @@ bool ModuleSceneStage1::Start() {
 	
 
 	App->render->ResetCamera();
+	if (!first_time) App->ui->PlayerReady();;
 
 
 	return true;
@@ -537,6 +539,7 @@ void ModuleSceneStage1::injection()
 				if (startAnimation.isDone())
 				{
 					injectionposition.y--;
+					if (injectionposition.y <= -100) first_time = false;
 				}
 				else {
 					textrect[2] = startAnimation.GetCurrentFrame();
@@ -578,11 +581,6 @@ void ModuleSceneStage1::injection()
 			}
 		}
 	}
-}
-
-void ModuleSceneStage1::OnFade() {
-	ModuleStage::OnFade();
-	if (App->ui->is_continue) App->ui->PlayerReady();
 }
 
 void ModuleSceneStage1::BossUpdate() {
