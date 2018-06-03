@@ -502,6 +502,55 @@ void ModuleSceneStage1::loadEnemies()
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4212, 259, false, 3);
 	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4212, 427, true, 3);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 259, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 280, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 394, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 427, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4222, 259, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4222, 427, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 259, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 280, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 394, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 427, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4232, 259, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4232, 427, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 259, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 280, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 394, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 427, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4242, 259, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4242, 427, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 279, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 300, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 414, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4312, 447, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4212, 279, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4212, 447, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 279, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 300, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 414, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4322, 447, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4222, 279, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4222, 447, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 279, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 300, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 414, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4332, 447, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4232, 279, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4232, 447, true, 3);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 279, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 300, false, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 414, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4342, 447, true, 5);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4242, 279, false, 3);
+	App->enemies->AddEnemy(ENEMY_TYPES::GREENEYE, 4242, 447, true, 3);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 275);
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4413, 340);
 	App->enemies->AddEnemy(ENEMY_TYPES::BROWNEYE, 4477, 340);
