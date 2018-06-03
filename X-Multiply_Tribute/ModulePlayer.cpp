@@ -885,15 +885,42 @@ void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece, floa
 {
 	int hipotenusa = sqrt((ex * ex) + (ey * ey));
 
-	if (App->player->position.x < App->player->lastposition.x)
+	if (angle < 22.3)
 	{
-		angle2 += 2;
+		angle2 += 4;
 	}
-	else if (App->player->position.x > App->player->lastposition.x+2)
+	else if (angle > 22.2 && angle < 23.6)
 	{
-		angle2 -= 2;
+		if (angle2 > 20) {
+			angle2 -= 3;
+		}else
+		if (angle2 < 30) {
+			angle2 += 3;
+		}
+
+	}
+	else if (angle > 23.6 && angle < 24.3)
+	{
+		if (angle2 < -20) {
+			angle2 += 3;
+		}else
+		if (angle2 > -30) {
+			angle2 -= 3;
+		}
+
+	}
+	else if (angle > 24.3)
+	{
+		angle2 -= 4;
+
 	}
 
+	if (angle2 > 85) {
+		angle2 = 85;
+	}
+	if (angle2 < -85) {
+		angle2 = -85;
+	}
 	if (flipPiece)
 	{
 		if (!moveUp) {
@@ -905,32 +932,32 @@ void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece, floa
 				angle -= 0.5;
 			}
 		}
-		App->render->BlitFlipped(graphics, position.x, position.y, &(anim.GetCurrentFrame()), false, true, angle2, { 2,5 });
+		App->render->BlitFlipped(graphics, position.x, position.y, &(anim.GetCurrentFrame()), false, true, -angle2, { 2,5 });
 
 				piece2->position.x = position.x - cosf(angle)*hipotenusa;
 				piece2->position.y = position.y - sinf(angle)*hipotenusa;
 
-		App->render->BlitFlipped(graphics, piece2->position.x, piece2->position.y, &(piece2->anim.GetCurrentFrame()), false, true, angle2, { 2,5 });
+		App->render->BlitFlipped(graphics, piece2->position.x, piece2->position.y, &(piece2->anim.GetCurrentFrame()), false, true, -angle2, { 2,5 });
 			
 				piece3->position.x = piece2->position.x - cosf(angle)*hipotenusa;
 				piece3->position.y = piece2->position.y - sinf(angle)*hipotenusa;
 
-		App->render->BlitFlipped(graphics, piece3->position.x, piece3->position.y, &(piece3->anim.GetCurrentFrame()), false, true, angle2, { 2,5 });
+		App->render->BlitFlipped(graphics, piece3->position.x, piece3->position.y, &(piece3->anim.GetCurrentFrame()), false, true, -angle2, { 2,5 });
 			
 				piece4->position.x = piece3->position.x - cosf(angle)*hipotenusa;
 				piece4->position.y = piece3->position.y - sinf(angle)*hipotenusa;
 
-		App->render->BlitFlipped(graphics, piece4->position.x, piece4->position.y, &(piece4->anim.GetCurrentFrame()), false, true, angle2, { 2,5 });
+		App->render->BlitFlipped(graphics, piece4->position.x, piece4->position.y, &(piece4->anim.GetCurrentFrame()), false, true, -angle2, { 2,5 });
 			
 				piece5->position.x = piece4->position.x - cosf(angle)*hipotenusa;
 				piece5->position.y = piece4->position.y - sinf(angle)*hipotenusa;
 
-		App->render->BlitFlipped(graphics, piece5->position.x, piece5->position.y, &(piece5->anim.GetCurrentFrame()), false, true, angle2, { 2,5 });
+		App->render->BlitFlipped(graphics, piece5->position.x, piece5->position.y, &(piece5->anim.GetCurrentFrame()), false, true, -angle2, { 2,5 });
 			
 				piece6->position.x = piece5->position.x - cosf(angle)*hipotenusa;
 				piece6->position.y = piece5->position.y - sinf(angle)*hipotenusa;
 
-		App->render->BlitFlipped(graphics, piece6->position.x, piece6->position.y, &(piece6->anim.GetCurrentFrame()), false, true, angle2, { 2,5 });
+		App->render->BlitFlipped(graphics, piece6->position.x, piece6->position.y, &(piece6->anim.GetCurrentFrame()), false, true, -angle2, { 2,5 });
 		
 		head->position.x = (piece6->position.x);
 		head->position.y = piece6->position.y;
