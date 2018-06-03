@@ -89,7 +89,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 70) {
 			shooting = true;
-			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x+20, position.y+28, COLLIDER_ENEMY_SHOT, { -2, -2 }, 0, 1, false, false, false);
+			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x+20, position.y+28, COLLIDER_ENEMY_INDESTRUCTIBLE_SHOT, { -2, -2 }, 0, 1, false, false, false);
 		}/*AddParticle.. */break;
 	case 2:
 		if (position.y == 247) {
@@ -99,7 +99,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 70) {
 			shooting = true;
-			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x+w-40, position.y+28, COLLIDER_ENEMY_SHOT, { 2, -2 }, 0, 1, false, true, false);
+			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x+w-40, position.y+28, COLLIDER_ENEMY_INDESTRUCTIBLE_SHOT, { 2, -2 }, 0, 1, false, true, false);
 		}
 		break;
 	case 3:
@@ -109,7 +109,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 240) {
 			shooting = true;
-			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x+ 20, position.y + 28, COLLIDER_ENEMY_SHOT, { -2, 2 }, 0, 1, false, false, true);
+			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x+ 20, position.y + 28, COLLIDER_ENEMY_INDESTRUCTIBLE_SHOT, { -2, 2 }, 0, 1, false, false, true);
 		}
 		break;
 	case 4:
@@ -119,7 +119,7 @@ void Enemy_Zarikasu::Move()
 		}
 		if (shootTimer == 180){
 			shooting = true;
-			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x + w - 20, position.y + 28, COLLIDER_ENEMY_SHOT, { 2, 2 }, 0, 1, false, true, true);
+			shot = App->particles->AddParticleRetEx(App->particles->zarikasubeam, position.x + w - 20, position.y + 28, COLLIDER_ENEMY_INDESTRUCTIBLE_SHOT, { 2, 2 }, 0, 1, false, true, true);
 		}
 		break;
 	default:

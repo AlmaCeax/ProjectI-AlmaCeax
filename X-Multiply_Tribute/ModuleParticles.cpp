@@ -777,7 +777,7 @@ bool Particle::Update()
 			{
 				if (preparationtimer == 2)
 				{
-					subparticles[indexchild] = App->particles->AddParticleRet(App->particles->zarikasubeampart, origin_position.x, origin_position.y, COLLIDER_ENEMY_SHOT, flipX, flipY, speed);
+					subparticles[indexchild] = App->particles->AddParticleRet(App->particles->zarikasubeampart, origin_position.x, origin_position.y, COLLIDER_ENEMY_INDESTRUCTIBLE_SHOT, flipX, flipY, speed);
 					preparationtimer = 0;
 					indexchild++;
 				}
