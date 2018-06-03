@@ -21,6 +21,7 @@ private :
 	void SaveScore();
 	void NameInput();
 
+	int timer = 0;
 	int player_id;
 	char player_input[10] = "a";
 	char score_1[9];
