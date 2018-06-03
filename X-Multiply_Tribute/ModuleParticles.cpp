@@ -17,7 +17,7 @@
 
 ModuleParticles::ModuleParticles()
 {
-	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	for (int i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
 
 	// BaseShot particle
@@ -376,7 +376,7 @@ ModuleParticles::ModuleParticles()
 	laserexplosion.id = 16;
 	laserexplosion.speed = { 0,0 };
 
-	zarikasubeam.anim.PushBack({ 5, 639, 21, 16 });
+	zarikasubeam.anim.PushBack({ 5, 644, 13, 8 });
 	zarikasubeam.anim.speed = 0.f;
 	zarikasubeam.anim.loop = false;
 	zarikasubeam.life = 500000;
@@ -384,7 +384,7 @@ ModuleParticles::ModuleParticles()
 	zarikasubeam.speed = { 0,0 };
 	zarikasubeam.preparation = true;
 	
-	zarikasubeampart.anim.PushBack({ 5, 658, 21, 16 });
+	zarikasubeampart.anim.PushBack({ 5, 658, 13, 8 });
 	zarikasubeampart.anim.speed = 0.f;
 	zarikasubeampart.anim.loop = false;
 	zarikasubeampart.life = 500000;
@@ -449,7 +449,7 @@ bool ModuleParticles::CleanUp()
 // Update: draw background
 update_status ModuleParticles::Update()
 {
-	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	for (int i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		Particle* p = active[i];
 
@@ -738,9 +738,9 @@ bool Particle::Update()
 	case 17:
 		if (preparation)
 		{
-			if (indexchild < 10)
+			if (indexchild < 20)
 			{
-				if (preparationtimer == 14)
+				if (preparationtimer == 6)
 				{
 					subparticles[indexchild] = App->particles->AddParticleRet(App->particles->zarikasubeampart, origin_position.x, origin_position.y, COLLIDER_ENEMY_SHOT, flipX, flipY, speed);
 					preparationtimer = 0;
@@ -752,7 +752,6 @@ bool Particle::Update()
 		}
 		position.x += speed.x;
 		position.y += speed.y;
-
 		if (position.x < 5408) {
 			speed.x = 1;
 			flipX = !flipX;
@@ -775,7 +774,6 @@ bool Particle::Update()
 	case 18:
 		position.x += speed.x;
 		position.y += speed.y; 
-
 		if (position.x < 5408) {
 			speed.x = 1;
 			flipX = !flipX;

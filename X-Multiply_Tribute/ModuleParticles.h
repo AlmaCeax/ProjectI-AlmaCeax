@@ -8,7 +8,7 @@
 #include "ModuleCollision.h"
 #include "Enemy.h"
 
-#define MAX_ACTIVE_PARTICLES 50
+#define MAX_ACTIVE_PARTICLES 200
 
 struct SDL_Texture;
 struct Collider;
@@ -42,7 +42,7 @@ struct Particle
 	bool missileUp = false;
 	SDL_Point center = {0,0};
 	float rangle = 0;
-	Particle* subparticles[10];
+	Particle* subparticles[20];
 	int indexchild = 0;
 
 

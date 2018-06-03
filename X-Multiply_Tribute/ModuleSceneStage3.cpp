@@ -155,7 +155,7 @@ void ModuleSceneStage3::BackgroundEvents()
 		{
 			EnemyInfo infozarikasu1;
 			infozarikasu1.type = ENEMY_TYPES::ZARIKASU;
-			infozarikasu1.x = 5740;
+			infozarikasu1.x = 5735;
 			infozarikasu1.y = 317;
 			infozarikasu1.powerUpid = 1;
 			boss[0] = App->enemies->SpawnEnemyRet(infozarikasu1);
@@ -169,7 +169,7 @@ void ModuleSceneStage3::BackgroundEvents()
 
 			EnemyInfo infozarikasu3;
 			infozarikasu3.type = ENEMY_TYPES::ZARIKASU;
-			infozarikasu3.x = 5740;
+			infozarikasu3.x = 5735;
 			infozarikasu3.y = 40;
 			infozarikasu3.powerUpid = 3;
 			boss[2] = App->enemies->SpawnEnemyRet(infozarikasu3);
