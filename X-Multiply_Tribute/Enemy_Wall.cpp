@@ -65,6 +65,12 @@ Enemy_Wall::Enemy_Wall(int x, int y) :Enemy(x, y)
 	collider4 = App->collision->AddCollider({ 0, 0, 160, 50 }, COLLIDER_TYPE::COLLIDER_WALL, App->enemies);
 }
 
+Enemy_Wall::~Enemy_Wall()
+{
+	collider3->to_delete = true;
+	collider4->to_delete = true;
+}
+
 void Enemy_Wall::Move()
 {
 	
