@@ -213,8 +213,12 @@ update_status ModulePlayer::Update()
 		tentacle_piece2.collider->SetPos(tentacle_piece2.position.x, tentacle_piece2.position.y);
 
 
-
-
+		if (angle <= 21.85) {
+			angle = 21.85;
+		}
+		if (angle >= 25.27) {
+			angle = 25.27;
+		}
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || SDL_GameControllerGetAxis(App->input->controller, SDL_CONTROLLER_AXIS_LEFTX) > CONTROLLER_DEAD_ZONE)
 		{
 			current_animation = &idle;
@@ -831,8 +835,6 @@ void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece, floa
 {
 	angle = angle;
 	int hipotenusa = sqrt((4 * 4) + (11 * 11));
-
-
 
 	if (flipPiece)
 	{
