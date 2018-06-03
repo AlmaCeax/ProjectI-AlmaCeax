@@ -110,6 +110,7 @@ update_status ModuleSceneStage1::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_F8] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(this, App->stage3, 0.0f);
+		first_time = false;
 		App->ui->current_checkpoint = 0;
 	}
 
