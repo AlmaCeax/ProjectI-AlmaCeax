@@ -828,6 +828,23 @@ void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece, floa
 	Tentacle_Piece piece5;
 	Tentacle_Piece piece6;
 	Tentacle head;
+
+	SDL_Rect rect_tentaclecol = { head.position.x,head.position.y,19,10 };
+	SDL_Rect rect_tentaclecol1 = { position.x,position.y,4,10 };
+	SDL_Rect rect_tentaclecol2 = { piece2.position.x, piece2.position.y, 4, 10 };
+	SDL_Rect rect_tentaclecol3 = { piece3.position.x,piece3.position.y,4,10 };
+	SDL_Rect rect_tentaclecol4 = { piece4.position.x,piece4.position.y,4,10 };
+	SDL_Rect rect_tentaclecol5 = { piece5.position.x,piece5.position.y,4,10 };
+	SDL_Rect rect_tentaclecol6 = { piece6.position.x,piece6.position.y,4,10 };
+
+	head.collider = App->collision->AddCollider(rect_tentaclecol, COLLIDER_PLAYER_SHOT);
+	//collider = App->collision->AddCollider(rect_tentaclecol1, COLLIDER_PLAYER_SHOT);
+	piece2.collider = App->collision->AddCollider(rect_tentaclecol2, COLLIDER_PLAYER_SHOT);
+	piece3.collider = App->collision->AddCollider(rect_tentaclecol3, COLLIDER_PLAYER_SHOT);
+	piece4.collider = App->collision->AddCollider(rect_tentaclecol4, COLLIDER_PLAYER_SHOT);
+	piece5.collider = App->collision->AddCollider(rect_tentaclecol5, COLLIDER_PLAYER_SHOT);
+	piece6.collider = App->collision->AddCollider(rect_tentaclecol6, COLLIDER_PLAYER_SHOT);
+
 	angle = angle;
 	int hipotenusa = sqrt((4 * 4) + (11 * 11));
 
@@ -901,4 +918,11 @@ void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece, floa
 		
 		App->render->Blit(graphics, head.position.x, head.position.y, &(head.anim.GetCurrentFrame()));
 	}
+	head.collider->SetPos((int)head.position.x, (int)head.position.y);
+	/*piece2.collider->SetPos(piece2.position.x, piece2.position.y);
+	//collider->SetPos(position.x, position.y);
+	piece3.collider->SetPos(piece3.position.x, piece3.position.y);
+	piece4.collider->SetPos(piece4.position.x, piece4.position.y);
+	piece5.collider->SetPos(piece5.position.x, piece5.position.y);
+	piece6.collider->SetPos(piece6.position.x, piece6.position.y);*/
 }
