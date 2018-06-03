@@ -125,6 +125,7 @@ void Enemy_Wall::Draw(SDL_Texture* sprites) {
 			hit = false;
 		}
 	}
+	
 	if (&anim3 != nullptr) {
 		if (!hit)App->render->BlitFlipped(sprites, position.x, position.y, &((&anim3)->GetCurrentFrame()), flipX, flipY, rangle3, center3);
 		else {
