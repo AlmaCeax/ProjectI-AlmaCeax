@@ -64,7 +64,7 @@ public:
 	Tentacle* head;
 	
 	int w, h = 0;
-	float ex = 3, ey = 10;
+	float ex = 3, ey = 8;
 	bool moveUp = true, moveDown = true;
 	enum movement { up, down, right, left, rest };
 

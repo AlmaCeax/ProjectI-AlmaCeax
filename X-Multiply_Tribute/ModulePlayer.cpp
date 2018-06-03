@@ -224,11 +224,11 @@ update_status ModulePlayer::Update()
 			angle -= 0.01;
 		}
 
-		if (tentacle_piece2.ey <= 10) {
+		if (tentacle_piece2.ey <= 8) {
 			tentacle_piece2.ey += 0.01;
 		}
 
-		if (tentacle_piece1.ey <= 10) {
+		if (tentacle_piece1.ey <= 8) {
 			tentacle_piece1.ey += 0.01;
 		}
 
