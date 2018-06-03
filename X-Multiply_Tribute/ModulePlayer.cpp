@@ -109,6 +109,18 @@ bool ModulePlayer::Start()
 		//tentacle2.collider->enable = false;
 		tentacle_piece1.collider->enable = false;
 		tentacle_piece2.collider->enable = false;
+		tentacle_piece1.head->collider->enable = false;
+		tentacle_piece2.head->collider->enable = false;
+		tentacle_piece1.piece2->collider->enable = false;
+		tentacle_piece2.piece2->collider->enable = false;
+		tentacle_piece1.piece3->collider->enable = false;
+		tentacle_piece2.piece3->collider->enable = false;
+		tentacle_piece1.piece4->collider->enable = false;
+		tentacle_piece2.piece4->collider->enable = false;
+		tentacle_piece1.piece5->collider->enable = false;
+		tentacle_piece2.piece5->collider->enable = false;
+		tentacle_piece1.piece6->collider->enable = false;
+		tentacle_piece2.piece6->collider->enable = false;
 	}
 
 	current_animation = &idle;
@@ -391,6 +403,18 @@ update_status ModulePlayer::Update()
 			App->player->tentacle2.collider->enable = true;*/
 			App->player->tentacle_piece1.collider->enable = true;
 			App->player->tentacle_piece2.collider->enable = true;
+			tentacle_piece1.head->collider->enable = true;
+			tentacle_piece2.head->collider->enable = true;
+			tentacle_piece1.piece2->collider->enable = true;
+			tentacle_piece2.piece2->collider->enable = true;
+			tentacle_piece1.piece3->collider->enable = true;
+			tentacle_piece2.piece3->collider->enable = true;
+			tentacle_piece1.piece4->collider->enable = true;
+			tentacle_piece2.piece4->collider->enable = true;
+			tentacle_piece1.piece5->collider->enable = true;
+			tentacle_piece2.piece5->collider->enable = true;
+			tentacle_piece1.piece6->collider->enable = true;
+			tentacle_piece2.piece6->collider->enable = true;
 		}
 
 		if (last_animation != current_animation) {
@@ -807,6 +831,8 @@ void Tentacle_Piece::RenderTentacle(SDL_Texture * graphics, bool flipPiece, floa
 {
 	angle = angle;
 	int hipotenusa = sqrt((4 * 4) + (11 * 11));
+
+
 
 	if (flipPiece)
 	{
