@@ -34,10 +34,10 @@ Application::Application()
 	modules[i++] = stage1 = new ModuleSceneStage1();
 	modules[i++] = stage2 = new ModuleSceneStage2();
 	modules[i++] = stage3 = new ModuleSceneStage3();
+	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = powerups = new ModulePowerUPS();
 	modules[i++] = player = new ModulePlayer();
-	modules[i++] = particles = new ModuleParticles();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = ui = new ModuleUI();

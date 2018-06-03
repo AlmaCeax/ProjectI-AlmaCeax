@@ -182,6 +182,7 @@ void ModuleSceneStage3::BackgroundEvents()
 
 			right = false;
 			bossdead = false;
+			bossdeads = 0;
 		}
 	}
 
