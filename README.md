@@ -152,7 +152,7 @@ Unzip the zip file, run the X-Multiply_Tribute.exe file and enjoy the game.
 - Big Daddy Worm 
 - Zarikasu   
 
-## V_1.0 Polish
+## V_1.0 Alpha
 - UI high scores screen and intro animation 
 - Background colour     
 - Tentacles
